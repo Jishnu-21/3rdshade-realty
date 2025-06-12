@@ -96,9 +96,9 @@ const Banner = () => {
         </div>
       </div>
       {/* Sticky Video Section */}
-      <div ref={videoRef} className="sticky top-0 z-20 h-screen w-full flex justify-center items-center">
+      <div ref={videoRef} className="sticky top-0 z-20 h-screen w-full flex justify-center items-center bg-black">
         <div
-          className={`transition-all duration-700 ease-in-out ${isSticky ? 'w-full' : 'w-[98vw] md:w-[85vw]'} h-full overflow-hidden bg-black`}
+          className={`transition-all duration-700 ease-in-out ${isSticky ? 'w-full' : 'w-[98vw] md:w-[85vw]'} h-full overflow-hidden`}
         >
           <video
             src="https://cdn.pixabay.com/video/2020/08/12/46950-450094784_large.mp4"
