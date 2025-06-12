@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-const text = '3rdshade realty';
+const text = '3RD SHADE REALTY';
 
 const Loader = ({ onFinish }: { onFinish: () => void }) => {
   const [visibleLetters, setVisibleLetters] = useState(0);
@@ -13,8 +13,8 @@ const Loader = ({ onFinish }: { onFinish: () => void }) => {
       const timeout = setTimeout(() => setVisibleLetters(visibleLetters + 1), 80);
       return () => clearTimeout(timeout);
     } else {
-      // Wait a moment, then slide up
-      const timeout = setTimeout(() => setHide(true), 600);
+      // Wait longer before sliding up
+      const timeout = setTimeout(() => setHide(true), 1400);
       return () => clearTimeout(timeout);
     }
   }, [visibleLetters]);

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -13,6 +13,8 @@ const images = [
 const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showSecondLine, setShowSecondLine] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
+  const videoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -26,15 +28,25 @@ const Banner = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!videoRef.current) return;
+      const rect = videoRef.current.getBoundingClientRect();
+      setIsSticky(rect.top <= 0);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="w-full">
+    <div className="w-full relative">
       {/* Top Black Section */}
-      <div className="relative bg-black w-full min-h-[60vh] flex flex-col justify-between pt-24">
+      <div className="relative bg-black w-full min-h-[60vh] flex flex-col justify-between pt-24 z-10">
         {/* Navbar */}
 
         {/* Centered Title */}
         <div className="flex-1 flex flex-col justify-center px-8 pb-4">
-        <h1 className="font-bold text-3xl md:text-6xl lg:text-7xl leading-tight max-w-5xl">
+          <h1 className="font-bold text-3xl md:text-6xl lg:text-7xl leading-tight max-w-5xl">
             <span className="block text-white animate-fadeUp">Your Gateway to Luxury</span>
             {showSecondLine && (
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 animate-fadeUp delay-0">
@@ -83,16 +95,20 @@ const Banner = () => {
           `}</style>
         </div>
       </div>
-      {/* Blue Section replaced with video */}
-      <div className="relative w-full min-h-[40vh] mt-0">
-        <video
-          src="https://cdn.pixabay.com/video/2020/08/12/46950-450094784_large.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover animate-fadeInScale"
-        />
+      {/* Sticky Video Section */}
+      <div ref={videoRef} className="sticky top-0 z-20 h-screen w-full flex justify-center items-center">
+        <div
+          className={`transition-all duration-700 ease-in-out ${isSticky ? 'w-full' : 'w-[98vw] md:w-[85vw]'} h-full overflow-hidden bg-black`}
+        >
+          <video
+            src="https://cdn.pixabay.com/video/2020/08/12/46950-450094784_large.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover animate-fadeInScale"
+          />
+        </div>
       </div>
     </div>
   );
