@@ -1,20 +1,23 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 const featuredItems = [
   {
     videoSrc: 'https://cdn.pixabay.com/video/2020/08/12/46950-450094784_large.mp4',
+    poster: 'https://cdn.pixabay.com/photo/2017/01/20/00/30/dubai-1990138_1280.jpg',
     title: 'Alterscope',
     description: 'A new perspective on digital transparency.'
   },
   {
     videoSrc: 'https://cdn.pixabay.com/video/2023/03/14/157187-813013973_large.mp4',
+    poster: 'https://cdn.pixabay.com/photo/2016/11/29/09/32/architecture-1868667_1280.jpg',
     title: 'Creative Union',
     description: 'Collaboration in motion for modern brands.'
   },
   {
     videoSrc: 'https://cdn.pixabay.com/video/2023/07/25/176067-848282232_large.mp4',
+    poster: 'https://cdn.pixabay.com/photo/2015/01/28/23/35/dubai-615430_1280.jpg',
     title: 'App Showcase',
     description: 'A sleek mobile experience for productivity.'
   },
@@ -36,6 +39,8 @@ const featuredItems = [
 ];
 
 const FeaturedSlider = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -67,21 +72,30 @@ const FeaturedSlider = () => {
         {featuredItems.map((item, idx) => (
           <div
             key={idx}
-            className="min-w-[440px] max-w-md bg-black rounded-2xl shadow-lg snap-start flex-shrink-0 overflow-hidden border border-neutral-800"
+            className="min-w-[400px] max-w-md bg-black rounded-2xl shadow-lg snap-start flex-shrink-0 overflow-hidden border border-neutral-800 cursor-pointer group"
+            onMouseEnter={() => {
+              setHoveredIndex(idx);
+              videoRefs.current[idx]?.play();
+            }}
+            onMouseLeave={() => {
+              setHoveredIndex(null);
+              videoRefs.current[idx]?.pause();
+            }}
           >
-            <div className="w-full h-96 bg-neutral-900 flex items-center justify-center">
+            <div className="w-full h-[500px] bg-neutral-900 flex items-center justify-center relative">
               <video
+                ref={el => { videoRefs.current[idx] = el; }}
                 src={item.videoSrc}
-                autoPlay
                 loop
                 muted
                 playsInline
                 className="w-full h-full object-cover"
+                preload="auto"
               />
             </div>
-            <div className="p-6">
-              <h3 className="text-white text-2xl font-bold mb-2">{item.title}</h3>
-              <p className="text-gray-300 text-base">{item.description}</p>
+            <div className="p-8">
+              <h3 className="text-white text-3xl font-bold mb-4">{item.title}</h3>
+              <p className="text-gray-300 text-lg">{item.description}</p>
             </div>
           </div>
         ))}

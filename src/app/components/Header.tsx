@@ -57,7 +57,7 @@ const Header = () => {
   }, [mobileMenuOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black w-full py-6">
+    <header className={`fixed top-0 left-0 right-0 z-50 w-full py-6 transition-transform duration-300 ${isVisible ? 'translate-y-0 bg-black/70 backdrop-blur' : '-translate-y-full bg-black'}`}>
       <div className="flex items-center justify-between px-8">
         {/* Logo */}
         <div className="flex items-center">

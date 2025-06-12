@@ -1,16 +1,24 @@
-import React from 'react'
+'use client';
+
+import { useState } from 'react';
+import Loader from './components/Loader';
 import Header from './components/Header'
 import Banner from './components/Banner'
 import FeaturedSlider from './components/FeaturedSlider'
 
-const page = () => {
+export default function Home() {
+  const [showLoader, setShowLoader] = useState(true);
+
   return (
     <>
-      <Header />
-      <Banner />
-      <FeaturedSlider />
+      {showLoader && <Loader onFinish={() => setShowLoader(false)} />}
+      {!showLoader && (
+        <>
+          <Header />
+          <Banner />
+          <FeaturedSlider />
+        </>
+      )}
     </>
   )
 }
-
-export default page
