@@ -4,37 +4,40 @@ import { useRef, useState } from 'react';
 
 const featuredItems = [
   {
-    videoSrc: 'https://cdn.pixabay.com/video/2020/08/12/46950-450094784_large.mp4',
+    videoSrc: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749729573/emaar-creek_lk2lce.webm',
     poster: 'https://cdn.pixabay.com/photo/2017/01/20/00/30/dubai-1990138_1280.jpg',
-    title: 'Alterscope',
-    description: 'A new perspective on digital transparency.'
+    title: 'Emaar Creek',
+    description: 'Emaar Creek is a luxury residential development located in the heart of Dubai. It is a 100% freehold property and offers a range of amenities including a swimming pool, gym, and a children\'s play area.'
   },
   {
-    videoSrc: 'https://cdn.pixabay.com/video/2023/03/14/157187-813013973_large.mp4',
+    videoSrc: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727749/sobha-solis2_c6nt2j.mp4',
     poster: 'https://cdn.pixabay.com/photo/2016/11/29/09/32/architecture-1868667_1280.jpg',
-    title: 'Creative Union',
-    description: 'Collaboration in motion for modern brands.'
+    title: 'Sobha Solis',
+    description: 'Sobha Solis is a luxury residential development located in the heart of Dubai. It is a 100% freehold property and offers a range of amenities including a swimming pool, gym, and a children\'s play area.'
   },
   {
-    videoSrc: 'https://cdn.pixabay.com/video/2023/07/25/176067-848282232_large.mp4',
+    videoSrc: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727087/azizi-venice_gsscns.mp4',
     poster: 'https://cdn.pixabay.com/photo/2015/01/28/23/35/dubai-615430_1280.jpg',
-    title: 'App Showcase',
-    description: 'A sleek mobile experience for productivity.'
+    title: 'Azizi Venice',
+    description: 'Azizi Venice is a luxury residential development located in the heart of Dubai. It is a 100% freehold property and offers a range of amenities including a swimming pool, gym, and a children\'s play area.'
   },
   {
-    videoSrc: 'https://cdn.pixabay.com/video/2023/07/25/176067-848282232_large.mp4',
-    title: 'App Showcase',
-    description: 'A sleek mobile experience for productivity.'
+    videoSrc: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727167/sobha-solis_y9ojjs.mp4',
+    poster: 'https://cdn.pixabay.com/photo/2016/11/29/09/32/architecture-1868667_1280.jpg',
+    title: 'Sobha Solis',
+    description: 'Sobha Solis is a luxury residential development located in the heart of Dubai. It is a 100% freehold property and offers a range of amenities including a swimming pool, gym, and a children\'s play area.'
   },
   {
-    videoSrc: 'https://cdn.pixabay.com/video/2023/07/25/176067-848282232_large.mp4',
-    title: 'App Showcase',
-    description: 'A sleek mobile experience for productivity.'
+    videoSrc: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727105/rk2_ef3ql8.mp4',
+    poster: 'https://cdn.pixabay.com/photo/2016/11/29/09/32/architecture-1868667_1280.jpg',
+    title: 'RK Properties',
+    description: 'RK Properties is a luxury residential development located in Pune, India.'
   },
   {
-    videoSrc: 'https://cdn.pixabay.com/video/2023/07/25/176067-848282232_large.mp4',
-    title: 'App Showcase',
-    description: 'A sleek mobile experience for productivity.'
+    videoSrc: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727071/sobha-hartland_qo4rxf.mp4',
+    poster: 'https://cdn.pixabay.com/photo/2016/11/29/09/32/architecture-1868667_1280.jpg',
+    title: 'Sobha Hartland',
+    description: 'Sobha Hartland is a luxury residential development located in Dubai.'
   },
 ];
 
