@@ -7,7 +7,8 @@ import Banner from './components/Banner'
 import FeaturedSlider from './components/FeaturedSlider'
 import LogoSwapper from './components/LogoSwapper';
 import FaqAccordionNew from './components/Faq';
-
+import Footer from './components/Footer';
+  
 export default function Home() {
   const [showLoader, setShowLoader] = useState(true);
 
@@ -43,8 +44,8 @@ export default function Home() {
           <Banner />
           <FeaturedSlider />
           <LogoSwapper />
-          <div className="pb-16 bg-black md:pb-24"></div> {/* Consistent spacing between components */}
           <FaqAccordionNew items={faqItems} />
+          <Footer />
         </>
       )}
     </>

@@ -58,24 +58,26 @@ const FeaturedSlider = () => {
   };
 
   return (
-    <section className="bg-black py-12 px-4 md:px-12 overflow-x-hidden">
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-white text-4xl md:text-5xl font-bold">Featured Properties</h2>
-        <div className="flex items-center space-x-4">
-          <button className="bg-black border border-white text-white rounded-full px-6 py-2 font-semibold hover:bg-white hover:text-black transition">View All</button>
-          <button onClick={() => scroll('left')} className="w-12 h-12 rounded-full bg-black border border-white text-white flex items-center justify-center text-2xl hover:bg-white hover:text-black transition">&#8592;</button>
-          <button onClick={() => scroll('right')} className="w-12 h-12 rounded-full bg-black border border-white text-white flex items-center justify-center text-2xl hover:bg-white hover:text-black transition">&#8594;</button>
+    <section className="bg-black py-12 overflow-x-hidden">
+      <div className="px-4 md:px-12 mb-8">
+        <div className="flex items-center justify-between">
+          <h2 className="text-white text-4xl md:text-5xl font-bold">Featured Properties</h2>
+          <div className="flex items-center space-x-4">
+            <button className="bg-black border border-white text-white rounded-full px-6 py-2 font-semibold hover:bg-white hover:text-black transition">View All</button>
+            <button onClick={() => scroll('left')} className="w-12 h-12 rounded-full bg-black border border-white text-white flex items-center justify-center text-2xl hover:bg-white hover:text-black transition">&#8592;</button>
+            <button onClick={() => scroll('right')} className="w-12 h-12 rounded-full bg-black border border-white text-white flex items-center justify-center text-2xl hover:bg-white hover:text-black transition">&#8594;</button>
+          </div>
         </div>
       </div>
       <div
         ref={scrollRef}
-        className="flex flex-nowrap space-x-8 overflow-x-auto w-full max-w-full pb-4 scrollbar-hide scroll-smooth snap-x snap-mandatory"
+        className="flex flex-nowrap space-x-8 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory px-4 md:px-12"
         style={{ scrollBehavior: 'smooth' }}
       >
         {featuredItems.map((item, idx) => (
           <div
             key={idx}
-            className="min-w-[400px] max-w-md bg-black rounded-2xl shadow-lg snap-start flex-shrink-0 overflow-hidden border border-neutral-800 cursor-pointer group"
+            className="min-w-[calc(100vw-32px)] md:min-w-[400px] max-w-md bg-black rounded-2xl shadow-lg snap-start flex-shrink-0 overflow-hidden border border-neutral-800 cursor-pointer group"
             onMouseEnter={() => {
               setHoveredIndex(idx);
               videoRefs.current[idx]?.play();
