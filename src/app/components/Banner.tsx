@@ -29,20 +29,22 @@ const Banner = () => {
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-start justify-center px-8 text-white text-left w-full pt-64 mt-[-20] flex-grow">
-        <h1 className="font-bold text-4xl md:text-6xl lg:text-7xl leading-tight mb-4 ">
-          Exclusive Properties <br /> for the Elite
-        </h1>
-        <p className="text-lg md:text-xl mb-8 max-w-2xl">
-          Discover our curated collection of the world's most extraordinary homes, where luxury meets perfection.
-        </p>
-        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
-          <Link href="#" className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-base font-semibold px-6 py-3 rounded-full hover:from-purple-700 hover:to-pink-700 transition-colors duration-300">
-            View Collection
-          </Link>
-          <Link href="#" className="border border-white text-white text-base font-semibold px-6 py-3 rounded-full hover:bg-white hover:text-black transition-colors duration-300">
-            Learn More
-          </Link>
+      <div className="relative z-10 w-full pt-64 mt-[-20] flex-grow">
+        <div className="max-w-screen-2xl mx-auto px-8 flex flex-col items-start text-left">
+          <h1 className="font-bold text-4xl md:text-6xl lg:text-7xl leading-tight mb-4 ">
+            Exclusive Properties <br /> for the Elite
+          </h1>
+          <p className="text-lg md:text-xl mb-8 max-w-2xl">
+            Discover our curated collection of the world's most extraordinary homes, where luxury meets perfection.
+          </p>
+          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
+            <Link href="#" className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-base font-semibold px-6 py-3 rounded-full hover:from-purple-700 hover:to-pink-700 transition-colors duration-300">
+              View Collection
+            </Link>
+            <Link href="#" className="border border-white text-white text-base font-semibold px-6 py-3 rounded-full hover:bg-white hover:text-black transition-colors duration-300">
+              Learn More
+            </Link>
+          </div>
         </div>
       </div>
 

@@ -30,7 +30,7 @@ const Header = () => {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 w-full py-6 transition-transform duration-300 ${isVisible ? 'translate-y-0 bg-black/70 backdrop-blur' : '-translate-y-full bg-black'}`}>
-      <div className="flex items-center justify-between px-8">
+      <div className="max-w-screen-2xl mx-auto px-8 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
           <Image src="/logos/logo.png" alt="3RD SHADE Logo" width={185} height={22} />
