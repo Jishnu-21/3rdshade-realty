@@ -30,7 +30,7 @@ const Banner = () => {
 
       {/* Main Content */}
       <div className="relative z-10 w-full pt-64 mt-[-20] flex-grow">
-        <div className="max-w-screen-2xl mx-auto px-8 flex flex-col items-start text-left">
+        <div className="max-w-screen-2xl mx-auto px-4 flex flex-col items-start text-left">
           <h1 className="font-bold text-4xl md:text-6xl lg:text-7xl leading-tight mb-4 ">
             Exclusive Properties <br /> for the Elite
           </h1>
