@@ -11,7 +11,7 @@ const lines = [
 const zigzagOffsets = [
   'justify-center', // left
   'px-60',   // right
-  'px-110' // center
+  'px-100' // center
 ];
 
 const parentVariants = {
