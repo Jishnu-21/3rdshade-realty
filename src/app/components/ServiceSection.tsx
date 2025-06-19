@@ -70,7 +70,15 @@ export default function ServiceSection() {
     <section className="w-full bg-black py-20 relative">
       <div className="w-full max-w-screen-4xl ">
         <div className="flex items-center mb-2">
-          <h2 className="text-white text-3xl md:text-3xl font-bold text-left pl-0">OUR SERVICES</h2>
+          <motion.h2
+            className="text-white text-3xl md:text-3xl font-bold text-center mx-auto"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            OUR SERVICES
+          </motion.h2>
         </div>
         <hr className="border-neutral-700 mb-12" />
         <div className="flex flex-col gap-32">

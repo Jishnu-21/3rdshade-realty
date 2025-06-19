@@ -3,15 +3,15 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const lines = [
-  'SERVICES',
+  'SERVICES ',
   'WE PROVIDE',
-  'FOR REAL ESTATE',
+  'REALESTATE',
 ];
 
 const zigzagOffsets = [
-  'justify-start', // left
-  'justify-end',   // right
-  'justify-center' // center
+  'justify-center', // left
+  'px-60',   // right
+  'px-110' // center
 ];
 
 const parentVariants = {
@@ -31,7 +31,7 @@ const lineVariants = {
 export default function ServiceHero() {
   return (
     <section className="w-full min-h-screen flex flex-col justify-center items-center select-none">
-      <div className="w-full max-w-screen-2xl mx-auto px-4 md:px-8">
+      <div className="w-full max-w-screen-4xl mx-auto px-4 md:px-8">
         <motion.div
           variants={parentVariants}
           initial="hidden"
@@ -46,7 +46,7 @@ export default function ServiceHero() {
               <h1
                 className="text-white font-bold"
                 style={{
-                  fontSize: 'clamp(2.5rem, 10vw, 8rem)',
+                  fontSize: 'clamp(2.5rem, 10vw, 9rem)',
                   lineHeight: 1.05,
                   letterSpacing: '-0.04em',
                   fontFamily: 'Arial, Helvetica, sans-serif',
