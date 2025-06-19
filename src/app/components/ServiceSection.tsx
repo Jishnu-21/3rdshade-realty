@@ -85,7 +85,7 @@ export default function ServiceSection() {
       <div className="w-full max-w-screen-4xl ">
         <div className="flex items-center mb-2">
           <motion.h2
-            className="text-white text-3xl md:text-3xl font-bold text-center mx-auto flex gap-1"
+            className="text-white text-3xl md:text-5xl font-extrabold text-center mx-auto flex gap-1"
             variants={titleParent}
             initial="hidden"
             whileInView="visible"
@@ -129,7 +129,7 @@ export default function ServiceSection() {
                   </div>
                   {/* Content */}
                   <div className="w-full md:w-1/2 flex flex-col justify-end pb-8 relative cursor-pointer group">
-                    <h3 className="text-white text-3xl md:text-5xl font-bold mb-6 leading-tight transition-colors duration-300 group-hover:text-gradient bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 bg-clip-text text-transparent">
+                    <h3 className="text-white text-2xl md:text-4xl font-extrabold mb-6 leading-tight transition-colors duration-300 group-hover:text-gradient bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 bg-clip-text text-transparent">
                       {service.title}
                     </h3>
                     <p className="text-neutral-300 text-lg md:text-xl leading-relaxed">
