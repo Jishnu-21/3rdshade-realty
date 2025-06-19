@@ -22,8 +22,7 @@ export default function Home() {
 
   return (
     <>
-      {loading ? <Loader onFinish={() => setLoading(false)} /> : null}
-      <main className={`${loading ? "hidden" : "block"}`}>
+      <main >
         <Header />
         <div className="relative w-full min-h-screen">
           <video
