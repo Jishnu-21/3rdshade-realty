@@ -1,30 +1,20 @@
 'use client'
-import React, { useEffect, useRef, useCallback, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
-const lines = [
+const paragraphLines = [
   'Through strategy, innovation and creativity',
-  'we take your brand on a journey of discovery and transformation',
-  'creating emotional experiences that leave a lasting impression',
+  'we take your brand on a journey of discovery',
+  'and transformation creating emotional',
+  'experiences that leave a lasting impression',
   'and drive behaviour.'
 ];
 
-function ColorChangeText({ lines, onRevealEnd }: { lines: string[]; onRevealEnd: () => void }) {
+function ColorChangeText({ textLines, onRevealEnd }: { textLines: string[]; onRevealEnd: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const lineRefs = useRef<HTMLDivElement[]>([]);
+  const textRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
   const [revealed, setRevealed] = useState(false);
-
-  const setLineRef = useCallback((el: HTMLDivElement | null, index: number) => {
-    if (el) {
-      lineRefs.current[index] = el;
-      el.style.filter = 'blur(10px)';
-      el.style.opacity = '0';
-      el.style.transform = 'scale(0.95)';
-      el.style.color = 'rgb(128, 128, 128)';
-    }
-  }, []);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -38,35 +28,31 @@ function ColorChangeText({ lines, onRevealEnd }: { lines: string[]; onRevealEnd:
         (viewportHeight - containerRect.top) / (containerRect.height)
       ));
 
-      lineRefs.current.forEach((line, index) => {
-        if (!line) return;
-        const delay = index * 0.15;
-        const lineProgress = Math.max(0, Math.min(1, 
-          (scrollProgress * 1.5) - delay
-        ));
-        const blur = Math.max(0, (1 - lineProgress) * 5);
-        const opacity = Math.min(1, lineProgress * 1.2);
-        line.style.filter = `blur(${blur}px)`;
-        line.style.opacity = opacity.toString();
-        line.style.transform = `scale(${0.95 + (lineProgress * 0.05)})`;
-        line.style.color = `rgb(${
-          Math.round(128 + (127 * lineProgress))
+      // Text reveal
+      if (textRef.current) {
+        const progress = Math.max(0, Math.min(1, scrollProgress * 1.2));
+        const blur = Math.max(0, (1 - progress) * 5);
+        const opacity = Math.min(1, progress * 1.2);
+        textRef.current.style.filter = `blur(${blur}px)`;
+        textRef.current.style.opacity = opacity.toString();
+        textRef.current.style.transform = `scale(${0.98 + (progress * 0.02)})`;
+        textRef.current.style.color = `rgb(${
+          Math.round(128 + (127 * progress))
         }, ${
-          Math.round(128 + (127 * lineProgress))
+          Math.round(128 + (127 * progress))
         }, ${
-          Math.round(128 + (127 * lineProgress))
+          Math.round(128 + (127 * progress))
         })`;
-      });
+      }
 
-      // Button reveal after last line, with less delay
+      // Button reveal after text
       if (buttonRef.current) {
-        const delay = (lines.length - 1) * 0.15 + 0.12;
-        const btnProgress = Math.max(0, Math.min(1, (scrollProgress * 1.5) - delay));
+        const btnProgress = Math.max(0, Math.min(1, (scrollProgress * 1.2) - 0.15));
         const blur = Math.max(0, (1 - btnProgress) * 5);
         const opacity = Math.min(1, btnProgress * 1.2);
         buttonRef.current.style.filter = `blur(${blur}px)`;
         buttonRef.current.style.opacity = opacity.toString();
-        buttonRef.current.style.transform = `scale(${0.95 + (btnProgress * 0.05)})`;
+        buttonRef.current.style.transform = `scale(${0.98 + (btnProgress * 0.02)})`;
         buttonRef.current.style.color = `rgb(${
           Math.round(128 + (127 * btnProgress))
         }, ${
@@ -76,7 +62,7 @@ function ColorChangeText({ lines, onRevealEnd }: { lines: string[]; onRevealEnd:
         })`;
       }
 
-      // Only trigger once when the last line is fully revealed
+      // Only trigger once when the text is fully revealed
       if (!hasRevealed && scrollProgress >= 0.7) {
         setRevealed(true);
         onRevealEnd();
@@ -87,35 +73,34 @@ function ColorChangeText({ lines, onRevealEnd }: { lines: string[]; onRevealEnd:
     window.addEventListener('scroll', handleScroll);
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [onRevealEnd, lines.length]);
+  }, [onRevealEnd]);
 
   return (
     <div ref={containerRef} className="w-full">
-      <div className="flex flex-col items-start gap-2 sm:gap-3 md:gap-4 lg:gap-6">
-        {lines.map((line, index) => (
-          <div
-            key={index}
-            ref={el => setLineRef(el, index)}
-            className="transition-all duration-500 will-change-transform text-left"
-            style={{
-              fontSize: 'clamp(1.75rem, 4vw, 3.5rem)',
-              lineHeight: '1.2',
-              fontWeight: '300',
-              textShadow: '0 2px 4px rgba(0,0,0,0.3)',
-              maxWidth: '100%',
-              overflowWrap: 'break-word',
-            }}
-          >
-            {line}
-          </div>
-        ))}
+      <div className="flex flex-col items-start gap-8">
+        <div
+          ref={textRef}
+          className="transition-all duration-500 will-change-transform text-left font-serif"
+          style={{
+            fontSize: 'clamp(2.5rem, 3vw, 4rem)',
+            lineHeight: '1.2',
+            fontWeight: 300,
+            textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+            maxWidth: '100%',
+            overflowWrap: 'break-word',
+          }}
+        >
+          {textLines.map((line, idx) => (
+            <div key={idx}>{line}</div>
+          ))}
+        </div>
         <div
           ref={buttonRef}
           className="mt-8 transition-all duration-500 will-change-transform"
           style={{
             opacity: 0,
             filter: 'blur(10px)',
-            transform: 'scale(0.95)',
+            transform: 'scale(0.98)',
             color: 'rgb(128,128,128)',
           }}
         >
@@ -140,7 +125,7 @@ export default function ServiceIntro() {
    
       <div className="w-full">
         <div className="relative z-10 flex flex-col items-start text-left w-full">
-          <ColorChangeText lines={lines} onRevealEnd={() => setShowButton(true)} />
+          <ColorChangeText textLines={paragraphLines} onRevealEnd={() => setShowButton(true)} />
         </div>
       </div>
     </section>

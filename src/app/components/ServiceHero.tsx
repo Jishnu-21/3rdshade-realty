@@ -3,15 +3,15 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const lines = [
-  'SERVICES ',
-  'WE PROVIDE',
-  'REALESTATE',
+  'SERVICES',
+  'PROVIDES',
+  'FOR REAL ESTATE',
 ];
 
 const zigzagOffsets = [
-  'justify-center', // left
-  'px-60',   // right
-  'px-100' // center
+  'ml-80',           // 1st line: flush left
+  '-ml-26 md:-ml-2', // 2nd line: outdented left
+  'ml-70',           // 3rd line: flush left
 ];
 
 const parentVariants = {
@@ -30,35 +30,42 @@ const lineVariants = {
 
 export default function ServiceHero() {
   return (
-    <section className="w-full min-h-screen flex flex-col justify-center items-center select-none">
+    <section className="w-full min-h-screen flex flex-col justify-center items-center select-none bg-black">
       <div className="w-full max-w-screen-4xl mx-auto px-4 md:px-8">
-        <motion.div
-          variants={parentVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {lines.map((line, idx) => (
+        <div className="flex justify-center w-full">
+          <div className="w-full max-w-6xl">
             <motion.div
-              key={idx}
-              className={`flex w-full ${zigzagOffsets[idx % zigzagOffsets.length]}`}
-              variants={lineVariants}
+              variants={parentVariants}
+              initial="hidden"
+              animate="visible"
             >
-              <h1
-                className="text-white font-bold"
-                style={{
-                  fontSize: 'clamp(2.5rem, 10vw, 9rem)',
-                  lineHeight: 1.05,
-                  letterSpacing: '-0.04em',
-                  fontFamily: 'Arial, Helvetica, sans-serif',
-                  fontWeight: 700,
-                  textShadow: '0 2px 24px rgba(0,0,0,0.25)',
-                }}
-              >
-                {line}
-              </h1>
+              {lines.map((line, idx) => (
+                <motion.div
+                  key={idx}
+                  className={`flex w-full ${zigzagOffsets[idx % zigzagOffsets.length]} items-center`}
+                  variants={lineVariants}
+                >
+                  <h1
+                    className="text-white font-extrabold break-words text-left"
+                    style={{
+                      fontSize: 'clamp(3.5rem, 13vw, 10rem)',
+                      lineHeight: 1.05,
+                      letterSpacing: '-0.04em',
+                      fontFamily: 'Arial, Helvetica, sans-serif',
+                      fontWeight: 500,
+                      textShadow: '0 2px 24px rgba(0,0,0,0.15)',
+                      width: '100%',
+                      wordBreak: 'break-word',
+                      padding: '0.10em 0',
+                    }}
+                  >
+                    {line}
+                  </h1>
+                </motion.div>
+              ))}
             </motion.div>
-          ))}
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
