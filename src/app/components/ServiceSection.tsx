@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 const services = [
   {
@@ -50,6 +50,20 @@ const serviceVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, type: 'spring' as const, stiffness: 80 } },
 };
 
+// Animation variants for letter-by-letter title
+const titleParent: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.07,
+    },
+  },
+};
+const letterVariant: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 500, damping: 30 } },
+};
+
 export default function ServiceSection() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [pointer, setPointer] = useState<{ x: number; y: number } | null>(null);
@@ -71,13 +85,21 @@ export default function ServiceSection() {
       <div className="w-full max-w-screen-4xl ">
         <div className="flex items-center mb-2">
           <motion.h2
-            className="text-white text-3xl md:text-3xl font-bold text-center mx-auto"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="text-white text-3xl md:text-3xl font-bold text-center mx-auto flex gap-1"
+            variants={titleParent}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
           >
-            OUR SERVICES
+            {Array.from('OUR SERVICES').map((char, idx) => (
+              <motion.span
+                key={idx}
+                variants={letterVariant}
+                style={{ display: char === ' ' ? 'inline-block' : 'inline-block', minWidth: char === ' ' ? '0.5em' : undefined }}
+              >
+                {char}
+              </motion.span>
+            ))}
           </motion.h2>
         </div>
         <hr className="border-neutral-700 mb-12" />

@@ -11,7 +11,7 @@ const lines = [
 const zigzagOffsets = [
   'ml-80',           // 1st line: flush left
   '-ml-26 md:-ml-2', // 2nd line: outdented left
-  'ml-70',           // 3rd line: flush left
+  'ml-45',           // 3rd line: flush left
 ];
 
 const parentVariants = {
@@ -48,7 +48,7 @@ export default function ServiceHero() {
                   <h1
                     className="text-white font-extrabold break-words text-left"
                     style={{
-                      fontSize: 'clamp(3.5rem, 13vw, 10rem)',
+                      fontSize: 'clamp(3.5rem, 13vw, 8.5rem)',
                       lineHeight: 1.05,
                       letterSpacing: '-0.04em',
                       fontFamily: 'Arial, Helvetica, sans-serif',
