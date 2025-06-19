@@ -6,6 +6,7 @@ import Image from 'next/image';
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const Header = () => {
         </div>
 
         {/* Desktop Nav Links */}
-        <nav className="flex items-center space-x-8">
+        <nav className="hidden md:flex items-center space-x-8">
           <Link href="#" className="text-white text-xl font-semibold">Properties</Link>
           <Link href="#" className="text-white text-xl font-semibold">Services</Link>
           <Link href="#" className="text-white text-xl font-semibold">About</Link>
@@ -45,12 +46,34 @@ const Header = () => {
         </nav>
 
         {/* Desktop Schedule Tour Button */}
-        <button className={`bg-neutral-800 text-white text-lg font-semibold px-6 py-3 rounded-full hover:bg-neutral-700 transition-colors duration-300 ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <button className={`hidden md:block bg-neutral-800 text-white text-lg font-semibold px-6 py-3 rounded-full hover:bg-neutral-700 transition-colors duration-300 ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
           Schedule Tour
         </button>
 
+        {/* Mobile Hamburger */}
+        <button
+          className="md:hidden flex flex-col justify-center items-center w-10 h-10 text-white focus:outline-none"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle navigation menu"
+        >
+          <span className={`block w-6 h-0.5 bg-white mb-1 transition-transform ${menuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
+          <span className={`block w-6 h-0.5 bg-white mb-1 transition-opacity ${menuOpen ? 'opacity-0' : 'opacity-100'}`}></span>
+          <span className={`block w-6 h-0.5 bg-white transition-transform ${menuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+        </button>
       </div>
 
+      {/* Mobile Nav Dropdown */}
+      {menuOpen && (
+        <div className="md:hidden bg-black/95 backdrop-blur-sm px-8 pb-6 pt-2 absolute top-full left-0 w-full z-40 flex flex-col items-center space-y-4 animate-fade-in-down">
+          <Link href="#" className="text-white text-lg font-semibold w-full text-center">Properties</Link>
+          <Link href="#" className="text-white text-lg font-semibold w-full text-center">Services</Link>
+          <Link href="#" className="text-white text-lg font-semibold w-full text-center">About</Link>
+          <Link href="#" className="text-white text-lg font-semibold w-full text-center">Contact</Link>
+          <button className="bg-neutral-800 text-white text-lg font-semibold px-6 py-3 rounded-full hover:bg-neutral-700 transition-colors duration-300 w-full mt-2">
+            Schedule Tour
+          </button>
+        </div>
+      )}
     </header>
   );
 };
