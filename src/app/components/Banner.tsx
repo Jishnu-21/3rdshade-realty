@@ -31,10 +31,10 @@ const Banner = () => {
       {/* Main Content */}
       <div className="relative z-10 w-full pt-24 md:pt-64 flex-grow">
         <div className="max-w-screen-2xl mx-auto px-4 md:px-8 flex flex-col items-start text-left">
-          <h1 className="font-bold text-4xl md:text-6xl lg:text-7xl leading-tight mb-4 ">
+          <h1 className="font-bold text-white text-4xl md:text-6xl lg:text-7xl leading-tight mb-4 ">
             Exclusive Properties <br /> for the Elite
           </h1>
-          <p className="text-lg md:text-xl mb-8 max-w-2xl">
+          <p className="text-lg text-white md:text-xl mb-8 max-w-2xl">
             Discover our curated collection of the world's most extraordinary homes, where luxury meets perfection.
           </p>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
