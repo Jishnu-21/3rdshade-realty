@@ -13,7 +13,7 @@ const lines = [
 
 export default function ServicesPage() {
   return (
-    <>
+    <div className="font-montserrat">
       <Header />
       <main className="min-h-screen bg-black flex flex-col justify-center items-center relative">
         <div className="w-full max-w-screen-2xl mx-auto px-4 md:px-8">
@@ -23,6 +23,6 @@ export default function ServicesPage() {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 } 

@@ -3,15 +3,15 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const lines = [
+  'POWERING ',
+  'REALTY',
   'SERVICES',
-  'PROVIDES',
-  'FOR REAL ESTATE',
 ];
 
 const zigzagOffsets = [
-  'ml-80',           // 1st line: flush left
-  '-ml-26 md:-ml-2', // 2nd line: outdented left
-  'ml-45',           // 3rd line: flush left
+  'ml-2 md:ml-80 ',           // 1st line: small left margin on mobile, large on desktop
+  '-ml-1 md:-ml-26 lg:-ml-2', // 2nd line: almost flush on mobile, zig-zag on desktop
+  'ml-3 md:ml-45',           // 3rd line: small left margin on mobile, large on desktop
 ];
 
 const parentVariants = {
@@ -30,7 +30,7 @@ const lineVariants = {
 
 export default function ServiceHero() {
   return (
-    <section className="w-full min-h-screen flex flex-col justify-center items-center select-none bg-black">
+    <section className="w-full min-h-screen md:min-h-screen flex flex-col justify-center items-center select-none bg-black">
       <div className="w-full max-w-screen-4xl mx-auto px-4 md:px-8">
         <div className="flex justify-center w-full">
           <div className="w-full max-w-6xl">
@@ -46,12 +46,12 @@ export default function ServiceHero() {
                   variants={lineVariants}
                 >
                   <h1
-                    className="text-white font-extrabold break-words text-left"
+                    className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 break-words text-left"
                     style={{
-                      fontSize: 'clamp(3.5rem, 13vw, 8.5rem)',
+                      fontSize: 'clamp(3.2rem, 13vw, 8.5rem)',
                       lineHeight: 1.05,
                       letterSpacing: '-0.04em',
-                      fontFamily: 'Arial, Helvetica, sans-serif',
+                      fontFamily: 'Montserrat, Helvetica, sans-serif',
                       fontWeight: 500,
                       textShadow: '0 2px 24px rgba(0,0,0,0.15)',
                       width: '100%',

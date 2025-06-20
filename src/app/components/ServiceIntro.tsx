@@ -3,11 +3,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 const paragraphLines = [
-  'Through strategy, innovation and creativity',
-  'we take your brand on a journey of discovery',
-  'and transformation creating emotional',
-  'experiences that leave a lasting impression',
-  'and drive behaviour.'
+  'Your real estate brand deserves more than visibility,',
+  'it deserves a story the market remembers.',
+  'At Third Shade Realty, powered by 3rd Shades creative force,',
+  'we align strategy, visuals, and marketing excellence',
+  'to put your properties in the spotlight.',
+  'From new project launches to brand evolution,',
+  'we scale your presence with precision and purpose.'
 ];
 
 function ColorChangeText({ textLines, onRevealEnd }: { textLines: string[]; onRevealEnd: () => void }) {
@@ -36,13 +38,6 @@ function ColorChangeText({ textLines, onRevealEnd }: { textLines: string[]; onRe
         textRef.current.style.filter = `blur(${blur}px)`;
         textRef.current.style.opacity = opacity.toString();
         textRef.current.style.transform = `scale(${0.98 + (progress * 0.02)})`;
-        textRef.current.style.color = `rgb(${
-          Math.round(128 + (127 * progress))
-        }, ${
-          Math.round(128 + (127 * progress))
-        }, ${
-          Math.round(128 + (127 * progress))
-        })`;
       }
 
       // Button reveal after text
@@ -80,7 +75,7 @@ function ColorChangeText({ textLines, onRevealEnd }: { textLines: string[]; onRe
       <div className="flex flex-col items-start gap-8">
         <div
           ref={textRef}
-          className="transition-all duration-500 will-change-transform text-left font-serif"
+          className="transition-all duration-500 will-change-transform text-left text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500"
           style={{
             fontSize: 'clamp(2.5rem, 3vw, 4rem)',
             lineHeight: '1.2',
@@ -120,7 +115,7 @@ export default function ServiceIntro() {
   const [showButton, setShowButton] = useState(false);
 
   return (
-    <section className="relative w-full bg-black py-20 flex items-center min-h-[60vh]">
+    <section className="relative w-full bg-black py-20 flex items-center min-h-screen md:min-h-[60vh]">
       {/* Smaller Gradient Glow */}
    
       <div className="w-full">
