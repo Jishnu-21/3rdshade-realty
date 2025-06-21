@@ -20,7 +20,7 @@ const Header = () => {
         setIsVisible(true); // Scrolling up
       }
       
-      // Update scroll state
+      // Update scroll state - only add background when scrolled
       setIsScrolled(currentScrollY > 10);
       lastScrollY.current = currentScrollY;
     };
@@ -30,22 +30,25 @@ const Header = () => {
   }, []);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 w-full py-6 transition-transform duration-300 
+    <header className={`fixed top-0 left-0 right-0 z-50 w-full py-6 transition-all duration-300 
       ${isVisible ? 'translate-y-0' : '-translate-y-full'}
       ${isScrolled ? 'bg-black/70 backdrop-blur' : 'bg-transparent'}`}
     >
       <div className="max-w-screen-2xl mx-auto px-8 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
-          <Image src="/logos/logo.png" alt="3RD SHADE Logo" width={185} height={22} />
+          <Link href="/" className="flex items-center">
+            <Image src="/logos/logo.png" alt="3RD SHADE Logo" width={185} height={22} />
+          </Link>
         </div>
 
         {/* Desktop Nav Links */}
         <nav className="hidden md:flex items-center space-x-8">
-          <Link href="#" className="text-white text-xl font-semibold">Properties</Link>
-          <Link href="#" className="text-white text-xl font-semibold">Services</Link>
-          <Link href="#" className="text-white text-xl font-semibold">About</Link>
-          <Link href="#" className="text-white text-xl font-semibold">Contact</Link>
+          <Link href="/" className="text-white text-xl font-semibold hover:text-purple-400 transition-colors duration-300">Home</Link>
+          <Link href="/properties" className="text-white text-xl font-semibold hover:text-purple-400 transition-colors duration-300">Properties</Link>
+          <Link href="/services" className="text-white text-xl font-semibold hover:text-purple-400 transition-colors duration-300">Services</Link>
+          <Link href="/about" className="text-white text-xl font-semibold hover:text-purple-400 transition-colors duration-300">About</Link>
+          <Link href="/contact" className="text-white text-xl font-semibold hover:text-purple-400 transition-colors duration-300">Contact</Link>
         </nav>
 
         {/* Desktop Schedule Tour Button */}
@@ -68,10 +71,11 @@ const Header = () => {
       {/* Mobile Nav Dropdown */}
       {menuOpen && (
         <div className="md:hidden bg-black/95 backdrop-blur-sm px-8 pb-6 pt-2 absolute top-full left-0 w-full z-40 flex flex-col items-center space-y-4 animate-fade-in-down">
-          <Link href="#" className="text-white text-lg font-semibold w-full text-center">Properties</Link>
-          <Link href="#" className="text-white text-lg font-semibold w-full text-center">Services</Link>
-          <Link href="#" className="text-white text-lg font-semibold w-full text-center">About</Link>
-          <Link href="#" className="text-white text-lg font-semibold w-full text-center">Contact</Link>
+          <Link href="/" className="text-white text-lg font-semibold w-full text-center hover:text-purple-400 transition-colors duration-300">Home</Link>
+          <Link href="/properties" className="text-white text-lg font-semibold w-full text-center hover:text-purple-400 transition-colors duration-300">Properties</Link>
+          <Link href="/services" className="text-white text-lg font-semibold w-full text-center hover:text-purple-400 transition-colors duration-300">Services</Link>
+          <Link href="/about" className="text-white text-lg font-semibold w-full text-center hover:text-purple-400 transition-colors duration-300">About</Link>
+          <Link href="/contact" className="text-white text-lg font-semibold w-full text-center hover:text-purple-400 transition-colors duration-300">Contact</Link>
           <button className="bg-neutral-800 text-white text-lg font-semibold px-6 py-3 rounded-full hover:bg-neutral-700 transition-colors duration-300 w-full mt-2">
             Schedule Tour
           </button>

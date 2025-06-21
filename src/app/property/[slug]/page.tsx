@@ -64,7 +64,7 @@ export default function PropertyPage({ params }: { params: Promise<{ slug: strin
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Column: Image/Video Gallery */}
           <div className="lg:col-span-1 flex flex-col h-full">
-            <div className="relative w-full h-[600px] rounded-xl overflow-hidden mb-4">
+            <div className="relative w-full h-[635px] rounded-xl overflow-hidden mb-4">
               {mainMedia.type === 'video' ? (
                 <video src={mainMedia.src} className="w-full h-full object-cover" autoPlay loop muted playsInline />
               ) : (
