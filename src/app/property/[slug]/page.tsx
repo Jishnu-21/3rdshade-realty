@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { FaSwimmer, FaCar, FaConciergeBell, FaDumbbell, FaShieldAlt, FaSpa, FaMapMarkerAlt, FaTrain, FaPlane, FaShoppingBag, FaCheckCircle, FaCalendarAlt, FaPhoneAlt, FaFileDownload } from 'react-icons/fa';
 import Header from '@/app/components/Header';
@@ -45,8 +45,17 @@ const relatedProperties = [
     { image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=600&q=80', name: 'Classic Mansion' },
 ];
 
-export default function PropertyPage({ params }: { params: { slug: string } }) {
+export default function PropertyPage({ params }: { params: Promise<{ slug: string }> }) {
   const [mainMedia, setMainMedia] = useState({ type: 'video', src: propertyData.reelVideoUrl });
+  const [slug, setSlug] = useState<string>('');
+
+  useEffect(() => {
+    const getSlug = async () => {
+      const resolvedParams = await params;
+      setSlug(resolvedParams.slug);
+    };
+    getSlug();
+  }, [params]);
 
   return (
     <div className="bg-black text-white font-montserrat">
