@@ -76,7 +76,7 @@ const Banner = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Discover our curated collection of the world's most extraordinary homes, where luxury meets perfection.
+          We offer curated digital packages tailored to your real estate journey - whether you're starting out or scaling globally. From brand launches to international expansions, we handle every digital touchpoint that drives results.
           </motion.p>
           <motion.div
             className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6"

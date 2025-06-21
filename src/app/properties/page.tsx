@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { FaBed, FaBath, FaRulerCombined, FaMapMarkerAlt, FaStar, FaHeart, FaPlay, FaSwimmer, FaCar, FaConciergeBell, FaDumbbell, FaShieldAlt, FaSpa, FaWifi, FaParking } from 'react-icons/fa';
@@ -139,6 +139,7 @@ const PropertiesPage = () => {
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState('price-low');
   const [priceRange, setPriceRange] = useState([0, 15000000]);
+  const videoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({});
 
   useEffect(() => {
     setIsVisible(true);
@@ -152,6 +153,21 @@ const PropertiesPage = () => {
         ? prev.filter(a => a !== amenity)
         : [...prev, amenity]
     );
+  };
+
+  const handleVideoPlay = (propertyId: number) => {
+    const video = videoRefs.current[propertyId];
+    if (video) {
+      video.play();
+    }
+  };
+
+  const handleVideoPause = (propertyId: number) => {
+    const video = videoRefs.current[propertyId];
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
   };
 
   const filteredProperties = allProperties.filter(property => {
@@ -283,12 +299,15 @@ const PropertiesPage = () => {
                 animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="group"
+                onMouseEnter={() => handleVideoPlay(property.id)}
+                onMouseLeave={() => handleVideoPause(property.id)}
               >
                 <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-gray-800">
                   {/* Video/Image Container - Portrait Size */}
                   <div className="relative h-[450px] overflow-hidden">
                     {/* Video Reel */}
                     <video
+                      ref={(el) => videoRefs.current[property.id] = el}
                       src={property.reelVideoUrl}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       muted
