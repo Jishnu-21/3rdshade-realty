@@ -307,7 +307,7 @@ const PropertiesPage = () => {
                   <div className="relative h-[450px] overflow-hidden">
                     {/* Video Reel */}
                     <video
-                      ref={(el) => videoRefs.current[property.id] = el}
+                      ref={(el) => { videoRefs.current[property.id] = el; }}
                       src={property.reelVideoUrl}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       muted
