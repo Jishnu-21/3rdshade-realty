@@ -8,11 +8,11 @@ import Footer from '@/app/components/Footer';
 
 // Mock data for a single property
 const propertyData = {
-  name: 'Skyline Penthouse',
-  description: 'Experience luxury living at its finest in this stunning penthouse apartment featuring panoramic city views, premium finishes, and world-class amenities. Located in the heart of the business district with unparalleled access to dining, shopping, and entertainment.',
+  name: 'Emaar Creek',
+  description: 'Emaar Creek is a luxury residential development located in the heart of Dubai. It is a 100% freehold property and offers a range of amenities including a swimming pool, gym, and a childrens play area.',
   price: '2,850,000',
   roi: '12-15%',
-  reelVideoUrl: 'https://videos.pexels.com/video-files/5838634/5838634-uhd_2560_1440_30fps.mp4',
+  reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749729573/emaar-creek_lk2lce.webm',
   images: [
     'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
     'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
