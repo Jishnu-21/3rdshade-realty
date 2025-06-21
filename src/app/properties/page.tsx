@@ -180,7 +180,7 @@ const PropertiesPage = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative pt-28 pb-16 bg-gradient-to-br from-purple-900/30 via-black to-pink-900/30">
+      <section className="relative pt-48 pb-40 bg-gradient-to-br from-purple-900/30 via-black to-pink-900/30 flex items-center justify-start">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div 
             initial={{ opacity: 0, y: 50 }}
