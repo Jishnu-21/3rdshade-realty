@@ -11,12 +11,12 @@ const services = [
   {
     title: 'SEO',
     description: 'Optimize your online presence to rank higher in search results and attract more qualified leads.',
-    image: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750498823/seo_q1e3dk.png',
   },
   {
     title: 'Website Development',
     description: 'Get a stunning, high-performance website tailored for real estate, with seamless user experience.',
-    image: 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=0',
   },
   {
     title: 'Performance Marketing',
