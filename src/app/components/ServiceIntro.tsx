@@ -75,7 +75,7 @@ function ColorChangeText({ textLines, onRevealEnd }: { textLines: string[]; onRe
       <div className="flex flex-col items-start gap-8">
         <div
           ref={textRef}
-          className="transition-all duration-500 will-change-transform text-left text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500"
+          className="transition-all duration-500 will-change-transform text-left text-white"
           style={{
             fontSize: 'clamp(2.5rem, 3vw, 4rem)',
             lineHeight: '1.2',

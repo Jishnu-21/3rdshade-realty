@@ -46,7 +46,7 @@ export default function ServiceHero() {
                   variants={lineVariants}
                 >
                   <h1
-                    className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 break-words text-left"
+                    className="text-white break-words text-left"
                     style={{
                       fontSize: 'clamp(3.2rem, 13vw, 8.5rem)',
                       lineHeight: 1.05,
