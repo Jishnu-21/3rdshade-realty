@@ -20,11 +20,11 @@ export default function ContactPage() {
         <div className="w-full md:w-[420px] flex flex-col justify-center gap-12 text-white text-sm md:text-base font-medium z-10 md:items-end md:text-right md:ml-auto">
           <div>
             <div className="uppercase text-xs text-neutral-400 mb-2 tracking-widest">Get in touch</div>
-            <div className="font-bold text-white">INFO@3RDSHADE.IN<br />+91 826 296 5961</div>
+            <div className="font-bold text-white">INFO@3RDSHADE.IN<br />+91 8600181189</div>
           </div>
           <div>
             <div className="uppercase text-xs text-neutral-400 mb-2 tracking-widest">Our address</div>
-            <div className="font-bold text-white">3RD SHADE MEDIA<br />KORE ROAD<br />PUNE, MAHARASTRA<br />INDIA<br />411001</div>
+            <div className="font-bold text-white">3RD SHADE MEDIA<br />PARK PLAZA,LOHEGAON<br />1st FLOOR, ROOM No.01<br />PUNE, MAHARASTRA,INDIA<br />411047</div>
           </div>
           <div>
             <div className="uppercase text-xs text-neutral-400 mb-2 tracking-widest">Connect with us</div>
@@ -32,7 +32,6 @@ export default function ContactPage() {
               <a href="#" className="hover:underline">Instagram<span className="ml-1">↗</span></a>
               <a href="#" className="hover:underline">LinkedIn<span className="ml-1">↗</span></a>
               <a href="#" className="hover:underline">Youtube<span className="ml-1">↗</span></a>
-              <a href="#" className="hover:underline">Behence<span className="ml-1">↗</span></a>
             </div>
           </div>
         </div>
