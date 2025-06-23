@@ -4,10 +4,9 @@ import Link from 'next/link';
 
 const paragraphLines = [
   'Your real estate brand deserves more than visibility,',
-  'it deserves a story the market remembers.',
-  'At Third Shade Realty, powered by 3rd Shades creative force,',
-  'we align strategy, visuals, and marketing excellence',
-  'to put your properties in the spotlight.',
+  'it deserves a story the market remembers.At Third Shade ',
+  'Realty,powered by 3rd Shades creative force,visuals,and',
+  ' marketing excellenceto put your properties in the spotlight.',
   'From new project launches to brand evolution,',
   'we scale your presence with precision and purpose.'
 ];
@@ -77,7 +76,7 @@ function ColorChangeText({ textLines, onRevealEnd }: { textLines: string[]; onRe
           ref={textRef}
           className="transition-all duration-500 will-change-transform text-left text-white"
           style={{
-            fontSize: 'clamp(2.5rem, 3vw, 4rem)',
+            fontSize: 'clamp(2.5rem, 3vw, 3.5rem)',
             lineHeight: '1.2',
             fontWeight: 300,
             textShadow: '0 2px 4px rgba(0,0,0,0.3)',

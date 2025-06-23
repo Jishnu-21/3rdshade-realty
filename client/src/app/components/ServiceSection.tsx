@@ -6,7 +6,7 @@ const services = [
   {
     title: 'Branding',
     description: 'Build a powerful, memorable brand identity that sets you apart in the real estate market.',
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750656188/branding_bkbwui.png',
   },
   {
     title: 'SEO',
@@ -16,32 +16,32 @@ const services = [
   {
     title: 'Website Development',
     description: 'Get a stunning, high-performance website tailored for real estate, with seamless user experience.',
-    image: 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=0',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750656195/web-dev_qokpcn.png',
   },
   {
     title: 'Performance Marketing',
     description: 'Drive measurable results with targeted digital campaigns and data-driven marketing strategies.',
-    image: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750656187/performance_kksaww.png',
   },
   {
     title: 'UI/UX',
     description: 'Delight your users with intuitive, beautiful interfaces and seamless digital experiences.',
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750656189/ui-ux_ccwton.png',
   },
   {
     title: 'Consulting',
     description: 'Expert advice and strategic guidance to help you grow and scale your real estate business.',
-    image: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750656187/consulting_hglv1k.png',
   },
   {
     title: 'Ecommerce Listing',
     description: 'Expand your reach with professional ecommerce listing services for your properties.',
-    image: 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750656192/ecom_hb3oui.png',
   },
   {
     title: 'Social Media',
     description: 'Engage your audience and build your brand with creative, effective social media strategies.',
-    image: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750656185/social-media_izbxum.png',
   },
 ];
 
@@ -136,23 +136,6 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
                     <p className="text-neutral-300 text-lg md:text-xl leading-relaxed">
                       {service.description}
                     </p>
-                    <div className="text-neutral-500 text-sm mt-6">
-                      Strategy, Brand, Digital, Development, Motion
-                    </div>
-                    <div className="flex gap-4 mt-6">
-                      <button
-                        className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-2 px-6 rounded-xl shadow hover:from-purple-700 hover:to-pink-600 transition-all duration-300"
-                        onClick={() => onEnquire()}
-                      >
-                        Enquire Now
-                      </button>
-                      <button
-                        className="bg-black border border-purple-600 text-purple-400 font-bold py-2 px-6 rounded-xl shadow hover:bg-purple-900 hover:text-white transition-all duration-300"
-                        onClick={() => onCallNow(service.title)}
-                      >
-                        Call Now
-                      </button>
-                    </div>
                   </div>
                 </div>
               </motion.div>
