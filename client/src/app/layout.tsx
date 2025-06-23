@@ -20,13 +20,13 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body
-          className={`${montserrat.variable} antialiased overflow-x-hidden`}
-        >
-          {children}
-        </body>
-      </html>
+    <html lang="en">
+      <body
+        className={`${montserrat.variable} antialiased overflow-x-hidden`}
+      >
+        {children}
+      </body>
+    </html>
     </ClerkProvider>
   );
 }
