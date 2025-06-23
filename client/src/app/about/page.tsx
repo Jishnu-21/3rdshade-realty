@@ -99,7 +99,7 @@ const AboutPage = () => {
             transition={{ duration: 1, delay: 0.2 }}
             className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
           >
-            About 3RD SHADE
+            About US
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 30 }}
@@ -107,7 +107,7 @@ const AboutPage = () => {
             transition={{ duration: 1, delay: 0.4 }}
             className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed"
           >
-            Pioneering luxury real estate experiences across the globe, connecting discerning clients with exceptional properties that define modern living.
+          Elevating luxury real estate globally, we connect discerning clients with exceptional properties that redefine modern living.
           </motion.p>
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
