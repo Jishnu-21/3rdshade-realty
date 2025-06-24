@@ -6,9 +6,11 @@ import { motion } from 'framer-motion';
 import { FaAward, FaUsers, FaHome, FaGlobe, FaHandshake, FaChartLine, FaStar, FaCheckCircle, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
+import { useRouter } from 'next/navigation';
 
 const AboutPage = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setIsVisible(true);
@@ -25,22 +27,22 @@ const AboutPage = () => {
     {
       icon: <FaHandshake />,
       title: 'Trust & Integrity',
-      description: 'We believe in doing business the right way by being honest, transparent, and dependable at every step. Strong partnerships are built on trust, and that’s where we start.'
+      description: "We believe in doing business the right way by being honest, transparent, and dependable at every step. Strong partnerships are built on trust, and that's where we start."
     },
     {
       icon: <FaChartLine />,
       title: 'Excellence',
-      description: 'We approach every project with clarity and purpose. Our campaigns are driven by data, refined by experience, and aligned with each client’s business vision.'
+      description: "We approach every project with clarity and purpose. Our campaigns are driven by data, refined by experience, and aligned with each client's business vision."
     },
     {
       icon: <FaStar />,
       title: 'Innovation',
-      description: 'Our ideas are original, but never vague. We focus on delivering sharp, targeted content and visuals that connect with the right audience at the right time.'
+      description: "Our ideas are original, but never vague. We focus on delivering sharp, targeted content and visuals that connect with the right audience at the right time."
     },
     {
       icon: <FaCheckCircle />,
       title: 'Quality',
-      description: 'Everything we do is built around our clients’ goals. From strategy to execution, we stay responsive, focused, and committed to delivering meaningful outcomes.'
+      description: "Everything we do is built around our clients' goals. From strategy to execution, we stay responsive, focused, and committed to delivering meaningful outcomes."
     }
   ];
 
@@ -99,7 +101,7 @@ const AboutPage = () => {
             transition={{ duration: 1, delay: 0.2 }}
             className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
           >
-            About US
+            About Us
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 30 }}
@@ -115,10 +117,16 @@ const AboutPage = () => {
             transition={{ duration: 1, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <button className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-4 px-8 rounded-full hover:from-purple-700 hover:to-pink-600 transition-all duration-300">
+            <button
+              className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-4 px-8 rounded-full hover:from-purple-700 hover:to-pink-600 transition-all duration-300"
+              onClick={() => router.push('/properties')}
+            >
               Our Properties
             </button>
-            <button className="border-2 border-white text-white font-bold py-4 px-8 rounded-full hover:bg-white hover:text-black transition-all duration-300">
+            <button
+              className="border-2 border-white text-white font-bold py-4 px-8 rounded-full hover:bg-white hover:text-black transition-all duration-300"
+              onClick={() => router.push('/contact')}
+            >
               Contact Us
             </button>
           </motion.div>
@@ -253,12 +261,20 @@ const AboutPage = () => {
             Work with our experts to build visibility, generate leads, and drive qualified results.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-4 px-8 rounded-full hover:from-purple-700 hover:to-pink-600 transition-all duration-300 flex items-center justify-center gap-2">
+              <a
+                href="tel:++918600181189"
+                className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-4 px-8 rounded-full hover:from-purple-700 hover:to-pink-600 transition-all duration-300 flex items-center justify-center gap-2"
+                style={{ display: 'inline-flex' }}
+              >
                 <FaPhoneAlt /> Get in Touch
-              </button>
-              <button className="border-2 border-white text-white font-bold py-4 px-8 rounded-full hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center gap-2">
+              </a>
+              <a
+                href="mailto:info@3rdshade.in"
+                className="border-2 border-white text-white font-bold py-4 px-8 rounded-full hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center gap-2"
+                style={{ display: 'inline-flex' }}
+              >
                 <FaEnvelope /> Send Message
-              </button>
+              </a>
             </div>
           </motion.div>
         </div>

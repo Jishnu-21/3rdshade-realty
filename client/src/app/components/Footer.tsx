@@ -19,27 +19,25 @@ const Footer = () => (
         {/* Center: Links */}
         <div className="flex-1 grid grid-cols-2 md:grid-cols-3 gap-8">
           <div>
-            <h4 className="text-white font-semibold mb-3">Properties</h4>
+            <h4 className="text-white font-semibold mb-3">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-white">Featured Listings</a></li>
-              <li><a href="#" className="hover:text-white">New Arrivals</a></li>
-              <li><a href="#" className="hover:text-white">Coming Soon</a></li>
+              <li><a href="/about" className="hover:text-white">About</a></li>
+              <li><a href="/properties" className="hover:text-white">Property</a></li>
+              <li><a href="/services" className="hover:text-white">Services</a></li>
             </ul>
           </div>
           <div>
-            <h4 className="text-white font-semibold mb-3">Services</h4>
+            <h4 className="text-white font-semibold mb-3">Privacy</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-white">Buying</a></li>
-              <li><a href="#" className="hover:text-white">Selling</a></li>
-              <li><a href="#" className="hover:text-white">Investment</a></li>
+              <li><a href="/privacy" className="hover:text-white">Privacy</a></li>
+              <li><a href="/terms" className="hover:text-white">Terms</a></li>
             </ul>
           </div>
           <div>
             <h4 className="text-white font-semibold mb-3">Contact</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="tel:+15551234567" className="hover:text-white">+1 (555) 123-4567</a></li>
-              <li><a href="mailto:elite@luxury.com" className="hover:text-white">elite@luxury.com</a></li>
-              <li>Beverly Hills, CA</li>
+              <li>INFO@3RDSHADE.IN</li>
+              <li>+91 8600181189</li>
             </ul>
           </div>
         </div>
