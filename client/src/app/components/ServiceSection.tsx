@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
+import Modal from 'react-modal';
 
 const services = [
   {
@@ -68,6 +69,12 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [pointer, setPointer] = useState<{ x: number; y: number } | null>(null);
 
+  // Modal state
+  const [showModal, setShowModal] = useState(false);
+  const [form, setForm] = useState({ name: '', email: '', services: [] as string[], message: '' });
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState<string | null>(null);
+
   // Hide pointer on mouse leave
   const handlePointerLeave = () => {
     setPointer(null);
@@ -78,6 +85,57 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
   const handlePointerMove = (e: React.MouseEvent, idx: number) => {
     setHoveredIdx(idx);
     setPointer({ x: e.clientX, y: e.clientY });
+  };
+
+  // Open modal with selected service (pre-check it)
+  const handleOpenModal = (serviceTitle: string) => {
+    setForm(f => ({ ...f, services: [serviceTitle] }));
+    setShowModal(true);
+    setResult(null);
+  };
+
+  // Handle form input
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value, type } = e.target;
+    if (type === 'checkbox' && e.target instanceof HTMLInputElement) {
+      const checked = e.target.checked;
+      setForm(f => ({
+        ...f,
+        services: checked
+          ? [...f.services, value]
+          : f.services.filter(s => s !== value),
+      }));
+    } else {
+      setForm(f => ({ ...f, [name]: value }));
+    }
+  };
+
+  // Handle form submit
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setResult(null);
+    try {
+      const res = await fetch('/api/send-service-inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          services: form.services,
+          message: form.message,
+        }),
+      });
+      if (res.ok) {
+        setResult('Thank you! Your enquiry has been sent.');
+        setForm({ name: '', email: '', services: [], message: '' });
+      } else {
+        setResult('Sorry, there was an error sending your enquiry.');
+      }
+    } catch {
+      setResult('Sorry, there was an error sending your enquiry.');
+    }
+    setLoading(false);
   };
 
   return (
@@ -125,12 +183,12 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
                       src={service.image}
                       alt={service.title}
                       className="w-full h-80 md:h-[500px] object-cover rounded-2xl shadow-2xl transition-transform duration-300 group-hover:scale-105 cursor-pointer"
-                      onClick={onEnquire}
+                      onClick={() => handleOpenModal(service.title)}
                     />
                   </div>
                   {/* Content */}
                   <div className="w-full md:w-1/2 flex flex-col justify-end pb-8 relative cursor-pointer group">
-                    <h3 className="text-white text-2xl md:text-4xl font-extrabold mb-6 leading-tight transition-colors duration-300 group-hover:text-gradient bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 bg-clip-text text-transparent" onClick={onEnquire}>
+                    <h3 className="text-white text-2xl md:text-4xl font-extrabold mb-6 leading-tight transition-colors duration-300 group-hover:text-gradient bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 bg-clip-text text-transparent" onClick={() => handleOpenModal(service.title)}>
                       {service.title}
                     </h3>
                     <p className="text-neutral-300 text-lg md:text-xl leading-relaxed">
@@ -143,6 +201,71 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
           ))}
         </div>
       </div>
+      {/* Modal Enquiry Form */}
+      <Modal
+        isOpen={showModal}
+        onRequestClose={() => setShowModal(false)}
+        className="fixed inset-0 flex items-center justify-center z-[9999] bg-black/70"
+        overlayClassName="fixed inset-0 bg-black/70 z-[9998]"
+        ariaHideApp={false}
+      >
+        <div className="bg-neutral-900 rounded-xl shadow-2xl p-8 w-full max-w-md relative animate-fadeIn">
+          <button className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer scale-100 hover:scale-110" onClick={() => setShowModal(false)}>
+            ×
+          </button>
+          <h2 className="text-2xl font-bold mb-6 text-center text-white">Service Enquiry</h2>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              value={form.name}
+              onChange={handleInputChange}
+              className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={form.email}
+              onChange={handleInputChange}
+              className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
+              required
+            />
+            <div>
+              <label className="block text-white mb-2">Select Service(s):</label>
+              <div className="flex flex-wrap gap-2">
+                {services.map(s => (
+                  <label key={s.title} className="flex items-center gap-2 bg-neutral-800 px-3 py-2 rounded-lg cursor-pointer text-white">
+                    <input
+                      type="checkbox"
+                      name="services"
+                      value={s.title}
+                      checked={form.services.includes(s.title)}
+                      onChange={handleInputChange}
+                      className="accent-purple-500 w-5 h-5"
+                    />
+                    {s.title}
+                  </label>
+                ))}
+              </div>
+            </div>
+            <textarea
+              name="message"
+              placeholder="Message"
+              value={form.message}
+              onChange={handleInputChange}
+              className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 min-h-[100px]"
+              required
+            />
+            <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg" disabled={loading}>
+              {loading ? 'Sending...' : 'Send Enquiry'}
+            </button>
+            {result && <div className="text-center text-sm mt-2 text-white">{result}</div>}
+          </form>
+        </div>
+      </Modal>
       {/* Custom Pointer */}
       <AnimatePresence>
         {pointer && hoveredIdx !== null && (

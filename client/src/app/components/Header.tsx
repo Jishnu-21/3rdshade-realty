@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const Header = () => {
+const Header = ({ onEnquire }: { onEnquire?: () => void }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -48,12 +48,14 @@ const Header = () => {
           <Link href="/properties" className="text-white text-xl font-semibold hover:text-purple-400 transition-colors duration-300">Properties</Link>
           <Link href="/services" className="text-white text-xl font-semibold hover:text-purple-400 transition-colors duration-300">Services</Link>
           <Link href="/about" className="text-white text-xl font-semibold hover:text-purple-400 transition-colors duration-300">About</Link>
-          <Link href="/contact" className="text-white text-xl font-semibold hover:text-purple-400 transition-colors duration-300">Contact</Link>
         </nav>
 
-        {/* Desktop Schedule Tour Button */}
-        <button className={`hidden md:block bg-neutral-800 text-white text-lg font-semibold px-6 py-3 rounded-full hover:bg-neutral-700 transition-colors duration-300 ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-          Schedule Tour
+        {/* Desktop Get Started Button */}
+        <button
+          className={`hidden md:block bg-neutral-800 text-white text-lg font-semibold px-6 py-3 rounded-full hover:bg-neutral-700 transition-colors duration-300 cursor-pointer ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          onClick={() => window.location.href = '/contact'}
+        >
+          Get Started
         </button>
 
         {/* Mobile Hamburger */}
@@ -70,14 +72,17 @@ const Header = () => {
 
       {/* Mobile Nav Dropdown */}
       {menuOpen && (
-        <div className="md:hidden bg-black/95 backdrop-blur-sm px-8 pb-6 pt-2 absolute top-full left-0 w-full z-40 flex flex-col items-center space-y-4 animate-fade-in-down">
+        <div className="md:hidden cursor-pointer bg-black/95 backdrop-blur-sm px-8 pb-6 pt-2 absolute top-full left-0 w-full z-40 flex flex-col items-center space-y-4 animate-fade-in-down">
           <Link href="/" className="text-white text-lg font-semibold w-full text-center hover:text-purple-400 transition-colors duration-300">Home</Link>
           <Link href="/properties" className="text-white text-lg font-semibold w-full text-center hover:text-purple-400 transition-colors duration-300">Properties</Link>
           <Link href="/services" className="text-white text-lg font-semibold w-full text-center hover:text-purple-400 transition-colors duration-300">Services</Link>
           <Link href="/about" className="text-white text-lg font-semibold w-full text-center hover:text-purple-400 transition-colors duration-300">About</Link>
           <Link href="/contact" className="text-white text-lg font-semibold w-full text-center hover:text-purple-400 transition-colors duration-300">Contact</Link>
-          <button className="bg-neutral-800 text-white text-lg font-semibold px-6 py-3 rounded-full hover:bg-neutral-700 transition-colors duration-300 w-full mt-2">
-            Schedule Tour
+          <button
+            className="bg-neutral-800 text-white text-lg font-semibold px-6 py-3 rounded-full hover:bg-neutral-700 transition-colors duration-300 w-full mt-2 cursor-pointer"
+            onClick={() => { setMenuOpen(false); window.location.href = '/contact'; }}
+          >
+            Get Started
           </button>
         </div>
       )}

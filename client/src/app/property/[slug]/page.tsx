@@ -95,9 +95,22 @@ export default function PropertyPage({ params }: { params: Promise<{ slug: strin
     setCallForm({ ...callForm, [e.target.name]: e.target.value });
   };
 
-  const handleCallSubmit = (e: React.FormEvent) => {
+  const handleCallSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setShowCallModal(false);
+    try {
+      await fetch('/api/send-service-inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'call',
+          property: propertyData.name,
+          ...callForm,
+        }),
+      });
+      setShowCallModal(false);
+    } catch (err) {
+      // Optionally show an error message
+    }
   };
 
   const handleEnquireInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -112,15 +125,28 @@ export default function PropertyPage({ params }: { params: Promise<{ slug: strin
   };
   const handleEnquireNext = () => setEnquireStep(s => Math.min(s + 1, 3));
   const handleEnquireBack = () => setEnquireStep(s => Math.max(s - 1, 1));
-  const handleEnquireSubmit = (e: React.FormEvent) => {
+  const handleEnquireSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setShowEnquireModal(false);
-    setEnquireStep(1);
+    try {
+      await fetch('/api/send-service-inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'enquiry',
+          property: propertyData.name,
+          ...enquireForm,
+        }),
+      });
+      setShowEnquireModal(false);
+      setEnquireStep(1);
+    } catch (err) {
+      // Optionally show an error message
+    }
   };
 
   return (
     <div className="bg-black text-white font-montserrat">
-      <Header />
+      <Header onEnquire={() => setShowEnquireModal(true)} />
       {/* Custom Login/Register Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
