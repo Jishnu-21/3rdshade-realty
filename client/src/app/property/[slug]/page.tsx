@@ -7,6 +7,11 @@ import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import { notFound } from 'next/navigation';
 
+// Define the type for params
+interface PropertyPageProps {
+  params: { slug: string };
+}
+
 // Array of all properties with a unique slug for each
 const allProperties = [
   {
@@ -22,21 +27,21 @@ const allProperties = [
       'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760831/damac-villa3_y3zpva.jpg',
     ],
     amenities: [
-        { icon: <FaSwimmer />, name: '700,000 sq.m. of Parks & Green Spaces' },
-        { icon: <FaCar />, name: 'Over 250,000 sq.m. of Retail & Dining' },
-        { icon: <FaConciergeBell />, name: 'Cultural Hub with Museums & Exhibitions' },
-        { icon: <FaDumbbell />, name: 'Cycling Tracks' },
-        { icon: <FaShieldAlt />, name: 'Entertainment Arenas for Concerts & Theatre' },
-        { icon: <FaSpa />, name: 'Waterfront Promenades' },
+      { icon: <FaSwimmer />, name: '700,000 sq.m. of Parks & Green Spaces' },
+      { icon: <FaCar />, name: 'Over 250,000 sq.m. of Retail & Dining' },
+      { icon: <FaConciergeBell />, name: 'Cultural Hub with Museums & Exhibitions' },
+      { icon: <FaDumbbell />, name: 'Cycling Tracks' },
+      { icon: <FaShieldAlt />, name: 'Entertainment Arenas for Concerts & Theatre' },
+      { icon: <FaSpa />, name: 'Waterfront Promenades' },
     ],
     location: {
-        address: 'Emaar Creek Harbour, Dubai',
+      address: 'Emaar Creek Harbour, Dubai',
       city: 'Dubai Marina, UAE',
       points: [
-          { icon: <FaTrain />, name: 'Creek Metro Station (Green Line)- approx. 2.8 km/5–10 min' },
-          { icon: <FaPlane />, name: 'Airport: Dubai Intl – 15 min' },
-          { icon: <FaShoppingBag />, name: ': Dubai Festival City Mall – ~3 km / 7 min drive' },
-      ]
+        { icon: <FaTrain />, name: 'Creek Metro Station (Green Line)- approx. 2.8 km/5–10 min' },
+        { icon: <FaPlane />, name: 'Airport: Dubai Intl – 15 min' },
+        { icon: <FaShoppingBag />, name: 'Dubai Festival City Mall – ~3 km / 7 min drive' },
+      ],
     },
     goldenVisa: true,
     relatedSlugs: ['deeyar-eleve', 'sobha-solis', 'azizi-venice', 'wasl-1-residences'],
@@ -44,7 +49,7 @@ const allProperties = [
   {
     slug: 'deeyar-eleve',
     name: 'Deeyar Eleve',
-    description: 'Deeyar Eleve offers 1 to 3- bedroom apartments in a lifestyle-focused development designed around comfort, convenience, and elevated living.',
+    description: 'Deeyar Eleve offers 1 to 3-bedroom apartments in a lifestyle-focused development designed around comfort, convenience, and elevated living.',
     price: '1,000,000',
     roi: '10-12%',
     reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750744127/deeyer-eleve_hmjj4n.jpg',
@@ -65,10 +70,10 @@ const allProperties = [
       address: 'Deeyar Eleve, Dubai',
       city: 'Dubai, UAE',
       points: [
-        { icon: <FaTrain />, name: 'UAE Exchange Station -  5 min walk' },
+        { icon: <FaTrain />, name: 'UAE Exchange Station - 5 min walk' },
         { icon: <FaPlane />, name: 'Airport: 20 min' },
-        { icon: <FaShoppingBag />, name: 'DXB  - 40 min drive DWC  - 20 min drive' },
-      ]
+        { icon: <FaShoppingBag />, name: 'DXB - 40 min drive DWC - 20 min drive' },
+      ],
     },
     goldenVisa: true,
     relatedSlugs: ['emaar-creek-harbour', 'sobha-solis', 'azizi-venice', 'wasl-1-residences'],
@@ -76,7 +81,7 @@ const allProperties = [
   {
     slug: 'sobha-solis',
     name: 'Sobha Solis',
-    description: 'Sobha Solis offers 1 to 3-bedroom residences in a large-scale community setting with over 2,300 apartments. Designed for active, family-friendly living, the development integrates extensive indoor and outdoor amenities',
+    description: 'Sobha Solis offers 1 to 3-bedroom residences in a large-scale community setting with over 2,300 apartments. Designed for active, family-friendly living, the development integrates extensive indoor and outdoor amenities.',
     price: '1,000,000',
     roi: '-',
     reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727749/sobha-solis2_c6nt2j.mp4',
@@ -86,18 +91,12 @@ const allProperties = [
       'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760828/sobha1_mfjw7n.jpg',
     ],
     amenities: [
-      // Outdoor
       { icon: <FaSwimmer />, name: 'Lap Pool' },
-      { icon: <FaSwimmer />, name: "Kids Pool & Leisure Pool" },
+      { icon: <FaSwimmer />, name: 'Kids Pool & Leisure Pool' },
       { icon: <FaSpa />, name: 'Common Parks & Lawns' },
-
-
-      // Indoor
       { icon: <FaDumbbell />, name: 'Gym & Fitness Zone' },
       { icon: <FaChild />, name: 'Indoor Kids Play Area' },
       { icon: <FaSpa />, name: 'Yoga & Meditation Studio' },
-     
-
     ],
     location: {
       address: 'Sobha Solis, Dubai',
@@ -107,7 +106,7 @@ const allProperties = [
         { icon: <FaPlane />, name: 'Airport: Dubai International – 41 km (≈45 min drive)' },
         { icon: <FaShoppingBag />, name: 'Mall: First Avenue Mall – 4.6 km (≈10 min)' },
         { icon: <FaCar />, name: 'Nearby Landmark: Dubai Autodrome – <1 min drive' },
-      ]
+      ],
     },
     goldenVisa: true,
     relatedSlugs: ['emaar-creek-harbour', 'deeyar-eleve', 'azizi-venice', 'wasl-1-residences'],
@@ -128,19 +127,19 @@ const allProperties = [
       { icon: <FaStore />, name: 'Climate-Controlled Retail Boulevard' },
       { icon: <FaSwimmer />, name: 'Crystal Lagoon & Swimmable Beaches' },
       { icon: <FaTheaterMasks />, name: 'Opera House (1,500 seats)' },
-      { icon: <FaHotel />, name: 'Five-Star Family & Lifestyle Hotels' }
+      { icon: <FaHotel />, name: 'Five-Star Family & Lifestyle Hotels' },
     ],
     location: {
       address: 'Azizi Venice, Dubai South',
       city: 'Dubai, UAE',
       points: [
-        { icon: <FaPlane />, name: ",7 MINS Al Maktoum Int'l Airport (DWC)" },
+        { icon: <FaPlane />, name: "7 MINS Al Maktoum Int'l Airport (DWC)" },
         { icon: <FaLandmark />, name: '10 MINS Dubai Parks and Resorts' },
         { icon: <FaWater />, name: '15 MINS The Palm Jebel Ali' },
         { icon: <FaMapMarkerAlt />, name: '20 MINS Dubai Marina' },
-      ]
+      ],
     },
-        goldenVisa: true,
+    goldenVisa: true,
     relatedSlugs: ['emaar-creek-harbour', 'deeyar-eleve', 'sobha-solis', 'wasl-1-residences'],
   },
   {
@@ -156,23 +155,23 @@ const allProperties = [
       'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760856/wasl4_gkv7rf.jpg',
     ],
     amenities: [
-      { icon: <FaSwimmer />, name: "Swimming Pool" },
+      { icon: <FaSwimmer />, name: 'Swimming Pool' },
       { icon: <FaChild />, name: "Kids' Pool & Play Areas" },
-      { icon: <FaFire />, name: "BBQ Stations" },
-      { icon: <FaDumbbell />, name: "State-of-the-Art Gym" },
-      { icon: <FaHotTub />, name: "Sauna" },
-      { icon: <FaTree />, name: "Park & Green Spaces" },
-      { icon: <FaCouch />, name: "Lounge & Relaxation Areas" },
+      { icon: <FaFire />, name: 'BBQ Stations' },
+      { icon: <FaDumbbell />, name: 'State-of-the-Art Gym' },
+      { icon: <FaHotTub />, name: 'Sauna' },
+      { icon: <FaTree />, name: 'Park & Green Spaces' },
+      { icon: <FaCouch />, name: 'Lounge & Relaxation Areas' },
     ],
     location: {
       address: 'Wasl 1 Residences, Dubai',
       city: 'Dubai, UAE',
       points: [
-        { icon: <FaTrain />, name: "Metro: Max Fashion/Max Station – 1 min walk" },
-        { icon: <FaPlane />, name: "Airport: Dubai International – 15 min drive" },
-        { icon: <FaShoppingBag />, name: "Mall: Dubai Mall/Burj Khalifa – 10 min drive BurJuman Mall – 5 min drive" },
+        { icon: <FaTrain />, name: 'Metro: Max Fashion/Max Station – 1 min walk' },
+        { icon: <FaPlane />, name: 'Airport: Dubai International – 15 min drive' },
+        { icon: <FaShoppingBag />, name: 'Mall: Dubai Mall/Burj Khalifa – 10 min drive BurJuman Mall – 5 min drive' },
         { icon: <FaLandmark />, name: "Nearby Landmark: Za'abeel Park – Adjacent" },
-      ]
+      ],
     },
     goldenVisa: false,
     relatedSlugs: ['emaar-creek-harbour', 'deeyar-eleve', 'sobha-solis', 'azizi-venice'],
@@ -188,7 +187,6 @@ const allProperties = [
       'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760797/emaar-south3_hq2hmi.jpg',
       'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760800/emaar-south1_ty362p.jpg',
       'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760798/emaar-south2_vpucjn.jpg',
-      
     ],
     amenities: [
       { icon: <FaGolfBall />, name: 'Golf Course & Clubhouse' },
@@ -205,7 +203,7 @@ const allProperties = [
         { icon: <FaPlane />, name: 'Airport: Al Maktoum Intl – approx. 5 min drive' },
         { icon: <FaShoppingBag />, name: 'Mall: South Village Mall – on-site retail; Aiko Mall ≈20 min drive; Ibn Battuta Mall ≈27 min drive' },
         { icon: <FaGolfBall />, name: 'Nearby Landmark: Emaar South Golf Course & Love Lake' },
-      ]
+      ],
     },
     goldenVisa: false,
     relatedSlugs: ['the-valley-avena', 'damac-islands', 'damac-islands-villas', 'azizi-venice'],
@@ -238,7 +236,7 @@ const allProperties = [
         { icon: <FaPlane />, name: 'Airport: Dubai Intl – ~25 min drive; Al Maktoum Intl – ~35 min drive' },
         { icon: <FaShoppingBag />, name: 'Mall: Dubai Outlet Mall – ~8 min drive' },
         { icon: <FaLandmark />, name: 'Nearby Landmark: The Sevens Rugby & Cricket Stadium – ~5 min drive' },
-      ]
+      ],
     },
     goldenVisa: false,
     relatedSlugs: ['emaar-south', 'damac-islands', 'damac-islands-villas', 'azizi-venice'],
@@ -251,21 +249,15 @@ const allProperties = [
     roi: '-',
     reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760818/damac1_uoxl27.jpg',
     images: [
-     'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760815/damac2_usulqy.jpg',
-     'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760815/damac2_usulqy.jpg',
-     'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760809/damac3_zdxq5i.jpg',
+      'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760815/damac2_usulqy.jpg',
+      'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760815/damac2_usulqy.jpg',
+      'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760809/damac3_zdxq5i.jpg',
     ],
     amenities: [
-      // Waterfront & Lifestyle
       { icon: <FaWater />, name: 'Private Beach Access' },
       { icon: <FaTheaterMasks />, name: 'Floating Wedding Venue' },
       { icon: <FaTint />, name: 'Aqua Dome & Aqua Park' },
       { icon: <FaSpa />, name: 'Lagoon Tours & Hammocks' },
-
-      // Wellness & Adventure
-     
-      // Nature & Community
-      
     ],
     location: {
       address: 'Damac Islands, Dubai',
@@ -275,7 +267,7 @@ const allProperties = [
         { icon: <FaPlane />, name: 'Airports: DXB – ~20 min drive; DWC – ~25 min drive' },
         { icon: <FaShoppingBag />, name: 'Malls: Dubai Mall & Mall of the Emirates – ~25 min drive each' },
         { icon: <FaLandmark />, name: 'Nearby Landmarks: Palm Jumeirah, Dubai Marina, Bluewaters Island – ~25 min drive' },
-      ]
+      ],
     },
     goldenVisa: false,
     relatedSlugs: ['damac-islands-villas', 'emaar-south', 'the-valley-avena', 'azizi-venice'],
@@ -293,16 +285,12 @@ const allProperties = [
       'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760841/damac-villa2_dhqx1v.jpg',
     ],
     amenities: [
-      // Villa Features
       { icon: <FaBed />, name: '6 to 7 Bedrooms' },
       { icon: <FaRulerCombined />, name: 'Up to 17,078 sq.ft. Built-Up Area' },
       { icon: <FaDumbbell />, name: "Private Gym & Maid's Room" },
       { icon: <FaLayerGroup />, name: 'Multiple Terraces & Basement Level' },
       { icon: <FaCogs />, name: 'Smart Home Automation' },
       { icon: <FaWindowMaximize />, name: 'Floor-to-Ceiling Sea View Windows' },
-      // Lifestyle & Waterfront Access
-     
-      
     ],
     location: {
       address: 'Damac Islands, Dubai',
@@ -312,22 +300,14 @@ const allProperties = [
         { icon: <FaPlane />, name: 'Airports: DXB – approx. 20 min, DWC – approx. 25 min' },
         { icon: <FaShoppingBag />, name: 'Malls: Dubai Marina Mall, Ibn Battuta Mall – 20–25 min drive' },
         { icon: <FaLandmark />, name: 'Nearby Landmarks: Palm Jumeirah, Bluewaters Island – ~25 min drive' },
-      ]
+      ],
     },
     goldenVisa: false,
     relatedSlugs: ['damac-islands', 'emaar-south', 'the-valley-avena', 'azizi-venice'],
   },
-  // ...add more properties with unique slugs
 ];
 
-const relatedProperties = [
-  { image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750746204/wasl_kubqws.jpg', name: 'Wasl 1' },
-  { image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750746917/valey-avena_nwrgaj.jpg', name: 'The Valley-Avena' },
-  { image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750745150/azizi_fvgglb.webp', name: 'Azizi Venice' },
-  { image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750745150/azizi_fvgglb.webp', name: 'Damac Islands' },
-];
-
-export default function PropertyPage({ params }: { params: { slug: string } }) {
+export default function PropertyPage({ params }: PropertyPageProps) {
   // Find the property by slug
   const propertyData = allProperties.find(p => p.slug === params.slug);
   if (!propertyData) {
@@ -407,6 +387,7 @@ export default function PropertyPage({ params }: { params: { slug: string } }) {
       setEnquireForm({ ...enquireForm, [name]: value });
     }
   };
+
   const handleEnquireNext = () => setEnquireStep(s => Math.min(s + 1, 2));
   const handleEnquireBack = () => setEnquireStep(s => Math.max(s - 1, 1));
   const handleEnquireSubmit = async (e: React.FormEvent) => {
@@ -553,7 +534,7 @@ export default function PropertyPage({ params }: { params: { slug: string } }) {
             <form onSubmit={handleEnquireSubmit} className="flex flex-col gap-6">
               {/* Stepper */}
               <div className="flex justify-center gap-2 mb-4">
-                {[1,2].map(step => (
+                {[1, 2].map(step => (
                   <div key={step} className={`w-8 h-2 rounded-full transition-all duration-300 ${enquireStep === step ? 'bg-gradient-to-r from-purple-600 to-pink-500' : 'bg-neutral-700'}`}></div>
                 ))}
               </div>
@@ -565,7 +546,7 @@ export default function PropertyPage({ params }: { params: { slug: string } }) {
                   <input type="tel" name="phone" placeholder="Phone (with country code)" value={enquireForm.phone} onChange={handleEnquireInputChange} className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500" required />
                   <label className="text-sm text-gray-300">Preferred contact method</label>
                   <div className="flex gap-3">
-                    {['WhatsApp','Email','Phone'].map(method => (
+                    {['WhatsApp', 'Email', 'Phone'].map(method => (
                       <label key={method} className={`px-4 py-2 rounded-full cursor-pointer font-semibold transition-all duration-200 ${enquireForm.contactMethod === method ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700'}`}>
                         <input type="radio" name="contactMethod" value={method} checked={enquireForm.contactMethod === method} onChange={handleEnquireInputChange} className="hidden" />
                         {method}
@@ -579,7 +560,7 @@ export default function PropertyPage({ params }: { params: { slug: string } }) {
                 <div className="flex flex-col gap-4 animate-fadeIn">
                   <label className="text-sm text-gray-300">Are you currently in India?</label>
                   <div className="flex gap-3">
-                    {['Yes','No'].map(val => (
+                    {['Yes', 'No'].map(val => (
                       <label key={val} className={`px-4 py-2 rounded-full cursor-pointer font-semibold transition-all duration-200 ${enquireForm.inIndia === val ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700'}`}>
                         <input type="radio" name="inIndia" value={val} checked={enquireForm.inIndia === val} onChange={handleEnquireInputChange} className="hidden" />
                         {val}
@@ -593,7 +574,7 @@ export default function PropertyPage({ params }: { params: { slug: string } }) {
                   </select>
                   <label className="text-sm text-gray-300">Type of visit</label>
                   <div className="flex gap-3">
-                    {['Virtual','Physical'].map(type => (
+                    {['Virtual', 'Physical'].map(type => (
                       <label key={type} className={`px-4 py-2 rounded-full cursor-pointer font-semibold transition-all duration-200 ${enquireForm.visitType === type ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700'}`}>
                         <input type="radio" name="visitType" value={type} checked={enquireForm.visitType === type} onChange={handleEnquireInputChange} className="hidden" />
                         {type}
@@ -607,7 +588,7 @@ export default function PropertyPage({ params }: { params: { slug: string } }) {
                   </div>
                   <label className="text-sm text-gray-300">How soon are you looking to buy?</label>
                   <div className="flex flex-wrap gap-2">
-                    {['Immediately','1–3 Months','3–6 Months','Just Exploring'].map(opt => (
+                    {['Immediately', '1–3 Months', '3–6 Months', 'Just Exploring'].map(opt => (
                       <label key={opt} className={`px-4 py-2 rounded-full cursor-pointer font-semibold transition-all duration-200 ${enquireForm.buyTimeline === opt ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700'}`}>
                         <input type="radio" name="buyTimeline" value={opt} checked={enquireForm.buyTimeline === opt} onChange={handleEnquireInputChange} className="hidden" />
                         {opt}
@@ -644,7 +625,7 @@ export default function PropertyPage({ params }: { params: { slug: string } }) {
                   );
                 } else {
                   return (
-                    <Image src={mainMedia.src} alt="Property Image" layout="fill" className="object-cover" />
+                    <Image src={mainMedia.src} alt="Property Image" fill className="object-cover" />
                   );
                 }
               })()}
@@ -677,7 +658,7 @@ export default function PropertyPage({ params }: { params: { slug: string } }) {
                   }`} 
                   onClick={() => setMainMedia({ type: 'image', src: img })}
                 >
-                  <Image src={img} alt={`Thumbnail ${idx + 1}`} layout="fill" className="object-cover" />
+                  <Image src={img} alt={`Thumbnail ${idx + 1}`} fill className="object-cover" />
                 </div>
               ))}
             </div>
@@ -711,11 +692,11 @@ export default function PropertyPage({ params }: { params: { slug: string } }) {
             <div className="bg-black rounded-xl p-4">
               <h2 className="text-lg font-bold text-white mb-3">Premium Amenities</h2>
               {propertyData.amenities?.filter(Boolean).map(item => (
-                  <div key={item.name} className="flex items-center gap-2 text-gray-300">
-                    <span className="text-purple-400 text-xs">{item.icon}</span>
-                    <span className="text-xs">{item.name}</span>
-                  </div>
-                ))}
+                <div key={item.name} className="flex items-center gap-2 text-gray-300">
+                  <span className="text-purple-400 text-xs">{item.icon}</span>
+                  <span className="text-xs">{item.name}</span>
+                </div>
+              ))}
             </div>
 
             {/* Prime Location */}
@@ -792,7 +773,7 @@ export default function PropertyPage({ params }: { params: { slug: string } }) {
               return (
                 <a key={relProp.slug} href={`/property/${relProp.slug}`} className="rounded-lg overflow-hidden block group">
                   <div className="relative h-64">
-                    <Image src={relProp.images[0]} alt={relProp.name} layout="fill" className="object-cover group-hover:scale-105 transition-transform duration-300" />
+                    <Image src={relProp.images[0]} alt={relProp.name} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
                   </div>
                   <div className="p-4 bg-neutral-900">
                     <h3 className="font-bold group-hover:text-purple-400 transition-colors duration-200">{relProp.name}</h3>
