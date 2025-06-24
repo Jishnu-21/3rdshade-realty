@@ -15,6 +15,7 @@ interface Property {
   imageUrl: string;
   videoUrl?: string; // Optional video URL
   tag?: 'Featured' | 'New';
+  slug: string;
 }
 
 const properties: Property[] = [
@@ -29,6 +30,7 @@ const properties: Property[] = [
     imageUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750745906/dubai-creek_wrypak.jpg',
     videoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749729573/emaar-creek_lk2lce.webm',
     tag: 'New',
+    slug: 'emaar-creek-harbour',
   },
   {
     id: 2,
@@ -41,6 +43,7 @@ const properties: Property[] = [
     imageUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750745431/sobha_hm1hsd.webp',
     videoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727749/sobha-solis2_c6nt2j.mp4',
     tag: 'New',
+    slug: 'sobha-solis',
   },
   {
     id: 3,
@@ -53,6 +56,7 @@ const properties: Property[] = [
     imageUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750745150/azizi_fvgglb.webp',
     videoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727087/azizi-venice_gsscns.mp4',
     tag: 'New',
+    slug: 'azizi-venice',
   },
   {
     id: 4,
@@ -65,6 +69,7 @@ const properties: Property[] = [
     imageUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750744127/deeyer-eleve_hmjj4n.jpg',
     videoUrl: '',
     tag: 'New',
+    slug: 'deeyar-eleve',
   },
   {
     id: 5,
@@ -77,6 +82,7 @@ const properties: Property[] = [
     imageUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750746204/wasl_kubqws.jpg',
     videoUrl: '',
     tag: 'New',
+    slug: 'wasl-1-residences',
   },
   {
     id: 6,
@@ -89,6 +95,7 @@ const properties: Property[] = [
     imageUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750746793/emaar-south_ba7wgp.jpg',
     videoUrl: '',
     tag: 'New',
+    slug: 'emaar-south',
   },
   {
     id: 7,
@@ -101,6 +108,7 @@ const properties: Property[] = [
     imageUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750746917/valey-avena_nwrgaj.jpg',
     videoUrl: '',
     tag: 'New',
+    slug: 'the-valley-avena',
   },
   {
     id: 8,
@@ -113,6 +121,7 @@ const properties: Property[] = [
     imageUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750744640/damac-islands_awlzym.jpg',
     videoUrl: '',
     tag: 'New',
+    slug: 'damac-islands',
   },
   {
     id: 9,
@@ -125,6 +134,7 @@ const properties: Property[] = [
     imageUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750747071/damac-villa_sjtrcb.jpg',
     videoUrl: '',
     tag: 'New',
+    slug: 'damac-islands-villas',
   },
   
 ];
@@ -171,7 +181,7 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
   const hasVideo = !!property.videoUrl;
 
   return (
-    <Link href="/property/emaar-creek" className="block" prefetch={false}>
+    <Link href={`/property/${property.slug}`} className="block" prefetch={false}>
       <div
         className="bg-neutral-900 rounded-lg overflow-hidden shadow-lg flex flex-col items-center transition-transform duration-300 hover:scale-105 cursor-pointer"
         onMouseEnter={() => hasVideo && setIsHovered(true)}

@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { FaBed, FaBath, FaRulerCombined, FaMapMarkerAlt, FaStar, FaHeart, FaPlay, FaSwimmer, FaCar, FaConciergeBell, FaDumbbell, FaShieldAlt, FaSpa, FaWifi, FaParking, FaMoneyBillWave } from 'react-icons/fa';
+import { FaBed, FaBath, FaRulerCombined, FaMapMarkerAlt, FaStar, FaPlay, FaSwimmer, FaCar, FaConciergeBell, FaDumbbell, FaShieldAlt, FaSpa, FaWifi, FaParking, FaMoneyBillWave } from 'react-icons/fa';
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import React from 'react';
@@ -369,10 +369,6 @@ const PropertiesPage = () => {
                         </div>
                       </div>
                     )}
-                    {/* Favorite Button */}
-                    <button className="absolute top-4 right-4 w-10 h-10 bg-black/50 rounded-full flex items-center justify-center text-white hover:bg-red-500 transition-colors duration-300 z-10">
-                      <FaHeart className="text-sm" />
-                    </button>
                     {/* Amenities Badge */}
                     <div className="absolute top-4 left-4 flex gap-1 z-10">
                       {property.amenities.slice(0, 3).map(amenity => (
