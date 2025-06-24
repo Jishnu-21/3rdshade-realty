@@ -362,11 +362,7 @@ export default function PropertyPage({ params }: { params: { slug: string } }) {
   ];
 
   useEffect(() => {
-    const getSlug = async () => {
-      const resolvedParams = await params;
-      setSlug(resolvedParams.slug);
-    };
-    getSlug();
+    setSlug(params.slug);
   }, [params]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
