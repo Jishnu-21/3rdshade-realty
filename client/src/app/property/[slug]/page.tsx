@@ -330,7 +330,7 @@ export default function PropertyPage({ params }: { params: Promise<{ slug: strin
                 </div>
                 <div className="rounded-xl p-[1px] bg-gradient-to-r from-purple-600 to-pink-500">
                   <button className="w-full bg-black text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg">
-                    <FaFileDownload /> Brochure
+                    <FaFileDownload /> Enquire Now
                   </button>
                 </div>
               </div>
