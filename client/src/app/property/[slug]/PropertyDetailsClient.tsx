@@ -749,7 +749,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                 className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg"
                 onClick={() => setShowModal(true)}
               >
-                <FaCalendarAlt /> Book Viewing Now
+                <FaCalendarAlt /> Pay Now
               </button>
               <div className="grid grid-cols-2 gap-3">
                 <div className="rounded-xl p-[1px] bg-gradient-to-r from-purple-600 to-pink-500">
