@@ -125,8 +125,8 @@ export default function ServicesPage() {
     <div className="font-montserrat">
       <Header />
       <main className="min-h-screen bg-black flex flex-col justify-center items-center relative">
+      <ServiceHero />
         <div className="w-full max-w-screen-2xl mx-auto px-4 md:px-8">
-          <ServiceHero />
           <ServiceIntro />
           <ServiceSection
             onEnquire={() => setShowModal(true)}
