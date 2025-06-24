@@ -68,7 +68,8 @@ const Banner = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Exclusive Properties <br /> for the Elite
+            Elite Digital Strategy for
+            <br/>Elite Properties
           </motion.h1>
           <motion.p
             className="text-lg text-white md:text-xl mb-8 max-w-2xl"
@@ -76,8 +77,8 @@ const Banner = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-          We offer curated digital packages tailored to your real estate journey - whether you're starting out or scaling globally. From brand launches to international expansions, we handle every digital touchpoint that drives results.
-          </motion.p>
+Whether you’re launching or expanding, we master every digital move that drives high-value real estate.
+</motion.p>
           <motion.div
             className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6"
             initial={{ opacity: 0, y: 40 }}

@@ -25,22 +25,22 @@ const AboutPage = () => {
     {
       icon: <FaHandshake />,
       title: 'Trust & Integrity',
-      description: 'Building lasting relationships through transparency and honest communication.'
+      description: 'We believe in doing business the right way by being honest, transparent, and dependable at every step. Strong partnerships are built on trust, and that’s where we start.'
     },
     {
       icon: <FaChartLine />,
       title: 'Excellence',
-      description: 'Delivering exceptional service and premium properties that exceed expectations.'
+      description: 'We approach every project with clarity and purpose. Our campaigns are driven by data, refined by experience, and aligned with each client’s business vision.'
     },
     {
       icon: <FaStar />,
       title: 'Innovation',
-      description: 'Embracing cutting-edge technology and modern approaches to real estate.'
+      description: 'Our ideas are original, but never vague. We focus on delivering sharp, targeted content and visuals that connect with the right audience at the right time.'
     },
     {
       icon: <FaCheckCircle />,
       title: 'Quality',
-      description: 'Ensuring every property meets the highest standards of luxury and comfort.'
+      description: 'Everything we do is built around our clients’ goals. From strategy to execution, we stay responsive, focused, and committed to delivering meaningful outcomes.'
     }
   ];
 
@@ -169,14 +169,12 @@ const AboutPage = () => {
                 Our Story
               </h2>
               <p className="text-gray-300 text-lg mb-6 leading-relaxed">
-                Founded in 2008, 3RD SHADE began with a simple vision: to redefine luxury real estate by creating exceptional living experiences that transcend traditional boundaries.
+              3rd Shade Realty was built to help property brands gain serious traction in a fast-moving, digital-first market. We combine real estate insight with strategic marketing to shape how high-value homes are seen, shared, and sold.
               </p>
               <p className="text-gray-300 text-lg mb-6 leading-relaxed">
-                What started as a boutique agency in Dubai has grown into a global powerhouse, serving clients across 50+ countries with properties that represent the pinnacle of modern luxury.
-              </p>
+              What began as a focused agency in Dubai has evolved into a global partner for developers and brokers across 50+ countries. Our work reflects the quality of the properties we represent - clear, confident, and built for results.              </p>
               <p className="text-gray-300 text-lg leading-relaxed">
-                Today, we continue to push boundaries, embracing innovation while maintaining the personal touch that has made us trusted partners to thousands of discerning clients worldwide.
-              </p>
+              We collaborate closely with clients to create visibility where it matters most. No frills, just sharp thinking, tailored campaigns, and measurable outcomes that move the market.              </p>
             </motion.div>
             
             <motion.div 
@@ -214,7 +212,7 @@ const AboutPage = () => {
               Our Values
             </h2>
             <p className="text-gray-300 text-lg max-w-3xl mx-auto">
-              The principles that guide every decision we make and every relationship we build.
+            Why our clients trust us - and how we stay accountable
             </p>
           </motion.div>
           
@@ -249,10 +247,10 @@ const AboutPage = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Ready to Find Your Dream Property?
+            Ready to Put Your Property on the Map?
             </h2>
             <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-              Let our expert team guide you through the world of luxury real estate and help you discover the perfect investment opportunity.
+            Work with our experts to build visibility, generate leads, and drive qualified results.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-4 px-8 rounded-full hover:from-purple-700 hover:to-pink-600 transition-all duration-300 flex items-center justify-center gap-2">

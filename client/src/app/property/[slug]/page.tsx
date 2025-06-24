@@ -2,10 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { FaSwimmer, FaCar, FaConciergeBell, FaDumbbell, FaShieldAlt, FaSpa, FaMapMarkerAlt, FaTrain, FaPlane, FaShoppingBag, FaCheckCircle, FaCalendarAlt, FaPhoneAlt, FaFileDownload } from 'react-icons/fa';
+import { FaSwimmer, FaCar, FaConciergeBell, FaDumbbell, FaShieldAlt, FaSpa, FaMapMarkerAlt, FaTrain, FaPlane, FaShoppingBag, FaCheckCircle, FaCalendarAlt, FaPhoneAlt, FaFileDownload, FaTimes, FaClock } from 'react-icons/fa';
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
-import { SignInButton } from "@clerk/nextjs";
 
 // Mock data for a single property
 const propertyData = {
@@ -40,15 +39,20 @@ const propertyData = {
 };
 
 const relatedProperties = [
-    { image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80', name: 'Luxury Villa' },
-    { image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80', name: 'Modern Apartment' },
-    { image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=600&q=80', name: 'Beachfront Home' },
-    { image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=600&q=80', name: 'Classic Mansion' },
+    { image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750746204/wasl_kubqws.jpg', name: 'Wasl 1' },
+    { image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750746917/valey-avena_nwrgaj.jpg', name: 'The Valley-Avena' },
+    { image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750745150/azizi_fvgglb.webp', name: 'Azizi Venice' },
+    { image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750745150/azizi_fvgglb.webp', name: 'Damac Islands' },
 ];
 
 export default function PropertyPage({ params }: { params: Promise<{ slug: string }> }) {
   const [mainMedia, setMainMedia] = useState({ type: 'video', src: propertyData.reelVideoUrl });
   const [slug, setSlug] = useState<string>('');
+  const [showModal, setShowModal] = useState(false);
+  const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [isRegister, setIsRegister] = useState(false);
+  const [showCallModal, setShowCallModal] = useState(false);
+  const [callForm, setCallForm] = useState({ date: '', time: '', email: '' });
 
   useEffect(() => {
     const getSlug = async () => {
@@ -58,9 +62,138 @@ export default function PropertyPage({ params }: { params: Promise<{ slug: strin
     getSlug();
   }, [params]);
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle login/register logic here
+    setShowModal(false);
+  };
+
+  const handleCallInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCallForm({ ...callForm, [e.target.name]: e.target.value });
+  };
+
+  const handleCallSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setShowCallModal(false);
+  };
+
   return (
     <div className="bg-black text-white font-montserrat">
       <Header />
+      {/* Custom Login/Register Modal */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+          <div className="bg-neutral-900 rounded-xl shadow-2xl p-8 w-full max-w-md relative animate-fadeIn">
+            <button className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer scale-100 hover:scale-110" onClick={() => setShowModal(false)}>
+              <FaTimes size={20} />
+            </button>
+            <div className="flex flex-col items-center mb-4">
+              <Image src="/logos/logo.png" alt="3rdshade Logo" width={120} height={40} className="mb-2" />
+            </div>
+            <div className="flex justify-center gap-4 mb-6">
+              <button
+                type="button"
+                className={`px-4 py-2 rounded-full font-semibold transition-all duration-300 cursor-pointer ${!isRegister ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-md scale-105' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700 scale-100'}`}
+                onClick={() => setIsRegister(false)}
+              >
+                Login
+              </button>
+              <button
+                type="button"
+                className={`px-4 py-2 rounded-full font-semibold transition-all duration-300 cursor-pointer ${isRegister ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-md scale-105' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700 scale-100'}`}
+                onClick={() => setIsRegister(true)}
+              >
+                Register
+              </button>
+            </div>
+            <h2 className="text-2xl font-bold mb-6 text-center">{isRegister ? 'Register' : 'Login'}</h2>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              {isRegister && (
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  value={form.name}
+                  onChange={handleInputChange}
+                  className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
+                  required
+                />
+              )}
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={form.email}
+                onChange={handleInputChange}
+                className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
+                required
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={form.password}
+                onChange={handleInputChange}
+                className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
+                required
+              />
+              <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg">
+                {isRegister ? 'Register' : 'Login'}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+      {showCallModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+          <div className="bg-neutral-900 rounded-xl shadow-2xl p-8 w-full max-w-md relative animate-fadeIn">
+            <button className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer scale-100 hover:scale-110" onClick={() => setShowCallModal(false)}>
+              <FaTimes size={20} />
+            </button>
+            <div className="flex flex-col items-center mb-4">
+              <FaPhoneAlt className="text-3xl text-purple-400 mb-2" />
+            </div>
+            <h2 className="text-2xl font-bold mb-6 text-center">Book a Call Slot</h2>
+            <form onSubmit={handleCallSubmit} className="flex flex-col gap-4">
+              <label className="text-sm text-gray-300">Select Date</label>
+              <input
+                type="date"
+                name="date"
+                value={callForm.date}
+                onChange={handleCallInputChange}
+                className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer"
+                required
+              />
+              <label className="text-sm text-gray-300">Select Time</label>
+              <input
+                type="time"
+                name="time"
+                value={callForm.time}
+                onChange={handleCallInputChange}
+                className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer"
+                required
+              />
+              <label className="text-sm text-gray-300">Your Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={callForm.email}
+                onChange={handleCallInputChange}
+                className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
+                required
+              />
+              <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg">
+                Book Call
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
       <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-28">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Column: Image/Video Gallery */}
@@ -181,19 +314,22 @@ export default function PropertyPage({ params }: { params: Promise<{ slug: strin
             
             {/* Action Buttons */}
             <div className="space-y-3 pt-2">
-              <SignInButton mode="modal">
-                <button className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2">
-                  <FaCalendarAlt /> Book Viewing Now
-                </button>
-              </SignInButton>
+              <button
+                className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg"
+                onClick={() => setShowModal(true)}
+              >
+                <FaCalendarAlt /> Book Viewing Now
+              </button>
               <div className="grid grid-cols-2 gap-3">
                 <div className="rounded-xl p-[1px] bg-gradient-to-r from-purple-600 to-pink-500">
-                  <button className="w-full bg-black text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2">
+                  <button className="w-full bg-black text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg"
+                    onClick={() => setShowCallModal(true)}
+                  >
                     <FaPhoneAlt /> Call Now
                   </button>
                 </div>
                 <div className="rounded-xl p-[1px] bg-gradient-to-r from-purple-600 to-pink-500">
-                  <button className="w-full bg-black text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2">
+                  <button className="w-full bg-black text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg">
                     <FaFileDownload /> Brochure
                   </button>
                 </div>

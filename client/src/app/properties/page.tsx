@@ -3,124 +3,148 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { FaBed, FaBath, FaRulerCombined, FaMapMarkerAlt, FaStar, FaHeart, FaPlay, FaSwimmer, FaCar, FaConciergeBell, FaDumbbell, FaShieldAlt, FaSpa, FaWifi, FaParking } from 'react-icons/fa';
+import { FaBed, FaBath, FaRulerCombined, FaMapMarkerAlt, FaStar, FaHeart, FaPlay, FaSwimmer, FaCar, FaConciergeBell, FaDumbbell, FaShieldAlt, FaSpa, FaWifi, FaParking, FaMoneyBillWave } from 'react-icons/fa';
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import React from 'react';
+import Link from 'next/link';
 
 // Mock data for all properties
 const allProperties = [
   {
     id: 1,
-    name: 'Emaar Creek',
-    location: 'Dubai Marina, UAE',
-    price: '2,850,000',
-    roi: '12-15%',
+    name: 'Emaar Creek Harbour',
+    location: '',
+    price: 'Starting from AED 1.5M',
+    roi: '',
     reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749729573/emaar-creek_lk2lce.webm',
-    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80',
-    beds: 3,
-    baths: 2,
-    sqft: '2,500',
-    rating: 4.8,
-    amenities: ['pool', 'gym', 'security', 'parking', 'wifi'],
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750745906/dubai-creek_wrypak.jpg',
+    beds: 1,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [] as string[],
+    description: `1 - 3 Bedroom Residences | Starting from AED 1.5M\nA next-generation waterfront destination redefining city living with expansive green zones, world-class retail, and unmatched skyline views. This is more than a residence - it's a self-contained world built for 200,000+ future-forward residents.\nTap to explore the full masterplan, lifestyle perks, and investment potential.`,
   },
   {
     id: 2,
-    name: 'Palm Jumeirah Villa',
-    location: 'Palm Jumeirah, Dubai',
-    price: '5,200,000',
-    roi: '10-12%',
-    reelVideoUrl: 'https://videos.pexels.com/video-files/5838634/5838634-uhd_2560_1440_30fps.mp4',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80',
-    beds: 4,
-    baths: 3,
-    sqft: '3,800',
-    rating: 4.9,
-    amenities: ['pool', 'gym', 'spa', 'concierge', 'parking', 'wifi'],
+    name: 'Sobha Solis',
+    location: '',
+    price: 'Starting from AED 1M',
+    roi: '',
+    reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727749/sobha-solis2_c6nt2j.mp4',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750745431/sobha_hm1hsd.webp',
+    beds: 1,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [] as string[],
+    description: `1 - 3 Bedroom Apartments | Starting from AED 1M\nA resort-style community with over 50+ wellness, fitness, and leisure amenities  -  from lap pools to rock climbing and a racetrack deck. Designed for those who want more than just a home, it's your everyday escape in the heart of Dubai.\nClick to uncover the full lifestyle and amenity experience.`,
   },
   {
     id: 3,
-    name: 'Downtown Penthouse',
-    location: 'Downtown Dubai, UAE',
-    price: '3,500,000',
-    roi: '14-16%',
-    reelVideoUrl: 'https://videos.pexels.com/video-files/5838634/5838634-uhd_2560_1440_30fps.mp4',
-    image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=600&q=80',
-    beds: 2,
-    baths: 2,
-    sqft: '1,800',
-    rating: 4.7,
-    amenities: ['gym', 'security', 'parking', 'wifi'],
+    name: 'Azizi Venice',
+    location: '',
+    price: 'Launching Soon',
+    roi: '',
+    reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727087/azizi-venice_gsscns.mp4',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750745150/azizi_fvgglb.webp',
+    beds: 0,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [] as string[],
+    description: `Studios to 3 Bedrooms | Launching Soon\nA vibrant waterfront city with swimmable beaches, climate-controlled retail boulevards, and over 40 acres of green space. From cable car access to a private opera house, every detail is built for next-level urban living with resort-style comfort.\nClick to explore amenities, lifestyle, and investment details.`,
   },
   {
     id: 4,
-    name: 'Beachfront Resort',
-    location: 'JBR, Dubai',
-    price: '1,800,000',
-    roi: '8-10%',
-    reelVideoUrl: 'https://videos.pexels.com/video-files/5838634/5838634-uhd_2560_1440_30fps.mp4',
-    image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=600&q=80',
+    name: 'Deeyar Eleve',
+    location: '',
+    price: 'Starting from AED 1M',
+    roi: '',
+    reelVideoUrl: '',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750744127/deeyer-eleve_hmjj4n.jpg',
     beds: 1,
-    baths: 1,
-    sqft: '1,200',
-    rating: 4.6,
-    amenities: ['pool', 'wifi'],
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [] as string[],
+    description: `1 - 3 Bedroom Residences | Starting from AED 1M\nModern high-rise living with panoramic port views, resort-style pools, and a vibrant F&B street below. From fitness zones to luxe lounges, every element is designed to elevate everyday life in a connected urban community.\nTap to view full amenities, lifestyle, and project highlights.`,
   },
   {
     id: 5,
-    name: 'Luxury Golf Villa',
-    location: 'Emirates Hills, Dubai',
-    price: '8,500,000',
-    roi: '9-11%',
-    reelVideoUrl: 'https://videos.pexels.com/video-files/5838634/5838634-uhd_2560_1440_30fps.mp4',
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80',
-    beds: 5,
-    baths: 4,
-    sqft: '5,200',
-    rating: 4.9,
-    amenities: ['pool', 'gym', 'spa', 'concierge', 'security', 'parking', 'wifi'],
+    name: 'Wasl 1 Residences',
+    location: '',
+    price: 'Starting from AED 1.5M',
+    roi: '',
+    reelVideoUrl: '',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750746204/wasl_kubqws.jpg',
+    beds: 1,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [] as string[],
+    description: `1–3 Bedroom Apartments | Starting from AED 1.5M\nPositioned at the crossroads of old and new Dubai, this community blends city connectivity with modern comfort. Enjoy park views, premium fitness zones, and family-friendly spaces -  all in one address.\nClick to discover the amenities and location advantage.`,
   },
   {
     id: 6,
-    name: 'Modern Apartment',
-    location: 'Business Bay, Dubai',
-    price: '1,200,000',
-    roi: '11-13%',
-    reelVideoUrl: 'https://videos.pexels.com/video-files/5838634/5838634-uhd_2560_1440_30fps.mp4',
-    image: 'https://images.unsplash.com/photo-1600607687644-c7171b42498b?auto=format&fit=crop&w=600&q=80',
-    beds: 2,
-    baths: 2,
-    sqft: '1,500',
-    rating: 4.5,
-    amenities: ['gym', 'security', 'parking', 'wifi'],
+    name: 'Emaar South',
+    location: '',
+    price: 'Starting from AED 2.8M',
+    roi: '',
+    reelVideoUrl: '',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750746793/emaar-south_ba7wgp.jpg',
+    beds: 3,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [] as string[],
+    description: `3 - 4 Bedroom Townhouses | Starting from AED 2.8M\nSurrounded by green fairways and open parks, Greenridge offers spacious modern townhomes with direct access to golf, retail, schools, and community spaces  -  all in a self-sustained, family-first neighbourhood.\nTap to explore floor plans, pricing, and lifestyle highlights.`,
   },
   {
     id: 7,
-    name: 'Waterfront Mansion',
-    location: 'Dubai Creek Harbour',
-    price: '12,000,000',
-    roi: '7-9%',
-    reelVideoUrl: 'https://videos.pexels.com/video-files/5838634/5838634-uhd_2560_1440_30fps.mp4',
-    image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=600&q=80',
-    beds: 6,
-    baths: 5,
-    sqft: '7,800',
-    rating: 5.0,
-    amenities: ['pool', 'gym', 'spa', 'concierge', 'security', 'parking', 'wifi'],
+    name: 'The Valley – Avena',
+    location: '',
+    price: 'Starting from AED 4.37M',
+    roi: '',
+    reelVideoUrl: '',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750746917/valey-avena_nwrgaj.jpg',
+    beds: 4,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [] as string[],
+    description: `4 Bedroom Villas | Starting from AED 4.37M\nSet within a 250,000 sqm central park, Avena offers family-centric villas designed for sustainable, resort-style living. Spacious layouts, lush landscapes, and seamless indoor-outdoor flow define this premium residential enclave.\nClick to view floor plans, park access, and villa features.`,
   },
   {
     id: 8,
-    name: 'Skyline Loft',
-    location: 'DIFC, Dubai',
-    price: '2,200,000',
-    roi: '13-15%',
-    reelVideoUrl: 'https://videos.pexels.com/video-files/5838634/5838634-uhd_2560_1440_30fps.mp4',
-    image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=80',
-    beds: 1,
-    baths: 1,
-    sqft: '1,100',
-    rating: 4.4,
-    amenities: ['gym', 'security', 'wifi'],
+    name: 'Damac Islands',
+    location: '',
+    price: 'Starting from AED 2.4M',
+    roi: '',
+    reelVideoUrl: '',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750744640/damac-islands_awlzym.jpg',
+    beds: 4,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [] as string[],
+    description: `4 - 5 Bedroom Townhouses | Starting from AED 2.4M\nA private island community blending tropical beauty with ultra-luxury living. These waterfront homes offer beach access, smart automation, and rare experiences - from jungle trails to floating spas and LED-lit gondola rides.\nTap to explore full amenities, villa finishes, and island lifestyle.`,
+  },
+  {
+    id: 9,
+    name: 'Damac Islands Villas',
+    location: '',
+    price: 'Starting from AED 2.4M',
+    roi: '',
+    reelVideoUrl: '',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750747071/damac-villa_sjtrcb.jpg',
+    beds: 6,
+    baths: 0,
+    sqft: '17,000+',
+    rating: 0,
+    amenities: [] as string[],
+    description: `6 - 7 Bedroom Villas | Starting from AED 2.4M\nExpansive beachfront villas up to 17,000+ sq.ft., complete with private gyms, basements, maid's rooms, and panoramic terraces. Designed for elite living, these residences combine space, privacy, and resort-style luxury on Dubai's most exclusive island.\nClick to explore villa plans, features, and lifestyle benefits.`,
   },
 ];
 
@@ -171,13 +195,12 @@ const PropertiesPage = () => {
   };
 
   const filteredProperties = allProperties.filter(property => {
-    const price = parseFloat(property.price.replace(/,/g, ''));
-    const inPriceRange = price >= priceRange[0] && price <= priceRange[1];
-    
+    // const price = parseFloat(property.price.replace(/,/g, ''));
+    // const inPriceRange = price >= priceRange[0] && price <= priceRange[1];
+    // Only filter by amenities for now
     const hasSelectedAmenities = selectedAmenities.length === 0 || 
       selectedAmenities.every(amenity => property.amenities.includes(amenity));
-    
-    return inPriceRange && hasSelectedAmenities;
+    return hasSelectedAmenities;
   });
 
   const sortedProperties = [...filteredProperties].sort((a, b) => {
@@ -304,31 +327,44 @@ const PropertiesPage = () => {
               >
                 <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-gray-800">
                   {/* Video/Image Container - Portrait Size */}
-                  <div className="relative h-[450px] overflow-hidden">
-                    {/* Video Reel */}
-                    <video
-                      ref={(el) => { videoRefs.current[property.id] = el; }}
-                      src={property.reelVideoUrl}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      muted
-                      loop
-                      playsInline
+                  <div className="relative h-[450px] overflow-hidden group">
+                    {/* Image always shown by default */}
+                    <Image
+                      src={property.image}
+                      alt={property.name}
+                      width={800}
+                      height={450}
+                      className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-500 ${property.reelVideoUrl ? 'group-hover:opacity-0' : 'opacity-100'}`}
+                      style={{ zIndex: 1 }}
                     />
-                    
-                    {/* Play Button Overlay */}
-                    <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
-                        <FaPlay className="text-black text-xl ml-1" />
+                    {/* Video fades in on hover if present */}
+                    {property.reelVideoUrl && (
+                      <video
+                        ref={(el) => { videoRefs.current[property.id] = el; }}
+                        src={property.reelVideoUrl}
+                        className="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                        muted
+                        loop
+                        playsInline
+                        onMouseEnter={e => e.currentTarget.play()}
+                        onMouseLeave={e => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
+                        style={{ zIndex: 2 }}
+                      />
+                    )}
+                    {/* Play Button Overlay (only if video) */}
+                    {property.reelVideoUrl && (
+                      <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                        <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
+                          <FaPlay className="text-black text-xl ml-1" />
+                        </div>
                       </div>
-                    </div>
-
+                    )}
                     {/* Favorite Button */}
-                    <button className="absolute top-4 right-4 w-10 h-10 bg-black/50 rounded-full flex items-center justify-center text-white hover:bg-red-500 transition-colors duration-300">
+                    <button className="absolute top-4 right-4 w-10 h-10 bg-black/50 rounded-full flex items-center justify-center text-white hover:bg-red-500 transition-colors duration-300 z-10">
                       <FaHeart className="text-sm" />
                     </button>
-
                     {/* Amenities Badge */}
-                    <div className="absolute top-4 left-4 flex gap-1">
+                    <div className="absolute top-4 left-4 flex gap-1 z-10">
                       {property.amenities.slice(0, 3).map(amenity => (
                         <div key={amenity} className="w-8 h-8 bg-black/70 rounded-full flex items-center justify-center text-white text-xs">
                           {amenityIcons[amenity]}
@@ -344,39 +380,18 @@ const PropertiesPage = () => {
 
                   {/* Property Details */}
                   <div className="p-6">
-                    <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300">
+                    <div className="flex flex-col items-start mb-3">
+                      <h3 className="text-2xl font-extrabold text-white group-hover:text-purple-400 transition-colors duration-300 truncate w-full" style={{lineHeight: 1.2}} title={property.name}>
                         {property.name}
                       </h3>
-                      <div className="text-right">
-                        <div className="text-2xl font-bold text-white">${property.price}</div>
-                        <div className="text-sm text-gray-400">{property.roi} ROI</div>
-                      </div>
                     </div>
 
-                    <div className="flex items-center gap-2 text-gray-400 mb-4">
-                      <FaMapMarkerAlt className="text-sm" />
-                      <span className="text-sm">{property.location}</span>
-                    </div>
-
-                    <div className="flex items-center justify-between text-gray-400 text-sm mb-4">
-                      <div className="flex items-center gap-1">
-                        <FaBed />
-                        <span>{property.beds} beds</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <FaBath />
-                        <span>{property.baths} baths</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <FaRulerCombined />
-                        <span>{property.sqft} sqft</span>
-                      </div>
-                    </div>
-
-                    <button className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold py-3 rounded-xl hover:from-purple-700 hover:to-pink-600 transition-all duration-300">
+                    <Link
+                      href={`/property/${property.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
+                      className="w-full block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold py-3 rounded-xl hover:from-purple-700 hover:to-pink-600 transition-all duration-300 text-center mt-4"
+                    >
                       View Details
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </motion.div>
