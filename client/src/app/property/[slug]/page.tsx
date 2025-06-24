@@ -53,6 +53,25 @@ export default function PropertyPage({ params }: { params: Promise<{ slug: strin
   const [isRegister, setIsRegister] = useState(false);
   const [showCallModal, setShowCallModal] = useState(false);
   const [callForm, setCallForm] = useState({ date: '', time: '', email: '' });
+  const [showEnquireModal, setShowEnquireModal] = useState(false);
+  const [enquireStep, setEnquireStep] = useState(1);
+  const [enquireForm, setEnquireForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    contactMethod: 'WhatsApp',
+    inIndia: '',
+    country: '',
+    visitType: '',
+    date: '',
+    time: '',
+    buyTimeline: '',
+    payNow: false,
+    paymentMethod: '',
+  });
+  const countryList = [
+    'India', 'United States', 'United Kingdom', 'UAE', 'Canada', 'Australia', 'Singapore', 'Germany', 'France', 'China', 'Japan', 'South Africa', 'Saudi Arabia', 'Qatar', 'Kuwait', 'Oman', 'Bahrain', 'Russia', 'Italy', 'Spain', 'Netherlands', 'Switzerland', 'Turkey', 'Brazil', 'Other'
+  ];
 
   useEffect(() => {
     const getSlug = async () => {
@@ -79,6 +98,24 @@ export default function PropertyPage({ params }: { params: Promise<{ slug: strin
   const handleCallSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setShowCallModal(false);
+  };
+
+  const handleEnquireInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    if (type === 'checkbox') {
+      if (e.target instanceof HTMLInputElement) {
+        setEnquireForm({ ...enquireForm, [name]: e.target.checked });
+      }
+    } else {
+      setEnquireForm({ ...enquireForm, [name]: value });
+    }
+  };
+  const handleEnquireNext = () => setEnquireStep(s => Math.min(s + 1, 3));
+  const handleEnquireBack = () => setEnquireStep(s => Math.max(s - 1, 1));
+  const handleEnquireSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setShowEnquireModal(false);
+    setEnquireStep(1);
   };
 
   return (
@@ -190,6 +227,114 @@ export default function PropertyPage({ params }: { params: Promise<{ slug: strin
               <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg">
                 Book Call
               </button>
+            </form>
+          </div>
+        </div>
+      )}
+      {showEnquireModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+          <div className="bg-neutral-900 rounded-xl shadow-2xl p-8 w-full max-w-lg relative animate-fadeIn">
+            <button className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer scale-100 hover:scale-110" onClick={() => { setShowEnquireModal(false); setEnquireStep(1); }}>
+              <FaTimes size={20} />
+            </button>
+            <div className="flex flex-col items-center mb-4">
+              <Image src="/logos/logo.png" alt="3rdshade Logo" width={120} height={40} className="mb-2" />
+            </div>
+            <form onSubmit={handleEnquireSubmit} className="flex flex-col gap-6">
+              {/* Stepper */}
+              <div className="flex justify-center gap-2 mb-4">
+                {[1,2,3].map(step => (
+                  <div key={step} className={`w-8 h-2 rounded-full transition-all duration-300 ${enquireStep === step ? 'bg-gradient-to-r from-purple-600 to-pink-500' : 'bg-neutral-700'}`}></div>
+                ))}
+              </div>
+              {/* Step 1: Basic Info */}
+              {enquireStep === 1 && (
+                <div className="flex flex-col gap-4 animate-fadeIn">
+                  <input type="text" name="name" placeholder="Name" value={enquireForm.name} onChange={handleEnquireInputChange} className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500" required />
+                  <input type="email" name="email" placeholder="Email" value={enquireForm.email} onChange={handleEnquireInputChange} className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500" required />
+                  <input type="tel" name="phone" placeholder="Phone (with country code)" value={enquireForm.phone} onChange={handleEnquireInputChange} className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500" required />
+                  <label className="text-sm text-gray-300">Preferred contact method</label>
+                  <div className="flex gap-3">
+                    {['WhatsApp','Email','Phone'].map(method => (
+                      <label key={method} className={`px-4 py-2 rounded-full cursor-pointer font-semibold transition-all duration-200 ${enquireForm.contactMethod === method ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700'}`}>
+                        <input type="radio" name="contactMethod" value={method} checked={enquireForm.contactMethod === method} onChange={handleEnquireInputChange} className="hidden" />
+                        {method}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {/* Step 2: Property Visit Preferences */}
+              {enquireStep === 2 && (
+                <div className="flex flex-col gap-4 animate-fadeIn">
+                  <label className="text-sm text-gray-300">Are you currently in India?</label>
+                  <div className="flex gap-3">
+                    {['Yes','No'].map(val => (
+                      <label key={val} className={`px-4 py-2 rounded-full cursor-pointer font-semibold transition-all duration-200 ${enquireForm.inIndia === val ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700'}`}>
+                        <input type="radio" name="inIndia" value={val} checked={enquireForm.inIndia === val} onChange={handleEnquireInputChange} className="hidden" />
+                        {val}
+                      </label>
+                    ))}
+                  </div>
+                  <label className="text-sm text-gray-300">Select the country</label>
+                  <select name="country" value={enquireForm.country} onChange={handleEnquireInputChange} className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500">
+                    <option value="">Select Country</option>
+                    {countryList.map(c => <option key={c} value={c}>{c}</option>)}
+                  </select>
+                  <label className="text-sm text-gray-300">Type of visit</label>
+                  <div className="flex gap-3">
+                    {['Virtual','Physical'].map(type => (
+                      <label key={type} className={`px-4 py-2 rounded-full cursor-pointer font-semibold transition-all duration-200 ${enquireForm.visitType === type ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700'}`}>
+                        <input type="radio" name="visitType" value={type} checked={enquireForm.visitType === type} onChange={handleEnquireInputChange} className="hidden" />
+                        {type}
+                      </label>
+                    ))}
+                  </div>
+                  <label className="text-sm text-gray-300">Preferred Date & Time</label>
+                  <div className="flex gap-2">
+                    <input type="date" name="date" value={enquireForm.date} onChange={handleEnquireInputChange} className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer" required />
+                    <input type="time" name="time" value={enquireForm.time} onChange={handleEnquireInputChange} className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer" required />
+                  </div>
+                  <label className="text-sm text-gray-300">How soon are you looking to buy?</label>
+                  <div className="flex flex-wrap gap-2">
+                    {['Immediately','1–3 Months','3–6 Months','Just Exploring'].map(opt => (
+                      <label key={opt} className={`px-4 py-2 rounded-full cursor-pointer font-semibold transition-all duration-200 ${enquireForm.buyTimeline === opt ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700'}`}>
+                        <input type="radio" name="buyTimeline" value={opt} checked={enquireForm.buyTimeline === opt} onChange={handleEnquireInputChange} className="hidden" />
+                        {opt}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {/* Step 3: Final Action & Payment */}
+              {enquireStep === 3 && (
+                <div className="flex flex-col gap-4 animate-fadeIn">
+                  <div className="flex items-center gap-3 bg-neutral-800 rounded-lg p-4">
+                    <input type="checkbox" name="payNow" checked={enquireForm.payNow} onChange={handleEnquireInputChange} className="accent-purple-500 w-5 h-5" />
+                    <span className="text-sm text-gray-200">Pay ₹499 now to reserve your consultation slot & get ₹499 off when booking the property.</span>
+                  </div>
+                  <label className="text-sm text-gray-300">Payment Options</label>
+                  <div className="flex gap-3">
+                    {['UPI','Card','PayPal','Stripe'].map(method => (
+                      <label key={method} className={`px-4 py-2 rounded-full cursor-pointer font-semibold transition-all duration-200 ${enquireForm.paymentMethod === method ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700'}`}>
+                        <input type="radio" name="paymentMethod" value={method} checked={enquireForm.paymentMethod === method} onChange={handleEnquireInputChange} className="hidden" />
+                        {method}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {/* Step Navigation */}
+              <div className="flex justify-between mt-2">
+                {enquireStep > 1 ? (
+                  <button type="button" onClick={handleEnquireBack} className="px-6 py-2 rounded-full bg-neutral-800 text-gray-300 font-semibold transition-all duration-200 cursor-pointer hover:bg-neutral-700 hover:scale-105">Back</button>
+                ) : <div />}
+                {enquireStep < 3 ? (
+                  <button type="button" onClick={handleEnquireNext} className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold transition-all duration-200 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg">Next</button>
+                ) : (
+                  <button type="submit" className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold transition-all duration-200 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg">Submit</button>
+                )}
+              </div>
             </form>
           </div>
         </div>
@@ -329,8 +474,10 @@ export default function PropertyPage({ params }: { params: Promise<{ slug: strin
                   </button>
                 </div>
                 <div className="rounded-xl p-[1px] bg-gradient-to-r from-purple-600 to-pink-500">
-                  <button className="w-full bg-black text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg">
-                    <FaFileDownload /> Enquire Now
+                  <button className="w-full bg-black text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg"
+                    onClick={() => setShowEnquireModal(true)}
+                  >
+                    Enquire Now
                   </button>
                 </div>
               </div>
