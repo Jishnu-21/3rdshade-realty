@@ -219,8 +219,18 @@ const PropertiesPage = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative pt-48 pb-40 bg-gradient-to-br from-purple-900/30 via-black to-pink-900/30 flex items-center justify-start">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="relative pt-48 pb-40 flex items-center justify-start overflow-hidden">
+        {/* Background Image */}
+        <Image
+          src="https://res.cloudinary.com/dzmxqwlse/image/upload/v1750745906/dubai-creek_wrypak.jpg"
+          alt="Luxury Property"
+          fill
+          className="object-cover object-center absolute inset-0 z-0"
+          priority
+        />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-purple-900/60 z-10" />
+        <div className="max-w-7xl mx-auto px-6 relative z-20">
           <motion.div 
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50 }}

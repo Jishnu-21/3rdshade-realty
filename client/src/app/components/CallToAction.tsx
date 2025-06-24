@@ -1,8 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
-const VIDEO_URL = "https://res.cloudinary.com/dzmxqwlse/video/upload/v1749729573/emaar-creek_lk2lce.webm";
+// Use a modern abstract video as background
+const VIDEO_URL = "https://videos.pexels.com/video-files/3611031/3611031-hd_1920_1080_24fps.mp4";
 
 const CallToAction = () => {
   const [videoError, setVideoError] = useState(false);
@@ -22,7 +24,7 @@ const CallToAction = () => {
           muted
           playsInline
           onError={handleVideoError}
-          className="absolute inset-0 w-full h-full object-cover z-[-2]"
+          className="absolute inset-0 w-full h-full object-cover "
         />
       ) : (
         <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-900 to-pink-900 z-[-2]" />
@@ -36,12 +38,16 @@ const CallToAction = () => {
           Let our experts guide you to the perfect luxury home that exceeds your expectations.
         </p>
         <div className="flex flex-col md:flex-row gap-4 justify-center">
-          <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300">
-            Schedule Consultation
-          </button>
-          <button className="border-2 border-white text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-white hover:text-black transition-all duration-300">
-            View All Properties
-          </button>
+          <Link href="/contact" passHref legacyBehavior>
+            <a className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 text-center">
+              Get Started
+            </a>
+          </Link>
+          <Link href="/properties" passHref legacyBehavior>
+            <a className="border-2 border-white text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-white hover:text-black transition-all duration-300 text-center">
+              View All Properties
+            </a>
+          </Link>
         </div>
       </div>
     </section>

@@ -77,7 +77,7 @@ const Banner = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-Whether you’re launching or expanding, we master every digital move that drives high-value real estate.
+Whether you're launching or expanding, we master every digital move that drives high-value real estate.
 </motion.p>
           <motion.div
             className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6"
@@ -85,10 +85,10 @@ Whether you’re launching or expanding, we master every digital move that drive
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <Link href="#" className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-base font-semibold px-6 py-3 rounded-full hover:from-purple-700 hover:to-pink-700 transition-colors duration-300">
-              View Collection
+            <Link href="/properties" className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-base font-semibold px-6 py-3 rounded-full hover:from-purple-700 hover:to-pink-700 transition-colors duration-300">
+              View Properties
             </Link>
-            <Link href="#" className="border border-white text-white text-base font-semibold px-6 py-3 rounded-full hover:bg-white hover:text-black transition-colors duration-300">
+            <Link href="/about" className="border border-white text-white text-base font-semibold px-6 py-3 rounded-full hover:bg-white hover:text-black transition-colors duration-300">
               Learn More
             </Link>
           </motion.div>

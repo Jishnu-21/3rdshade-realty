@@ -8,9 +8,9 @@ import Footer from '@/app/components/Footer';
 
 // Mock data for a single property
 const propertyData = {
-  name: 'Emaar Creek',
-  description: 'Emaar Creek is a luxury residential development located in the heart of Dubai. It is a 100% freehold property and offers a range of amenities including a swimming pool, gym, and a childrens play area.',
-  price: '2,850,000',
+  name: 'Emaar Creek Harbour',
+  description: 'Emaar Creek Harbour offers 1 to 3-bedroom apartments in a self-sustained waterfront district that spans across 550 hectares. With expansive parks, cultural spaces, world-class retail, and a projected population of over 200,000.',
+  price: ' 1,500,000',
   roi: '12-15%',
   reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749729573/emaar-creek_lk2lce.webm',
   images: [
@@ -19,20 +19,20 @@ const propertyData = {
     'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1200&q=80',
   ],
   amenities: [
-    { icon: <FaSwimmer />, name: 'Infinity Pool' },
-    { icon: <FaCar />, name: 'Valet Parking' },
-    { icon: <FaConciergeBell />, name: 'Concierge Service' },
-    { icon: <FaDumbbell />, name: 'Fitness Center' },
-    { icon: <FaShieldAlt />, name: '24/7 Security' },
-    { icon: <FaSpa />, name: 'Spa & Wellness' },
+    { icon: <FaSwimmer />, name: '700,000 sq.m. of Parks & Green Spaces' },
+    { icon: <FaCar />, name: 'Over 250,000 sq.m. of Retail & Dining' },
+    { icon: <FaConciergeBell />, name: 'Cultural Hub with Museums & Exhibitions' },
+    { icon: <FaDumbbell />, name: 'Cycling Tracks' },
+    { icon: <FaShieldAlt />, name: 'Entertainment Arenas for Concerts & Theatre' },
+    { icon: <FaSpa />, name: 'Waterfront Promenades' },
   ],
   location: {
-    address: 'Downtown Financial District',
+    address: 'Emaar Creek Harbour, Dubai',
     city: 'Dubai Marina, UAE',
     points: [
-      { icon: <FaTrain />, name: 'Metro: 2 min' },
-      { icon: <FaPlane />, name: 'Airport: 25 min' },
-      { icon: <FaShoppingBag />, name: 'Mall: 5 min' },
+      { icon: <FaTrain />, name: 'Creek Metro Station (Green Line)- approx. 2.8 km/5–10 min' },
+      { icon: <FaPlane />, name: 'Airport: Dubai Intl – 15 min' },
+      { icon: <FaShoppingBag />, name: ': Dubai Festival City Mall – ~3 km / 7 min drive' },
     ]
   },
   goldenVisa: true,
