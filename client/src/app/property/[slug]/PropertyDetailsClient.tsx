@@ -319,7 +319,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
   const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [isRegister, setIsRegister] = useState(false);
   const [showCallModal, setShowCallModal] = useState(false);
-  const [callForm, setCallForm] = useState({ date: '', time: '', email: '' });
+  const [callForm, setCallForm] = useState({ date: '', time: '', email: '', phone: '' });
   const [showEnquireModal, setShowEnquireModal] = useState(false);
   const [enquireStep, setEnquireStep] = useState(1);
   const [enquireForm, setEnquireForm] = useState({
@@ -483,7 +483,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
             <div className="flex flex-col items-center mb-4">
               <FaPhoneAlt className="text-3xl text-purple-400 mb-2" />
             </div>
-            <h2 className="text-2xl font-bold mb-6 text-center">Book a Call Slot</h2>
+            <h2 className="text-2xl font-bold mb-6 text-center">Book a Video Call Slot</h2>
             <form onSubmit={handleCallSubmit} className="flex flex-col gap-4">
               <label className="text-sm text-gray-300">Select Date</label>
               <input
@@ -503,6 +503,16 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                 className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer"
                 required
               />
+              <label className="text-sm text-gray-300">Your Phone Number</label>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Phone (with country code)"
+                value={callForm.phone}
+                onChange={handleCallInputChange}
+                className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
+                required
+              />
               <label className="text-sm text-gray-300">Your Email</label>
               <input
                 type="email"
@@ -514,7 +524,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                 required
               />
               <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg">
-                Book Call
+                Book Video Call
               </button>
             </form>
           </div>
@@ -746,7 +756,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                   <button className="w-full bg-black text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg"
                     onClick={() => setShowCallModal(true)}
                   >
-                    <FaPhoneAlt /> Call Now
+                    <FaPhoneAlt /> Call Expert
                   </button>
                 </div>
                 <div className="rounded-xl p-[1px] bg-gradient-to-r from-purple-600 to-pink-500">
