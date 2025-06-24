@@ -182,11 +182,11 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
 
   return (
     <Link href={`/property/${property.slug}`} className="block" prefetch={false}>
-      <div
-        className="bg-neutral-900 rounded-lg overflow-hidden shadow-lg flex flex-col items-center transition-transform duration-300 hover:scale-105 cursor-pointer"
+    <div
+      className="bg-neutral-900 rounded-lg overflow-hidden shadow-lg flex flex-col items-center transition-transform duration-300 hover:scale-105 cursor-pointer"
         onMouseEnter={() => hasVideo && setIsHovered(true)}
         onMouseLeave={() => hasVideo && setIsHovered(false)}
-      >
+    >
         <div className="w-full flex justify-center items-center bg-black relative h-[550px] md:h-[700px]">
           {/* Show image by default, swap to video on hover if video exists */}
           {property.imageUrl ? (
@@ -200,12 +200,12 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
             />
           ) : null}
           {hasVideo && (
-            <video
-              ref={videoRef}
-              src={property.videoUrl}
-              loop
-              muted
-              playsInline
+        <video
+          ref={videoRef}
+          src={property.videoUrl}
+          loop
+          muted
+          playsInline
               className={`object-cover w-full h-full transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
               style={{ position: 'absolute', inset: 0, height: '100%' }}
             />
@@ -216,23 +216,23 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
               No Media Available
             </div>
           )}
+      </div>
+      <div className="p-6 w-full">
+        <div className="flex justify-between items-center mb-2">
+          <h3 className="text-white text-xl font-bold">{property.title}</h3>
+          <span className="text-purple-400 font-semibold text-lg">
+            {property.price}
+          </span>
         </div>
-        <div className="p-6 w-full">
-          <div className="flex justify-between items-center mb-2">
-            <h3 className="text-white text-xl font-bold">{property.title}</h3>
-            <span className="text-purple-400 font-semibold text-lg">
-              {property.price}
-            </span>
-          </div>
-          <p className="text-neutral-400 text-sm mb-2">
+        <p className="text-neutral-400 text-sm mb-2">
             {property.beds > 0 ? `${property.beds} bed` : ''}
             {property.sqft !== 'N/A' && property.sqft !== '' ? `${property.beds > 0 ? ' · ' : ''}${property.sqft} sq ft` : ''}
-          </p>
-          <p className="text-neutral-500 text-sm">
-            {property.description}
-          </p>
-        </div>
+        </p>
+        <p className="text-neutral-500 text-sm">
+          {property.description}
+        </p>
       </div>
+    </div>
     </Link>
   );
 };

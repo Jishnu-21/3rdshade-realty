@@ -349,25 +349,25 @@ const PropertiesPage = () => {
                     />
                     {/* Video fades in on hover if present */}
                     {property.reelVideoUrl && (
-                      <video
-                        ref={(el) => { videoRefs.current[property.id] = el; }}
-                        src={property.reelVideoUrl}
+                    <video
+                      ref={(el) => { videoRefs.current[property.id] = el; }}
+                      src={property.reelVideoUrl}
                         className="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
-                        muted
-                        loop
-                        playsInline
+                      muted
+                      loop
+                      playsInline
                         onMouseEnter={e => e.currentTarget.play()}
                         onMouseLeave={e => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
                         style={{ zIndex: 2 }}
-                      />
+                    />
                     )}
                     {/* Play Button Overlay (only if video) */}
                     {property.reelVideoUrl && (
                       <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                        <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
-                          <FaPlay className="text-black text-xl ml-1" />
-                        </div>
+                      <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
+                        <FaPlay className="text-black text-xl ml-1" />
                       </div>
+                    </div>
                     )}
                     {/* Amenities Badge */}
                     <div className="absolute top-4 left-4 flex gap-1 z-10">
