@@ -146,6 +146,36 @@ const allProperties = [
     amenities: [] as string[],
     description: `6 - 7 Bedroom Villas | Starting from AED 2.4M\nExpansive beachfront villas up to 17,000+ sq.ft., complete with private gyms, basements, maid's rooms, and panoramic terraces. Designed for elite living, these residences combine space, privacy, and resort-style luxury on Dubai's most exclusive island.\nClick to explore villa plans, features, and lifestyle benefits.`,
   },
+  {
+    id: 10,
+    name: 'Belgravia Gardens',
+    location: 'Belgravia Gardens, Dubai',
+    price: 'Starting from AED 1.2M',
+    roi: '-',
+    reelVideoUrl: '',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750856353/belgravia4_coh1y6.jpg', // Add image URL if available
+    beds: 0,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: ['spa', 'pool', 'gym'],
+    description: `Studio to 3 Bedroom Apartments | Starting from AED 1.2M\nBelgravia Gardens features studio to 3-bedroom apartments with optional office layouts, offering a flexible living experience in a refined residential community. With urban beach access, lagoon views, and a fully-equipped clubhouse, this development is designed for residents seeking lifestyle, leisure, and smart indoor-outdoor connectivity.\nLeisure & Wellness, Urban Beach & Artificial Lagoon, Private Dining & Juice Lounge, Yoga & Pilates Studio, Fitness Studio & Sauna, Children's Pool & Kids' Play Area, Clubhouse Pavilion, Cinema Room, Game Room, Clubhouse Gallery, Clubhouse Majlis.\nPrime Location: Metro: Future station within 15 min, Airport: 20 min to Dubai Intl, Mall: 5 min to Silicon Central, 10 min to Global Village, Nearby: IMG Worlds, Dubai Hills Mall, Downtown (20 min).`,
+  },
+  {
+    id: 11,
+    name: 'Sobha Orbis',
+    location: 'Sobha Orbis, Dubai',
+    price: 'Launching Soon',
+    roi: '-',
+    reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727071/sobha-hartland_qo4rxf.mp4',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750856683/orbis_kinmqf.webp', // Add image URL if available
+    beds: 0,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: ['spa', 'gym', 'pool'],
+    description: `Studios, 1 & 2 Bedroom Apartments | Launching Soon\nSobha Orbis is a new launch by Sobha Realty, offering modern apartments in a vibrant community with premium amenities and excellent connectivity.\nMore details coming soon.`,
+  },
 ];
 
 const amenityIcons: { [key: string]: React.ReactElement } = {

@@ -3,7 +3,7 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { FaSwimmer, FaCar, FaConciergeBell, FaDumbbell, FaShieldAlt, FaSpa, FaMapMarkerAlt, FaTrain, FaPlane, FaShoppingBag, FaCheckCircle, FaCalendarAlt, FaPhoneAlt, FaFileDownload, FaTimes, FaClock, FaFilm, FaFire, FaMountain, FaDog, FaTableTennis, FaCouch, FaTint, FaChild, FaHotTub, FaHeartbeat, FaBook, FaMusic, FaBriefcase, FaRoad, FaGamepad, FaStore, FaTheaterMasks, FaHotel, FaSchool, FaTree, FaLandmark, FaWater, FaGolfBall, FaMosque, FaWalking, FaLeaf, FaShip, FaGlassCheers, FaFeather, FaAppleAlt, FaWindowMaximize, FaDoorOpen, FaCogs, FaBed, FaRulerCombined, FaLayerGroup } from 'react-icons/fa';
+import { FaSwimmer, FaCar, FaConciergeBell, FaDumbbell, FaShieldAlt, FaSpa, FaMapMarkerAlt, FaTrain, FaPlane, FaShoppingBag, FaCheckCircle, FaCalendarAlt, FaPhoneAlt, FaFileDownload, FaTimes, FaClock, FaFilm, FaFire, FaMountain, FaDog, FaTableTennis, FaCouch, FaTint, FaChild, FaHotTub, FaHeartbeat, FaBook, FaMusic, FaBriefcase, FaRoad, FaGamepad, FaStore, FaTheaterMasks, FaHotel, FaSchool, FaTree, FaLandmark, FaWater, FaGolfBall, FaMosque, FaWalking, FaLeaf, FaShip, FaGlassCheers, FaFeather, FaAppleAlt, FaWindowMaximize, FaDoorOpen, FaCogs, FaBed, FaRulerCombined, FaLayerGroup, FaBasketballBall, FaChess } from 'react-icons/fa';
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import { notFound } from 'next/navigation';
@@ -156,7 +156,7 @@ const allProperties = [
       ],
       amenities: [
         { icon: <FaSwimmer />, name: 'Swimming Pool' },
-        { icon: <FaChild />, name: "Kids' Pool & Play Areas" },
+        { icon: <FaChild />, name: "Children's Pool & Kids' Play Area" },
         { icon: <FaFire />, name: 'BBQ Stations' },
         { icon: <FaDumbbell />, name: 'State-of-the-Art Gym' },
         { icon: <FaHotTub />, name: 'Sauna' },
@@ -305,6 +305,83 @@ const allProperties = [
       goldenVisa: false,
       relatedSlugs: ['damac-islands', 'emaar-south', 'the-valley-avena', 'azizi-venice'],
     },
+    {
+      slug: 'belgravia-gardens',
+      name: 'Belgravia Gardens',
+      description: 'Belgravia Gardens features studio to 3-bedroom apartments with optional office layouts, offering a flexible living experience in a refined residential community. With urban beach access, lagoon views, and a fully-equipped clubhouse, this development is designed for residents seeking lifestyle, leisure, and smart indoor-outdoor connectivity.',
+      price: '1,200,000',
+      roi: '-',
+      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750856353/belgravia4_coh1y6.jpg',
+      images: [
+       'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750856356/belgravia3_liuq6o.jpg',
+       'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750856353/belgravia1_hmsnw9.jpg',
+       'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750856353/belgravia4_coh1y6.jpg',
+      ],
+      amenities: [
+        { icon: <FaSpa />, name: 'Leisure & Wellness' },
+        { icon: <FaWater />, name: 'Urban Beach & Artificial Lagoon' },
+        { icon: <FaGlassCheers />, name: 'Private Dining & Juice Lounge' },
+        { icon: <FaSpa />, name: 'Yoga & Pilates Studio' },
+        { icon: <FaDumbbell />, name: 'Fitness Studio & Sauna' },
+        { icon: <FaChild />, name: "Children's Pool & Kids' Play Area" },
+        { icon: <FaHotel />, name: 'Clubhouse Pavilion' },
+        { icon: <FaFilm />, name: 'Cinema Room' },
+        { icon: <FaGamepad />, name: 'Game Room' },
+        { icon: <FaStore />, name: 'Clubhouse Gallery' },
+        { icon: <FaCouch />, name: 'Clubhouse Majlis' },
+      ],
+      location: {
+        address: 'Belgravia Gardens, Dubai',
+        city: 'Dubai, UAE',
+        points: [
+          { icon: <FaTrain />, name: 'Metro: Future station within 15 min' },
+          { icon: <FaPlane />, name: 'Airport: 20 min to Dubai Intl' },
+          { icon: <FaShoppingBag />, name: 'Mall: 5 min to Silicon Central, 10 min to Global Village' },
+          { icon: <FaLandmark />, name: 'Nearby: IMG Worlds, Dubai Hills Mall, Downtown (20 min)' },
+        ],
+      },
+      goldenVisa: false,
+      relatedSlugs: [],
+    },
+    {
+      slug: 'sobha-orbis',
+      name: 'Sobha Orbis',
+      description: "Sobha Orbis introduces 1 to 3-bedroom apartments across a large, amenity-rich development with 2,900 units. Designed for social, active, and family-oriented living, the community features wellness spaces, resort-style pools, sports courts, and recreational zones. It's a complete environment with leisure, fitness, business, and retail integrated into everyday life.",
+      price: '1,000,000',
+      roi: '-',
+      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727071/sobha-hartland_qo4rxf.mp4',
+      images: [
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750856683/orbis_kinmqf.webp',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750856682/orbis3_cbcesd.webp',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750856683/orbis2_c7t3he.webp',
+      ],
+      amenities: [
+        { icon: <FaCouch />, name: 'Clubhouse & Sports' },
+        { icon: <FaTableTennis />, name: 'Badminton & Squash Courts' },
+        { icon: <FaTableTennis />, name: 'Volleyball & Beach Volleyball' },
+        { icon: <FaBasketballBall />, name: 'Basketball & Padel Tennis' },
+        { icon: <FaGamepad />, name: 'Billiards & Indoor Games' },
+        { icon: <FaChild />, name: "Kid's & Toddler Play Areas" },
+        { icon: <FaDumbbell />, name: 'Community Gym & Studios' },
+        { icon: <FaMusic />, name: 'Karaoke Room' },
+        { icon: <FaCogs />, name: 'MPH Sports Hall' },
+        { icon: <FaSpa />, name: 'Yoga & Meditation Zones' },
+        { icon: <FaLeaf />, name: 'Zen Garden & Hammock Lawn' },
+        { icon: <FaWalking />, name: 'Walking Paths & Landscaped Gardens' },
+        
+      ],
+      location: {
+        address: 'Sobha Orbis, Dubai',
+        city: 'Dubai, UAE',
+        points: [
+          { icon: <FaPlane />, name: 'Airport: DXB – ≈30 min drive' },
+          { icon: <FaShoppingBag />, name: 'Mall: First Avenue Mall – 0.7 km (5 min walk)' },
+          { icon: <FaCar />, name: 'Nearby Landmark: Dubai Autodrome & Formula 1 circuit – on-site' },
+        ],
+      },
+      goldenVisa: false,
+      relatedSlugs: [],
+    },
   ];
 
 export default function PropertyDetailsClient({ slug }: PropertyDetailsClientProps) {
@@ -313,6 +390,13 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
   if (!propertyData) {
     notFound();
   }
+
+  // Provide safe defaults for possibly undefined fields
+  const images = propertyData.images || [];
+  const amenities = propertyData.amenities || [];
+  const location = propertyData.location || { address: '', city: '', points: [] };
+  const locationPoints = location.points || [];
+  const relatedSlugs = propertyData.relatedSlugs || [];
 
   const [mainMedia, setMainMedia] = useState({ type: 'video', src: propertyData.reelVideoUrl });
   const [showModal, setShowModal] = useState(false);
@@ -656,7 +740,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                 </div>
               </div>
               {/* Image Thumbnails */}
-              {propertyData.images.map((img: string, idx: number) => (
+              {images.map((img: string, idx: number) => (
                 <div 
                   key={idx} 
                   className={`relative h-20 rounded-lg overflow-hidden cursor-pointer border-2 ${
@@ -666,7 +750,9 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                   }`} 
                   onClick={() => setMainMedia({ type: 'image', src: img })}
                 >
-                  <Image src={img} alt={`Thumbnail ${idx + 1}`} fill className="object-cover" />
+                  {img && (
+                    <Image src={img} alt={`Thumbnail ${idx + 1}`} fill className="object-cover" />
+                  )}
                 </div>
               ))}
             </div>
@@ -699,7 +785,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
             {/* Premium Amenities */}
             <div className="bg-black rounded-xl p-4">
               <h2 className="text-lg font-bold text-white mb-3">Premium Amenities</h2>
-              {propertyData.amenities?.filter(Boolean).map((item: { icon: React.ReactNode; name: string }) => (
+              {amenities.filter(Boolean).map((item: { icon: React.ReactNode; name: string }) => (
                 <div key={item.name} className="flex items-center gap-2 text-gray-300">
                   <span className="text-purple-400 text-xs">{item.icon}</span>
                   <span className="text-xs">{item.name}</span>
@@ -714,12 +800,12 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                 <div className="flex items-start gap-2 mb-3">
                   <FaMapMarkerAlt className="text-purple-400 mt-1 text-sm" />
                   <div>
-                    <div className="font-semibold text-white text-sm">{propertyData.location.address}</div>
-                    <div className="text-xs text-gray-400">{propertyData.location.city}</div>
+                    <div className="font-semibold text-white text-sm">{location.address}</div>
+                    <div className="text-xs text-gray-400">{location.city}</div>
                   </div>
                 </div>
                 <div className="flex justify-around text-xs">
-                  {propertyData.location.points?.filter(Boolean).map((pt: { icon: React.ReactNode; name: string }) => (
+                  {locationPoints.filter(Boolean).map((pt: { icon: React.ReactNode; name: string }) => (
                     <div key={pt.name} className="flex items-center gap-1 text-gray-300">
                       <span className="text-purple-400 text-xs">{pt.icon}</span> 
                       <span>{pt.name}</span>
@@ -775,13 +861,15 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
         <div className="mt-2">
           <h2 className="text-3xl font-bold mb-8">Related Properties</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {propertyData.relatedSlugs.map((slug: string) => {
+            {relatedSlugs.map((slug: string) => {
               const relProp = allProperties.find((p: any) => p.slug === slug);
               if (!relProp) return null;
               return (
                 <a key={relProp.slug} href={`/property/${relProp.slug}`} className="rounded-lg overflow-hidden block group">
                   <div className="relative h-64">
-                    <Image src={relProp.images[0]} alt={relProp.name} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
+                    {relProp.images && relProp.images[0] && (
+                      <Image src={relProp.images[0]} alt={relProp.name} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
+                    )}
                   </div>
                   <div className="p-4 bg-neutral-900">
                     <h3 className="font-bold group-hover:text-purple-400 transition-colors duration-200">{relProp.name}</h3>
