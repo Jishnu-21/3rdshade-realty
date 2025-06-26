@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 
 const VideoModal = ({
   videoSrc = "https://res.cloudinary.com/dkgjl08a5/video/upload/v1744839021/Dubai_realestate_video_01_tsmqus.webm",
@@ -15,7 +15,7 @@ const VideoModal = ({
   const videoRef = useRef(null);
 
   // Animation variants for fullscreen modal
-  const fullscreenVariants = {
+  const fullscreenVariants: Variants = {
     hidden: { x: "100vw", opacity: 0 },
     visible: {
       x: 0,
