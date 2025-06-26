@@ -12,7 +12,7 @@ const VideoModal = ({
   const [isMini, setIsMini] = useState(false); // Start in fullscreen mode
   const [isMuted, setIsMuted] = useState(muted);
   const [showMiniAfterClose, setShowMiniAfterClose] = useState(false);
-  const videoRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   // Animation variants for fullscreen modal
   const fullscreenVariants: Variants = {
