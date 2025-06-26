@@ -8,6 +8,10 @@ import FeaturedProperties from "./components/FeaturedProperties";
 import EliteServices from './components/EliteServices';
 import CallToAction from './components/CallToAction';
 import Footer from './components/Footer';
+import dynamic from 'next/dynamic';
+
+// Dynamically import VideoModal to avoid SSR issues with framer-motion
+const VideoModal = dynamic(() => import('./components/VideoModal'), { ssr: false });
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -22,6 +26,7 @@ export default function Home() {
 
   return (
     <>
+      <VideoModal />
       <main >
         <Header />
         <div className="relative w-full min-h-screen">

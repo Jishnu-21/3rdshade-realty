@@ -1318,7 +1318,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
           </div>
         </div>
       )}
-      <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-28">
+      <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-28 md:pt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Column: Image/Video Gallery */}
           <div className="lg:col-span-1 flex flex-col h-full">
@@ -1472,7 +1472,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
         </div>
 
         {/* Related Properties */}
-        <div className="mt-8 lg:mt-2">
+        <div className="mt-8 md:mt-4 lg:mt-2">
           <h2 className="text-3xl font-bold mb-8">Related Properties</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {relatedSlugs.map((slug: string) => {
