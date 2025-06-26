@@ -378,14 +378,14 @@ const allProperties = [
     {
       slug: 'pierside-marina-residences',
       name: 'Pierside Marina Residences – Sobha Siniya Island',
-      description: `Pierside Marina Residences offers 1 to 3-bedroom luxury apartments set on an exclusive island destination by Sobha Realty. Designed for those who seek privacy, views, and a curated lifestyle, the development combines yacht-side living with resort-class wellness, retail, and leisure experiences. With sweeping sea views, smart home features, and refined interiors, it's where elevated living meets ocean serenity.`,
+      description: `Pierside Marina Residences offers 1 to 3-bedroom luxury apartments set on an exclusive island destination by Sobha Realty. Designed for those who seek privacy, views, and a curated lifestyle, the development combines yacht-side living with resort-class wellness, retail, and leisure experiences.`,
       price: '1,000,000',
       roi: '-',
       reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954167/pierside2_qhivsz.webp', // Placeholder video
       images: [
         'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954168/pierside3_pfbnzz.webp',
         'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954167/pierside4_gg4wbz.webp',
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954194/pierside1_h2yck8.webp',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750957827/Pierside-Marina-homes-for-sal_i4gvyk.jpg',
       ],
       amenities: [
         { icon: <FaSwimmer />, name: 'Infinity Marina Pool with Seaview Deck' },
@@ -1331,7 +1331,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                   );
                 } else {
                   return (
-                    <Image src={mainMedia.src} alt="Property Image" fill className="object-fit-contain" />
+                    <Image src={mainMedia.src} alt="Property Image" fill className="object-cover" />
                   );
                 }
               })()}
