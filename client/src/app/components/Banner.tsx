@@ -60,7 +60,7 @@ const Banner = () => {
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
       {/* Main Content */}
-      <div className="relative z-10 w-full pt-24 md:pt-64 flex-grow">
+      <div className="relative z-10 w-full pt-20 sm:pt-24 md:pt-40 lg:pt-56 xl:pt-64 flex-grow">
         <div className="max-w-screen-2xl mx-auto px-4 md:px-8 flex flex-col items-start text-left">
           <motion.h1
             className="font-bold text-white text-4xl md:text-6xl lg:text-7xl leading-tight mb-4"
@@ -97,13 +97,13 @@ Whether you're launching or expanding, we master every digital move that drives 
 
       {/* Stats Section */}
       <motion.div
-        className="relative z-10 w-full py-20 px-8"
+        className="relative z-10 w-full py-12 sm:py-16 md:py-20 px-4 md:px-8"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.6 }}
       >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
+        <div className="max-w-screen-2xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white px-0">
           {stats.map((stat, idx) => {
             const animated = useAnimatedNumber(stat.value, 1.2, stat.format);
             return (

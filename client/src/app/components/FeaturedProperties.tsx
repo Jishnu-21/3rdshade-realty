@@ -183,11 +183,11 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
   return (
     <Link href={`/property/${property.slug}`} className="block" prefetch={false}>
     <div
-      className="bg-neutral-900 rounded-lg overflow-hidden shadow-lg flex flex-col items-center transition-transform duration-300 hover:scale-105 cursor-pointer"
+      className="bg-neutral-900 rounded-lg overflow-hidden shadow-lg flex flex-col items-center transition-transform duration-300 hover:scale-105 cursor-pointer min-h-[540px] h-full"
         onMouseEnter={() => hasVideo && setIsHovered(true)}
         onMouseLeave={() => hasVideo && setIsHovered(false)}
     >
-        <div className="w-full flex justify-center items-center bg-black relative h-[550px] md:h-[700px]">
+        <div className="w-full flex justify-center items-center bg-black relative h-[340px] sm:h-[420px] md:h-[550px] lg:h-[700px]">
           {/* Show image by default, swap to video on hover if video exists */}
           {property.imageUrl ? (
             <Image
@@ -217,7 +217,7 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
             </div>
           )}
       </div>
-      <div className="p-6 w-full">
+      <div className="p-6 w-full flex-1 flex flex-col">
         <div className="flex justify-between items-center mb-2">
           <h3 className="text-white text-xl font-bold">{property.title}</h3>
           <span className="text-purple-400 font-semibold text-lg">
@@ -239,23 +239,21 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
 
 const FeaturedProperties = () => {
   return (
-    <section className="py-20 bg-black">
-      <div className="container mx-auto px-4">
-        <h2 className="text-white text-center text-4xl md:text-5xl font-bold mb-4">
+    <section className="py-12 sm:py-16 md:py-20 bg-black">
+      <div className="max-w-screen-2xl mx-auto px-4 md:px-8">
+        <h2 className="text-white text-center text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6">
           Featured Properties
         </h2>
-        <p className="text-neutral-400 text-center text-lg mb-12 max-w-2xl mx-auto">
+        <p className="text-neutral-400 text-center text-base sm:text-lg mb-8 md:mb-12 max-w-2xl mx-auto">
           A curated set of premium properties offering value through design, connectivity, and development credibility.
         </p>
-        {/* View All Button */}
-       
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
           {properties.map((property) => (
             <PropertyCard key={property.id} property={property} />
           ))}
         </div>
-        <div className="flex justify-center mt-10">
-          <Link href="/properties" className="inline-block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:from-purple-700 hover:to-pink-600 transition-all duration-300 text-lg">
+        <div className="flex justify-center mt-8 md:mt-10">
+          <Link href="/properties" className="inline-block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold px-6 sm:px-8 py-3 rounded-xl shadow-lg hover:from-purple-700 hover:to-pink-600 transition-all duration-300 text-base sm:text-lg">
             View All
           </Link>
         </div>

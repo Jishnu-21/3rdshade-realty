@@ -373,7 +373,7 @@ const allProperties = [
         ],
       },
       goldenVisa: false,
-      relatedSlugs: ['belgravia-gardens', 'pierside-marina-residences', 'timez-by-danube', 'belgrove-residences'],
+      relatedSlugs: ['ellington-cove', 'sobha-solis', 'ocean-house', 'one-river-point'],
     },
     {
       slug: 'pierside-marina-residences',
@@ -985,6 +985,8 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
   return (
     <div className="bg-black text-white font-montserrat">
       <Header onEnquire={() => setShowEnquireModal(true)} />
+      {/* Add gap below header */}
+      <div className="mt-0 md:pt-8" />
       {/* Custom Login/Register Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
@@ -1318,8 +1320,8 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
           </div>
         </div>
       )}
-      <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-28 md:pt-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <main className="max-w-screen-2xl mx-auto px-6 sm:px-6 lg:px-8 py-20 pt-28 md:pt-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-15 items-stretch">
           {/* Left Column: Image/Video Gallery */}
           <div className="lg:col-span-1 flex flex-col h-full">
             <div className="relative w-full h-[635px] rounded-xl overflow-hidden mb-4 bg-black">
@@ -1373,7 +1375,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
           </div>
 
           {/* Right Column: Property Details */}
-          <div className="lg:col-span-1 flex flex-col min-h-screen space-y-4">
+          <div className="lg:col-span-1 flex flex-col space-y-4 h-full">
             {/* Property Title */}
             <div>
               <h1 className="text-3xl font-bold text-white mb-3">{propertyData.name}</h1>
@@ -1408,8 +1410,8 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
             </div>
 
             {/* Prime Location */}
-            <div className="rounded-xl p-[2px] bg-gradient-to-r from-purple-600 to-pink-500">
-              <div className="bg-black rounded-xl p-4">
+            <div className="rounded-xl p-[2px] bg-gradient-to-r from-purple-600 to-pink-500 h-fit">
+              <div className="bg-black rounded-xl p-4 h-full">
                 <h2 className="text-lg font-bold text-white mb-3">Prime Location</h2>
                 <div className="flex items-start gap-2 mb-3">
                   <FaMapMarkerAlt className="text-purple-400 mt-1 text-sm" />
@@ -1418,11 +1420,11 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                     <div className="text-xs text-gray-400">{location.city}</div>
                   </div>
                 </div>
-                <div className="flex justify-around text-xs">
+                <div className="flex flex-wrap gap-2 md:flex-nowrap md:gap-4 text-xs">
                   {locationPoints.filter(Boolean).map((pt: { icon: React.ReactNode; name: string }) => (
-                    <div key={pt.name} className="flex items-center gap-1 text-gray-300">
-                      <span className="text-purple-400 text-xs">{pt.icon}</span> 
-                      <span>{pt.name}</span>
+                    <div key={pt.name} className="flex items-center gap-1 text-gray-300 bg-neutral-900/60 rounded px-2 py-1 mb-1 max-w-full md:max-w-xs">
+                      <span className="text-purple-400 text-xs">{pt.icon}</span>
+                      <span className="break-words whitespace-normal">{pt.name}</span>
                     </div>
                   ))}
                 </div>
@@ -1431,13 +1433,13 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
 
             {/* Golden Visa */}
             {propertyData.goldenVisa && (
-              <div className="bg-gradient-to-r from-yellow-500 to-amber-400 rounded-xl p-4 flex items-center justify-between text-black">
+              <div className="bg-gradient-to-r from-yellow-300/60 to-amber-200/40 backdrop-blur-md border border-yellow-200/40 rounded-xl p-4 flex items-center justify-between text-yellow-900/90 shadow-lg" style={{boxShadow: '0 4px 24px 0 rgba(255, 221, 51, 0.10)'}}>
                 <div>
-                  <h3 className="font-bold text-base">Golden Visa Eligibility</h3>
+                  <h3 className="font-bold text-base drop-shadow">Golden Visa Eligibility</h3>
                   <p className="text-xs opacity-80">Qualify for UAE Golden Visa with this investment.</p>
                 </div>
                 <div className="text-center">
-                  <FaCheckCircle size={24} className="mx-auto mb-1" />
+                  <FaCheckCircle size={24} className="mx-auto mb-1 text-yellow-600 drop-shadow" />
                   <div className="font-bold text-sm">YES</div>
                 </div>
               </div>
@@ -1472,7 +1474,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
         </div>
 
         {/* Related Properties */}
-        <div className="mt-8 md:mt-4 lg:mt-2">
+        <div className="mt-6 md:mt-4 lg:mt-2">
           <h2 className="text-3xl font-bold mb-8">Related Properties</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {relatedSlugs.map((slug: string) => {
