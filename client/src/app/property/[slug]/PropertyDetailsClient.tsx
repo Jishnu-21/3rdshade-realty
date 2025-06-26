@@ -54,9 +54,9 @@ const allProperties = [
       roi: '10-12%',
       reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750744127/deeyer-eleve_hmjj4n.jpg',
       images: [
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760853/Deeyar_Eleve_4_vcv6o6.jpg',
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760849/Deeyar_Eleve_2_go8gtb.jpg',
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760845/Deeyar_Eleve_1_xa3ka7.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750958272/Exterior-scaled_omygee.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750958268/Pool-scaled_ngcwan.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750958268/Eleve_02Living-Dining_006-min-scaled_b60opc.jpg',
       ],
       amenities: [
         { icon: <FaSwimmer />, name: 'Grand Lobby & Lounge' },
@@ -86,9 +86,9 @@ const allProperties = [
       roi: '-',
       reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727749/sobha-solis2_c6nt2j.mp4',
       images: [
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760839/sobha3_xqltd6.jpg',
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760835/sobha2_jvhxq7.jpg',
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760828/sobha1_mfjw7n.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750958703/sobhasolis3_zxecuh.webp',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750958543/sobhasolis_hqajtt.webp',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750958703/sobhasolis2_g7kbxt.webp',
       ],
       amenities: [
         { icon: <FaSwimmer />, name: 'Lap Pool' },
@@ -247,11 +247,11 @@ const allProperties = [
       description: `Damac Islands offers 4 and 5-bedroom townhouses with direct waterfront access, private beaches, and expansive terraces. Inspired by the world's most beautiful tropical islands.`,
       price: '2,400,000',
       roi: '-',
-      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760818/damac1_uoxl27.jpg',
+      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750958213/675042e75752cda845284754_DAMAC_ISLANDS_Digital_Brochure_EN_TRIMMED_241118_173247.pdf_cv28rc.webp',
       images: [
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760815/damac2_usulqy.jpg',
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760815/damac2_usulqy.jpg',
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760809/damac3_zdxq5i.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750958213/DAMAC_Islands-Gallery-03_ft4mtg.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750958213/676897089-gallery-21_dshyai.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750958213/DAMAC_Islands-Homepage_Hero_16x9_gzoklx.jpg',
       ],
       amenities: [
         { icon: <FaWater />, name: 'Private Beach Access' },
@@ -1331,7 +1331,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                   );
                 } else {
                   return (
-                    <Image src={mainMedia.src} alt="Property Image" fill className="object-cover" />
+                    <Image src={mainMedia.src} alt="Property Image" fill className="object-fit-contain" />
                   );
                 }
               })()}
