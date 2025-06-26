@@ -425,6 +425,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
   const countryList = [
     'India', 'United States', 'United Kingdom', 'UAE', 'Canada', 'Australia', 'Singapore', 'Germany', 'France', 'China', 'Japan', 'South Africa', 'Saudi Arabia', 'Qatar', 'Kuwait', 'Oman', 'Bahrain', 'Russia', 'Italy', 'Spain', 'Netherlands', 'Switzerland', 'Turkey', 'Brazil', 'Other'
   ];
+  const [amountWarning, setAmountWarning] = useState('');
 
   useEffect(() => {
     // No need to setSlug, just use slug directly
@@ -439,47 +440,28 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
     setIsLoading(true);
     setFormError('');
     setFormSuccess('');
+    setAmountWarning('');
     try {
-      // 1. Create Razorpay order
-      const amountInPaise = Math.round(Number(propertyData.price.replace(/[^\d]/g, '')) * 100) || 50000; // fallback ₹500
-      const orderRes = await fetch('/api/razorpay/order', {
+      // 1. Cap amount at ₹50,000 (5000000 paise)
+      let amountInPaise = Math.round(Number(propertyData.price.replace(/[^\d]/g, '')) * 100) || 50000; // fallback ₹500
+      if (amountInPaise > 5000000) {
+        setAmountWarning('For demo purposes, payment is capped at ₹50,000. Contact us for higher value transactions.');
+        amountInPaise = 5000000;
+      }
+      const res = await fetch('/api/razorpay/order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           amount: amountInPaise,
-          currency: 'INR',
-          receipt: `receipt_${Date.now()}`,
-        }),
-      });
-      const order = await orderRes.json();
-      if (!order.id) throw new Error(order.error || 'Failed to create order');
-
-      // 2. Open Razorpay modal
-      const options = {
-        key: 'YOUR_KEY_ID', // Replace with your Razorpay key
-        amount: order.amount,
-        currency: order.currency,
-        name: propertyData.name,
-        description: 'Property Booking',
-        image: '/logos/logo.png',
-        order_id: order.id,
-        handler: function (response: any) {
-          setFormSuccess('Payment successful!');
-          setShowModal(false);
-        },
-        prefill: {
           name: form.name,
           email: form.email,
-          contact: form.phone,
-        },
-        theme: { color: '#8b5cf6' },
-      };
-      if (typeof window !== 'undefined' && (window as any).Razorpay) {
-        const rzp = new (window as any).Razorpay(options);
-        rzp.open();
-      } else {
-        throw new Error('Razorpay SDK not loaded');
-      }
+          phone: form.phone,
+        }),
+      });
+      const data = await res.json();
+      if (!data.url) throw new Error(data.error || 'Failed to create payment link');
+      // 2. Redirect to payment link
+      window.location.href = data.url;
     } catch (error) {
       setFormError(error instanceof Error ? error.message : 'Payment failed');
     } finally {
@@ -583,6 +565,9 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
               </div>
             </div>
             <div className="px-8 pb-8">
+              {amountWarning && (
+                <div className="mb-4 p-3 bg-yellow-500/20 border border-yellow-500/50 rounded-lg text-yellow-400 text-sm">{amountWarning}</div>
+              )}
               {formError && (
                 <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-sm">{formError}</div>
               )}
