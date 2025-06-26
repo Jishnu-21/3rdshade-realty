@@ -13,7 +13,6 @@ const Footer = () => (
           </p>
           <div className="flex space-x-4">
             <a href="#" aria-label="Instagram" className="hover:text-white"><FaInstagram size={22} /></a>
-            <a href="#" aria-label="LinkedIn" className="hover:text-white"><FaLinkedin size={22} /></a>
           </div>
         </div>
         {/* Center: Links */}
@@ -27,10 +26,10 @@ const Footer = () => (
             </ul>
           </div>
           <div>
-            <h4 className="text-white font-semibold mb-3">Privacy</h4>
+            <h4 className="text-white font-semibold mb-3">Privacy and Terms</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="/privacy" className="hover:text-white">Privacy</a></li>
-              <li><a href="/terms" className="hover:text-white">Terms</a></li>
+              <li><a href="/privacy policy" className="hover:text-white">Privacy</a></li>
+              <li><a href="/terms and conditions" className="hover:text-white">Terms</a></li>
             </ul>
           </div>
           <div>

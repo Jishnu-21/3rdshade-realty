@@ -43,7 +43,25 @@ export default function ContactPage() {
             transition={{ duration: 0.6, delay: 0.6 }}
           >
             <div className="uppercase text-xs text-neutral-400 mb-2 tracking-widest">Get in touch</div>
-            <div className="font-bold text-white">INFO@3RDSHADE.IN<br />+91 8600181189</div>
+            <div className="font-bold text-white">
+              <a
+                href="mailto:INFO@3RDSHADE.IN"
+                className="hover:underline"
+                style={{ display: 'inline-block' }}
+              >
+                INFO@3RDSHADE.IN
+              </a>
+              <br />
+              <a
+                href="https://wa.me/918600181189"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+                style={{ display: 'inline-block' }}
+              >
+                +91 8600181189
+              </a>
+            </div>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -51,7 +69,7 @@ export default function ContactPage() {
             transition={{ duration: 0.6, delay: 0.8 }}
           >
             <div className="uppercase text-xs text-neutral-400 mb-2 tracking-widest">Our address</div>
-            <div className="font-bold text-white">3RD SHADE MEDIA<br />PARK PLAZA,LOHEGAON<br />1st FLOOR, ROOM No.01<br />PUNE, MAHARASTRA,INDIA<br />411047</div>
+            <div className="font-bold text-white">THIRD SHADE MEDIA<br />PARK PLAZA, LOHEGAON<br />1st FLOOR, ROOM No.01<br />PUNE, MAHARASTRA, INDIA<br />411047</div>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -67,22 +85,6 @@ export default function ContactPage() {
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 Instagram<span className="ml-1">↗</span>
-              </motion.a>
-              <motion.a 
-                href="#" 
-                className="hover:underline"
-                whileHover={{ scale: 1.05, x: -5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                LinkedIn<span className="ml-1">↗</span>
-              </motion.a>
-              <motion.a 
-                href="#" 
-                className="hover:underline"
-                whileHover={{ scale: 1.05, x: -5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                Youtube<span className="ml-1">↗</span>
               </motion.a>
             </div>
           </motion.div>

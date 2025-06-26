@@ -245,12 +245,19 @@ const FeaturedProperties = () => {
           Featured Properties
         </h2>
         <p className="text-neutral-400 text-center text-lg mb-12 max-w-2xl mx-auto">
-        A curated set of premium properties offering value through design, connectivity, and development credibility.
+          A curated set of premium properties offering value through design, connectivity, and development credibility.
         </p>
+        {/* View All Button */}
+       
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {properties.map((property) => (
             <PropertyCard key={property.id} property={property} />
           ))}
+        </div>
+        <div className="flex justify-center mt-10">
+          <Link href="/properties" className="inline-block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:from-purple-700 hover:to-pink-600 transition-all duration-300 text-lg">
+            View All
+          </Link>
         </div>
       </div>
     </section>

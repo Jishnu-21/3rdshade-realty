@@ -3,11 +3,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 const paragraphLines = [
-  'Your real estate brand deserves more than visibility,',
-  'it deserves a story the market remembers.At Third Shade ',
-  'Realty,powered by 3rd Shades creative force,visuals,and',
+  'Your real estate brand deserves more than visibility, ',
+  'it deserves a story the market remembers. At Third Shade ',
+  'Realty, powered by 3rd Shades creative force, visuals,and',
   ' marketing excellenceto put your properties in the spotlight.',
-  'From new project launches to brand evolution,',
+  'From new project launches to brand evolution, ',
   'we scale your presence with precision and purpose.'
 ];
 

@@ -8,6 +8,8 @@ import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import React from 'react';
 import Link from 'next/link';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 // Mock data for all properties
 const allProperties = [
@@ -188,6 +190,23 @@ const amenityIcons: { [key: string]: React.ReactElement } = {
   wifi: <FaWifi />,
 };
 
+// Add a type for property
+interface Property {
+  id: number;
+  name: string;
+  location: string;
+  price: string;
+  roi: string;
+  reelVideoUrl: string;
+  image: string;
+  beds: number;
+  baths: number;
+  sqft: string;
+  rating: number;
+  amenities: string[];
+  description: string;
+}
+
 const PropertiesPage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
@@ -225,24 +244,40 @@ const PropertiesPage = () => {
   };
 
   const filteredProperties = allProperties.filter(property => {
-    // const price = parseFloat(property.price.replace(/,/g, ''));
-    // const inPriceRange = price >= priceRange[0] && price <= priceRange[1];
-    // Only filter by amenities for now
-    const hasSelectedAmenities = selectedAmenities.length === 0 || 
-      selectedAmenities.every(amenity => property.amenities.includes(amenity));
-    return hasSelectedAmenities;
+    // Extract numeric price from string (e.g., 'Starting from AED 1.5M')
+    const priceMatch = property.price.match(/([\d.]+)\s*M/i);
+    let price = 0;
+    if (priceMatch) {
+      price = parseFloat(priceMatch[1]) * 1000000;
+    } else if (/([\d,]+)/.test(property.price)) {
+      price = parseFloat(property.price.replace(/[^\d.]/g, ''));
+    }
+    const inPriceRange = price >= priceRange[0] && price <= priceRange[1];
+    return inPriceRange;
   });
 
+  // Use Property type for getPrice
   const sortedProperties = [...filteredProperties].sort((a, b) => {
-    const priceA = parseFloat(a.price.replace(/,/g, ''));
-    const priceB = parseFloat(b.price.replace(/,/g, ''));
-    
+    const getPrice = (p: Property) => {
+      const priceMatch = p.price.match(/([\d.]+)\s*M/i);
+      if (priceMatch) return parseFloat(priceMatch[1]) * 1000000;
+      if (/([\d,]+)/.test(p.price)) return parseFloat(p.price.replace(/[^\d.]/g, ''));
+      return 0;
+    };
+    const priceA = getPrice(a);
+    const priceB = getPrice(b);
     if (sortBy === 'price-low') return priceA - priceB;
     if (sortBy === 'price-high') return priceB - priceA;
     if (sortBy === 'rating') return b.rating - a.rating;
     if (sortBy === 'beds') return b.beds - a.beds;
     return priceA - priceB;
   });
+
+  const handleSliderChange = (value: number | number[]) => {
+    if (Array.isArray(value)) {
+      setPriceRange(value as number[]);
+    }
+  };
 
   return (
     <div className="bg-black text-white font-montserrat">
@@ -280,50 +315,28 @@ const PropertiesPage = () => {
       {/* Filters Section */}
       <section className="py-12 border-b border-gray-800 bg-gradient-to-r from-gray-900/80 to-gray-800/80 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Price Range */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Price Range with Slider */}
             <div className="bg-black/40 rounded-xl p-6 border border-gray-700">
-              <label className="block text-lg font-semibold text-white mb-4">Price Range</label>
-              <div className="flex gap-4 items-center">
-                <input
-                  type="number"
-                  placeholder="Min"
-                  value={priceRange[0]}
-                  onChange={(e) => setPriceRange([parseInt(e.target.value) || 0, priceRange[1]])}
-                  className="w-full px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
+              <label className="block text-lg font-semibold text-white mb-4">Price Range (AED)</label>
+              <div className="flex flex-col gap-4 items-center">
+                <Slider
+                  range
+                  min={0}
+                  max={15000000}
+                  step={100000}
+                  value={priceRange}
+                  onChange={handleSliderChange}
+                  trackStyle={[{ backgroundColor: '#a21caf' }]}
+                  handleStyle={[{ borderColor: '#a21caf' }, { borderColor: '#a21caf' }]}
+                  railStyle={{ backgroundColor: '#444' }}
                 />
-                <span className="text-gray-400 font-semibold">-</span>
-                <input
-                  type="number"
-                  placeholder="Max"
-                  value={priceRange[1]}
-                  onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value) || 15000000])}
-                  className="w-full px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
-                />
+                <div className="flex justify-between w-full text-sm text-gray-300">
+                  <span>{priceRange[0].toLocaleString()}</span>
+                  <span>{priceRange[1].toLocaleString()}</span>
+                </div>
               </div>
             </div>
-
-            {/* Amenities Filter */}
-            <div className="bg-black/40 rounded-xl p-6 border border-gray-700">
-              <label className="block text-lg font-semibold text-white mb-4">Amenities</label>
-              <div className="flex flex-wrap gap-3">
-                {allAmenities.map(amenity => (
-                  <button
-                    key={amenity}
-                    onClick={() => toggleAmenity(amenity)}
-                    className={`px-4 py-2 rounded-lg text-sm transition-all duration-300 flex items-center gap-2 font-medium ${
-                      selectedAmenities.includes(amenity)
-                        ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-lg'
-                        : 'bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-600'
-                    }`}
-                  >
-                    {amenityIcons[amenity]}
-                    {amenity.charAt(0).toUpperCase() + amenity.slice(1)}
-                  </button>
-                ))}
-              </div>
-            </div>
-
             {/* Sort Options */}
             <div className="bg-black/40 rounded-xl p-6 border border-gray-700">
               <label className="block text-lg font-semibold text-white mb-4">Sort By</label>
@@ -399,23 +412,11 @@ const PropertiesPage = () => {
                       </div>
                     </div>
                     )}
-                    {/* Amenities Badge */}
-                    <div className="absolute top-4 left-4 flex gap-1 z-10">
-                      {property.amenities.slice(0, 3).map(amenity => (
-                        <div key={amenity} className="w-8 h-8 bg-black/70 rounded-full flex items-center justify-center text-white text-xs">
-                          {amenityIcons[amenity]}
-                        </div>
-                      ))}
-                      {property.amenities.length > 3 && (
-                        <div className="w-8 h-8 bg-black/70 rounded-full flex items-center justify-center text-white text-xs">
-                          +{property.amenities.length - 3}
-                        </div>
-                      )}
-                    </div>
                   </div>
 
                   {/* Property Details */}
                   <div className="p-6">
+                    <div className="mb-2 text-lg font-bold text-purple-200/90">{property.price}</div>
                     <div className="flex flex-col items-start mb-3">
                       <h3 className="text-2xl font-extrabold text-white group-hover:text-purple-400 transition-colors duration-300 truncate w-full" style={{lineHeight: 1.2}} title={property.name}>
                         {property.name}

@@ -906,12 +906,12 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Column: Image/Video Gallery */}
           <div className="lg:col-span-1 flex flex-col h-full">
-            <div className="relative w-full h-[635px] rounded-xl overflow-hidden mb-4">
+            <div className="relative w-full h-[635px] rounded-xl overflow-hidden mb-4 bg-black">
               {(() => {
                 const isImage = /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(mainMedia.src);
                 if (mainMedia.type === 'video' && !isImage) {
                   return (
-                    <video src={mainMedia.src} className="w-full h-full object-cover" autoPlay loop muted playsInline />
+                    <video src={mainMedia.src} className="w-full h-full object-contain bg-black" autoPlay loop muted playsInline />
                   );
                 } else {
                   return (
@@ -923,14 +923,14 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
             <div className="grid grid-cols-4 gap-3">
               {/* Video Thumbnail */}
               <div 
-                className={`relative h-20 rounded-lg overflow-hidden cursor-pointer border-2 ${
+                className={`relative h-20 rounded-lg overflow-hidden cursor-pointer border-2 bg-black ${
                   mainMedia.type === 'video' && mainMedia.src === propertyData.reelVideoUrl 
                     ? 'border-purple-500' 
                     : 'border-transparent'
                 }`} 
                 onClick={() => setMainMedia({ type: 'video', src: propertyData.reelVideoUrl })}
               >
-                <video src={propertyData.reelVideoUrl} className="w-full h-full object-cover" muted />
+                <video src={propertyData.reelVideoUrl} className="w-full h-full object-contain bg-black" muted />
                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                   <div className="w-6 h-6 bg-white/80 rounded-full flex items-center justify-center">
                     <div className="w-0 h-0 border-l-[6px] border-l-black border-y-[4px] border-y-transparent ml-0.5"></div>
