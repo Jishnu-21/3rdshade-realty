@@ -7,11 +7,11 @@ const key_secret = 'gAgzpIAyBwwdpuoSZjyV86Vb'; // Your Razorpay secret
 const razorpay = new Razorpay({ key_id, key_secret });
 
 export async function POST(request: NextRequest) {
-  const { amount, name, email, phone } = await request.json();
+  const { amount, name, email, phone, currency } = await request.json();
   try {
     const paymentLink = await razorpay.paymentLink.create({
       amount,
-      currency: 'INR',
+      currency: currency || 'INR',
       customer: {
         name,
         email,

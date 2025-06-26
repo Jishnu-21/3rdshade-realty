@@ -426,6 +426,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
     'India', 'United States', 'United Kingdom', 'UAE', 'Canada', 'Australia', 'Singapore', 'Germany', 'France', 'China', 'Japan', 'South Africa', 'Saudi Arabia', 'Qatar', 'Kuwait', 'Oman', 'Bahrain', 'Russia', 'Italy', 'Spain', 'Netherlands', 'Switzerland', 'Turkey', 'Brazil', 'Other'
   ];
   const [amountWarning, setAmountWarning] = useState('');
+  const BASE_RAZORPAY_AMOUNT_AED = 2000; // Always use 2,000 AED
 
   useEffect(() => {
     // No need to setSlug, just use slug directly
@@ -442,20 +443,18 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
     setFormSuccess('');
     setAmountWarning('');
     try {
-      // 1. Cap amount at ₹50,000 (5000000 paise)
-      let amountInPaise = Math.round(Number(propertyData.price.replace(/[^\d]/g, '')) * 100) || 50000; // fallback ₹500
-      if (amountInPaise > 5000000) {
-        setAmountWarning('For demo purposes, payment is capped at ₹50,000. Contact us for higher value transactions.');
-        amountInPaise = 5000000;
-      }
+      // Always use AED 2,000 for payment
+      const amountAed = BASE_RAZORPAY_AMOUNT_AED;
+      const amountInFils = amountAed * 100;
       const res = await fetch('/api/razorpay/order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          amount: amountInPaise,
+          amount: amountInFils,
           name: form.name,
           email: form.email,
           phone: form.phone,
+          currency: 'AED',
         }),
       });
       const data = await res.json();
@@ -565,14 +564,14 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
               </div>
             </div>
             <div className="px-8 pb-8">
-              {amountWarning && (
-                <div className="mb-4 p-3 bg-yellow-500/20 border border-yellow-500/50 rounded-lg text-yellow-400 text-sm">{amountWarning}</div>
-              )}
               {formError && (
                 <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-sm">{formError}</div>
               )}
               {formSuccess && (
                 <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-sm">{formSuccess}</div>
+              )}
+              {amountWarning && (
+                <div className="mb-4 p-3 bg-yellow-500/20 border border-yellow-500/50 rounded-lg text-yellow-400 text-sm">{amountWarning}</div>
               )}
               <form onSubmit={handlePayNowSubmit} className="flex flex-col gap-5">
                 <div className="relative">
