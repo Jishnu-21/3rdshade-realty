@@ -405,7 +405,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
   const [formError, setFormError] = useState('');
   const [formSuccess, setFormSuccess] = useState('');
   const [showCallModal, setShowCallModal] = useState(false);
-  const [callForm, setCallForm] = useState({ date: '', time: '', email: '', phone: '' });
+  const [callForm, setCallForm] = useState({ name: '', date: '', time: '', timezone: '', country: '', email: '', phone: '' });
   const [showEnquireModal, setShowEnquireModal] = useState(false);
   const [enquireStep, setEnquireStep] = useState(1);
   const [enquireForm, setEnquireForm] = useState({
@@ -427,6 +427,23 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
   ];
   const [amountWarning, setAmountWarning] = useState('');
   const BASE_RAZORPAY_AMOUNT_AED = 2000; // Always use 2,000 AED
+  const [callFormSuccess, setCallFormSuccess] = useState('');
+  const [callFormError, setCallFormError] = useState('');
+  const [enquireFormSuccess, setEnquireFormSuccess] = useState('');
+  const [enquireFormError, setEnquireFormError] = useState('');
+  const timezoneList = [
+    'Asia/Kolkata (IST)',
+    'Asia/Dubai (GST)',
+    'Europe/London (GMT)',
+    'Europe/Paris (CET)',
+    'America/New_York (EST)',
+    'America/Los_Angeles (PST)',
+    'Asia/Singapore (SGT)',
+    'Australia/Sydney (AEST)',
+    'UTC',
+  ];
+  const [callFormLoading, setCallFormLoading] = useState(false);
+  const [enquireFormLoading, setEnquireFormLoading] = useState(false);
 
   useEffect(() => {
     // No need to setSlug, just use slug directly
@@ -454,6 +471,8 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
           name: form.name,
           email: form.email,
           phone: form.phone,
+          address: form.address,
+          property: propertyData.name,
           currency: 'AED',
         }),
       });
@@ -468,14 +487,17 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
     }
   };
 
-  const handleCallInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCallInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setCallForm({ ...callForm, [e.target.name]: e.target.value });
   };
 
   const handleCallSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setCallFormSuccess('');
+    setCallFormError('');
+    setCallFormLoading(true);
     try {
-      await fetch('/api/send-service-inquiry', {
+      const res = await fetch('/api/send-service-inquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -484,9 +506,17 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
           ...callForm,
         }),
       });
-      setShowCallModal(false);
+      if (!res.ok) throw new Error('Failed to send. Please try again.');
+      setCallFormSuccess('Your call booking was submitted successfully!');
+      setTimeout(() => {
+        setShowCallModal(false);
+        setCallForm({ name: '', date: '', time: '', timezone: '', country: '', email: '', phone: '' });
+        setCallFormSuccess('');
+      }, 2000);
     } catch (err) {
-      // Optionally show an error message
+      setCallFormError('There was an error submitting your request. Please try again.');
+    } finally {
+      setCallFormLoading(false);
     }
   };
 
@@ -505,8 +535,11 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
   const handleEnquireBack = () => setEnquireStep(s => Math.max(s - 1, 1));
   const handleEnquireSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setEnquireFormSuccess('');
+    setEnquireFormError('');
+    setEnquireFormLoading(true);
     try {
-      await fetch('/api/send-service-inquiry', {
+      const res = await fetch('/api/send-service-inquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -515,10 +548,31 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
           ...enquireForm,
         }),
       });
-      setShowEnquireModal(false);
-      setEnquireStep(1);
+      if (!res.ok) throw new Error('Failed to send. Please try again.');
+      setEnquireFormSuccess('Your enquiry was submitted successfully!');
+      setTimeout(() => {
+        setShowEnquireModal(false);
+        setEnquireStep(1);
+        setEnquireForm({
+          name: '',
+          email: '',
+          phone: '',
+          contactMethod: 'WhatsApp',
+          inIndia: '',
+          country: '',
+          visitType: '',
+          date: '',
+          time: '',
+          buyTimeline: '',
+          payNow: false,
+          paymentMethod: '',
+        });
+        setEnquireFormSuccess('');
+      }, 2000);
     } catch (err) {
-      // Optionally show an error message
+      setEnquireFormError('There was an error submitting your enquiry. Please try again.');
+    } finally {
+      setEnquireFormLoading(false);
     }
   };
 
@@ -659,7 +713,30 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
               <FaPhoneAlt className="text-3xl text-purple-400 mb-2" />
             </div>
             <h2 className="text-2xl font-bold mb-6 text-center">Book a Video Call Slot</h2>
+            {callFormSuccess && <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-sm text-center">{callFormSuccess}</div>}
+            {callFormError && <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-sm text-center">{callFormError}</div>}
             <form onSubmit={handleCallSubmit} className="flex flex-col gap-4">
+              <label className="text-sm text-gray-300">Your Name</label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Full Name"
+                value={callForm.name}
+                onChange={handleCallInputChange}
+                className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
+                required
+              />
+              <label className="text-sm text-gray-300">Country</label>
+              <select
+                name="country"
+                value={callForm.country}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleCallInputChange(e)}
+                className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
+                required
+              >
+                <option value="">Select Country</option>
+                {countryList.map(c => <option key={c} value={c}>{c}</option>)}
+              </select>
               <label className="text-sm text-gray-300">Select Date</label>
               <input
                 type="date"
@@ -670,14 +747,26 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                 required
               />
               <label className="text-sm text-gray-300">Select Time</label>
-              <input
-                type="time"
-                name="time"
-                value={callForm.time}
-                onChange={handleCallInputChange}
-                className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer"
-                required
-              />
+              <div className="flex gap-2">
+                <input
+                  type="time"
+                  name="time"
+                  value={callForm.time}
+                  onChange={handleCallInputChange}
+                  className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer w-1/2"
+                  required
+                />
+                <select
+                  name="timezone"
+                  value={callForm.timezone}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleCallInputChange(e)}
+                  className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-1/2"
+                  required
+                >
+                  <option value="">Timezone</option>
+                  {timezoneList.map(tz => <option key={tz} value={tz}>{tz}</option>)}
+                </select>
+              </div>
               <label className="text-sm text-gray-300">Your Phone Number</label>
               <input
                 type="tel"
@@ -698,8 +787,15 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                 className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
                 required
               />
-              <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg">
-                Book Video Call
+              <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg" disabled={callFormLoading}>
+                {callFormLoading ? (
+                  <div className="flex items-center justify-center gap-2">
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    Submitting...
+                  </div>
+                ) : (
+                  'Book Video Call'
+                )}
               </button>
             </form>
           </div>
@@ -714,6 +810,8 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
             <div className="flex flex-col items-center mb-4">
               <Image src="/logos/logo.png" alt="3rdshade Logo" width={120} height={40} className="mb-2" />
             </div>
+            {enquireFormSuccess && <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-sm text-center">{enquireFormSuccess}</div>}
+            {enquireFormError && <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-sm text-center">{enquireFormError}</div>}
             <form onSubmit={handleEnquireSubmit} className="flex flex-col gap-6">
               {/* Stepper */}
               <div className="flex justify-center gap-2 mb-4">
@@ -788,7 +886,16 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                 {enquireStep < 2 ? (
                   <button type="button" onClick={handleEnquireNext} className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold transition-all duration-200 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg">Next</button>
                 ) : (
-                  <button type="submit" className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold transition-all duration-200 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg">Submit</button>
+                  <button type="submit" className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold transition-all duration-200 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg" disabled={enquireFormLoading}>
+                    {enquireFormLoading ? (
+                      <div className="flex items-center justify-center gap-2">
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        Submitting...
+                      </div>
+                    ) : (
+                      'Submit'
+                    )}
+                  </button>
                 )}
               </div>
             </form>

@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 
 export async function POST(req) {
   const data = await req.json();
-  const { name, email, service, message } = data;
+  const { type = 'enquiry', name = '', email = '', phone = '', address = '', property = '', service = '', message = '', contactMethod = '', inIndia = '', country = '', visitType = '', date = '', time = '', buyTimeline = '' } = data;
 
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -15,59 +15,125 @@ export async function POST(req) {
     },
   });
 
+  let adminSubject = 'New Service Inquiry';
+  let userSubject = 'Thank you for contacting 3rdshade.in';
+  let adminHtml = '';
+  let userHtml = '';
+
+  if (type === 'paynow') {
+    adminSubject = `New Pay Now Submission${property ? ' - ' + property : ''}`;
+    userSubject = `Thank you for your interest in ${property || 'our property'} - 3rdshade.in`;
+    adminHtml = `
+      <h2>Pay Now Submission</h2>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Address:</strong> ${address}</p>
+      <p><strong>Property:</strong> ${property}</p>
+    `;
+    userHtml = `
+      <h2>Thank you for your interest in ${property || 'our property'}</h2>
+      <p>Dear ${name},</p>
+      <p>We have received your details and will contact you soon.</p>
+      <h3>Your submission details:</h3>
+      <p><strong>Property:</strong> ${property}</p>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Address:</strong> ${address}</p>
+      <p>Best regards,<br>Team 3rdshade.in</p>
+    `;
+  } else if (type === 'call') {
+    adminSubject = `New Call Booking${property ? ' - ' + property : ''}`;
+    userSubject = `Your call booking with 3rdshade.in`;
+    adminHtml = `
+      <h2>Call Booking</h2>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Country:</strong> ${country}</p>
+      <p><strong>Date:</strong> ${date}</p>
+      <p><strong>Time:</strong> ${time}</p>
+      <p><strong>Timezone:</strong> ${data.timezone || ''}</p>
+      <p><strong>Property:</strong> ${property}</p>
+    `;
+    userHtml = `
+      <h2>Your call booking is received</h2>
+      <p>Dear ${name},</p>
+      <p>Thank you for booking a call with us. We will contact you at your chosen time.</p>
+      <h3>Booking details:</h3>
+      <p><strong>Country:</strong> ${country}</p>
+      <p><strong>Date:</strong> ${date}</p>
+      <p><strong>Time:</strong> ${time}</p>
+      <p><strong>Timezone:</strong> ${data.timezone || ''}</p>
+      <p><strong>Property:</strong> ${property}</p>
+      <p>Best regards,<br>Team 3rdshade.in</p>
+    `;
+  } else {
+    // enquiry or service enquiry
+    adminSubject = `New Property Enquiry${property ? ' - ' + property : ''}`;
+    userSubject = `Thank you for your enquiry at 3rdshade.in`;
+    let servicesHtml = '';
+    if (Array.isArray(data.services) && data.services.length > 0) {
+      servicesHtml = `<p><strong>Selected Services:</strong></p><ul>` + data.services.map(s => `<li>${s}</li>`).join('') + `</ul>`;
+    }
+    adminHtml = `
+      <h2>Property/Service Enquiry</h2>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      ${servicesHtml}
+      <p><strong>Contact Method:</strong> ${contactMethod}</p>
+      <p><strong>In India:</strong> ${inIndia}</p>
+      <p><strong>Country:</strong> ${country}</p>
+      <p><strong>Visit Type:</strong> ${visitType}</p>
+      <p><strong>Date:</strong> ${date}</p>
+      <p><strong>Time:</strong> ${time}</p>
+      <p><strong>Buy Timeline:</strong> ${buyTimeline}</p>
+      <p><strong>Property:</strong> ${property}</p>
+      <p><strong>Message:</strong> ${message}</p>
+    `;
+    userHtml = `
+      <h2>Thank you for your enquiry</h2>
+      <p>Dear ${name},</p>
+      <p>We have received your enquiry and will get back to you soon.</p>
+      <h3>Your submission details:</h3>
+      ${servicesHtml}
+      <p><strong>Property:</strong> ${property}</p>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Contact Method:</strong> ${contactMethod}</p>
+      <p><strong>Country:</strong> ${country}</p>
+      <p><strong>Visit Type:</strong> ${visitType}</p>
+      <p><strong>Date:</strong> ${date}</p>
+      <p><strong>Time:</strong> ${time}</p>
+      <p><strong>Buy Timeline:</strong> ${buyTimeline}</p>
+      <p><strong>Message:</strong> ${message}</p>
+      <p>Best regards,<br>Team 3rdshade.in</p>
+    `;
+  }
+
   try {
     // Send notification email to admin
     await transporter.sendMail({
       from: `"3rdshade.in" <${process.env.GMAIL_USER}>`,
       to: 'info@3rdshade.in',
-      subject: 'New Service Inquiry',
-      text: `
-        Name: ${name}
-        Email: ${email}
-        Service: ${service}
-        Message: ${message}
-      `,
-      html: `
-        <h2>Service Inquiry</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Service:</strong> ${service}</p>
-        <p><strong>Message:</strong> ${message}</p>
-      `,
+      subject: adminSubject,
+      html: adminHtml,
     });
 
     // Send confirmation email to user
     await transporter.sendMail({
       from: `"3rdshade.in" <${process.env.GMAIL_USER}>`,
       to: email,
-      subject: 'Thank you for contacting 3rdshade.in',
-      text: `
-        Dear ${name},
-
-        Thank you for reaching out to 3rdshade.in. We have received your inquiry and our team will get back to you shortly.
-
-        Here's a summary of your submission:
-        Service: ${service}
-        
-        We appreciate your interest in our services.
-
-        Best regards,
-        Team 3rdshade.in
-      `,
-      html: `
-        <h2>Thank you for contacting 3rdshade.in</h2>
-        <p>Dear ${name},</p>
-        <p>Thank you for reaching out to 3rdshade.in. We have received your inquiry and our team will get back to you shortly.</p>
-        <h3>Your submission details:</h3>
-        <p><strong>Service:</strong> ${service}</p>
-        <p>We appreciate your interest in our services.</p>
-        <p>Best regards,<br>Team 3rdshade.in</p>
-      `,
+      subject: userSubject,
+      html: userHtml,
     });
 
-    return new Response(JSON.stringify({ message: 'Emails sent successfully' }), { status: 200 });
+    return NextResponse.json({ message: 'Emails sent successfully' }, { status: 200 });
   } catch (error) {
     console.error('Error sending email:', error);
-    return new Response(JSON.stringify({ message: 'Error sending email', error: error.message }), { status: 500 });
+    return NextResponse.json({ message: 'Error sending email', error: error.message }, { status: 500 });
   }
 } 
