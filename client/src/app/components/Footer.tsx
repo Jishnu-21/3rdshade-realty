@@ -36,14 +36,14 @@ const Footer = () => (
           <div>
             <h4 className="text-white font-semibold mb-3">Contact</h4>
             <ul className="space-y-2 text-sm">
-              <li>INFO@3RDSHADE.IN</li>
+              <li>info@3rdshade.in</li>
               <li>+91 8600181189</li>
             </ul>
           </div>
         </div>
       </div>
       <div className="text-center text-xs text-neutral-500 pt-6">
-        &copy; 2024 Elite Luxury Real Estate. All rights reserved.
+        &copy; 2025 3rdshade Realty. All rights reserved.
       </div>
     </div>
   </footer>
