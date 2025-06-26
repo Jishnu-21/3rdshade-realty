@@ -3,7 +3,7 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { FaSwimmer, FaCar, FaConciergeBell, FaDumbbell, FaShieldAlt, FaSpa, FaMapMarkerAlt, FaTrain, FaPlane, FaShoppingBag, FaCheckCircle, FaCalendarAlt, FaPhoneAlt, FaFileDownload, FaTimes, FaClock, FaFilm, FaFire, FaMountain, FaDog, FaTableTennis, FaCouch, FaTint, FaChild, FaHotTub, FaHeartbeat, FaBook, FaMusic, FaBriefcase, FaRoad, FaGamepad, FaStore, FaTheaterMasks, FaHotel, FaSchool, FaTree, FaLandmark, FaWater, FaGolfBall, FaMosque, FaWalking, FaLeaf, FaShip, FaGlassCheers, FaFeather, FaAppleAlt, FaWindowMaximize, FaDoorOpen, FaCogs, FaBed, FaRulerCombined, FaLayerGroup, FaBasketballBall, FaChess, FaUser, FaEnvelope } from 'react-icons/fa';
+import { FaSwimmer, FaCar, FaConciergeBell, FaDumbbell, FaShieldAlt, FaSpa, FaMapMarkerAlt, FaTrain, FaPlane, FaShoppingBag, FaCheckCircle, FaCalendarAlt, FaPhoneAlt, FaFileDownload, FaTimes, FaClock, FaFilm, FaFire, FaMountain, FaDog, FaTableTennis, FaCouch, FaTint, FaChild, FaHotTub, FaHeartbeat, FaBook, FaMusic, FaBriefcase, FaRoad, FaGamepad, FaStore, FaTheaterMasks, FaHotel, FaSchool, FaTree, FaLandmark, FaWater, FaGolfBall, FaMosque, FaWalking, FaLeaf, FaShip, FaGlassCheers, FaFeather, FaAppleAlt, FaWindowMaximize, FaDoorOpen, FaCogs, FaBed, FaRulerCombined, FaLayerGroup, FaBasketballBall, FaChess, FaUser, FaEnvelope, FaParking } from 'react-icons/fa';
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import { notFound } from 'next/navigation';
@@ -120,7 +120,7 @@ const allProperties = [
       reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727087/azizi-venice_gsscns.mp4',
       images: [
         'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750938711/azizi3_hyudc7.webp',
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750938711/azizi1_wtf7m6.webp',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750938712/azizi4_d3cmug.jpg',
         'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750938711/azizi1_wtf7m6.webp',
       ],
       amenities: [
@@ -148,11 +148,11 @@ const allProperties = [
       description: 'Wasl 1 Residences presents 1 to 3 bedroom apartments in a prime location, designed for seamless city living with access to luxury amenities and lush green surroundings. The development combines modern comfort with recreational spaces, offering residents a peaceful yet connected lifestyle in the heart of Dubai.',
       price: '1,500,000',
       roi: '-',
-      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760859/wasl3_xo1dqc.jpg',
+      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750944977/wasl_ssorua.webp',
       images: [
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760793/wasl1_gqojoi.jpg',
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760857/wasl2_ylbm2z.jpg',
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760856/wasl4_gkv7rf.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750944977/wasl2_htj8vz.webp',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750944976/wasl1_qfqnhh.webp',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750944976/wasl3_kchou4.webp',
       ],
       amenities: [
         { icon: <FaSwimmer />, name: 'Swimming Pool' },
@@ -182,11 +182,11 @@ const allProperties = [
       description: 'Greenridge at Emaar South features spacious 3 and 4-bedroom townhouses within a well-connected, green-focused community. Surrounded by a championship golf course, landscaped parks, and family-friendly amenities, this development blends suburban calm with smart city planning - ideal for those seeking space, privacy, and proximity to key conveniences.',
       price: '2,800,000',
       roi: '-',
-      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760790/emaar-south4_x2dypb.jpg',
+      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954173/emaar-south5_unimlb.jpg',
       images: [
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760797/emaar-south3_hq2hmi.jpg',
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760800/emaar-south1_ty362p.jpg',
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760798/emaar-south2_vpucjn.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954172/emaar-south1_utocb5.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954176/emaar-south2_gevmgc.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954175/emaar-south4_nlhy6y.jpg',
       ],
       amenities: [
         { icon: <FaGolfBall />, name: 'Golf Course & Clubhouse' },
@@ -214,11 +214,11 @@ const allProperties = [
       description: `The Valley's Avena collection features 4-bedroom villas with expansive layouts and direct access to green, open landscapes. With a massive 250,000 sq.m. central park and a focus on sustainability, this community offers a quiet, family-oriented lifestyle framed by nature, modern infrastructure, and resort-inspired design.`,
       price: '4,370,000',
       roi: '-',
-      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760807/valey3_icaox3.jpg',
+      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954189/avena1_z9mxhm.webp',
       images: [
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760802/valey2_bnvsgt.jpg',
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760804/valey1_hoegph.jpg',
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760811/valey4_vinwrs.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954181/avena2_tbbskh.webp',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954182/avena4_q8ntqy.webp',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954183/avena3_ymlrxs.webp',
       ],
       amenities: [
         { icon: <FaTree />, name: '250,000 sq.m. Central Park' },
@@ -308,14 +308,14 @@ const allProperties = [
     {
       slug: 'belgravia-gardens',
       name: 'Belgravia Gardens',
-      description: 'Belgravia Gardens features studio to 3-bedroom apartments with optional office layouts, offering a flexible living experience in a refined residential community. With urban beach access, lagoon views, and a fully-equipped clubhouse, this development is designed for residents seeking lifestyle, leisure, and smart indoor-outdoor connectivity.',
+      description: 'Belgravia Gardens features studio to 3-bedroom apartments with optional office layouts, offering a flexible living experience in a refined residential community. With urban beach access, lagoon views, and a fully-equipped clubhouse, this development is designed for residents seeking lifestyle.',
       price: '1,200,000',
       roi: '-',
-      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750856353/belgravia4_coh1y6.jpg',
+      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954174/belgravia-garden_rbcaj8.jpg',
       images: [
        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750856356/belgravia3_liuq6o.jpg',
        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750856353/belgravia1_hmsnw9.jpg',
-       'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750856353/belgravia4_coh1y6.jpg',
+       'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954180/belgravia-garden2_meloqa.jpg',
       ],
       amenities: [
         { icon: <FaSpa />, name: 'Leisure & Wellness' },
@@ -326,9 +326,6 @@ const allProperties = [
         { icon: <FaChild />, name: "Children's Pool & Kids' Play Area" },
         { icon: <FaHotel />, name: 'Clubhouse Pavilion' },
         { icon: <FaFilm />, name: 'Cinema Room' },
-        { icon: <FaGamepad />, name: 'Game Room' },
-        { icon: <FaStore />, name: 'Clubhouse Gallery' },
-        { icon: <FaCouch />, name: 'Clubhouse Majlis' },
       ],
       location: {
         address: 'Belgravia Gardens, Dubai',
@@ -341,7 +338,7 @@ const allProperties = [
         ],
       },
       goldenVisa: false,
-      relatedSlugs: [],
+      relatedSlugs: ['sobha-orbis', 'pierside-marina-residences', 'timez-by-danube', 'belgrove-residences'],
     },
     {
       slug: 'sobha-orbis',
@@ -376,7 +373,7 @@ const allProperties = [
         ],
       },
       goldenVisa: false,
-      relatedSlugs: [],
+      relatedSlugs: ['belgravia-gardens', 'pierside-marina-residences', 'timez-by-danube', 'belgrove-residences'],
     },
     {
       slug: 'pierside-marina-residences',
@@ -384,11 +381,11 @@ const allProperties = [
       description: `Pierside Marina Residences offers 1 to 3-bedroom luxury apartments set on an exclusive island destination by Sobha Realty. Designed for those who seek privacy, views, and a curated lifestyle, the development combines yacht-side living with resort-class wellness, retail, and leisure experiences. With sweeping sea views, smart home features, and refined interiors, it's where elevated living meets ocean serenity.`,
       price: '1,000,000',
       roi: '-',
-      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1750760807/placeholder-video.mp4', // Placeholder video
+      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954167/pierside2_qhivsz.webp', // Placeholder video
       images: [
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760802/placeholder1.jpg',
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760804/placeholder2.jpg',
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760811/placeholder3.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954168/pierside3_pfbnzz.webp',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954167/pierside4_gg4wbz.webp',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954194/pierside1_h2yck8.webp',
       ],
       amenities: [
         { icon: <FaSwimmer />, name: 'Infinity Marina Pool with Seaview Deck' },
@@ -410,7 +407,376 @@ const allProperties = [
         ],
       },
       goldenVisa: false,
-      relatedSlugs: [],
+      relatedSlugs: ['belgravia-gardens', 'sobha-orbis', 'timez-by-danube', 'belgrove-residences'],
+    },
+    {
+      slug: 'timez-by-danube',
+      name: 'Timez by Danube – Dubai Silicon Oasis',
+      description: `Timez by Danube offers studio to 2-bedroom convertible apartments in the heart of Dubai Silicon Oasis. With smart layouts that adapt as you grow—like studios that transform into 1BHKs—this project blends flexibility with upscale living. From private pools in select homes to 40+ curated amenities, it's an ideal choice for end-users and investors seeking affordable luxury with high ROI potential.`,
+      price: '200,000',
+      roi: 'High (Expected)',
+      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954167/timez4_zg1v01.jpg', // Placeholder video
+      images: [
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954168/timez1_lbbzmg.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954167/timez3_p08h5d.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954171/timez2_xnn2eb.jpg',
+      ],
+      amenities: [
+        { icon: <FaCogs />, name: 'Convertible Studio & 1BHK Units' },
+        { icon: <FaSwimmer />, name: 'Infinity Pool with Jacuzzi & Aquatic Gym' },
+        { icon: <FaLeaf />, name: 'Japanese Garden & Open-Air Cinema' },
+        { icon: <FaTableTennis />, name: 'Paddle Court, Cricket Pitch & Mini Golf' },
+        { icon: <FaChild />, name: "Kids' Oasis, Splash Pad & Trampoline Zone" },
+        { icon: <FaGlassCheers />, name: 'Indoor Party Lounge & BBQ Area' },
+        { icon: <FaDumbbell />, name: 'Outdoor Gym, Zumba Ring & Yoga Deck' },
+      ],
+      location: {
+        address: 'Dubai Silicon Oasis, UAE',
+        city: 'UAE',
+        points: [
+          { icon: <FaTrain />, name: 'Metro: Proposed Station – 3 min' },
+          { icon: <FaPlane />, name: 'Airport: Dubai Intl – 14 km (≈14 min drive)' },
+          { icon: <FaShoppingBag />, name: 'Mall: Silicon Central Mall – 2 min' },
+          { icon: <FaLandmark />, name: 'Nearby Landmark: Global Village – 7 min' },
+        ],
+      },
+      goldenVisa: false,
+      relatedSlugs: ['belgravia-gardens', 'sobha-orbis', 'pierside-marina-residences', 'belgrove-residences'],
+    },
+    {
+      slug: 'belgrove-residences',
+      name: 'Belgrove Residences – Mohammed Bin Rashid City (MBR City)',
+      description: `Belgrove Residences offers 1 to 3-bedroom apartments that blend architectural precision with the serenity of nature. Set in MBR City and overlooking the Ras Al Khor Wildlife Sanctuary, the project creates a peaceful escape within a vibrant urban core. Designed with sacred geometry and natural balance.`,
+      price: '350,000',
+      roi: '-',
+      reelVideoUrl: '/images/properties/belgrove4.jpg', // Placeholder video
+      images: [
+        '/images/properties/belgrove1.jpg',
+        '/images/properties/belgrove2.jpg',
+        '/images/properties/belgrove3.jpg',
+      ],
+      amenities: [
+        { icon: <FaSwimmer />, name: 'Infinity Pool with Flamingo Views' },
+        { icon: <FaDumbbell />, name: 'Indoor & Outdoor Fitness + Yoga Studios' },
+        { icon: <FaFilm />, name: 'Outdoor Cinema & Clubhouse Lounge' },
+        { icon: <FaGlassCheers />, name: 'BBQ Pods, Picnic Zones & Pet Wash Area' },
+        { icon: <FaChild />, name: 'Kids\' Play Area + Daycare' },
+        { icon: <FaMountain />, name: 'Rooftop Observatory & Flamingo Lounge' },
+        { icon: <FaStore />, name: 'Retail + Dining Pavilion on Site' },
+      ],
+      location: {
+        address: 'MBR City, Dubai',
+        city: 'Dubai, UAE',
+        points: [
+          { icon: <FaTrain />, name: 'Metro: Proposed Dubai Metro – 2 min' },
+          { icon: <FaPlane />, name: 'Airport: Dubai Intl – 9 km (≈9 min drive)' },
+          { icon: <FaShoppingBag />, name: 'Mall: Dubai Mall – 10 min' },
+          { icon: <FaFeather />, name: 'Nearby Landmark: Ras Al Khor Wildlife Sanctuary – 6 min' },
+        ],
+      },
+      goldenVisa: false,
+      relatedSlugs: ['belgravia-gardens', 'pierside-marina-residences', 'timez-by-danube', 'claydon-house'],
+    },
+    {
+      slug: 'claydon-house',
+      name: 'Claydon House – Mohammed Bin Rashid City (MBR City)',
+      description: `Claydon House offers 1 to 4-bedroom waterfront apartments thoughtfully designed for refined living in the heart of MBR City. Surrounded by nature and connected to urban life, the residences combine spacious layouts, premium finishes, and panoramic views of Ras Al Khor and Downtown Dubai.`,
+      price: '450,000',
+      roi: '-',
+      reelVideoUrl: '/images/properties/claydon1.jpg', // Placeholder video
+      images: [
+        '/images/properties/claydon2.jpg',
+        '/images/properties/claydon4.jpg',
+        '/images/properties/claydon3.jpg',
+      ],
+      amenities: [
+        { icon: <FaSwimmer />, name: 'Rooftop Infinity Pool with City Views' },
+        { icon: <FaDumbbell />, name: 'State-of-the-Art Fitness Center & Yoga Studio' },
+        { icon: <FaFilm />, name: 'Cinema & Arcade Lounge' },
+        { icon: <FaChild />, name: "Children's Play Zone & Daycare" },
+        { icon: <FaTree />, name: 'Landscaped Gardens & Outdoor Seating' },
+        { icon: <FaCouch />, name: 'Lobby Lounge with Workstations' },
+      ],
+      location: {
+        address: 'MBR City, Dubai',
+        city: 'Dubai, UAE',
+        points: [
+          { icon: <FaTrain />, name: 'Metro: Meydan Metro Line – 1 min' },
+          { icon: <FaPlane />, name: 'Airport: Dubai Intl – 17 km (≈17 min drive)' },
+          { icon: <FaShoppingBag />, name: 'Mall: Dubai Festival City Mall – 12 min' },
+          { icon: <FaFeather />, name: 'Nearby Landmark: Ras Al Khor Wildlife Sanctuary – 5 min' },
+        ],
+      },
+      goldenVisa: false,
+      relatedSlugs: ['ellington-cove', 'mercer-house', 'ocean-house', 'one-river-point'],
+    },
+    {
+      slug: 'ellington-cove',
+      name: 'Ellington Cove – Dubai Islands',
+      description: `Ellington Cove offers studio to 4-bedroom residences along the pristine shores of Dubai Islands. With private beach access and a calm coastal aesthetic, the development merges contemporary architecture with nature-inspired design. From waterfall pools to a beach clubhouse, every space reflects a laid-back rhythm of beachfront living, perfect for those seeking serenity and connection.`,
+      price: '300,000',
+      roi: '-',
+      reelVideoUrl: '/images/properties/cove2.jpg', // Placeholder video
+      images: [
+        '/images/properties/cove1.jpg',
+        '/images/properties/cove3.jpg',
+        '/images/properties/cove4.jpg',
+      ],
+      amenities: [
+        { icon: <FaWater />, name: 'Private Beach with Water Sports Pavilion' },
+        { icon: <FaStore />, name: 'Beachfront Clubhouse with Sunset Terrace' },
+        { icon: <FaSpa />, name: 'Yoga & Fitness Studio Overlooking the Sea' },
+        { icon: <FaSwimmer />, name: 'Leisure Pool, Lap Pool & Waterfall Feature' },
+        { icon: <FaGlassCheers />, name: 'Barbecue Deck & Beach Gardens' },
+        { icon: <FaCouch />, name: 'Lobby Courtyard & Arrival Gardens' },
+        { icon: <FaConciergeBell />, name: 'Dedicated Drop-Off & Concierge Zone' },
+      ],
+      location: {
+        address: 'Dubai Islands, Dubai',
+        city: 'Dubai, UAE',
+        points: [
+          { icon: <FaPlane />, name: 'Airport: Dubai Intl – 18 km (≈20 min drive)' },
+          { icon: <FaShoppingBag />, name: 'Mall: Deira City Centre – 15 min' },
+          { icon: <FaWater />, name: 'Nearby Landmark: Dubai Beaches – 2 min' },
+        ],
+      },
+      goldenVisa: false,
+      relatedSlugs: ['claydon-house', 'mercer-house', 'ocean-house', 'one-river-point'],
+    },
+    {
+      slug: 'mercer-house',
+      name: 'Mercer House – Jumeirah Lakes Towers (JLT)',
+      description: `Mercer House presents studio to 4-bedroom residences, including penthouses, in one of JLT's most dynamic addresses. Designed for modern urban living, the twin towers combine skyline views, wellness spaces, and high-end leisure with city convenience. From family pools to a rooftop beach club`,
+      price: '350,000',
+      roi: '-',
+      reelVideoUrl: '/images/properties/mercer1.jpg', // Placeholder video
+      images: [
+        '/images/properties/mercer2.jpg',
+        '/images/properties/mercer3.jpg',
+        '/images/properties/mercer4.jpg',
+      ],
+      amenities: [
+        { icon: <FaWater />, name: 'Urban Beach Club with Skyline Views' },
+        { icon: <FaTableTennis />, name: 'Multi-Sports Hall with Padel & Squash Courts' },
+        { icon: <FaSpa />, name: 'Scenic Sauna & Ice Room' },
+        { icon: <FaCouch />, name: 'Clubhouse Lounge & Arcade Zone' },
+        { icon: <FaSwimmer />, name: 'Rooftop & Family Pools' },
+        { icon: <FaDumbbell />, name: 'Fully Equipped Fitness & Wellness Center' },
+        { icon: <FaStore />, name: 'Retail & F&B Spaces on Site' },
+      ],
+      location: {
+        address: 'JLT – Uptown Dubai',
+        city: 'Dubai, UAE',
+        points: [
+          { icon: <FaTrain />, name: 'Metro: DMCC Metro – 3 min' },
+          { icon: <FaPlane />, name: 'Airport: Dubai Intl – 30 min' },
+          { icon: <FaShoppingBag />, name: 'Mall: Dubai Marina Mall – 10 min' },
+          { icon: <FaLandmark />, name: 'Nearby Landmark: Palm Jumeirah – 15 min' },
+        ],
+      },
+      goldenVisa: false,
+      relatedSlugs: ['claydon-house', 'ellington-cove', 'ocean-house', 'one-river-point'],
+    },
+    {
+      slug: 'ocean-house',
+      name: 'Ocean House – Palm Jumeirah',
+      description: `Ocean House offers 2 to 6-bedroom residences, duplexes, and penthouses on the prestigious Palm Jumeirah. Designed for those who seek a one-of-a-kind oceanside lifestyle, the development presents panoramic views of the Burj Al Arab, Marina Skyline, and Arabian Gulf. From wellness retreats to private club lounges, Ocean House blends privacy, luxury, and beachfront beauty in one iconic address.`,
+      price: '4,200,000',
+      roi: '-',
+      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954791/Ocean_House_by_Ellington_-_exterior_nq7nfn.jpg', // Placeholder video
+      images: [
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954755/Ocean_House_by_Ellington_-_Balcony_view_fbjxnv.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954780/Ocean_House_by_Ellington_-_corner_unit_living_room_bwf3e0.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954758/Ocean_House_by_Ellington_-_penthouse_bedroom_vhe1g5.jpg',
+      ],
+      amenities: [
+        { icon: <FaWater />, name: 'Direct Private Beach Access' },
+        { icon: <FaSwimmer />, name: 'Olympic-Size Swimming Pool & Kids Pool' },
+        { icon: <FaSpa />, name: 'Wellness Spa with Infrared Sauna & Salt Cave' },
+        { icon: <FaTint />, name: 'Plunge Pool & Fitness Studio' },
+        { icon: <FaFilm />, name: 'Cinema Room & Games Room' },
+        { icon: <FaCouch />, name: 'Private Clubhouse with Dining Lounge' },
+      ],
+      location: {
+        address: 'Palm Jumeirah, Dubai',
+        city: 'Dubai, UAE',
+        points: [
+          { icon: <FaTrain />, name: 'Metro: Al Khail Metro Station – 10 min' },
+          { icon: <FaPlane />, name: 'Airport: Dubai Intl – 27 min' },
+          { icon: <FaShoppingBag />, name: 'Mall: Nakheel Mall – 8 min' },
+          { icon: <FaLandmark />, name: 'Nearby Landmark: Atlantis The Royal – 6 min' },
+        ],
+      },
+      goldenVisa: false,
+      relatedSlugs: ['claydon-house', 'ellington-cove', 'mercer-house', 'one-river-point'],
+    },
+    {
+      slug: 'one-river-point',
+      name: 'One River Point – Business Bay',
+      description: `Positioned along the Dubai Canal with direct views of Burj Khalifa, One River Point presents luxury living in the heart of Business Bay. The project redefines modern elegance with a sculptural façade, curated amenities, and seamless urban connectivity. Designed for refined lifestyles, this tower is both a landmark and a sanctuary for city dwellers.`,
+      price: '460,000',
+      roi: '-',
+      reelVideoUrl: '/images/properties/orp1.jpg',// Placeholder video
+      images: [
+        '/images/properties/orp2.jpg',
+        '/images/properties/orp3.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954755/One_River_Point_Aerial_View_rzeu25.jpg',
+      ],
+      amenities: [
+        { icon: <FaConciergeBell />, name: 'Hotel-Style Drop-Off & Club Lounge' },
+        { icon: <FaSwimmer />, name: 'Beach Club Pool with Sun Deck' },
+        { icon: <FaFilm />, name: 'Immersive Room & Yoga Studio' },
+        { icon: <FaDumbbell />, name: 'Fitness Centre with Climbing Net' },
+        { icon: <FaWalking />, name: 'Boardwalk Access to Dubai Water Canal' },
+        { icon: <FaChild />, name: 'Kids Play Zone & Adult Leisure Pool' },
+        { icon: <FaCouch />, name: 'Clubhouse, Teens Room & BBQ Deck' },
+        { icon: <FaParking />, name: 'Secure Parking, Landscaped Courtyards' },
+
+      ],
+      location: {
+        address: 'Business Bay, Dubai',
+        city: 'Dubai, UAE',
+        points: [
+          { icon: <FaTrain />, name: 'Metro: Business Bay Station – 5 min' },
+          { icon: <FaPlane />, name: 'Airport: Dubai Intl – 18 min' },
+          { icon: <FaShoppingBag />, name: 'Mall: Dubai Mall – 7 min' },
+        ],
+      },
+      goldenVisa: false,
+      relatedSlugs: ['claydon-house', 'mercer-house', 'ocean-house', 'playa-del-sol'],
+    },
+    {
+      slug: 'playa-del-sol',
+      name: 'Playa Del Sol – Al Marjan Island',
+      description: `Playa Del Sol offers resort-inspired living on the serene shores of Al Marjan Island in Ras Al Khaimah. With studios to 5-bedroom villas, every residence is crafted for elegance, wellness, and panoramic sea views. From private yacht access to lush courtyards and a teens' lounge, it's a complete destination for families, second-home seekers, and investors alike.`,
+      price: '272,000',
+      roi: '-',
+      reelVideoUrl: '/images/properties/psd1.jpg',
+      images: [
+        '/images/properties/psd2.jpg',
+        '/images/properties/psd3.jpg',
+        '/images/properties/psd4.jpeg',
+      ],
+      amenities: [
+        { icon: <FaWater />, name: 'Private Beachfront & Yacht Jetty' },
+        { icon: <FaSwimmer />, name: 'Infinity Pool with Kids Splash Zone' },
+        { icon: <FaDumbbell />, name: 'Fitness Studios (Indoor/Outdoor) & Squash Court' },
+        { icon: <FaSpa />, name: 'Spa Rooms, Sauna & Hair Salon Lounge' },
+        { icon: <FaCouch />, name: 'Clubhouse, Teens Room & BBQ Deck' },
+        { icon: <FaParking />, name: 'Secure Parking, Landscaped Courtyards' },
+        { icon: <FaLeaf />, name: 'Kinetic Garden & Secret Club Room' },
+
+      ],
+      location: {
+        address: 'Al Marjan Island, Ras Al Khaimah',
+        city: 'Ras Al Khaimah, UAE',
+        points: [
+          { icon: <FaPlane />, name: 'Airport: RAK Intl – 34 min' },
+          { icon: <FaShoppingBag />, name: 'Mall: Al Hamra Mall – 12 min' },
+          { icon: <FaLandmark />, name: 'Landmark: Wynn Resort – 5 min' },
+        ],
+      },
+      goldenVisa: false,
+      relatedSlugs: ['the-crestmark', 'the-highgrove', 'the-sanctuary', 'ocean-house'],
+    },
+    {
+      slug: 'the-crestmark',
+      name: 'The Crestmark – Business Bay',
+      description: `With bold design and tranquil detail, The Crestmark offers 189 upscale residences in the heart of Business Bay. From studios to signature penthouses, each space blends greenery, light, and luxury for a balanced urban lifestyle. Direct canal access, serene lounges, and kinetic amenities make The Crestmark a standout for those seeking calm amid the city pulse.`,
+      price: '475,000',
+      roi: '-',
+      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954741/The_Crestmark_-_balcony_view_mlhx9g.jpg', // Placeholder video
+      images: [
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954758/The_Crestmark_-_library_lounge_xcygh9.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954741/The_Crestmark_-_balcony_view_mlhx9g.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954741/The_Crestmark_-_Kidtropolis_i5cjha.jpg',
+      ],
+      amenities: [
+        { icon: <FaWalking />, name: 'Dubai Canal Boardwalk & Lounge Pool' },
+        { icon: <FaSpa />, name: 'Zen Room & Wellness Studio' },
+        { icon: <FaDumbbell />, name: 'Functional Training Zone' },
+        { icon: <FaGamepad />, name: 'Mini Bowling & Arcade Area' },
+        { icon: <FaLeaf />, name: 'Kinetic Garden & Secret Club Room' },
+        { icon: <FaChild />, name: 'Kidtropolis Play World' },
+      ],
+      location: {
+        address: 'Business Bay, Dubai',
+        city: 'Dubai, UAE',
+        points: [
+          { icon: <FaTrain />, name: 'Metro: Business Bay Station – 6 min' },
+          { icon: <FaPlane />, name: 'Airport: DXB – 20 min' },
+          { icon: <FaShoppingBag />, name: 'Mall: Dubai Mall – 9 min' },
+          { icon: <FaLandmark />, name: 'Landmark: Burj Khalifa – 7 min' },
+        ],
+      },
+      goldenVisa: false,
+      relatedSlugs: ['playa-del-sol', 'the-highgrove', 'the-sanctuary', 'ocean-house'],
+    },
+    {
+      slug: 'the-highgrove',
+      name: 'The Highgrove - MBR City',
+      description: `The Highgrove by Ellington Properties redefines modern serenity, offering stylish 1 to 3-bedroom apartments, duplexes, a penthouse, and a sky villa. Nestled in the heart of MBR City and framed by a crystal lagoon, it's designed for those who seek both connection to nature and the sophistication of city life. Contemporary layouts, elegant finishes, and lush surroundings make it a haven for families and professionals alike.`,
+      price: '520,000',
+      roi: '-',
+      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954755/The_Highgrove_-_hero_shot_1_wgkw9p.jpg', // Placeholder video
+      images: [
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954743/The_Highgrove_-_duplex_apartment_wtd5fb.jpg',
+        '/images/properties/highgrove2.jpg',
+        '/images/properties/highgrove1.jpg',
+      ],
+      amenities: [
+        { icon: <FaSwimmer />, name: 'Infinity Lagoon Pool with Canopy' },
+        { icon: <FaWater />, name: 'Crystal Lagoon Access' },
+        { icon: <FaGlassCheers />, name: 'Sky-Dining & Viewing Deck' },
+        { icon: <FaDumbbell />, name: 'Indoor & Outdoor Fitness Studio' },
+        { icon: <FaCouch />, name: 'Clubhouse & Cinema Room' },
+        { icon: <FaChild />, name: 'Kids Play Areas (Indoor & Outdoor)' },
+      ],
+      location: {
+        address: 'MBR City, Dubai',
+        city: 'Dubai, UAE',
+        points: [
+          { icon: <FaTrain />, name: 'Metro: Meydan Line – 6 min' },
+          { icon: <FaPlane />, name: 'Airport: DXB – 15 min' },
+          { icon: <FaShoppingBag />, name: 'Mall: Dubai Mall – 12 min' },
+          { icon: <FaLandmark />, name: 'Landmark: Ras Al Khor Wildlife Sanctuary – 10 min' },
+        ],
+      },
+      goldenVisa: false,
+      relatedSlugs: ['playa-del-sol', 'the-crestmark', 'the-sanctuary', 'ocean-house'],
+    },
+    {
+      slug: 'the-sanctuary',
+      name: 'The Sanctuary – MBR City',
+      description: `The Sanctuary by Ellington is a private villa community nestled beside the tranquil blue lagoon in MBR City. Featuring uninterrupted views of the Burj Khalifa and Downtown Dubai, this premium gated enclave offers exclusive villas with rooftop terraces, private lifts, and automated smart-home systems. Crafted for families who seek privacy without sacrificing access, The Sanctuary blends nature, luxury, and seamless connectivity into a rare lifestyle offering.`,
+      price: '3,500,000',
+      roi: '-',
+      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954196/santuary_w21rmh.jpg', // Placeholder video
+      images: [
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954200/The_Sanctuary_-_Garden_view_fzh8ym.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954742/The_Sanctuary_-_Lagoon_views_kdmjxo.jpg',
+        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954190/The_Sanctuary_-_Living_area_jkmcxr.jpg',
+      ],
+      amenities: [
+        { icon: <FaWater />, name: 'Crystal Lagoon Access' },
+        { icon: <FaTree />, name: 'Private Garden with Pool & Sunken Seating' },
+        { icon: <FaLeaf />, name: 'Zen Courtyards & Rooftop Terrace' },
+        { icon: <FaCogs />, name: 'Home Automation in Every Villa' },
+        { icon: <FaSwimmer />, name: 'Water Activity Zone & Nature Playground' },
+        { icon: <FaConciergeBell />, name: 'Premium Gated Community with Clubhouse' },
+      ],
+      location: {
+        address: 'MBR City, Dubai',
+        city: 'Dubai, UAE',
+        points: [
+          { icon: <FaTrain />, name: 'Metro: Meydan Line – 6 min' },
+          { icon: <FaPlane />, name: 'Airport: DXB – 15 min' },
+          { icon: <FaShoppingBag />, name: 'Mall: Dubai Mall – 12 min' },
+          { icon: <FaLandmark />, name: 'Landmark: Ras Al Khor Wildlife Sanctuary – 10 min' },
+        ],
+      },
+      goldenVisa: false,
+      relatedSlugs: ['playa-del-sol', 'the-crestmark', 'the-highgrove', 'ocean-house'],
     },
   ];
 
@@ -621,108 +987,108 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
       <Header onEnquire={() => setShowEnquireModal(true)} />
       {/* Custom Login/Register Modal */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
-          <div className="bg-gradient-to-br from-purple-900/90 to-black/90 rounded-2xl shadow-2xl p-0 w-full max-w-lg relative animate-fadeIn border border-purple-700/40">
-            <button className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer scale-100 hover:scale-110" onClick={() => setShowModal(false)}>
-              <FaTimes size={22} />
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+          <div className="bg-gradient-to-br from-purple-900/90 to-black/90 rounded-2xl shadow-2xl p-0 w-full max-w-lg relative animate-fadeIn border border-purple-700/40 max-h-[95vh] overflow-y-auto">
+            <button className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer scale-100 hover:scale-110 z-10" onClick={() => setShowModal(false)}>
+              <FaTimes size={20} className="sm:w-[22px] sm:h-[22px]" />
             </button>
-            <div className="flex flex-col items-center pt-8 pb-2 px-8">
-              <Image src="/logos/logo.png" alt="3rdshade Logo" width={120} height={40} className="mb-2" />
-              <h2 className="text-3xl font-extrabold mb-2 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Secure Your Property</h2>
-              <p className="text-gray-300 text-center mb-4 text-sm">Fill in your details to proceed with your interest in <span className="font-bold text-white">{propertyData.name}</span>.</p>
-              <div className="w-full bg-gradient-to-r from-purple-700/60 to-pink-700/60 rounded-xl p-[2px] mb-6">
-                <div className="bg-black/80 rounded-xl p-4 flex flex-col gap-1">
+            <div className="flex flex-col items-center pt-6 sm:pt-8 pb-2 px-4 sm:px-8">
+              <Image src="/logos/logo.png" alt="3rdshade Logo" width={500} height={40} className="mb-2 sm:w-[120px] sm:h-[20px]" />
+              <h2 className="text-2xl sm:text-3xl font-extrabold mb-2 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent px-2">Secure Your Property</h2>
+              <p className="text-gray-300 text-center mb-4 text-xs sm:text-sm px-2">Fill in your details to proceed with your interest in <span className="font-bold text-white">{propertyData.name}</span>.</p>
+              <div className="w-full bg-gradient-to-r from-purple-700/60 to-pink-700/60 rounded-xl p-[2px] mb-4 sm:mb-6">
+                <div className="bg-black/80 rounded-xl p-3 sm:p-4 flex flex-col gap-1">
                   <div className="flex items-center gap-2">
-                    <FaMapMarkerAlt className="text-purple-400" />
-                    <span className="text-white font-semibold text-base">{propertyData.name}</span>
+                    <FaMapMarkerAlt className="text-purple-400 text-sm sm:text-base flex-shrink-0" />
+                    <span className="text-white font-semibold text-sm sm:text-base break-words">{propertyData.name}</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-xs text-gray-400">
+                    <FaMapMarkerAlt className="text-pink-400 mt-0.5 flex-shrink-0" />
+                    <span className="break-words">{propertyData.location.address}</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs text-gray-400">
-                    <FaMapMarkerAlt className="text-pink-400" />
-                    {propertyData.location.address}
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-gray-400">
-                    <FaShoppingBag className="text-pink-400" />
-                    Starting from <span className="text-white font-bold ml-1">AED {propertyData.price}</span>
+                    <FaShoppingBag className="text-pink-400 flex-shrink-0" />
+                    <span>Book now with <span className="text-white font-bold ml-1">AED 2000</span></span>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="px-8 pb-8">
+            <div className="px-4 sm:px-8 pb-6 sm:pb-8">
               {formError && (
-                <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-sm">{formError}</div>
+                <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-xs sm:text-sm break-words">{formError}</div>
               )}
               {formSuccess && (
-                <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-sm">{formSuccess}</div>
+                <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-xs sm:text-sm break-words">{formSuccess}</div>
               )}
               {amountWarning && (
-                <div className="mb-4 p-3 bg-yellow-500/20 border border-yellow-500/50 rounded-lg text-yellow-400 text-sm">{amountWarning}</div>
+                <div className="mb-4 p-3 bg-yellow-500/20 border border-yellow-500/50 rounded-lg text-yellow-400 text-xs sm:text-sm break-words">{amountWarning}</div>
               )}
-              <form onSubmit={handlePayNowSubmit} className="flex flex-col gap-5">
+              <form onSubmit={handlePayNowSubmit} className="flex flex-col gap-4 sm:gap-5">
                 <div className="relative">
-                  <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-lg" />
+                  <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-base sm:text-lg" />
                   <input
                     type="text"
                     name="name"
                     placeholder="Full Name"
                     value={form.name}
                     onChange={handleInputChange}
-                    className="pl-10 pr-4 py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition"
+                    className="pl-10 pr-4 py-2.5 sm:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition text-sm sm:text-base"
                     required
                     disabled={isLoading}
                   />
                 </div>
                 <div className="relative">
-                  <FaEnvelope className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-lg" />
+                  <FaEnvelope className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-base sm:text-lg" />
                   <input
                     type="email"
                     name="email"
                     placeholder="Email Address"
                     value={form.email}
                     onChange={handleInputChange}
-                    className="pl-10 pr-4 py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition"
+                    className="pl-10 pr-4 py-2.5 sm:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition text-sm sm:text-base"
                     required
                     disabled={isLoading}
                   />
                 </div>
                 <div className="relative">
-                  <FaPhoneAlt className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-lg" />
+                  <FaPhoneAlt className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-base sm:text-lg" />
                   <input
                     type="tel"
                     name="phone"
                     placeholder="Phone Number"
                     value={form.phone}
                     onChange={handleInputChange}
-                    className="pl-10 pr-4 py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition"
+                    className="pl-10 pr-4 py-2.5 sm:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition text-sm sm:text-base"
                     required
                     disabled={isLoading}
                   />
                 </div>
                 <div className="relative">
-                  <FaMapMarkerAlt className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-lg" />
+                  <FaMapMarkerAlt className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-base sm:text-lg" />
                   <input
                     type="text"
                     name="address"
                     placeholder="Address"
                     value={form.address}
                     onChange={handleInputChange}
-                    className="pl-10 pr-4 py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition"
+                    className="pl-10 pr-4 py-2.5 sm:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition text-sm sm:text-base"
                     required
                     disabled={isLoading}
                   />
                 </div>
                 <button
                   type="submit"
-                  className={`w-full font-bold py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md text-lg tracking-wide ${
+                  className={`w-full font-bold py-2.5 sm:py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md text-base sm:text-lg tracking-wide ${
                     isLoading
                       ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                      : 'bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:scale-105 hover:shadow-lg'
+                      : 'bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:scale-105 hover:shadow-lg active:scale-95'
                   }`}
                   disabled={isLoading}
                 >
                   {isLoading ? (
                     <div className="flex items-center justify-center gap-2">
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      Submitting...
+                      <span className="text-sm sm:text-base">Submitting...</span>
                     </div>
                   ) : (
                     'Submit'
@@ -734,94 +1100,114 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
         </div>
       )}
       {showCallModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-          <div className="bg-neutral-900 rounded-xl shadow-2xl p-8 w-full max-w-md relative animate-fadeIn">
-            <button className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer scale-100 hover:scale-110" onClick={() => setShowCallModal(false)}>
-              <FaTimes size={20} />
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
+          <div className="bg-neutral-900 rounded-xl shadow-2xl p-4 sm:p-8 w-full max-w-md relative animate-fadeIn max-h-[95vh] overflow-y-auto">
+            <button className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer scale-100 hover:scale-110 z-10" onClick={() => setShowCallModal(false)}>
+              <FaTimes size={18} className="sm:w-5 sm:h-5" />
             </button>
-            <div className="flex flex-col items-center mb-4">
-              <FaPhoneAlt className="text-3xl text-purple-400 mb-2" />
+            <div className="flex flex-col items-center mb-4 sm:mb-6 pt-2">
+              <FaPhoneAlt className="text-2xl sm:text-3xl text-purple-400 mb-2" />
+              <h2 className="text-xl sm:text-2xl font-bold text-center text-white px-2">Book a Video Call Slot</h2>
             </div>
-            <h2 className="text-2xl font-bold mb-6 text-center">Book a Video Call Slot</h2>
-            {callFormSuccess && <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-sm text-center">{callFormSuccess}</div>}
-            {callFormError && <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-sm text-center">{callFormError}</div>}
-            <form onSubmit={handleCallSubmit} className="flex flex-col gap-4">
-              <label className="text-sm text-gray-300">Your Name</label>
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                value={callForm.name}
-                onChange={handleCallInputChange}
-                className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
-                required
-              />
-              <label className="text-sm text-gray-300">Country</label>
-              <select
-                name="country"
-                value={callForm.country}
-                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleCallInputChange(e)}
-                className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
-                required
-              >
-                <option value="">Select Country</option>
-                {countryList.map(c => <option key={c} value={c}>{c}</option>)}
-              </select>
-              <label className="text-sm text-gray-300">Select Date</label>
-              <input
-                type="date"
-                name="date"
-                value={callForm.date}
-                onChange={handleCallInputChange}
-                className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer"
-                required
-              />
-              <label className="text-sm text-gray-300">Select Time</label>
-              <div className="flex gap-2">
+            {callFormSuccess && <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-xs sm:text-sm text-center break-words">{callFormSuccess}</div>}
+            {callFormError && <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-xs sm:text-sm text-center break-words">{callFormError}</div>}
+            <form onSubmit={handleCallSubmit} className="flex flex-col gap-3 sm:gap-4">
+              <div>
+                <label className="text-xs sm:text-sm text-gray-300 block mb-1">Your Name</label>
                 <input
-                  type="time"
-                  name="time"
-                  value={callForm.time}
+                  type="text"
+                  name="name"
+                  placeholder="Full Name"
+                  value={callForm.name}
                   onChange={handleCallInputChange}
-                  className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer w-1/2"
+                  className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-sm sm:text-base"
                   required
                 />
+              </div>
+              <div>
+                <label className="text-xs sm:text-sm text-gray-300 block mb-1">Country</label>
                 <select
-                  name="timezone"
-                  value={callForm.timezone}
+                  name="country"
+                  value={callForm.country}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleCallInputChange(e)}
-                  className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-1/2"
+                  className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-sm sm:text-base"
                   required
                 >
-                  <option value="">Timezone</option>
-                  {timezoneList.map(tz => <option key={tz} value={tz}>{tz}</option>)}
+                  <option value="">Select Country</option>
+                  {countryList.map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
               </div>
-              <label className="text-sm text-gray-300">Your Phone Number</label>
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Phone (with country code)"
-                value={callForm.phone}
-                onChange={handleCallInputChange}
-                className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
-                required
-              />
-              <label className="text-sm text-gray-300">Your Email</label>
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={callForm.email}
-                onChange={handleCallInputChange}
-                className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
-                required
-              />
-              <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg" disabled={callFormLoading}>
+              <div>
+                <label className="text-xs sm:text-sm text-gray-300 block mb-1">Select Date</label>
+                <input
+                  type="date"
+                  name="date"
+                  value={callForm.date}
+                  onChange={handleCallInputChange}
+                  className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer w-full text-sm sm:text-base"
+                  required
+                />
+              </div>
+              <div>
+                <label className="text-xs sm:text-sm text-gray-300 block mb-1">Select Time & Timezone</label>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <input
+                    type="time"
+                    name="time"
+                    value={callForm.time}
+                    onChange={handleCallInputChange}
+                    className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer w-full sm:w-1/2 text-sm sm:text-base"
+                    required
+                  />
+                  <select
+                    name="timezone"
+                    value={callForm.timezone}
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleCallInputChange(e)}
+                    className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full sm:w-1/2 text-sm sm:text-base"
+                    required
+                  >
+                    <option value="">Timezone</option>
+                    {timezoneList.map(tz => <option key={tz} value={tz}>{tz}</option>)}
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label className="text-xs sm:text-sm text-gray-300 block mb-1">Your Phone Number</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone (with country code)"
+                  value={callForm.phone}
+                  onChange={handleCallInputChange}
+                  className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-sm sm:text-base"
+                  required
+                />
+              </div>
+              <div>
+                <label className="text-xs sm:text-sm text-gray-300 block mb-1">Your Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={callForm.email}
+                  onChange={handleCallInputChange}
+                  className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-sm sm:text-base"
+                  required
+                />
+              </div>
+              <button 
+                type="submit" 
+                className={`w-full font-bold py-2.5 sm:py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md text-sm sm:text-base ${
+                  callFormLoading 
+                    ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
+                    : 'bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:scale-105 hover:shadow-lg active:scale-95'
+                }`}
+                disabled={callFormLoading}
+              >
                 {callFormLoading ? (
                   <div className="flex items-center justify-center gap-2">
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    Submitting...
+                    <span className="text-sm sm:text-base">Submitting...</span>
                   </div>
                 ) : (
                   'Book Video Call'
@@ -945,7 +1331,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                   );
                 } else {
                   return (
-                    <Image src={mainMedia.src} alt="Property Image" fill className="object-cover" />
+                    <Image src={mainMedia.src} alt="Property Image" fill className="object-fit-contain" />
                   );
                 }
               })()}
@@ -979,7 +1365,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                   onClick={() => setMainMedia({ type: 'image', src: img })}
                 >
                   {img && (
-                    <Image src={img} alt={`Thumbnail ${idx + 1}`} fill className="object-cover" />
+                    <Image src={img} alt={`Thumbnail ${idx + 1}`} fill className="object-fit-contain" />
                   )}
                 </div>
               ))}

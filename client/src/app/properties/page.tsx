@@ -184,8 +184,8 @@ const allProperties = [
     location: 'Sobha Siniya Island, UAE',
     price: 'Starting from $1,000,000',
     roi: '-',
-    reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1750760807/placeholder-video.mp4', // Placeholder video
-    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760802/placeholder1.jpg', // Placeholder image
+    reelVideoUrl: '', // Placeholder video
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954167/pierside2_qhivsz.webp', // Placeholder image
     beds: 1,
     baths: 0,
     sqft: 'N/A',
@@ -200,6 +200,253 @@ const allProperties = [
       'Open-Air Cinema & Cultural Lawn',
     ],
     description: `1 - 3 Bedroom Luxury Apartments | Starting from $1,000,000\nPierside Marina Residences offers 1 to 3-bedroom luxury apartments set on an exclusive island destination by Sobha Realty. Designed for those who seek privacy, views, and a curated lifestyle, the development combines yacht-side living with resort-class wellness, retail, and leisure experiences. With sweeping sea views, smart home features, and refined interiors, it's where elevated living meets ocean serenity.\n\nPremium Amenities: Infinity Marina Pool with Seaview Deck, Private Yacht Mooring & Marina Club, Smart-Home Ready Furnished Residences, Golf Course with Waterfront Views, Luxury Retail & Fine Dining Promenade, Wellness Spa, Gym & Yoga Deck, Open-Air Cinema & Cultural Lawn.\n\nPrime Location: Sobha Siniya Island, UAE. Metro: Ras Al Khaimah Bus Terminal – 16 km (≈20 min drive). Airport: Dubai International – 80 km (≈50 min drive). Mall: Marina Residences Mall – Onsite. Nearby Landmark: Private Yacht Club – Walking Distance.`,
+  },
+  {
+    id: 13,
+    name: 'Timez by Danube',
+    location: 'Dubai Silicon Oasis, UAE',
+    price: 'Starting from $200,000',
+    roi: 'High (Expected)',
+    reelVideoUrl: '', // Placeholder video
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954167/timez4_zg1v01.jpg', // Placeholder image
+    beds: 0,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [
+      'Convertible Studio & 1BHK Units',
+      'Infinity Pool with Jacuzzi & Aquatic Gym',
+      'Japanese Garden & Open-Air Cinema',
+      'Paddle Court, Cricket Pitch & Mini Golf',
+      "Kids' Oasis, Splash Pad & Trampoline Zone",
+      'Indoor Party Lounge & BBQ Area',
+      'Outdoor Gym, Zumba Ring & Yoga Deck',
+    ],
+    description: `Studio to 2 Bedroom Convertible Apartments | Starting from $200,000\nTimez by Danube offers studio to 2-bedroom convertible apartments in the heart of Dubai Silicon Oasis. With smart layouts that adapt as you grow—like studios that transform into 1BHKs—this project blends flexibility with upscale living. From private pools in select homes to 40+ curated amenities, it's an ideal choice for end-users and investors seeking affordable luxury with high ROI potential.\n\nPremium Amenities: Convertible Studio & 1BHK Units, Infinity Pool with Jacuzzi & Aquatic Gym, Japanese Garden & Open-Air Cinema, Paddle Court, Cricket Pitch & Mini Golf, Kids' Oasis, Splash Pad & Trampoline Zone, Indoor Party Lounge & BBQ Area, Outdoor Gym, Zumba Ring & Yoga Deck.\n\nPrime Location: Dubai Silicon Oasis, UAE. Metro: Proposed Station – 3 min. Airport: Dubai Intl – 14 km (≈14 min drive). Mall: Silicon Central Mall – 2 min. Nearby Landmark: Global Village – 7 min.`,
+  },
+  {
+    id: 14,
+    name: 'Belgrove Residences',
+    location: 'MBR City, Dubai',
+    price: 'Starting from $350,000',
+    roi: '-',
+    reelVideoUrl: '', // Placeholder video
+    image: '/images/properties/belgrove4.jpg', // Placeholder image
+    beds: 0,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [
+      'Infinity Pool with Flamingo Views',
+      'Indoor & Outdoor Fitness + Yoga Studios',
+      'Outdoor Cinema & Clubhouse Lounge',
+      'BBQ Pods, Picnic Zones & Pet Wash Area',
+      'Kids\' Play Area + Daycare',
+      'Rooftop Observatory & Flamingo Lounge',
+      'Retail + Dining Pavilion on Site',
+    ],
+    description: `1 - 3 Bedroom Apartments | Starting from $350,000\nBelgrove Residences offers 1 to 3-bedroom apartments that blend architectural precision with the serenity of nature. Set in MBR City and overlooking the Ras Al Khor Wildlife Sanctuary, the project creates a peaceful escape within a vibrant urban core. Designed with sacred geometry and natural balance, the community is crafted for families seeking calm, wellness, and meaningful connection to place.\n\nPremium Amenities: Infinity Pool with Flamingo Views, Indoor & Outdoor Fitness + Yoga Studios, Outdoor Cinema & Clubhouse Lounge, BBQ Pods, Picnic Zones & Pet Wash Area, Kids\' Play Area + Daycare, Rooftop Observatory & Flamingo Lounge, Retail + Dining Pavilion on Site.\n\nPrime Location: MBR City, Dubai. Metro: Proposed Dubai Metro – 2 min. Airport: Dubai Intl – 9 km (≈9 min drive). Mall: Dubai Mall – 10 min. Nearby Landmark: Ras Al Khor Wildlife Sanctuary – 6 min.`,
+  },
+  {
+    id: 15,
+    name: 'Claydon House',
+    location: 'MBR City, Dubai',
+    price: 'Starting from $450,000',
+    roi: '-',
+    reelVideoUrl: '', // Placeholder video
+    image: '/images/properties/claydon1.jpg', // Placeholder image
+    beds: 0,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [
+      'Rooftop Infinity Pool with City Views',
+      'State-of-the-Art Fitness Center & Yoga Studio',
+      'Cinema & Arcade Lounge',
+      "Children's Play Zone & Daycare",
+      'Landscaped Gardens & Outdoor Seating',
+      'Lobby Lounge with Workstations',
+      '24/7 Concierge & Secure Parking',
+    ],
+    description: `1 - 4 Bedroom Waterfront Apartments | Starting from $450,000\nClaydon House offers 1 to 4-bedroom waterfront apartments thoughtfully designed for refined living in the heart of MBR City. Surrounded by nature and connected to urban life, the residences combine spacious layouts, premium finishes, and panoramic views of Ras Al Khor and Downtown Dubai. With rooftop pools, wellness zones, and modern interiors, Claydon House is a lifestyle crafted around comfort, design, and convenience.\n\nPremium Amenities: Rooftop Infinity Pool with City Views, State-of-the-Art Fitness Center & Yoga Studio, Cinema & Arcade Lounge, "Children's Play Zone & Daycare", Landscaped Gardens & Outdoor Seating, Lobby Lounge with Workstations, 24/7 Concierge & Secure Parking.\n\nPrime Location: MBR City, Dubai. Metro: Meydan Metro Line – 1 min. Airport: Dubai Intl – 17 km (≈17 min drive). Mall: Dubai Festival City Mall – 12 min. Nearby Landmark: Ras Al Khor Wildlife Sanctuary – 5 min.`,
+  },
+  {
+    id: 16,
+    name: 'Ellington Cove',
+    location: 'Dubai Islands, Dubai',
+    price: 'Starting from $300,000',
+    roi: '-',
+    reelVideoUrl: '', // Placeholder video
+    image: '/images/properties/cove2.jpg', // Placeholder image
+    beds: 0,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [
+      'Private Beach with Water Sports Pavilion',
+      'Beachfront Clubhouse with Sunset Terrace',
+      'Yoga & Fitness Studio Overlooking the Sea',
+      'Leisure Pool, Lap Pool & Waterfall Feature',
+      'Barbecue Deck & Beach Gardens',
+      'Lobby Courtyard & Arrival Gardens',
+      'Dedicated Drop-Off & Concierge Zone',
+    ],
+    description: `Studio to 4 Bedroom Residences | Starting from $300,000\nEllington Cove offers studio to 4-bedroom residences along the pristine shores of Dubai Islands. With private beach access and a calm coastal aesthetic, the development merges contemporary architecture with nature-inspired design. From waterfall pools to a beach clubhouse, every space reflects a laid-back rhythm of beachfront living, perfect for those seeking serenity and connection.\n\nPremium Amenities: Private Beach with Water Sports Pavilion, Beachfront Clubhouse with Sunset Terrace, Yoga & Fitness Studio Overlooking the Sea, Leisure Pool, Lap Pool & Waterfall Feature, Barbecue Deck & Beach Gardens, Lobby Courtyard & Arrival Gardens, Dedicated Drop-Off & Concierge Zone.\n\nPrime Location: Dubai Islands, Dubai. Airport: Dubai Intl – 18 km (≈20 min drive). Mall: Deira City Centre – 15 min. Nearby Landmark: Dubai Beaches – 2 min.`,
+  },
+  {
+    id: 17,
+    name: 'Mercer House',
+    location: 'JLT – Uptown Dubai',
+    price: 'Starting from $350,000',
+    roi: '-',
+    reelVideoUrl: '', // Placeholder video
+    image: '/images/properties/mercer1.jpg', // Placeholder image
+    beds: 0,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [
+      'Urban Beach Club with Skyline Views',
+      'Multi-Sports Hall with Padel & Squash Courts',
+      'Scenic Sauna & Ice Room',
+      'Clubhouse Lounge & Arcade Zone',
+      'Rooftop & Family Pools',
+      'Fully Equipped Fitness & Wellness Center',
+      'Retail & F&B Spaces on Site',
+    ],
+    description: `Studio to 4 Bedroom Residences | Starting from $350,000\nMercer House presents studio to 4-bedroom residences, including penthouses, in one of JLT's most dynamic addresses. Designed for modern urban living, the twin towers combine skyline views, wellness spaces, and high-end leisure with city convenience. From family pools to a rooftop beach club, Mercer House offers an elevated lifestyle that blends play, relaxation, and sophistication.\n\nPremium Amenities: Urban Beach Club with Skyline Views, Multi-Sports Hall with Padel & Squash Courts, Scenic Sauna & Ice Room, Clubhouse Lounge & Arcade Zone, Rooftop & Family Pools, Fully Equipped Fitness & Wellness Center, Retail & F&B Spaces on Site.\n\nPrime Location: JLT – Uptown Dubai. Metro: DMCC Metro – 3 min. Airport: Dubai Intl – 30 min. Mall: Dubai Marina Mall – 10 min. Nearby Landmark: Palm Jumeirah – 15 min.`,
+  },
+  {
+    id: 18,
+    name: 'Ocean House',
+    location: 'Palm Jumeirah, Dubai',
+    price: 'Starting from $4,200,000',
+    roi: '-',
+    reelVideoUrl: '', // Placeholder video
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954791/Ocean_House_by_Ellington_-_exterior_nq7nfn.jpg', // Placeholder image
+    beds: 0,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [
+      'Direct Private Beach Access',
+      'Olympic-Size Swimming Pool & Kids Pool',
+      'Wellness Spa with Infrared Sauna & Salt Cave',
+      'Plunge Pool & Fitness Studio',
+      'Cinema Room & Games Room',
+      'Private Clubhouse with Dining Lounge',
+    ],
+    description: `2 - 6 Bedroom Residences, Duplexes & Penthouses | Starting from $4,200,000\nOcean House offers 2 to 6-bedroom residences, duplexes, and penthouses on the prestigious Palm Jumeirah. Designed for those who seek a one-of-a-kind oceanside lifestyle, the development presents panoramic views of the Burj Al Arab, Marina Skyline, and Arabian Gulf. From wellness retreats to private club lounges, Ocean House blends privacy, luxury, and beachfront beauty in one iconic address.\n\nPremium Amenities: Direct Private Beach Access, Olympic-Size Swimming Pool & Kids Pool, Wellness Spa with Infrared Sauna & Salt Cave, Plunge Pool & Fitness Studio, Cinema Room & Games Room, Private Clubhouse with Dining Lounge.\n\nPrime Location: Palm Jumeirah, Dubai. Metro: Al Khail Metro Station – 10 min. Airport: Dubai Intl – 27 min. Mall: Nakheel Mall – 8 min. Nearby Landmark: Atlantis The Royal – 6 min.`,
+  },
+  {
+    id: 19,
+    name: 'One River Point',
+    location: 'Business Bay, Dubai',
+    price: 'Starting from $460,000',
+    roi: '-',
+    reelVideoUrl: '', // Placeholder video
+    image: '/images/properties/orp1.jpg', // Placeholder image
+    beds: 0,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [
+      'Hotel-Style Drop-Off & Club Lounge',
+      'Beach Club Pool with Sun Deck',
+      'Immersive Room & Yoga Studio',
+      'Fitness Centre with Climbing Net',
+      'Boardwalk Access to Dubai Water Canal',
+      'Kids Play Zone & Adult Leisure Pool',
+    ],
+    description: `Luxury Residences | Starting from $460,000\nPositioned along the Dubai Canal with direct views of Burj Khalifa, One River Point presents luxury living in the heart of Business Bay. The project redefines modern elegance with a sculptural façade, curated amenities, and seamless urban connectivity. Designed for refined lifestyles, this tower is both a landmark and a sanctuary for city dwellers.\n\nPremium Amenities: Hotel-Style Drop-Off & Club Lounge, Beach Club Pool with Sun Deck, Immersive Room & Yoga Studio, Fitness Centre with Climbing Net, Boardwalk Access to Dubai Water Canal, Kids Play Zone & Adult Leisure Pool.\n\nPrime Location: Business Bay, Dubai. Metro: Business Bay Station – 5 min. Airport: Dubai Intl – 18 min. Mall: Dubai Mall – 7 min.`,
+  },
+  {
+    id: 20,
+    name: 'Playa Del Sol',
+    location: 'Al Marjan Island, Ras Al Khaimah',
+    price: 'Starting from $272,000',
+    roi: '-',
+    reelVideoUrl: '', // Placeholder video
+    image: '/images/properties/psd1.jpg', // Placeholder image
+    beds: 0,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [
+      'Private Beachfront & Yacht Jetty',
+      'Infinity Pool with Kids\' Splash Zone',
+      'Fitness Studios (Indoor/Outdoor) & Squash Court',
+      'Spa Rooms, Sauna & Hair Salon Lounge',
+      'Clubhouse, Teens\' Room & BBQ Deck',
+      'Secure Parking, Landscaped Courtyards',
+    ],
+    description: `Studios to 5 Bedroom Villas | Starting from $272,000\nPlaya Del Sol offers resort-inspired living on the serene shores of Al Marjan Island in Ras Al Khaimah. With studios to 5-bedroom villas, every residence is crafted for elegance, wellness, and panoramic sea views. From private yacht access to lush courtyards and a teens' lounge, it's a complete destination for families, second-home seekers, and investors alike.\n\nPremium Amenities: Private Beachfront & Yacht Jetty, Infinity Pool with Kids\' Splash Zone, Fitness Studios (Indoor/Outdoor) & Squash Court, Spa Rooms, Sauna & Hair Salon Lounge, Clubhouse, Teens\' Room & BBQ Deck, Secure Parking, Landscaped Courtyards.\n\nPrime Location: Al Marjan Island, Ras Al Khaimah. Airport: RAK Intl – 34 min. Mall: Al Hamra Mall – 12 min. Landmark: Wynn Resort – 5 min.`,
+  },
+  {
+    id: 21,
+    name: 'The Crestmark',
+    location: 'Business Bay, Dubai',
+    price: 'Starting from $475,000',
+    roi: '-',
+    reelVideoUrl: '', // Placeholder video
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954741/The_Crestmark_-_balcony_view_mlhx9g.jpg', // Placeholder image
+    beds: 0,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [
+      'Dubai Canal Boardwalk & Lounge Pool',
+      'Zen Room & Wellness Studio',
+      'Functional Training Zone',
+      'Mini Bowling & Arcade Area',
+      'Kinetic Garden & Secret Club Room',
+      'Kidtropolis Play World',
+    ],
+    description: `Studios to Signature Penthouses | Starting from $475,000\nWith bold design and tranquil detail, The Crestmark offers 189 upscale residences in the heart of Business Bay. From studios to signature penthouses, each space blends greenery, light, and luxury for a balanced urban lifestyle. Direct canal access, serene lounges, and kinetic amenities make The Crestmark a standout for those seeking calm amid the city pulse.\n\nPremium Amenities: Dubai Canal Boardwalk & Lounge Pool, Zen Room & Wellness Studio, Functional Training Zone, Mini Bowling & Arcade Area, Kinetic Garden & Secret Club Room, Kidtropolis Play World.\n\nPrime Location: Business Bay, Dubai. Metro: Business Bay Station – 6 min. Airport: DXB – 20 min. Mall: Dubai Mall – 9 min. Landmark: Burj Khalifa – 7 min.`,
+  },
+  {
+    id: 22,
+    name: 'The Highgrove',
+    location: 'MBR City, Dubai',
+    price: 'Starting from $520,000',
+    roi: '-',
+    reelVideoUrl: '', // Placeholder video
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954755/The_Highgrove_-_hero_shot_1_wgkw9p.jpg', // Placeholder image
+    beds: 0,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [
+      'Infinity Lagoon Pool with Canopy',
+      'Crystal Lagoon Access',
+      'Sky-Dining & Viewing Deck',
+      'Indoor & Outdoor Fitness Studio',
+      'Clubhouse & Cinema Room',
+      'Kids Play Areas (Indoor & Outdoor)',
+    ],
+    description: `1 to 3 Bedroom Apartments, Duplexes, Penthouse & Sky Villa | Starting from $520,000\nThe Highgrove by Ellington Properties redefines modern serenity, offering stylish 1 to 3-bedroom apartments, duplexes, a penthouse, and a sky villa. Nestled in the heart of MBR City and framed by a crystal lagoon, it's designed for those who seek both connection to nature and the sophistication of city life. Contemporary layouts, elegant finishes, and lush surroundings make it a haven for families and professionals alike.\n\nPremium Amenities: Infinity Lagoon Pool with Canopy, Crystal Lagoon Access, Sky-Dining & Viewing Deck, Indoor & Outdoor Fitness Studio, Clubhouse & Cinema Room, Kids Play Areas (Indoor & Outdoor).\n\nPrime Location: MBR City, Dubai. Metro: Meydan Line – 6 min. Airport: DXB – 15 min. Mall: Dubai Mall – 12 min. Landmark: Ras Al Khor Wildlife Sanctuary – 10 min.`,
+  },
+  {
+    id: 23,
+    name: 'The Sanctuary',
+    location: 'MBR City, Dubai',
+    price: 'Starting from $3,500,000',
+    roi: '-',
+    reelVideoUrl: '', // Placeholder video
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954196/santuary_w21rmh.jpg', // Placeholder image
+    beds: 0,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [
+      'Crystal Lagoon Access',
+      'Private Garden with Pool & Sunken Seating',
+      'Zen Courtyards & Rooftop Terrace',
+      'Home Automation in Every Villa',
+      'Water Activity Zone & Nature Playground',
+      'Premium Gated Community with Clubhouse',
+    ],
+    description: `Private Villa Community | Starting from $3,500,000\nThe Sanctuary by Ellington is a private villa community nestled beside the tranquil blue lagoon in MBR City. Featuring uninterrupted views of the Burj Khalifa and Downtown Dubai, this premium gated enclave offers exclusive villas with rooftop terraces, private lifts, and automated smart-home systems. Crafted for families who seek privacy without sacrificing access, The Sanctuary blends nature, luxury, and seamless connectivity into a rare lifestyle offering.\n\nPremium Amenities: Crystal Lagoon Access, Private Garden with Pool & Sunken Seating, Zen Courtyards & Rooftop Terrace, Home Automation in Every Villa, Water Activity Zone & Nature Playground, Premium Gated Community with Clubhouse.\n\nPrime Location: MBR City, Dubai. Metro: Meydan Line – 6 min. Airport: DXB – 15 min. Mall: Dubai Mall – 12 min. Landmark: Ras Al Khor Wildlife Sanctuary – 10 min.`,
   },
 ];
 
@@ -234,7 +481,9 @@ const PropertiesPage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState('price-low');
-  const [priceRange, setPriceRange] = useState([0, 15000000]);
+  const [priceRange, setPriceRange] = useState([0, 6000000]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const propertiesPerPage = 9;
   const videoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({});
 
   useEffect(() => {
@@ -302,6 +551,13 @@ const PropertiesPage = () => {
     }
   };
 
+  // Pagination logic
+  const totalPages = Math.ceil(sortedProperties.length / propertiesPerPage);
+  const paginatedProperties = sortedProperties.slice(
+    (currentPage - 1) * propertiesPerPage,
+    currentPage * propertiesPerPage
+  );
+
   return (
     <div className="bg-black text-white font-montserrat">
       <Header />
@@ -346,7 +602,7 @@ const PropertiesPage = () => {
                 <Slider
                   range
                   min={0}
-                  max={15000000}
+                  max={6000000}
                   step={100000}
                   value={priceRange}
                   onChange={handleSliderChange}
@@ -370,8 +626,7 @@ const PropertiesPage = () => {
               >
                 <option value="price-low">Price: Low to High</option>
                 <option value="price-high">Price: High to Low</option>
-                <option value="rating">Highest Rated</option>
-                <option value="beds">Most Bedrooms</option>
+                
               </select>
             </div>
           </div>
@@ -391,7 +646,7 @@ const PropertiesPage = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {sortedProperties.map((property, index) => (
+            {paginatedProperties.map((property, index) => (
               <motion.div 
                 key={property.id}
                 initial={{ opacity: 0, y: 50 }}
@@ -457,6 +712,34 @@ const PropertiesPage = () => {
               </motion.div>
             ))}
           </div>
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="flex justify-center mt-12 gap-2">
+              <button
+                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 ${currentPage === 1 ? 'bg-gray-700 text-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:scale-105'}`}
+              >
+                Prev
+              </button>
+              {Array.from({ length: totalPages }, (_, i) => (
+                <button
+                  key={i + 1}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 ${currentPage === i + 1 ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' : 'bg-gray-800 text-gray-300 hover:bg-gray-700'}`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+              <button
+                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+                className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 ${currentPage === totalPages ? 'bg-gray-700 text-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:scale-105'}`}
+              >
+                Next
+              </button>
+            </div>
+          )}
         </div>
       </section>
 

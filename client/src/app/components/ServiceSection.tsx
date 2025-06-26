@@ -71,7 +71,7 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
 
   // Modal state
   const [showModal, setShowModal] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '', services: [] as string[], message: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', services: [] as string[], message: '' });
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
 
@@ -122,13 +122,14 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
         body: JSON.stringify({
           name: form.name,
           email: form.email,
+          phone: form.phone,
           services: form.services,
           message: form.message,
         }),
       });
       if (res.ok) {
         setResult('Thank you! Your enquiry has been sent.');
-        setForm({ name: '', email: '', services: [], message: '' });
+        setForm({ name: '', email: '', phone: '', services: [], message: '' });
       } else {
         setResult('Sorry, there was an error sending your enquiry.');
       }
@@ -229,6 +230,15 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
               name="email"
               placeholder="Email"
               value={form.email}
+              onChange={handleInputChange}
+              className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
+              required
+            />
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Phone Number"
+              value={form.phone}
               onChange={handleInputChange}
               className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
               required

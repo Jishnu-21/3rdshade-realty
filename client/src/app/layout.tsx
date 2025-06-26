@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+import { FaWhatsapp } from 'react-icons/fa';
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -24,6 +25,17 @@ export default function RootLayout({
         className={`${montserrat.variable} antialiased overflow-x-hidden`}
       >
         {children}
+        {/* WhatsApp Floating Icon */}
+        <a
+          href="https://wa.me/918600181189"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp"
+          className="fixed bottom-6 right-6 z-50 bg-white rounded-full shadow-lg p-3 flex items-center justify-center hover:bg-gray-200 transition-colors"
+          style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.15)' }}
+        >
+          <FaWhatsapp size={28} color="#111" />
+        </a>
       </body>
     </html>
   );

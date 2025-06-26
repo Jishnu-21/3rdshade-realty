@@ -12,7 +12,7 @@ const Footer = () => (
             Redefining luxury real estate with unparalleled service and exclusive properties.
           </p>
           <div className="flex space-x-4">
-            <a href="#" aria-label="Instagram" className="hover:text-white"><FaInstagram size={22} /></a>
+            <a href="https://www.instagram.com/3rdshade.realty/" aria-label="Instagram" className="hover:text-white"><FaInstagram size={26} /></a>
           </div>
         </div>
         {/* Center: Links */}
@@ -26,17 +26,21 @@ const Footer = () => (
             </ul>
           </div>
           <div>
-            <h4 className="text-white font-semibold mb-3">Privacy and Terms</h4>
+            <h4 className="text-white font-semibold mb-3">Policies</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="/privacy policy" className="hover:text-white">Privacy</a></li>
-              <li><a href="/terms and conditions" className="hover:text-white">Terms</a></li>
+              <li><a href="/privacy policy" className="hover:text-white">Privacy Policies</a></li>
+              <li><a href="/terms and conditions" className="hover:text-white">Terms and Conditions</a></li>
             </ul>
           </div>
           <div>
             <h4 className="text-white font-semibold mb-3">Contact</h4>
             <ul className="space-y-2 text-sm">
-              <li>info@3rdshade.in</li>
-              <li>+91 8600181189</li>
+              <li>
+                <a href="mailto:info@3rdshade.in" className="hover:underline">info@3rdshade.in</a>
+              </li>
+              <li>
+                <a href="https://wa.me/918600181189" target="_blank" rel="noopener noreferrer" className="hover:underline">+91 8600181189</a>
+              </li>
             </ul>
           </div>
         </div>

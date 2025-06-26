@@ -69,7 +69,7 @@ export default function ContactPage() {
             transition={{ duration: 0.6, delay: 0.8 }}
           >
             <div className="uppercase text-xs text-neutral-400 mb-2 tracking-widest">Our address</div>
-            <div className="font-bold text-white">THIRD SHADE MEDIA<br />PARK PLAZA, LOHEGAON<br />1st FLOOR, ROOM No.01<br />PUNE, MAHARASTRA, INDIA<br />411047</div>
+            <div className="font-bold text-white">THIRD SHADE MEDIA SERVICES<br />PARK PLAZA, LOHEGAON<br />1st FLOOR, ROOM No.01<br />PUNE, MAHARASTRA, INDIA<br />411047</div>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -79,7 +79,7 @@ export default function ContactPage() {
             <div className="uppercase text-xs text-neutral-400 mb-2 tracking-widest">Connect with us</div>
             <div className="font-bold text-white flex flex-col gap-1 md:items-end md:text-right">
               <motion.a 
-                href="#" 
+                href="https://www.instagram.com/3rdshade.realty/" 
                 className="hover:underline"
                 whileHover={{ scale: 1.05, x: -5 }}
                 transition={{ type: "spring", stiffness: 300 }}
