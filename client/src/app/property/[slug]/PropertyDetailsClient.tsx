@@ -558,7 +558,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                   </div>
                   <div className="flex items-center gap-2 text-xs text-gray-400">
                     <FaShoppingBag className="text-pink-400" />
-                    Starting from <span className="text-white font-bold ml-1">{propertyData.price}</span>
+                    Starting from <span className="text-white font-bold ml-1">AED {propertyData.price}</span>
                   </div>
                 </div>
               </div>
@@ -862,7 +862,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
               <div className="bg-black rounded-xl p-4">
                 <div className="flex justify-between items-center">
                   <div>
-                    <div className="text-2xl font-bold text-white">{propertyData.price}</div>
+                    <div className="text-2xl font-bold text-white">AED {propertyData.price}</div>
                     <div className="text-gray-400 text-xs">Starting price</div>
                   </div>
                   <div className="text-right">
@@ -949,7 +949,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
         </div>
 
         {/* Related Properties */}
-        <div className="mt-2">
+        <div className="mt-8 lg:mt-2">
           <h2 className="text-3xl font-bold mb-8">Related Properties</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {relatedSlugs.map((slug: string) => {
