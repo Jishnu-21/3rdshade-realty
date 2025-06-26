@@ -178,6 +178,29 @@ const allProperties = [
     amenities: ['spa', 'gym', 'pool'],
     description: `Studios, 1 & 2 Bedroom Apartments | Launching Soon\nSobha Orbis is a new launch by Sobha Realty, offering modern apartments in a vibrant community with premium amenities and excellent connectivity.\nMore details coming soon.`,
   },
+  {
+    id: 12,
+    name: 'Pierside Marina Residences – Sobha Siniya Island',
+    location: 'Sobha Siniya Island, UAE',
+    price: 'Starting from $1,000,000',
+    roi: '-',
+    reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1750760807/placeholder-video.mp4', // Placeholder video
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760802/placeholder1.jpg', // Placeholder image
+    beds: 1,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: [
+      'Infinity Marina Pool with Seaview Deck',
+      'Private Yacht Mooring & Marina Club',
+      'Smart-Home Ready Furnished Residences',
+      'Golf Course with Waterfront Views',
+      'Luxury Retail & Fine Dining Promenade',
+      'Wellness Spa, Gym & Yoga Deck',
+      'Open-Air Cinema & Cultural Lawn',
+    ],
+    description: `1 - 3 Bedroom Luxury Apartments | Starting from $1,000,000\nPierside Marina Residences offers 1 to 3-bedroom luxury apartments set on an exclusive island destination by Sobha Realty. Designed for those who seek privacy, views, and a curated lifestyle, the development combines yacht-side living with resort-class wellness, retail, and leisure experiences. With sweeping sea views, smart home features, and refined interiors, it's where elevated living meets ocean serenity.\n\nPremium Amenities: Infinity Marina Pool with Seaview Deck, Private Yacht Mooring & Marina Club, Smart-Home Ready Furnished Residences, Golf Course with Waterfront Views, Luxury Retail & Fine Dining Promenade, Wellness Spa, Gym & Yoga Deck, Open-Air Cinema & Cultural Lawn.\n\nPrime Location: Sobha Siniya Island, UAE. Metro: Ras Al Khaimah Bus Terminal – 16 km (≈20 min drive). Airport: Dubai International – 80 km (≈50 min drive). Mall: Marina Residences Mall – Onsite. Nearby Landmark: Private Yacht Club – Walking Distance.`,
+  },
 ];
 
 const amenityIcons: { [key: string]: React.ReactElement } = {
@@ -424,7 +447,7 @@ const PropertiesPage = () => {
                     </div>
 
                     <Link
-                      href={`/property/${property.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
+                      href={property.name === 'Pierside Marina Residences – Sobha Siniya Island' ? '/property/pierside-marina-residences' : `/property/${property.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
                       className="w-full block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold py-3 rounded-xl hover:from-purple-700 hover:to-pink-600 transition-all duration-300 text-center mt-4"
                     >
                       View Details
