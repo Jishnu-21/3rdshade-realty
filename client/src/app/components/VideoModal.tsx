@@ -30,24 +30,24 @@ const VideoModal = ({
   };
 
   // Mini modal variants - always slide from right, never from bottom
-  const miniVariants = {
+  const miniVariants: Variants = {
     hidden: { x: 100, opacity: 0 },
-    visible: { x: 0, opacity: 1, transition: { duration: 0.6, ease: "easeInOut" } },
-    exit: { x: 100, opacity: 0, transition: { duration: 0.6, ease: "easeInOut" } },
+    visible: { x: 0, opacity: 1, transition: { duration: 0.6, ease: [0.42, 0, 0.58, 1] } },
+    exit: { x: 100, opacity: 0, transition: { duration: 0.6, ease: [0.42, 0, 0.58, 1] } },
   };
 
   // Overlay animation (opacity + blur)
-  const overlayVariants = {
+  const overlayVariants: Variants = {
     hidden: { opacity: 0, filter: "blur(0px)" },
     visible: {
       opacity: 1,
       filter: "blur(4px)",
-      transition: { duration: 0.6, ease: "easeInOut" },
+      transition: { duration: 0.6, ease: [0.42, 0, 0.58, 1] },
     },
     exit: {
       opacity: 0,
       filter: "blur(0px)",
-      transition: { duration: 0.6, ease: "easeInOut" },
+      transition: { duration: 0.6, ease: [0.42, 0, 0.58, 1] },
     },
   };
 
