@@ -3,7 +3,7 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { FaSwimmer, FaCar, FaConciergeBell, FaDumbbell, FaShieldAlt, FaSpa, FaMapMarkerAlt, FaTrain, FaPlane, FaShoppingBag, FaCheckCircle, FaCalendarAlt, FaPhoneAlt, FaFileDownload, FaTimes, FaClock, FaFilm, FaFire, FaMountain, FaDog, FaTableTennis, FaCouch, FaTint, FaChild, FaHotTub, FaHeartbeat, FaBook, FaMusic, FaBriefcase, FaRoad, FaGamepad, FaStore, FaTheaterMasks, FaHotel, FaSchool, FaTree, FaLandmark, FaWater, FaGolfBall, FaMosque, FaWalking, FaLeaf, FaShip, FaGlassCheers, FaFeather, FaAppleAlt, FaWindowMaximize, FaDoorOpen, FaCogs, FaBed, FaRulerCombined, FaLayerGroup, FaBasketballBall, FaChess } from 'react-icons/fa';
+import { FaSwimmer, FaCar, FaConciergeBell, FaDumbbell, FaShieldAlt, FaSpa, FaMapMarkerAlt, FaTrain, FaPlane, FaShoppingBag, FaCheckCircle, FaCalendarAlt, FaPhoneAlt, FaFileDownload, FaTimes, FaClock, FaFilm, FaFire, FaMountain, FaDog, FaTableTennis, FaCouch, FaTint, FaChild, FaHotTub, FaHeartbeat, FaBook, FaMusic, FaBriefcase, FaRoad, FaGamepad, FaStore, FaTheaterMasks, FaHotel, FaSchool, FaTree, FaLandmark, FaWater, FaGolfBall, FaMosque, FaWalking, FaLeaf, FaShip, FaGlassCheers, FaFeather, FaAppleAlt, FaWindowMaximize, FaDoorOpen, FaCogs, FaBed, FaRulerCombined, FaLayerGroup, FaBasketballBall, FaChess, FaUser, FaEnvelope } from 'react-icons/fa';
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import { notFound } from 'next/navigation';
@@ -400,8 +400,10 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
 
   const [mainMedia, setMainMedia] = useState({ type: 'video', src: propertyData.reelVideoUrl });
   const [showModal, setShowModal] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
-  const [isRegister, setIsRegister] = useState(false);
+  const [form, setForm] = useState({ name: '', email: '', phone: '', address: '' });
+  const [isLoading, setIsLoading] = useState(false);
+  const [formError, setFormError] = useState('');
+  const [formSuccess, setFormSuccess] = useState('');
   const [showCallModal, setShowCallModal] = useState(false);
   const [callForm, setCallForm] = useState({ date: '', time: '', email: '', phone: '' });
   const [showEnquireModal, setShowEnquireModal] = useState(false);
@@ -432,9 +434,57 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handlePayNowSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setShowModal(false);
+    setIsLoading(true);
+    setFormError('');
+    setFormSuccess('');
+    try {
+      // 1. Create Razorpay order
+      const amountInPaise = Math.round(Number(propertyData.price.replace(/[^\d]/g, '')) * 100) || 50000; // fallback ₹500
+      const orderRes = await fetch('/api/razorpay/order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: amountInPaise,
+          currency: 'INR',
+          receipt: `receipt_${Date.now()}`,
+        }),
+      });
+      const order = await orderRes.json();
+      if (!order.id) throw new Error(order.error || 'Failed to create order');
+
+      // 2. Open Razorpay modal
+      const options = {
+        key: 'YOUR_KEY_ID', // Replace with your Razorpay key
+        amount: order.amount,
+        currency: order.currency,
+        name: propertyData.name,
+        description: 'Property Booking',
+        image: '/logos/logo.png',
+        order_id: order.id,
+        handler: function (response: any) {
+          setFormSuccess('Payment successful!');
+          setShowModal(false);
+        },
+        prefill: {
+          name: form.name,
+          email: form.email,
+          contact: form.phone,
+        },
+        theme: { color: '#8b5cf6' },
+      };
+      if (typeof window !== 'undefined' && (window as any).Razorpay) {
+        const rzp = new (window as any).Razorpay(options);
+        rzp.open();
+      } else {
+        throw new Error('Razorpay SDK not loaded');
+      }
+    } catch (error) {
+      setFormError(error instanceof Error ? error.message : 'Payment failed');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleCallInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -491,70 +541,127 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
     }
   };
 
+  // Ensure Razorpay script is loaded
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !(window as any).Razorpay) {
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
+
   return (
     <div className="bg-black text-white font-montserrat">
       <Header onEnquire={() => setShowEnquireModal(true)} />
       {/* Custom Login/Register Modal */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-          <div className="bg-neutral-900 rounded-xl shadow-2xl p-8 w-full max-w-md relative animate-fadeIn">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+          <div className="bg-gradient-to-br from-purple-900/90 to-black/90 rounded-2xl shadow-2xl p-0 w-full max-w-lg relative animate-fadeIn border border-purple-700/40">
             <button className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer scale-100 hover:scale-110" onClick={() => setShowModal(false)}>
-              <FaTimes size={20} />
+              <FaTimes size={22} />
             </button>
-            <div className="flex flex-col items-center mb-4">
+            <div className="flex flex-col items-center pt-8 pb-2 px-8">
               <Image src="/logos/logo.png" alt="3rdshade Logo" width={120} height={40} className="mb-2" />
+              <h2 className="text-3xl font-extrabold mb-2 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Secure Your Property</h2>
+              <p className="text-gray-300 text-center mb-4 text-sm">Fill in your details to proceed with your interest in <span className="font-bold text-white">{propertyData.name}</span>.</p>
+              <div className="w-full bg-gradient-to-r from-purple-700/60 to-pink-700/60 rounded-xl p-[2px] mb-6">
+                <div className="bg-black/80 rounded-xl p-4 flex flex-col gap-1">
+                  <div className="flex items-center gap-2">
+                    <FaMapMarkerAlt className="text-purple-400" />
+                    <span className="text-white font-semibold text-base">{propertyData.name}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-gray-400">
+                    <FaMapMarkerAlt className="text-pink-400" />
+                    {propertyData.location.address}
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-gray-400">
+                    <FaShoppingBag className="text-pink-400" />
+                    Starting from <span className="text-white font-bold ml-1">{propertyData.price}</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="flex justify-center gap-4 mb-6">
-              <button
-                type="button"
-                className={`px-4 py-2 rounded-full font-semibold transition-all duration-300 cursor-pointer ${!isRegister ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-md scale-105' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700 scale-100'}`}
-                onClick={() => setIsRegister(false)}
-              >
-                Login
-              </button>
-              <button
-                type="button"
-                className={`px-4 py-2 rounded-full font-semibold transition-all duration-300 cursor-pointer ${isRegister ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-md scale-105' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700 scale-100'}`}
-                onClick={() => setIsRegister(true)}
-              >
-                Register
-              </button>
-            </div>
-            <h2 className="text-2xl font-bold mb-6 text-center">{isRegister ? 'Register' : 'Login'}</h2>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-              {isRegister && (
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Name"
-                  value={form.name}
-                  onChange={handleInputChange}
-                  className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
-                  required
-                />
+            <div className="px-8 pb-8">
+              {formError && (
+                <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-sm">{formError}</div>
               )}
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={form.email}
-                onChange={handleInputChange}
-                className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
-                required
-              />
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={form.password}
-                onChange={handleInputChange}
-                className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
-                required
-              />
-              <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg">
-                {isRegister ? 'Register' : 'Login'}
-              </button>
-            </form>
+              {formSuccess && (
+                <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-sm">{formSuccess}</div>
+              )}
+              <form onSubmit={handlePayNowSubmit} className="flex flex-col gap-5">
+                <div className="relative">
+                  <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-lg" />
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Full Name"
+                    value={form.name}
+                    onChange={handleInputChange}
+                    className="pl-10 pr-4 py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition"
+                    required
+                    disabled={isLoading}
+                  />
+                </div>
+                <div className="relative">
+                  <FaEnvelope className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-lg" />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
+                    value={form.email}
+                    onChange={handleInputChange}
+                    className="pl-10 pr-4 py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition"
+                    required
+                    disabled={isLoading}
+                  />
+                </div>
+                <div className="relative">
+                  <FaPhoneAlt className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-lg" />
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone Number"
+                    value={form.phone}
+                    onChange={handleInputChange}
+                    className="pl-10 pr-4 py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition"
+                    required
+                    disabled={isLoading}
+                  />
+                </div>
+                <div className="relative">
+                  <FaMapMarkerAlt className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-lg" />
+                  <input
+                    type="text"
+                    name="address"
+                    placeholder="Address"
+                    value={form.address}
+                    onChange={handleInputChange}
+                    className="pl-10 pr-4 py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition"
+                    required
+                    disabled={isLoading}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className={`w-full font-bold py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md text-lg tracking-wide ${
+                    isLoading
+                      ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                      : 'bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:scale-105 hover:shadow-lg'
+                  }`}
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      Submitting...
+                    </div>
+                  ) : (
+                    'Submit'
+                  )}
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       )}
