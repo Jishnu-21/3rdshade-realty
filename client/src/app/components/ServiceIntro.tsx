@@ -99,7 +99,7 @@ function ColorChangeText({ textLines, onRevealEnd }: { textLines: string[]; onRe
           }}
         >
           <Link
-            href="#about"
+            href="/about"
             className="px-8 py-3 rounded-full border border-white text-white font-bold text-lg hover:bg-white hover:text-black transition-colors duration-200 shadow-lg"
           >
             About us &rarr;
