@@ -61,18 +61,17 @@ const Banner = () => {
 
       {/* Main Content */}
       <div className="relative z-10 w-full flex-grow">
-        <div className="max-w-screen-2xl mx-auto px-4 md:px-8 flex flex-col items-start text-left mt-12 sm:mt-20 md:mt-32">
+        <div className="max-w-screen-2xl mx-auto px-4 md:px-8 flex flex-col items-start text-left mt-6 sm:mt-10 md:mt-14 lg:mt-20 xl:mt-28">
           <motion.h1
-            className="font-bold text-white text-4xl md:text-6xl lg:text-7xl leading-tight mb-4"
+            className="font-bold text-white text-2xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight mb-3 sm:mb-4"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-          >
-            Elite Digital Strategy for
-            <br/>Elite Properties
+          >Your Gateway to Dubai Real Estate
+          <br/>Wherever You Are in the World
           </motion.h1>
           <motion.p
-            className="text-lg text-white md:text-xl mb-8 max-w-2xl"
+            className="text-sm sm:text-sm md:text-2xl lg:text-xl text-white mb-6 sm:mb-8 max-w-2xl"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}

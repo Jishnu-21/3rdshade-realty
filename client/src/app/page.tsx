@@ -9,6 +9,7 @@ import EliteServices from './components/EliteServices';
 import CallToAction from './components/CallToAction';
 import Footer from './components/Footer';
 import dynamic from 'next/dynamic';
+import FeaturedSlider from './components/FeaturedSlider';
 
 // Dynamically import VideoModal to avoid SSR issues with framer-motion
 const VideoModal = dynamic(() => import('./components/VideoModal'), { ssr: false });
@@ -41,7 +42,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-black opacity-40 z-[-1]"></div>
           <Banner />
         </div>
-        <FeaturedProperties />
+        <FeaturedSlider />
         <EliteServices/>
         <CallToAction/>
         <Footer/>

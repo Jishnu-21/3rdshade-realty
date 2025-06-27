@@ -7,37 +7,55 @@ const featuredItems = [
     videoSrc: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749729573/emaar-creek_lk2lce.webm',
     poster: 'https://cdn.pixabay.com/photo/2017/01/20/00/30/dubai-1990138_1280.jpg',
     title: 'Emaar Creek',
-    description: 'Emaar Creek is a luxury residential development located in the heart of Dubai. It is a 100% freehold property and offers a range of amenities including a swimming pool, gym, and a children\'s play area.'
+    price: 'Starting from AED 1.5M',
+    amenities: [
+      '700,000 sq.m. of Parks & Green Spaces',
+      'Over 250,000 sq.m. of Retail & Dining',
+      'Cultural Hub with Museums & Exhibitions',
+      'Cycling Tracks',
+      'Entertainment Arenas for Concerts & Theatre',
+      'Waterfront Promenades',
+    ],
   },
   {
     videoSrc: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727749/sobha-solis2_c6nt2j.mp4',
     poster: 'https://cdn.pixabay.com/photo/2016/11/29/09/32/architecture-1868667_1280.jpg',
     title: 'Sobha Solis',
-    description: 'Sobha Solis is a luxury residential development located in the heart of Dubai. It is a 100% freehold property and offers a range of amenities including a swimming pool, gym, and a children\'s play area.'
+    price: 'Starting from AED 1M',
+    amenities: [
+      'Lap Pool',
+      'Kids Pool & Leisure Pool',
+      'Common Parks & Lawns',
+      'Gym & Fitness Zone',
+      'Indoor Kids Play Area',
+      'Yoga & Meditation Studio',
+    ],
   },
   {
     videoSrc: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727087/azizi-venice_gsscns.mp4',
     poster: 'https://cdn.pixabay.com/photo/2015/01/28/23/35/dubai-615430_1280.jpg',
     title: 'Azizi Venice',
-    description: 'Azizi Venice is a luxury residential development located in the heart of Dubai. It is a 100% freehold property and offers a range of amenities including a swimming pool, gym, and a children\'s play area.'
+    price: 'Launching Soon',
+    amenities: [
+      'Climate-Controlled Retail Boulevard',
+      'Crystal Lagoon & Swimmable Beaches',
+      'Opera House (1,500 seats)',
+      'Five-Star Family & Lifestyle Hotels',
+      'Five-Star Family & Lifestyle Hotels',
+    ],
   },
   {
     videoSrc: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727167/sobha-solis_y9ojjs.mp4',
     poster: 'https://cdn.pixabay.com/photo/2016/11/29/09/32/architecture-1868667_1280.jpg',
-    title: 'Sobha Solis',
-    description: 'Sobha Solis is a luxury residential development located in the heart of Dubai. It is a 100% freehold property and offers a range of amenities including a swimming pool, gym, and a children\'s play area.'
-  },
-  {
-    videoSrc: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727105/rk2_ef3ql8.mp4',
-    poster: 'https://cdn.pixabay.com/photo/2016/11/29/09/32/architecture-1868667_1280.jpg',
-    title: 'RK Properties',
-    description: 'RK Properties is a luxury residential development located in Pune, India.'
-  },
-  {
-    videoSrc: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727071/sobha-hartland_qo4rxf.mp4',
-    poster: 'https://cdn.pixabay.com/photo/2016/11/29/09/32/architecture-1868667_1280.jpg',
-    title: 'Sobha Hartland',
-    description: 'Sobha Hartland is a luxury residential development located in Dubai.'
+    title: 'Sobha Orbis',
+    price: 'Starting from AED 1M',
+    amenities: [
+      'Clubhouse & Sports',
+      'Badminton & Squash Courts',
+      'Billiards & Indoor Games',
+      "Kid's & Toddler Play Areas",
+      'Community Gym & Studios',
+    ],
   },
 ];
 
@@ -58,8 +76,8 @@ const FeaturedSlider = () => {
   };
 
   return (
-    <section className="bg-black py-12 overflow-x-hidden">
-      <div className="px-4 md:px-12 mb-8">
+    <section className="bg-black py-8 px-50  max-w-8xl mx-auto overflow-x-hidden">
+      <div className=" mb-8">
         <div className="flex items-center justify-between">
           <h2 className="text-white text-4xl md:text-5xl font-bold">Featured Properties</h2>
           <div className="flex items-center space-x-4">
@@ -87,7 +105,10 @@ const FeaturedSlider = () => {
               videoRefs.current[idx]?.pause();
             }}
           >
-            <div className="w-full h-[500px] bg-neutral-900 flex items-center justify-center relative">
+            <div
+              className="w-full bg-neutral-900 flex items-center justify-center relative"
+              style={{ height: '800px', minHeight: '800px', maxHeight: '900px' }}
+            >
               <video
                 ref={el => { videoRefs.current[idx] = el; }}
                 src={item.videoSrc}
@@ -96,11 +117,48 @@ const FeaturedSlider = () => {
                 playsInline
                 className="w-full h-full object-cover"
                 preload="auto"
+                style={{ height: '100%', width: '100%', objectFit: 'cover' }}
               />
             </div>
-            <div className="p-8">
-              <h3 className="text-white text-3xl font-bold mb-4">{item.title}</h3>
-              <p className="text-gray-300 text-lg">{item.description}</p>
+            <div className="p-8 border-t border-neutral-800 bg-black flex flex-col h-full min-h-[350px]" style={{height: 'calc(100% - 800px)'}}>
+              <div className="mb-4">
+                <div className="text-white text-xl font-bold truncate mb-1">{item.title}</div>
+                <div className="text-purple-400 font-semibold text-lg whitespace-nowrap">{item.price}</div>
+              </div>
+              <div className="text-white text-xs font-bold mb-4 grid grid-cols-1 gap-y-2">
+                {item.amenities && item.amenities.map((amenity, idx) => (
+                  <div key={idx} className="flex items-center gap-2">
+                    <span className="inline-block w-2 h-2 rounded-full bg-purple-400" />
+                    <span className="font-bold text-white whitespace-nowrap">{amenity}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex-1" />
+              <div className="space-y-2 pt-2">
+                <button
+                  type="button"
+                  className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg text-sm"
+                  onClick={() => alert('Pay Now clicked!')}
+                >
+                  Pay Now
+                </button>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    className="w-full bg-black text-white font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs"
+                    onClick={() => alert('Call Expert clicked!')}
+                  >
+                    Call Expert
+                  </button>
+                  <button
+                    type="button"
+                    className="w-full bg-black text-white font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs"
+                    onClick={() => alert('Enquire Now clicked!')}
+                  >
+                    Enquire Now
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         ))}

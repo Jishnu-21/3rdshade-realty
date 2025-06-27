@@ -149,7 +149,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onPayNow, onCallE
   return (
     <Link href={`/property/${property.slug}`} className="block" prefetch={false}>
       <div
-        className="bg-neutral-900 rounded-lg overflow-hidden shadow-lg flex flex-col transition-transform duration-300 hover:scale-105 cursor-pointer h-[1010px]"
+        className="bg-neutral-900 rounded-lg overflow-hidden shadow-lg flex flex-col transition-transform duration-300 hover:scale-105 cursor-pointer h-[700px] md:h-[1050px] lg:h-[800px] xl:h-[1050px] 2xl:h-[1250px] overflow-hidden"
         onMouseEnter={() => hasVideo && setIsHovered(true)}
         onMouseLeave={() => hasVideo && setIsHovered(false)}
       >
@@ -170,14 +170,14 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onPayNow, onCallE
             </div>
           )}
         </div>
-        <div className="p-6 w-full flex-1 flex flex-col overflow-y-auto">
+        <div className="p-6 w-full flex-1 flex flex-col">
           <div className="mb-4">
             <div className="text-white text-xl font-bold truncate mb-1">{property.title}</div>
             <div className="text-purple-400 font-semibold text-lg whitespace-nowrap">{property.price}</div>
           </div>
          
           {/* Amenities List */}
-          <div className="text-white text-sm font-bold mb-4 grid grid-cols-1 gap-y-2">
+          <div className="text-white text-xs font-bold mb-4 grid grid-cols-1 gap-y-2">
             {property.amenities && property.amenities.map((amenity, idx) => (
               <div key={idx} className="flex items-center gap-2">
                 <span className="inline-block w-2 h-2 rounded-full bg-purple-400" />
@@ -298,17 +298,46 @@ const FeaturedProperties = () => {
           </Link>
         </div>
         <p className="text-neutral-400 text-base sm:text-lg mb-8 md:mb-12 max-w-2xl">A curated set of premium properties offering value through design, connectivity, and development credibility.</p>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 items-stretch">
-          {properties.map((property) => (
-            <div key={property.id} className="h-full flex flex-col">
-              <PropertyCard 
-                property={property} 
-                onPayNow={() => setModal({ type: 'pay', property })}
-                onCallExpert={() => setModal({ type: 'call', property })}
-                onEnquireNow={() => setModal({ type: 'enquire', property })}
-              />
-            </div>
-          ))}
+        {/* Slider controls */}
+        <div className="relative">
+          <button
+            onClick={() => {
+              const el = document.getElementById('featured-properties-slider');
+              if (el) el.scrollBy({ left: -el.clientWidth * 0.8, behavior: 'smooth' });
+            }}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-black border border-white text-white flex items-center justify-center text-2xl hover:bg-white hover:text-black transition"
+            aria-label="Scroll left"
+            style={{ display: 'block' }}
+          >
+            &#8592;
+          </button>
+          <button
+            onClick={() => {
+              const el = document.getElementById('featured-properties-slider');
+              if (el) el.scrollBy({ left: el.clientWidth * 0.8, behavior: 'smooth' });
+            }}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-black border border-white text-white flex items-center justify-center text-2xl hover:bg-white hover:text-black transition"
+            aria-label="Scroll right"
+            style={{ display: 'block' }}
+          >
+            &#8594;
+          </button>
+          <div
+            id="featured-properties-slider"
+            className="flex flex-nowrap space-x-8 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory px-2 md:px-4"
+            style={{ scrollBehavior: 'smooth', minHeight: '700px' }}
+          >
+            {properties.map((property) => (
+              <div key={property.id} className="min-w-[420px] max-w-[480px] w-[32vw] flex-shrink-0 snap-start">
+                <PropertyCard 
+                  property={property} 
+                  onPayNow={() => setModal({ type: 'pay', property })}
+                  onCallExpert={() => setModal({ type: 'call', property })}
+                  onEnquireNow={() => setModal({ type: 'enquire', property })}
+                />
+              </div>
+            ))}
+          </div>
         </div>
         {/* Modal rendering */}
         {modal.type === 'pay' && modal.property && (

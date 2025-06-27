@@ -1,17 +1,18 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 
 const VideoModal = ({
   videoSrc = "https://res.cloudinary.com/dkgjl08a5/video/upload/v1744839021/Dubai_realestate_video_01_tsmqus.webm",
   thumbnail = "",
   autoPlay = true,
-  muted = true,
+  muted = false,
 }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [isMini, setIsMini] = useState(false); // Start in fullscreen mode
-  const [isMuted, setIsMuted] = useState(muted);
+  const [isMuted, setIsMuted] = useState(false); // never muted by default
   const [showMiniAfterClose, setShowMiniAfterClose] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(autoPlay);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Animation variants for fullscreen modal
@@ -51,83 +52,168 @@ const VideoModal = ({
     },
   };
 
-  // Handle close of fullscreen modal
+  // Prevent body scroll and blur background when modal is open
+  useEffect(() => {
+    if (isOpen && !isMini) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, [isOpen, isMini]);
+
+  // Ensure video plays when component mounts and stays playing
+  useEffect(() => {
+    if (videoRef.current && isOpen) {
+      const video = videoRef.current;
+      video.muted = false;
+      const playVideo = async () => {
+        try {
+          await video.play();
+          setIsPlaying(true);
+        } catch (error) {
+          setIsPlaying(false); // If autoplay fails, show play overlay
+        }
+      };
+      playVideo();
+    }
+  }, [isOpen, isMuted, autoPlay]);
+
+  // Keep video playing during transitions between fullscreen and mini
+  useEffect(() => {
+    if (videoRef.current && isOpen) {
+      const video = videoRef.current;
+      
+      // Don't pause the video during state transitions
+      // Only ensure it's playing if it should be
+      if (isPlaying && video.paused) {
+        video.play().catch(() => {});
+      }
+    }
+  }, [isMini, isPlaying, isOpen]);
+
+  // Play/pause on click (only manual control)
+  const handleVideoClick = () => {
+    if (!videoRef.current) return;
+    const video = videoRef.current;
+    if (video.paused) {
+      video.muted = false; // Always unmute when user clicks play
+      video.play().then(() => setIsPlaying(true)).catch(() => {});
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  // Handle close of fullscreen modal (go to mini mode, keep playing)
   const handleCloseFullscreen = () => {
-    setIsMini(false);
-    setShowMiniAfterClose(true);
-    setTimeout(() => {
-      setIsMini(true);
-      setShowMiniAfterClose(false);
-    }, 600); // Wait for exit animation
+    // Don't pause video when minimizing
+    setIsMini(true);
+  };
+
+  // Handle mute toggle
+  const handleMuteToggle = () => {
+    const newMutedState = !isMuted;
+    setIsMuted(newMutedState);
+    if (videoRef.current) {
+      videoRef.current.muted = newMutedState;
+    }
   };
 
   // When modal is closed, don't render
   if (!isOpen) return null;
 
   return (
-    <AnimatePresence>
-      {!isMini && (
-        <motion.div
-          className="fixed inset-0 z-[9999] flex items-center justify-center"
-          variants={fullscreenVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          key="fullscreen-modal"
-        >
-          {/* Modal Content */}
-          <div
-            className="relative bg-black aspect-[9/16] w-[min(92vw,42vh)] h-[min(75vh,calc(92vw*16/9))] max-w-[420px] max-h-[75vh] lg:max-w-[600px] lg:max-h-[75vh] flex items-center justify-center rounded-lg overflow-hidden shadow-2xl"
-            style={{ borderRadius: 24, zIndex: 2 }}
-          >
-            <video
-              ref={videoRef}
-              src={videoSrc}
-              poster={thumbnail}
-              autoPlay={autoPlay}
-              muted={isMuted}
-              loop
-              playsInline
-              className="w-full h-full object-contain aspect-[9/16]"
+    <>
+      {(!isMini && isOpen) && (
+        <>
+          {/* Overlay for blur - OUTSIDE the flex container */}
+          <AnimatePresence>
+            <motion.div
+              className="fixed inset-0 bg-black/60 backdrop-blur-[6px] z-[9998]"
+              variants={overlayVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              style={{ pointerEvents: 'none' }}
             />
-            {/* Close Button (slide out right) */}
-            <button
-              onClick={handleCloseFullscreen}
-              className="absolute top-2 right-2 z-10 bg-black/60 hover:bg-black/80 text-white rounded-full p-1.5 shadow-lg transition-transform hover:scale-110"
-              aria-label="Close video"
-              style={{ zIndex: 3 }}
+          </AnimatePresence>
+          <motion.div
+            className="fixed inset-0 z-[9999] flex items-center justify-center"
+            variants={fullscreenVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            key="fullscreen-modal"
+          >
+            {/* Modal Content */}
+            <div
+              className="relative bg-black aspect-[9/16] w-[min(98vw,60vh)] h-[min(75vh,calc(98vw*16/9))] max-w-[900px] max-h-[75vh] flex items-center justify-center rounded-lg overflow-hidden shadow-2xl z-[10000]"
+              style={{ borderRadius: 24 }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            {/* Mute/Unmute Button */}
-            <button
-              onClick={() => {
-                setIsMuted((m) => !m);
-                if (videoRef.current) videoRef.current.muted = !isMuted;
-              }}
-              className="absolute bottom-2 left-2 z-10 bg-black/60 hover:bg-black/80 text-white rounded-full p-1.5 shadow-lg transition-transform hover:scale-110"
-              aria-label={isMuted ? "Unmute video" : "Mute video"}
-              style={{ zIndex: 3 }}
-            >
-              {isMuted ? (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 9.75L19.5 12m0 0l2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
-                </svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
-                </svg>
+              <video
+                ref={videoRef}
+                src={videoSrc}
+                poster={thumbnail}
+                autoPlay={autoPlay}
+                muted={false}
+                loop
+                playsInline
+                className="w-full h-full object-contain aspect-[9/16] cursor-pointer"
+                onClick={handleVideoClick}
+              />
+              {/* Play overlay if video is paused */}
+              {!isPlaying && (
+                <button
+                  onClick={handleVideoClick}
+                  className="absolute inset-0 flex items-center justify-center bg-black/40 z-20"
+                  aria-label="Play video"
+                  style={{ borderRadius: 24 }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" width="64" height="64">
+                    <circle cx="12" cy="12" r="10" fill="rgba(0,0,0,0.6)" />
+                    <polygon points="10,8 16,12 10,16" fill="white" />
+                  </svg>
+                </button>
               )}
-            </button>
-          </div>
-        </motion.div>
+              {/* Close Button (slide out right) */}
+              <button
+                onClick={handleCloseFullscreen}
+                className="absolute top-2 right-2 z-10 bg-black/60 hover:bg-black/80 text-white rounded-full p-1.5 shadow-lg transition-transform hover:scale-110"
+                aria-label="Close video"
+                style={{ zIndex: 3 }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              {/* Mute/Unmute Button */}
+              <button
+                onClick={handleMuteToggle}
+                className="absolute bottom-2 left-2 z-10 bg-black/60 hover:bg-black/80 text-white rounded-full p-1.5 shadow-lg transition-transform hover:scale-110"
+                aria-label={isMuted ? "Unmute video" : "Mute video"}
+                style={{ zIndex: 3 }}
+              >
+                {isMuted ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 9.75L19.5 12m0 0l2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+                  </svg>
+                )}
+              </button>
+            </div>
+          </motion.div>
+        </>
       )}
       {/* Mini Modal (appears after closing fullscreen) */}
       {isMini && (
         <motion.div
-          className="fixed bottom-4 right-4 w-28 h-48 sm:w-36 sm:h-64 lg:w-48 lg:h-80 z-[9999] shadow-2xl group"
+          className="fixed bottom-4 right-4 w-48 h-80 sm:w-64 sm:h-[28rem] lg:w-80 lg:h-[32rem] z-[9999] shadow-2xl group"
           variants={miniVariants}
           initial="hidden"
           animate="visible"
@@ -151,12 +237,26 @@ const VideoModal = ({
               src={videoSrc}
               poster={thumbnail}
               autoPlay
-              muted={isMuted}
+              muted={false}
               loop
               playsInline
               className="w-full h-full object-contain aspect-[9/16] cursor-pointer"
               onClick={() => setIsMini(false)}
             />
+            {/* Play overlay if video is paused in mini mode */}
+            {!isPlaying && (
+              <button
+                onClick={handleVideoClick}
+                className="absolute inset-0 flex items-center justify-center bg-black/40 z-20"
+                aria-label="Play video"
+                style={{ borderRadius: 16 }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" width="48" height="48">
+                  <circle cx="12" cy="12" r="10" fill="rgba(0,0,0,0.6)" />
+                  <polygon points="10,8 16,12 10,16" fill="white" />
+                </svg>
+              </button>
+            )}
             {/* Close Button (only on hover) */}
             <button
               onClick={() => setIsOpen(false)}
@@ -170,10 +270,7 @@ const VideoModal = ({
             </button>
             {/* Mute/Unmute Button (only on hover) */}
             <button
-              onClick={() => {
-                setIsMuted((m) => !m);
-                if (videoRef.current) videoRef.current.muted = !isMuted;
-              }}
+              onClick={handleMuteToggle}
               className="absolute bottom-2 left-2 z-10 bg-black/60 hover:bg-black/80 text-white rounded-full p-1.5 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
               aria-label={isMuted ? "Unmute video" : "Mute video"}
             >
@@ -192,9 +289,8 @@ const VideoModal = ({
           </div>
         </motion.div>
       )}
-
-    </AnimatePresence>
+    </>
   );
 };
 
-export default VideoModal; 
+export default VideoModal;
