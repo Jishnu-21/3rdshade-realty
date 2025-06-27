@@ -46,7 +46,7 @@ const Banner = () => {
   }, []);
 
   return (
-    <div className="w-full relative min-h-screen flex flex-col justify-between overflow-hidden bg-transparent">
+    <div className="w-full relative min-h-screen flex flex-col justify-between overflow-hidden bg-transparent pt-20 md:pt-28">
       {/* Background Video */}
       <video
         ref={videoRef}
@@ -60,8 +60,8 @@ const Banner = () => {
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
       {/* Main Content */}
-      <div className="relative z-10 w-full pt-20 sm:pt-24 md:pt-40 lg:pt-56 xl:pt-64 flex-grow">
-        <div className="max-w-screen-2xl mx-auto px-4 md:px-8 flex flex-col items-start text-left">
+      <div className="relative z-10 w-full flex-grow">
+        <div className="max-w-screen-2xl mx-auto px-4 md:px-8 flex flex-col items-start text-left mt-12 sm:mt-20 md:mt-32">
           <motion.h1
             className="font-bold text-white text-4xl md:text-6xl lg:text-7xl leading-tight mb-4"
             initial={{ opacity: 0, y: 40 }}
