@@ -149,7 +149,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onPayNow, onCallE
   return (
     <Link href={`/property/${property.slug}`} className="block" prefetch={false}>
       <div
-        className="bg-neutral-900 rounded-lg overflow-hidden shadow-lg flex flex-col transition-transform duration-300 hover:scale-105 cursor-pointer h-[1050px]"
+        className="bg-neutral-900 rounded-lg overflow-hidden shadow-lg flex flex-col transition-transform duration-300 hover:scale-105 cursor-pointer h-[1010px]"
         onMouseEnter={() => hasVideo && setIsHovered(true)}
         onMouseLeave={() => hasVideo && setIsHovered(false)}
       >
