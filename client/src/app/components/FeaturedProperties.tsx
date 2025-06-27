@@ -149,11 +149,11 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onPayNow, onCallE
   return (
     <Link href={`/property/${property.slug}`} className="block" prefetch={false}>
       <div
-        className="bg-neutral-900 rounded-lg overflow-hidden shadow-lg flex flex-col items-center transition-transform duration-300 hover:scale-105 cursor-pointer min-h-[540px] h-full"
+        className="bg-neutral-900 rounded-lg overflow-hidden shadow-lg flex flex-col transition-transform duration-300 hover:scale-105 cursor-pointer h-[1050px]"
         onMouseEnter={() => hasVideo && setIsHovered(true)}
         onMouseLeave={() => hasVideo && setIsHovered(false)}
       >
-        <div className="w-full flex justify-center items-center bg-black relative h-[340px] sm:h-[420px] md:h-[550px] lg:h-[700px]">
+        <div className="w-full bg-black relative aspect-[3/4] flex-shrink-0">
           {hasVideo ? (
             <video
               ref={videoRef}
@@ -161,16 +161,16 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onPayNow, onCallE
               loop
               muted
               playsInline
-              className="object-cover w-full h-full"
-              style={{ position: 'absolute', inset: 0, height: '100%' }}
+              className="object-cover w-full h-full rounded-t-lg"
+              style={{ width: '100%', height: '100%', display: 'block' }}
             />
           ) : (
-            <div className="flex items-center justify-center w-full h-full bg-neutral-800 text-neutral-500 text-lg font-semibold" style={{position: 'absolute', inset: 0}}>
+            <div className="flex items-center justify-center w-full h-full bg-neutral-800 text-neutral-500 text-lg font-semibold rounded-t-lg">
               No Media Available
             </div>
           )}
         </div>
-        <div className="p-6 w-full flex-1 flex flex-col">
+        <div className="p-6 w-full flex-1 flex flex-col overflow-y-auto">
           <div className="flex justify-between items-center mb-2">
             <h3 className="text-white text-xl font-bold">{property.title}</h3>
             <span className="text-purple-400 font-semibold text-lg">
@@ -179,16 +179,16 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onPayNow, onCallE
           </div>
          
           {/* Amenities List */}
-          <ul className="text-neutral-300 text-xs mb-4 grid gap-1">
+          <div className="text-white text-sm font-bold mb-4 grid grid-cols-2 gap-x-4 gap-y-2">
             {property.amenities && property.amenities.map((amenity, idx) => (
-              <li key={idx} className="flex items-center gap-2">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-purple-400" />
-                <span>{amenity}</span>
-              </li>
+              <div key={idx} className="flex items-center gap-2">
+                <span className="inline-block w-2 h-2 rounded-full bg-purple-400" />
+                <span className="font-bold text-white">{amenity}</span>
+              </div>
             ))}
-          </ul>
+          </div>
           {/* Action Buttons */}
-          <div className="space-y-2 pt-2">
+          <div className="space-y-2 pt-2 mt-auto">
             <button
               type="button"
               className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg text-sm"
@@ -300,17 +300,15 @@ const FeaturedProperties = () => {
           </Link>
         </div>
         <p className="text-neutral-400 text-base sm:text-lg mb-8 md:mb-12 max-w-2xl">A curated set of premium properties offering value through design, connectivity, and development credibility.</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 items-stretch">
           {properties.map((property) => (
             <div key={property.id} className="h-full flex flex-col">
-              <div className="flex-1 flex flex-col">
-                <PropertyCard 
-                  property={property} 
-                  onPayNow={() => setModal({ type: 'pay', property })}
-                  onCallExpert={() => setModal({ type: 'call', property })}
-                  onEnquireNow={() => setModal({ type: 'enquire', property })}
-                />
-              </div>
+              <PropertyCard 
+                property={property} 
+                onPayNow={() => setModal({ type: 'pay', property })}
+                onCallExpert={() => setModal({ type: 'call', property })}
+                onEnquireNow={() => setModal({ type: 'enquire', property })}
+              />
             </div>
           ))}
         </div>
