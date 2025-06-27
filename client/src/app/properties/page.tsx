@@ -591,56 +591,9 @@ const PropertiesPage = () => {
         </div>
       </section>
 
-      {/* Filters Section */}
-      <section className="py-12 border-b border-gray-800 bg-gradient-to-r from-gray-900/80 to-gray-800/80 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Price Range with Slider */}
-            <div className="bg-black/40 rounded-xl p-6 border border-gray-700">
-              <label className="block text-lg font-semibold text-white mb-4">Price Range (AED)</label>
-              <div className="flex flex-col gap-4 items-center">
-                <Slider
-                  range
-                  min={0}
-                  max={6000000}
-                  step={100000}
-                  value={priceRange}
-                  onChange={handleSliderChange}
-                  trackStyle={[{ backgroundColor: '#a21caf' }]}
-                  handleStyle={[{ borderColor: '#a21caf' }, { borderColor: '#a21caf' }]}
-                  railStyle={{ backgroundColor: '#444' }}
-                />
-                <div className="flex justify-between w-full text-sm text-gray-300">
-                  <span>{priceRange[0].toLocaleString()}</span>
-                  <span>{priceRange[1].toLocaleString()}</span>
-                </div>
-              </div>
-            </div>
-            {/* Sort Options */}
-            <div className="bg-black/40 rounded-xl p-6 border border-gray-700">
-              <label className="block text-lg font-semibold text-white mb-4">Sort By</label>
-              <select 
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="w-full px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
-              >
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                
-              </select>
-            </div>
-          </div>
-        </div>
-      </section>
+    
 
-      {/* Results Count */}
-      <section className="py-6 bg-gray-900/50">
-        <div className="max-w-7xl mx-auto px-6">
-          <p className="text-gray-400 text-center">
-            Showing <span className="text-white font-semibold">{sortedProperties.length}</span> of <span className="text-white font-semibold">{allProperties.length}</span> properties
-          </p>
-        </div>
-      </section>
+
 
       {/* Properties Grid */}
       <section className="py-16">

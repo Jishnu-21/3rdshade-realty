@@ -42,9 +42,10 @@ const Header = ({ onEnquire }: { onEnquire?: () => void }) => {
               <Image
                 src="/logos/logo.png"
                 alt="3RD SHADE Logo"
-                width={120}
-                height={18}
-                className="md:w-[185px] md:h-[22px] w-[120px] h-[18px]"
+                width={185}
+                height={28}
+                className="w-[140px] md:w-[185px] h-auto"
+                priority
               />
             </Link>
           </div>
@@ -90,13 +91,14 @@ const Header = ({ onEnquire }: { onEnquire?: () => void }) => {
     </button>
 
     {/* Logo inside mobile menu */}
-    <Link href="/" onClick={() => setMenuOpen(false)} className="mb-6">
+    <Link href="/" onClick={() => setMenuOpen(false)} className="mb-6 flex justify-center w-full">
       <Image
         src="/logos/logo.png"
         alt="3RD SHADE Logo"
-        width={150}
-        height={30}
-        className="w-[150px] h-auto"
+        width={140}
+        height={24}
+        className="w-[120px] sm:w-[140px] h-auto mx-auto"
+        priority
       />
     </Link>
 
