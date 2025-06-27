@@ -149,7 +149,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onPayNow, onCallE
   return (
     <Link href={`/property/${property.slug}`} className="block" prefetch={false}>
       <div
-        className="bg-neutral-900 rounded-lg overflow-hidden shadow-lg flex flex-col transition-transform duration-300 hover:scale-105 cursor-pointer h-[1100px]"
+        className="bg-neutral-900 rounded-lg overflow-hidden shadow-lg flex flex-col transition-transform duration-300 hover:scale-105 cursor-pointer h-[1050px]"
         onMouseEnter={() => hasVideo && setIsHovered(true)}
         onMouseLeave={() => hasVideo && setIsHovered(false)}
       >
@@ -177,11 +177,11 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onPayNow, onCallE
           </div>
          
           {/* Amenities List */}
-          <div className="text-white text-sm font-bold mb-4 grid grid-cols-2 gap-x-4 gap-y-2">
+          <div className="text-white text-sm font-bold mb-4 grid grid-cols-1 gap-y-2">
             {property.amenities && property.amenities.map((amenity, idx) => (
               <div key={idx} className="flex items-center gap-2">
                 <span className="inline-block w-2 h-2 rounded-full bg-purple-400" />
-                <span className="font-bold text-white">{amenity}</span>
+                <span className="font-bold text-white whitespace-nowrap">{amenity}</span>
               </div>
             ))}
           </div>
