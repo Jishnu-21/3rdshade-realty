@@ -6,7 +6,7 @@ const paragraphLines = [
   'Your real estate brand deserves more than visibility, ',
   'it deserves a story the market remembers. At Third Shade ',
   'Realty, powered by 3rd Shades creative force, visuals,and',
-  ' marketing excellenceto put your properties in the spotlight.',
+  ' marketing excellence to put your properties in the spotlight.',
   'From new project launches to brand evolution, ',
   'we scale your presence with precision and purpose.'
 ];
