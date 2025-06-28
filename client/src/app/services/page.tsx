@@ -130,16 +130,55 @@ export default function ServicesPage() {
         loop
         muted
         playsInline
-        className="fixed top-0 left-0 w-full h-full object-cover "
-        style={{ minHeight: '100vh', minWidth: '100vw' }}
+        preload="metadata"
+        className="fixed top-0 left-0 w-full h-full object-cover z-0"
+        style={{ 
+          minHeight: '100vh', 
+          minWidth: '100vw',
+          filter: 'brightness(0.4) contrast(1.1)',
+          willChange: 'transform',
+          backfaceVisibility: 'hidden',
+          perspective: '1000px',
+          transform: 'translate3d(0, 0, 0)'
+        }}
+        onLoadedData={(e) => {
+          const video = e.target as HTMLVideoElement;
+          video.playbackRate = 1;
+          video.play().catch(console.error);
+        }}
       >
-        <source src="https://res.cloudinary.com/dzmxqwlse/video/upload/v1751103240/bg-service3d_xxpg9p.webm" type="video/mp4" />
+        <source src="https://res.cloudinary.com/dzmxqwlse/video/upload/v1751103240/bg-service3d_xxpg9p.mp4" type="video/mp4" />
+        <source src="https://res.cloudinary.com/dzmxqwlse/video/upload/v1751103240/bg-service3d_xxpg9p.webm" type="video/webm" />
         Your browser does not support the video tag.
       </video>
-      {/* Overlay for readability */}
-      <div className="fixed top-0 left-0 w-full h-full  pointer-events-none" />
+
+      {/* Gradient Overlay for better readability */}
+      <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-10 bg-gradient-to-b from-black/60 via-transparent to-black/80" />
+      
+      {/* Animated Gradient Overlay */}
+      <div 
+        className="fixed top-0 left-0 w-full h-full pointer-events-none z-10 opacity-30"
+        style={{
+          background: `
+            radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.2) 0%, transparent 50%)
+          `,
+          animation: 'pulse 4s ease-in-out infinite alternate'
+        }}
+      />
+
+      {/* Noise Texture Overlay */}
+      <div 
+        className="fixed top-0 left-0 w-full h-full pointer-events-none z-10 opacity-20"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          mixBlendMode: 'overlay'
+        }}
+      />
+
       {/* Page Content */}
-      <div className="relative z-10">
+      <div className="relative z-20">
         <Header />
         <main className="min-h-screen flex flex-col justify-center items-center relative">
           <ServiceHero />
@@ -164,10 +203,10 @@ export default function ServicesPage() {
 
         {/* Modal Form */}
         {showModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-            <div className="bg-black rounded-xl p-8 w-full max-w-md shadow-lg relative border border-gray-800">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+            <div className="bg-black/90 backdrop-blur-md rounded-xl p-8 w-full max-w-md shadow-2xl relative border border-gray-800/50">
               <button
-                className="absolute top-2 right-3 text-white text-2xl"
+                className="absolute top-2 right-3 text-white text-2xl hover:text-purple-400 transition-colors"
                 onClick={() => { setShowModal(false); setMessage(''); }}
               >
                 &times;
@@ -175,7 +214,7 @@ export default function ServicesPage() {
               <h2 className="text-xl font-bold mb-4 text-white">Service Inquiry</h2>
               <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                 <input
-                  className="border border-gray-700 bg-neutral-900 text-white rounded p-2"
+                  className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 backdrop-blur-sm focus:border-purple-500 focus:outline-none transition-colors"
                   placeholder="Your Name"
                   name="name"
                   value={form.name}
@@ -183,7 +222,7 @@ export default function ServicesPage() {
                   required
                 />
                 <input
-                  className="border border-gray-700 bg-neutral-900 text-white rounded p-2"
+                  className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 backdrop-blur-sm focus:border-purple-500 focus:outline-none transition-colors"
                   placeholder="Organization"
                   name="organization"
                   value={form.organization}
@@ -191,7 +230,7 @@ export default function ServicesPage() {
                   required
                 />
                 <input
-                  className="border border-gray-700 bg-neutral-900 text-white rounded p-2"
+                  className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 backdrop-blur-sm focus:border-purple-500 focus:outline-none transition-colors"
                   placeholder="Email"
                   name="email"
                   value={form.email}
@@ -203,7 +242,7 @@ export default function ServicesPage() {
                   <div className="text-white font-semibold mb-2">Select Services</div>
                   <div className="flex flex-wrap gap-2">
                     {SERVICE_LIST.map(service => (
-                      <label key={service} className="flex items-center gap-2 bg-neutral-900 border border-gray-700 rounded px-3 py-1 text-white cursor-pointer">
+                      <label key={service} className="flex items-center gap-2 bg-neutral-900/80 border border-gray-700 rounded px-3 py-1 text-white cursor-pointer hover:border-purple-500 transition-colors backdrop-blur-sm">
                         <input
                           type="checkbox"
                           name="services"
@@ -219,7 +258,7 @@ export default function ServicesPage() {
                 </div>
                 <button
                   type="submit"
-                  className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-2 rounded mt-2"
+                  className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-2 rounded mt-2 hover:from-purple-700 hover:to-pink-600 transition-all transform hover:scale-105"
                   disabled={loading}
                 >
                   {loading ? 'Sending...' : 'Submit'}
@@ -232,10 +271,10 @@ export default function ServicesPage() {
 
         {/* Call Booking Modal */}
         {showCallModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-            <div className="bg-black rounded-xl p-8 w-full max-w-md shadow-lg relative border border-purple-800">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+            <div className="bg-black/90 backdrop-blur-md rounded-xl p-8 w-full max-w-md shadow-2xl relative border border-purple-800/50">
               <button
-                className="absolute top-2 right-3 text-white text-2xl"
+                className="absolute top-2 right-3 text-white text-2xl hover:text-purple-400 transition-colors"
                 onClick={() => { setShowCallModal(false); setCallMessage(''); }}
               >
                 &times;
@@ -244,7 +283,7 @@ export default function ServicesPage() {
               <form className="flex flex-col gap-4" onSubmit={handleCallSubmit}>
                 <div className="text-white font-semibold">Service: <span className="text-pink-400">{callForm.service}</span></div>
                 <input
-                  className="border border-gray-700 bg-neutral-900 text-white rounded p-2"
+                  className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 backdrop-blur-sm focus:border-purple-500 focus:outline-none transition-colors"
                   type="date"
                   name="date"
                   value={callForm.date}
@@ -252,7 +291,7 @@ export default function ServicesPage() {
                   required
                 />
                 <input
-                  className="border border-gray-700 bg-neutral-900 text-white rounded p-2"
+                  className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 backdrop-blur-sm focus:border-purple-500 focus:outline-none transition-colors"
                   type="time"
                   name="time"
                   value={callForm.time}
@@ -260,7 +299,7 @@ export default function ServicesPage() {
                   required
                 />
                 <input
-                  className="border border-gray-700 bg-neutral-900 text-white rounded p-2"
+                  className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 backdrop-blur-sm focus:border-purple-500 focus:outline-none transition-colors"
                   placeholder="Your Email"
                   name="email"
                   value={callForm.email}
@@ -270,7 +309,7 @@ export default function ServicesPage() {
                 />
                 <button
                   type="submit"
-                  className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-2 rounded mt-2"
+                  className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-2 rounded mt-2 hover:from-purple-700 hover:to-pink-600 transition-all transform hover:scale-105"
                   disabled={callLoading}
                 >
                   {callLoading ? 'Booking...' : 'Book Slot'}
@@ -281,6 +320,13 @@ export default function ServicesPage() {
           </div>
         )}
       </div>
+
+      <style jsx>{`
+        @keyframes pulse {
+          0% { opacity: 0.2; }
+          100% { opacity: 0.4; }
+        }
+      `}</style>
     </div>
   );
-} 
+}
