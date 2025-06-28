@@ -10,7 +10,7 @@ const VideoModal = ({
 }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [isMini, setIsMini] = useState(false); // Start in fullscreen mode
-  const [isMuted, setIsMuted] = useState(false); // never muted by default
+  const [isMuted, setIsMuted] = useState(false); // Start unmuted to play with audio
   const [showMiniAfterClose, setShowMiniAfterClose] = useState(false);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -68,23 +68,47 @@ const VideoModal = ({
   useEffect(() => {
     if (videoRef.current && isOpen) {
       const video = videoRef.current;
+      
+      // Force unmuted state on video element directly
       video.muted = false;
+      video.volume = 1.0; // Ensure volume is at maximum
+      setIsMuted(false); // Ensure state matches
+      
       const playVideo = async () => {
         try {
+          console.log('Attempting to play with sound...');
           await video.play();
           setIsPlaying(true);
+          console.log('Playing with sound successfully');
         } catch (error) {
-          setIsPlaying(false); // If autoplay fails, show play overlay
+          // If autoplay fails with sound, try muted
+          console.log('Autoplay with sound failed, trying muted', error);
+          video.muted = true;
+          setIsMuted(true);
+          try {
+            await video.play();
+            setIsPlaying(true);
+            console.log('Playing muted successfully');
+          } catch (mutedError) {
+            console.log('Autoplay completely failed', mutedError);
+            setIsPlaying(false); // If both fail, show play overlay
+          }
         }
       };
-      playVideo();
+      
+      // Small delay to ensure video is ready
+      setTimeout(playVideo, 100);
     }
-  }, [isOpen, isMuted, autoPlay]);
+  }, [isOpen]);
 
   // Keep video playing during transitions between fullscreen and mini
   useEffect(() => {
     if (videoRef.current && isOpen) {
       const video = videoRef.current;
+      
+      // Ensure mute state is consistent when switching modes
+      video.muted = isMuted;
+      video.volume = 1.0;
       
       // Don't pause the video during state transitions
       // Only ensure it's playing if it should be
@@ -92,14 +116,18 @@ const VideoModal = ({
         video.play().catch(() => {});
       }
     }
-  }, [isMini, isPlaying, isOpen]);
+  }, [isMini, isPlaying, isOpen, isMuted]);
 
   // Play/pause on click (only manual control)
   const handleVideoClick = () => {
     if (!videoRef.current) return;
     const video = videoRef.current;
     if (video.paused) {
-      video.muted = false; // Always unmute when user clicks play
+      // Ensure audio is unmuted when user manually plays
+      if (isMuted) {
+        video.muted = false;
+        setIsMuted(false);
+      }
       video.play().then(() => setIsPlaying(true)).catch(() => {});
     } else {
       video.pause();
@@ -113,15 +141,16 @@ const VideoModal = ({
     setIsMini(true);
   };
 
-  // Handle click outside video to close modal
+  // Handle click outside video to minimize to mini mode
   const handleOutsideClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
-      setIsOpen(false);
+      setIsMini(true);
     }
   };
 
-  // Handle mute toggle
-  const handleMuteToggle = () => {
+  // Handle mute toggle - FIXED
+  const handleMuteToggle = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent video click handler
     const newMutedState = !isMuted;
     setIsMuted(newMutedState);
     if (videoRef.current) {
@@ -167,7 +196,6 @@ const VideoModal = ({
                 src={videoSrc}
                 poster={thumbnail}
                 autoPlay={autoPlay}
-                muted={false}
                 loop
                 playsInline
                 className="w-full h-full object-contain aspect-[9/16] cursor-pointer"
@@ -198,7 +226,7 @@ const VideoModal = ({
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
-              {/* Mute/Unmute Button */}
+              {/* Mute/Unmute Button - FIXED */}
               <button
                 onClick={handleMuteToggle}
                 className="absolute bottom-2 left-2 z-10 bg-black/60 hover:bg-black/80 text-white rounded-full p-1.5 shadow-lg transition-transform hover:scale-110"
@@ -219,7 +247,7 @@ const VideoModal = ({
           </motion.div>
         </>
       )}
-      {/* Mini Modal (appears after closing fullscreen) */}
+      {/* Mini Modal (appears after closing fullscreen) - FIXED aspect ratio */}
       {isMini && (
         <motion.div
           className="fixed bottom-4 right-4 w-48 h-80 sm:w-64 sm:h-[28rem] lg:w-80 lg:h-[32rem] z-[9999] shadow-2xl group"
@@ -238,7 +266,7 @@ const VideoModal = ({
           }}
         >
           <div
-            className="relative bg-black w-full h-full flex items-center justify-center rounded-lg overflow-hidden"
+            className="relative w-full h-full rounded-lg overflow-hidden"
             style={{ borderRadius: 16 }}
           >
             <video
@@ -246,10 +274,9 @@ const VideoModal = ({
               src={videoSrc}
               poster={thumbnail}
               autoPlay
-              muted={false}
               loop
               playsInline
-              className="w-full h-full object-contain aspect-[9/16] cursor-pointer"
+              className="w-full h-full object-cover cursor-pointer"
               onClick={() => setIsMini(false)}
             />
             {/* Play overlay if video is paused in mini mode */}
@@ -277,7 +304,7 @@ const VideoModal = ({
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            {/* Mute/Unmute Button (only on hover) */}
+            {/* Mute/Unmute Button (only on hover) - FIXED */}
             <button
               onClick={handleMuteToggle}
               className="absolute bottom-2 left-2 z-10 bg-black/60 hover:bg-black/80 text-white rounded-full p-1.5 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
