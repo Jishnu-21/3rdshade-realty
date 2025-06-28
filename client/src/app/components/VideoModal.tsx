@@ -113,6 +113,13 @@ const VideoModal = ({
     setIsMini(true);
   };
 
+  // Handle click outside video to close modal
+  const handleOutsideClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      setIsOpen(false);
+    }
+  };
+
   // Handle mute toggle
   const handleMuteToggle = () => {
     const newMutedState = !isMuted;
@@ -147,11 +154,13 @@ const VideoModal = ({
             animate="visible"
             exit="exit"
             key="fullscreen-modal"
+            onClick={handleOutsideClick}
           >
             {/* Modal Content */}
             <div
-              className="relative bg-black aspect-[9/16] w-[min(98vw,60vh)] h-[min(75vh,calc(98vw*16/9))] max-w-[900px] max-h-[75vh] flex items-center justify-center rounded-lg overflow-hidden shadow-2xl z-[10000]"
+              className="relative bg-black aspect-[9/16] w-auto h-auto max-w-[90vw] max-h-[90vh] flex items-center justify-center rounded-lg overflow-hidden shadow-2xl z-[10000]"
               style={{ borderRadius: 24 }}
+              onClick={(e) => e.stopPropagation()}
             >
               <video
                 ref={videoRef}

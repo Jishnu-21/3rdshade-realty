@@ -140,21 +140,29 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
   };
 
   return (
-    <section className="w-full bg-black py-20 relative">
+    <section className="w-full bg-black py-20 relative font-montserrat">
       <div className="w-full max-w-screen-4xl ">
         <div className="flex items-center mb-2">
           <motion.h2
-            className="text-white text-3xl md:text-5xl font-extrabold text-center mx-auto flex gap-1"
+            className="text-white text-4xl md:text-7xl font-normal text-center mx-auto flex gap-1 "
             variants={titleParent}
             initial="hidden"
             whileInView="visible"
+            style={{
+              fontFamily: 'Montserrat, Helvetica, sans-serif',
+            }}
             viewport={{ once: true }}
           >
             {Array.from('OUR SERVICES').map((char, idx) => (
               <motion.span
                 key={idx}
                 variants={letterVariant}
-                style={{ display: char === ' ' ? 'inline-block' : 'inline-block', minWidth: char === ' ' ? '0.5em' : undefined }}
+                style={{ 
+                  display: char === ' ' ? 'inline-block' : 'inline-block', 
+                  minWidth: char === ' ' ? '0.5em' : undefined,
+                  fontFamily: 'Montserrat, Helvetica, sans-serif'
+                }}
+                className="font-sans"
               >
                 {char}
               </motion.span>
@@ -173,13 +181,13 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
                 viewport={{ once: true, amount: 0.2 }}
               >
                 <div
-                  className={`w-full flex flex-col md:flex-row ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''} gap-8 md:gap-20 items-end group relative`}
-                  onMouseMove={e => handlePointerMove(e, idx)}
-                  onMouseLeave={handlePointerLeave}
-                  style={{ cursor: hoveredIdx === idx ? 'none' : 'auto' }}
+                  className={`w-full flex flex-col md:flex-row ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-4 md:gap-10 items-end group relative`}
                 >
                   {/* Image */}
-                  <div className="w-full md:w-1/2 relative">
+                  <div className="w-full md:w-1/2 relative flex-shrink-0"
+                    onMouseMove={e => handlePointerMove(e, idx)}
+                    onMouseLeave={handlePointerLeave}
+                  >
                     <img
                       src={service.image}
                       alt={service.title}
@@ -187,17 +195,36 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
                       onClick={() => handleOpenModal(service.title)}
                     />
                   </div>
-                  {/* Content */}
-                  <div className="w-full md:w-1/2 flex flex-col justify-end pb-8 relative cursor-pointer group">
-                    <h3 className="text-white text-2xl md:text-4xl font-extrabold mb-6 leading-tight transition-colors duration-300 group-hover:text-gradient bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 bg-clip-text text-transparent" onClick={() => handleOpenModal(service.title)}>
-                      {service.title}
+                  {/* Text (beside image, bottom-aligned) */}
+                  <div
+                    className={`w-full md:w-1/2 flex flex-col justify-end h-80 md:h-[500px] pb-4
+                      ${idx % 2 === 0 ? 'text-left items-start' : 'text-right items-end'}
+                    `}
+                  >
+                    <h3
+                      className="text-white text-4xl md:text-7xl font-normal leading-tight transition-all duration-300 inline-block group"
+                      style={{ fontFamily: 'Montserrat, Helvetica, sans-serif' }}
+                    >
+                      {service.title.split(' ').map((word, i) => (
+                        <span key={i} className="relative block">
+                          {word}
+                          <span
+                            className="absolute left-0 -bottom-1 h-1 w-full origin-left scale-x-0 group-hover:scale-x-100 bg-white transition-transform duration-300"
+                            aria-hidden="true"
+                          />
+                        </span>
+                      ))}
                     </h3>
-                    <p className="text-neutral-300 text-lg md:text-xl leading-relaxed">
+                    <p
+                      className="text-neutral-300 text-lg md:text-xl leading-relaxed mt-2"
+                      style={{ fontFamily: 'Montserrat, Helvetica, sans-serif' }}
+                    >
                       {service.description}
                     </p>
                   </div>
                 </div>
               </motion.div>
+              <hr className="border-neutral-700 my-12" />
             </React.Fragment>
           ))}
         </div>
@@ -210,11 +237,11 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
         overlayClassName="fixed inset-0 bg-black/70 z-[9998]"
         ariaHideApp={false}
       >
-        <div className="bg-neutral-900 rounded-xl shadow-2xl p-8 w-full max-w-md relative animate-fadeIn">
-          <button className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer scale-100 hover:scale-110" onClick={() => setShowModal(false)}>
+        <div className="bg-neutral-900 rounded-xl shadow-2xl p-8 w-full max-w-md relative animate-fadeIn font-montserrat">
+          <button className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer scale-100 hover:scale-110 font-montserrat" onClick={() => setShowModal(false)}>
             ×
           </button>
-          <h2 className="text-2xl font-bold mb-6 text-center text-white">Service Enquiry</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center text-white font-montserrat">Service Enquiry</h2>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <input
               type="text"
@@ -222,7 +249,7 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
               placeholder="Name"
               value={form.name}
               onChange={handleInputChange}
-              className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
+              className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 font-montserrat"
               required
             />
             <input
@@ -231,7 +258,7 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
               placeholder="Email"
               value={form.email}
               onChange={handleInputChange}
-              className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
+              className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 font-montserrat"
               required
             />
             <input
@@ -240,14 +267,14 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
               placeholder="Phone Number"
               value={form.phone}
               onChange={handleInputChange}
-              className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500"
+              className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 font-montserrat"
               required
             />
             <div>
-              <label className="block text-white mb-2">Select Service(s):</label>
+              <label className="block text-white mb-2 font-montserrat">Select Service(s):</label>
               <div className="flex flex-wrap gap-2">
                 {services.map(s => (
-                  <label key={s.title} className="flex items-center gap-2 bg-neutral-800 px-3 py-2 rounded-lg cursor-pointer text-white">
+                  <label key={s.title} className="flex items-center gap-2 bg-neutral-800 px-3 py-2 rounded-lg cursor-pointer text-white font-montserrat">
                     <input
                       type="checkbox"
                       name="services"
@@ -266,13 +293,13 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
               placeholder="Message"
               value={form.message}
               onChange={handleInputChange}
-              className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 min-h-[100px]"
+              className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 min-h-[100px] font-montserrat"
               required
             />
-            <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg" disabled={loading}>
+            <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg font-montserrat" disabled={loading}>
               {loading ? 'Sending...' : 'Send Enquiry'}
             </button>
-            {result && <div className="text-center text-sm mt-2 text-white">{result}</div>}
+            {result && <div className="text-center text-sm mt-2 text-white font-montserrat">{result}</div>}
           </form>
         </div>
       </Modal>
@@ -288,7 +315,7 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
             transition={{ duration: 0.2 }}
           >
             <div className="w-40 h-40 rounded-full flex items-center justify-center bg-gradient-to-br from-purple-500 via-pink-500 to-yellow-400 shadow-2xl animate-pulse">
-              <span className="text-white font-bold text-lg select-none">Enquire Now</span>
+              <span className="text-white font-bold text-lg select-none font-montserrat">Enquire Now</span>
             </div>
           </motion.div>
         )}

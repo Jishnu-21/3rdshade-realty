@@ -3,14 +3,18 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const lines = [
-  'POWERING ',
-  'REALTY',
-  'SERVICES',
+  'GUIDANCE',
+  'TRUST',
+  'DELIVERY',
 ];
+
+
+  
+
 
 // Updated responsive zigzag offsets with better iPad/tablet support
 const zigzagOffsets = [
-  'ml-4 sm:ml-8 md:ml-16 lg:ml-32 xl:ml-0',     // 1st line: progressive left margins
+  'ml-4 sm:ml-8 md:ml-16 lg:ml-32 xl:ml-10',     // 1st line: progressive left margins
   'ml-1 sm:ml-2 md:ml-4 lg:-ml-8 xl:-ml-40',     // 2nd line: positive margins on smaller screens, negative on larger
   'ml-2 sm:ml-6 md:ml-12 lg:ml-24 xl:ml-4',     // 3rd line: progressive left margins
 ];

@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import ServiceHero from '../components/ServiceHero';
 import ServiceIntro from '../components/ServiceIntro';
 import ServiceSection from '../components/ServiceSection';
+import CallToAction from '../components/CallToAction';
 
 const SERVICE_LIST = [
   'Branding',
@@ -137,6 +138,7 @@ export default function ServicesPage() {
           />
         </div>
       </main>
+      <CallToAction/>
       <Footer />
 
       {/* Example service card (add onClick to your actual service items) */}
@@ -260,6 +262,7 @@ export default function ServicesPage() {
               {callMessage && <div className="mt-2 text-center text-white">{callMessage}</div>}
             </form>
           </div>
+
         </div>
       )}
     </div>
