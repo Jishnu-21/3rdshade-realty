@@ -194,6 +194,7 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
                   <div className="w-full md:w-1/2 relative flex-shrink-0"
                     onMouseMove={e => handlePointerMove(e, idx)}
                     onMouseLeave={handlePointerLeave}
+                    data-aos={idx % 2 === 0 ? 'fade-right' : 'fade-left'}
                   >
                     <img
                       src={service.image}
