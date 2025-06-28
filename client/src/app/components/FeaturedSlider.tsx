@@ -95,7 +95,8 @@ const FeaturedSlider = () => {
         {featuredItems.map((item, idx) => (
           <div
             key={idx}
-            className="min-w-[calc(100vw-32px)] md:min-w-[400px] max-w-md bg-black rounded-2xl shadow-lg snap-start flex-shrink-0 overflow-hidden border border-neutral-800 cursor-pointer group"
+            className="min-w-[calc(100vw-32px)] md:min-w-[400px] max-w-md bg-black rounded-2xl shadow-lg snap-start flex-shrink-0 overflow-hidden border border-neutral-800 cursor-pointer group relative"
+            style={{ height: '800px' }}
             onMouseEnter={() => {
               setHoveredIndex(idx);
               videoRefs.current[idx]?.play();
@@ -105,9 +106,9 @@ const FeaturedSlider = () => {
               videoRefs.current[idx]?.pause();
             }}
           >
+            {/* Video Background */}
             <div
-              className="w-full bg-neutral-900 flex items-center justify-center relative"
-              style={{ height: '800px', minHeight: '800px', maxHeight: '900px' }}
+              className="w-full h-full relative"
             >
               <video
                 ref={el => { videoRefs.current[idx] = el; }}
@@ -117,46 +118,53 @@ const FeaturedSlider = () => {
                 playsInline
                 className="w-full h-full object-cover"
                 preload="auto"
-                style={{ height: '100%', width: '100%', objectFit: 'cover' }}
               />
-            </div>
-            <div className="p-8 border-t border-neutral-800 bg-black flex flex-col h-full min-h-[350px]" style={{height: 'calc(100% - 800px)'}}>
-              <div className="mb-4">
-                <div className="text-white text-xl font-bold truncate mb-1">{item.title}</div>
-                <div className="text-purple-400 font-semibold text-lg whitespace-nowrap">{item.price}</div>
-              </div>
-              <div className="text-white text-xs font-bold mb-4 grid grid-cols-1 gap-y-2">
-                {item.amenities && item.amenities.map((amenity, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <span className="inline-block w-2 h-2 rounded-full bg-purple-400" />
-                    <span className="font-bold text-white whitespace-nowrap">{amenity}</span>
+              
+              {/* Content Overlay - Shows on hover */}
+              <div 
+                className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent transition-all duration-500 ease-in-out ${
+                  hoveredIndex === idx ? 'opacity-100' : 'opacity-0'
+                }`}
+                style={{ height: '60%' }}
+              >
+                <div className="p-8 h-full flex flex-col justify-end">
+                  <div className="mb-4">
+                    <div className="text-white text-xl font-bold truncate mb-1">{item.title}</div>
+                    <div className="text-purple-400 font-semibold text-lg whitespace-nowrap">{item.price}</div>
                   </div>
-                ))}
-              </div>
-              <div className="flex-1" />
-              <div className="space-y-2 pt-2">
-                <button
-                  type="button"
-                  className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg text-sm"
-                  onClick={() => alert('Pay Now clicked!')}
-                >
-                  Pay Now
-                </button>
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    type="button"
-                    className="w-full bg-black text-white font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs"
-                    onClick={() => alert('Call Expert clicked!')}
-                  >
-                    Call Expert
-                  </button>
-                  <button
-                    type="button"
-                    className="w-full bg-black text-white font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs"
-                    onClick={() => alert('Enquire Now clicked!')}
-                  >
-                    Enquire Now
-                  </button>
+                  <div className="text-white text-xs font-bold mb-4 grid grid-cols-1 gap-y-2">
+                    {item.amenities && item.amenities.slice(0, 3).map((amenity, amenityIdx) => (
+                      <div key={amenityIdx} className="flex items-center gap-2">
+                        <span className="inline-block w-2 h-2 rounded-full bg-purple-400" />
+                        <span className="font-bold text-white whitespace-nowrap">{amenity}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="space-y-2 pt-2">
+                    <button
+                      type="button"
+                      className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg text-sm"
+                      onClick={() => alert('Pay Now clicked!')}
+                    >
+                      Pay Now
+                    </button>
+                    <div className="grid grid-cols-2 gap-2">
+                      <button
+                        type="button"
+                        className="w-full bg-black text-white font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs"
+                        onClick={() => alert('Call Expert clicked!')}
+                      >
+                        Call Expert
+                      </button>
+                      <button
+                        type="button"
+                        className="w-full bg-black text-white font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs"
+                        onClick={() => alert('Enquire Now clicked!')}
+                      >
+                        Enquire Now
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
