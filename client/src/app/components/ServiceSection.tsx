@@ -146,7 +146,7 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
   }, []);
 
   return (
-    <section className="w-full bg-black py-20 relative font-montserrat">
+    <section className="w-full py-20 relative font-montserrat">
       <div className="w-full max-w-screen-4xl ">
         <div className="flex items-center mb-2">
           <motion.h2

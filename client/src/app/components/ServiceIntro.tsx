@@ -85,7 +85,7 @@ export default function ServiceIntro() {
   const [showButton, setShowButton] = useState(false);
 
   return (
-    <section className="relative w-full bg-black py-20 flex items-center min-h-screen md:min-h-[60vh]">
+    <section className="relative w-full  py-20 flex items-center min-h-screen md:min-h-[60vh]">
       {/* Smaller Gradient Glow */}
    
       <div className="w-full">

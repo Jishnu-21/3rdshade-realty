@@ -35,7 +35,7 @@ const lineVariants = {
 
 export default function ServiceHero() {
   return (
-    <section className="w-full min-h-screen flex flex-col justify-center items-center select-none bg-gradient-to-br from-purple-900 via-black to-black overflow-hidden">
+    <section className="w-full min-h-screen flex flex-col justify-center items-center select-none">
       <div className="max-w-screen-xl mx-auto px-4 md:px-8">
         <motion.div
           variants={parentVariants}
