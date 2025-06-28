@@ -135,7 +135,8 @@ export default function ServicesPage() {
         style={{ 
           minHeight: '100vh', 
           minWidth: '100vw',
-          filter: 'brightness(0.4) contrast(1.1)',
+          filter: 'brightness(0.8) contrast(1.1)',
+          opacity: 1,
           willChange: 'transform',
           backfaceVisibility: 'hidden',
           perspective: '1000px',
@@ -271,8 +272,8 @@ export default function ServicesPage() {
 
         {/* Call Booking Modal */}
         {showCallModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-            <div className="bg-black/90 backdrop-blur-md rounded-xl p-8 w-full max-w-md shadow-2xl relative border border-purple-800/50">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+            <div className="bg-black/70 backdrop-blur-md rounded-xl p-8 w-full max-w-md shadow-2xl relative border border-purple-800/50">
               <button
                 className="absolute top-2 right-3 text-white text-2xl hover:text-purple-400 transition-colors"
                 onClick={() => { setShowCallModal(false); setCallMessage(''); }}
