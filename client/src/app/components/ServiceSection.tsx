@@ -1,7 +1,9 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import Modal from 'react-modal';
+import 'aos/dist/aos.css';
+import AOS from 'aos';
 
 const services = [
   {
@@ -139,6 +141,10 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
     setLoading(false);
   };
 
+  useEffect(() => {
+    AOS.init({ once: true, duration: 700, offset: 100 });
+  }, []);
+
   return (
     <section className="w-full bg-black py-20 relative font-montserrat">
       <div className="w-full max-w-screen-4xl ">
@@ -179,6 +185,7 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
+                data-aos={idx % 2 === 0 ? 'fade-right' : 'fade-left'}
               >
                 <div
                   className={`w-full flex flex-col md:flex-row ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-4 md:gap-10 items-end group relative`}
@@ -202,14 +209,15 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
                     `}
                   >
                     <h3
-                      className="text-white text-4xl md:text-7xl font-normal leading-tight transition-all duration-300 inline-block group"
-                      style={{ fontFamily: 'Montserrat, Helvetica, sans-serif' }}
+                      className="text-white text-4xl md:text-7xl font-normal leading-tight transition-all duration-300 inline-block group tracking-wide"
+                      style={{ fontFamily: 'Montserrat, Helvetica, sans-serif', textTransform: 'uppercase' }}
+                      data-aos="fade-up"
                     >
                       {service.title.split(' ').map((word, i) => (
                         <span key={i} className="relative block">
                           {word}
                           <span
-                            className="absolute left-0 -bottom-1 h-1 w-full origin-left scale-x-0 group-hover:scale-x-100 bg-white transition-transform duration-300"
+                            className="absolute left-0 -bottom-0.5 h-0.5 w-full origin-left scale-x-0 group-hover:scale-x-100 bg-white transition-transform duration-300"
                             aria-hidden="true"
                           />
                         </span>
