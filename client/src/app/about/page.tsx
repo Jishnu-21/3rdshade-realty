@@ -215,10 +215,10 @@ const AboutPage = () => {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Our Values
+            Why Clients Choose Us
             </h2>
             <p className="text-gray-300 text-lg max-w-3xl mx-auto">
-            Why our clients trust us - and how we stay accountable
+            Why our clients return  and how we stay committed to every promise
             </p>
           </motion.div>
           
