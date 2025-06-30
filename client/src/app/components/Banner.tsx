@@ -31,7 +31,6 @@ const stats = [
   { value: 100, label: 'Transparency & Compliance', suffix: '%', format: (n: number) => `${Math.round(n)}%` },
   { value: 24, label: 'Client Assistance Available', suffix: '/7', format: (n: number) => `${Math.round(n)}/7` },
   { value: 85, label: 'Client Retention on Repeat Deals', suffix: '%', format: (n: number) => `${Math.round(n)}%` },
-  { value: 10, label: 'Years experience', suffix: '+', format: (n: number) => `${Math.round(n)}+` },
 ];
 
 const Banner = () => {
@@ -71,12 +70,12 @@ const Banner = () => {
           <br/>Wherever You Are in the World
           </motion.h1>
           <motion.p
-            className="text-sm sm:text-sm md:text-2xl lg:text-xl text-white mb-6 sm:mb-8 max-w-2xl"
+            className="text-sm sm:text-sm md:text-2xl lg:text-2xl text-white mb-6 sm:mb-8 max-w-2xl"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-Whether you're launching or expanding, we master every digital move that drives high-value real estate.
+Whether you're buying, selling, or investing  we make your Dubai property journey seamless and secure.
 </motion.p>
           <motion.div
             className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6"
@@ -102,13 +101,13 @@ Whether you're launching or expanding, we master every digital move that drives 
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.6 }}
       >
-        <div className="max-w-screen-2xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white px-0">
+        <div className="max-w-screen-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center text-white px-0 justify-items-center">
           {stats.map((stat, idx) => {
             const animated = useAnimatedNumber(stat.value, 1.2, stat.format);
             return (
               <motion.div
                 key={stat.label}
-                className="flex flex-col items-center"
+                className="flex flex-col items-center justify-center"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

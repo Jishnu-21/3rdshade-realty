@@ -17,34 +17,10 @@ const AboutPage = () => {
   }, []);
 
   const stats = [
-    {
-      value: 100,
-      label: 'Transparency & Compliance',
-      suffix: '%',
-      format: (n: number) => `${Math.round(n)}%`,
-      icon: <FaAward className="w-10 h-10 bg-gradient-to-r from-rose-500 to-sky-500 text-transparent bg-clip-text mx-auto" />,
-    },
-    {
-      value: 24,
-      label: 'Client Assistance Available',
-      suffix: '/7',
-      format: (n: number) => `${Math.round(n)}/7`,
-      icon: <FaPhoneAlt className="w-10 h-10 bg-gradient-to-r from-rose-500 to-sky-500 text-transparent bg-clip-text mx-auto" />,
-    },
-    {
-      value: 85,
-      label: 'Client Retention on Repeat Deals',
-      suffix: '%',
-      format: (n: number) => `${Math.round(n)}%`,
-      icon: <FaUsers className="w-10 h-10 bg-gradient-to-r from-rose-500 to-sky-500 text-transparent bg-clip-text mx-auto" />,
-    },
-    {
-      value: 10,
-      label: 'Years experience',
-      suffix: '+',
-      format: (n: number) => `${Math.round(n)}+`,
-      icon: <FaGlobe className="w-10 h-10 bg-gradient-to-r from-rose-500 to-sky-500 text-transparent bg-clip-text mx-auto" />,
-    },
+    { number: '500+', label: 'Properties Sold', icon: <FaHome /> },
+    { number: '1000+', label: 'Happy Clients', icon: <FaUsers /> },
+    { number: '15+', label: 'Years Experience', icon: <FaAward /> },
+    { number: '50+', label: 'Countries Served', icon: <FaGlobe /> },
   ];
 
   const values = [
@@ -150,10 +126,10 @@ const AboutPage = () => {
                 viewport={{ once: true }}
                 className="text-center group"
               >
-                <div className="mb-4 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center">
+                <div className="text-purple-400 text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
                   {stat.icon}
                 </div>
-                <div className="text-4xl md:text-5xl font-bold text-white mb-2">{stat.format(stat.value)}</div>
+                <div className="text-4xl md:text-5xl font-bold text-white mb-2">{stat.number}</div>
                 <div className="text-gray-400 text-sm md:text-base">{stat.label}</div>
               </motion.div>
             ))}
@@ -215,10 +191,10 @@ const AboutPage = () => {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            Why Clients Choose Us
+              Our Values
             </h2>
             <p className="text-gray-300 text-lg max-w-3xl mx-auto">
-            Why our clients return  and how we stay committed to every promise
+            Why our clients trust us - and how we stay accountable
             </p>
           </motion.div>
           

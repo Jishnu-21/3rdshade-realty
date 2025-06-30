@@ -1,12 +1,14 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const featuredItems = [
   {
     videoSrc: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749729573/emaar-creek_lk2lce.webm',
     poster: 'https://cdn.pixabay.com/photo/2017/01/20/00/30/dubai-1990138_1280.jpg',
     title: 'Emaar Creek',
+    slug: 'emaar-creek',
     price: 'Starting from AED 1.5M',
     amenities: [
       '700,000 sq.m. of Parks & Green Spaces',
@@ -21,6 +23,7 @@ const featuredItems = [
     videoSrc: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727749/sobha-solis2_c6nt2j.mp4',
     poster: 'https://cdn.pixabay.com/photo/2016/11/29/09/32/architecture-1868667_1280.jpg',
     title: 'Sobha Solis',
+    slug: 'sobha-solis',
     price: 'Starting from AED 1M',
     amenities: [
       'Lap Pool',
@@ -35,6 +38,7 @@ const featuredItems = [
     videoSrc: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727087/azizi-venice_gsscns.mp4',
     poster: 'https://cdn.pixabay.com/photo/2015/01/28/23/35/dubai-615430_1280.jpg',
     title: 'Azizi Venice',
+    slug: 'azizi-venice',
     price: 'Launching Soon',
     amenities: [
       'Climate-Controlled Retail Boulevard',
@@ -48,6 +52,7 @@ const featuredItems = [
     videoSrc: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727167/sobha-solis_y9ojjs.mp4',
     poster: 'https://cdn.pixabay.com/photo/2016/11/29/09/32/architecture-1868667_1280.jpg',
     title: 'Sobha Orbis',
+    slug: 'sobha-orbis',
     price: 'Starting from AED 1M',
     amenities: [
       'Clubhouse & Sports',
@@ -63,11 +68,12 @@ const FeaturedSlider = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const { scrollLeft, clientWidth } = scrollRef.current;
-      const scrollAmount = clientWidth * 0.8;
+      const scrollAmount = clientWidth * 0.9;
       scrollRef.current.scrollTo({
         left: direction === 'left' ? scrollLeft - scrollAmount : scrollLeft + scrollAmount,
         behavior: 'smooth',
@@ -75,47 +81,60 @@ const FeaturedSlider = () => {
     }
   };
 
+  const handleCardClick = (slug: string, e: React.MouseEvent) => {
+    // Prevent navigation if clicking on buttons
+    if ((e.target as HTMLElement).closest('button')) {
+      return;
+    }
+    router.push(`/property/${slug}`);
+  };
+
   return (
-    <section className="bg-black py-8 px-50  max-w-8xl mx-auto overflow-x-hidden">
-      <div className=" mb-8">
-        <div className="flex items-center justify-between">
-          <h2 className="text-white text-4xl md:text-5xl font-bold">Featured Properties</h2>
-          <div className="flex items-center space-x-4">
-            <button className="bg-black border border-white text-white rounded-full px-6 py-2 font-semibold hover:bg-white hover:text-black transition">View All</button>
-            <button onClick={() => scroll('left')} className="w-12 h-12 rounded-full bg-black border border-white text-white flex items-center justify-center text-2xl hover:bg-white hover:text-black transition">&#8592;</button>
-            <button onClick={() => scroll('right')} className="w-12 h-12 rounded-full bg-black border border-white text-white flex items-center justify-center text-2xl hover:bg-white hover:text-black transition">&#8594;</button>
+    <section className="bg-black py-6 sm:py-6 md:py-16 max-w-screen-2xl mx-auto px-4 md:px-8 overflow-x-hidden">
+      <div className="mb-4 sm:mb-6 md:mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 items-start w-full">
+          <div className="flex flex-col gap-2">
+            <h2 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-left">Our Best Bet Homes</h2>
+            <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl">Experience luxury living through properties defined by aesthetics, access, and assurance.</p>
+          </div>
+          <div className="hidden sm:flex items-center space-x-4">
+            <button className="bg-black border border-white text-white rounded-full px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base font-semibold hover:bg-white hover:text-black transition">View All</button>
+            <button onClick={() => scroll('left')} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black border border-white text-white flex items-center justify-center text-xl sm:text-2xl hover:bg-white hover:text-black transition">←</button>
+            <button onClick={() => scroll('right')} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black border border-white text-white flex items-center justify-center text-xl sm:text-2xl hover:bg-white hover:text-black transition">→</button>
           </div>
         </div>
       </div>
       <div
         ref={scrollRef}
-        className="flex flex-nowrap space-x-8 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory px-4 md:px-12"
+        className="flex flex-nowrap space-x-4 sm:space-x-6 md:space-x-8 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory mb-4 sm:mb-0"
         style={{ scrollBehavior: 'smooth' }}
       >
         {featuredItems.map((item, idx) => (
           <div
             key={idx}
-            className="min-w-[calc(100vw-32px)] md:min-w-[400px] max-w-md bg-black rounded-2xl shadow-lg snap-start flex-shrink-0 overflow-hidden border border-neutral-800 cursor-pointer group relative"
-            style={{ height: '800px' }}
+            className="w-[70vw] sm:w-[50vw] md:w-[30vw] lg:w-[20vw] min-w-[200px] max-w-[360px] bg-black rounded-2xl shadow-lg snap-center flex-shrink-0 overflow-hidden border border-neutral-800 cursor-pointer group relative"
+            style={{ aspectRatio: '9/16' }}
+            onClick={(e) => handleCardClick(item.slug, e)}
             onMouseEnter={() => {
               setHoveredIndex(idx);
-              videoRefs.current[idx]?.play();
+              const video = videoRefs.current[idx];
+              if (video) video.play();
             }}
             onMouseLeave={() => {
               setHoveredIndex(null);
-              videoRefs.current[idx]?.pause();
+              const video = videoRefs.current[idx];
+              if (video) video.pause();
             }}
           >
             {/* Video Background */}
-            <div
-              className="w-full h-full relative"
-            >
+            <div className="w-full h-full relative">
               <video
-                ref={el => { videoRefs.current[idx] = el; }}
+                ref={(el: HTMLVideoElement | null) => { videoRefs.current[idx] = el; }}
                 src={item.videoSrc}
                 loop
                 muted
                 playsInline
+                poster={item.poster}
                 className="w-full h-full object-cover"
                 preload="auto"
               />
@@ -125,40 +144,40 @@ const FeaturedSlider = () => {
                 className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent transition-all duration-500 ease-in-out ${
                   hoveredIndex === idx ? 'opacity-100' : 'opacity-0'
                 }`}
-                style={{ height: '60%' }}
+                style={{ height: '65%' }}
               >
-                <div className="p-8 h-full flex flex-col justify-end">
-                  <div className="mb-4">
-                    <div className="text-white text-xl font-bold truncate mb-1">{item.title}</div>
-                    <div className="text-purple-400 font-semibold text-lg whitespace-nowrap">{item.price}</div>
+                <div className="p-2 sm:p-3 md:p-4 h-full flex flex-col justify-end">
+                  <div className="mb-2 sm:mb-3 md:mb-4">
+                    <div className="text-white text-sm sm:text-base md:text-lg lg:text-xl font-bold truncate mb-1">{item.title}</div>
+                    <div className="text-purple-400 font-semibold text-xs sm:text-sm md:text-base whitespace-nowrap">{item.price}</div>
                   </div>
-                  <div className="text-white text-xs font-bold mb-4 grid grid-cols-1 gap-y-2">
+                  <div className="text-white text-xs sm:text-sm font-bold mb-2 sm:mb-3 md:mb-4 grid grid-cols-1 gap-y-1 sm:gap-y-2">
                     {item.amenities && item.amenities.slice(0, 3).map((amenity, amenityIdx) => (
-                      <div key={amenityIdx} className="flex items-center gap-2">
-                        <span className="inline-block w-2 h-2 rounded-full bg-purple-400" />
-                        <span className="font-bold text-white whitespace-nowrap">{amenity}</span>
+                      <div key={amenityIdx} className="flex items-center gap-1 sm:gap-2">
+                        <span className="inline-block w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-purple-400" />
+                        <span className="font-bold text-white text-xs sm:text-sm whitespace-nowrap">{amenity}</span>
                       </div>
                     ))}
                   </div>
-                  <div className="space-y-2 pt-2">
+                  <div className="space-y-1 sm:space-y-2 pt-1 sm:pt-2">
                     <button
                       type="button"
-                      className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg text-sm"
+                      className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg text-xs sm:text-sm"
                       onClick={() => alert('Pay Now clicked!')}
                     >
                       Pay Now
                     </button>
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-2 gap-1 sm:gap-2">
                       <button
                         type="button"
-                        className="w-full bg-black text-white font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs"
+                        className="w-full bg-black text-white font-semibold py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs sm:text-sm"
                         onClick={() => alert('Call Expert clicked!')}
                       >
                         Call Expert
                       </button>
                       <button
                         type="button"
-                        className="w-full bg-black text-white font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs"
+                        className="w-full bg-black text-white font-semibold py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs sm:text-sm"
                         onClick={() => alert('Enquire Now clicked!')}
                       >
                         Enquire Now
@@ -171,6 +190,12 @@ const FeaturedSlider = () => {
           </div>
         ))}
       </div>
+      {/* Mobile navigation controls */}
+      <div className="flex sm:hidden justify-center items-center space-x-4 mt-4">
+        <button className="bg-black border border-white text-white rounded-full px-4 py-1.5 text-sm font-semibold hover:bg-white hover:text-black transition">View All</button>
+        <button onClick={() => scroll('left')} className="w-10 h-10 rounded-full bg-black border border-white text-white flex items-center justify-center text-xl hover:bg-white hover:text-black transition">←</button>
+        <button onClick={() => scroll('right')} className="w-10 h-10 rounded-full bg-black border border-white text-white flex items-center justify-center text-xl hover:bg-white hover:text-black transition">→</button>
+      </div>
       <style jsx global>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
@@ -179,9 +204,14 @@ const FeaturedSlider = () => {
           -ms-overflow-style: none;
           scrollbar-width: none;
         }
+        @media (max-width: 640px) {
+          .snap-x.snap-mandatory > div {
+            scroll-snap-align: center;
+          }
+        }
       `}</style>
     </section>
   );
 };
 
-export default FeaturedSlider; 
+export default FeaturedSlider;
