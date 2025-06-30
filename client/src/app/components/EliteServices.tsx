@@ -41,7 +41,7 @@ const EliteServices = () => (
     <div className="container mx-auto px-8">
       <h2 className="text-white text-center text-3xl md:text-4xl font-bold mb-2">Elite Services</h2>
       <p className="text-neutral-300 text-center mb-12 max-w-2xl mx-auto">
-        Our curated suite of services is designed for discerning clients who value discretion, efficiency, and expertise. Whether you're acquiring, selling, or building a global portfolio, we ensure a seamless luxury real estate experience at every touchpoint.
+      Our curated suite of services is designed for discerning clients who value discretion, efficiency, and expertise. Whether you're buying or selling the finest properties, or building a global portfolio, we ensure a seamless luxury real estate experience at every touchpoint.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-screen-2xl mx-auto">
         {services.map((service, idx) => (

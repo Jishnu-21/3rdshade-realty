@@ -150,7 +150,7 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
       <div className="w-full max-w-screen-4xl ">
         <div className="flex items-center mb-2">
           <motion.h2
-            className="text-white text-4xl md:text-7xl font-normal text-center mx-auto flex gap-1 "
+            className="text-4xl md:text-7xl font-normal text-center mx-auto flex gap-1 bg-gradient-to-r from-rose-500 to-sky-500 bg-clip-text text-transparent"
             variants={titleParent}
             initial="hidden"
             whileInView="visible"

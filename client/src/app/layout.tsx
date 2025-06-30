@@ -1,12 +1,7 @@
+// app/layout.tsx
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
 import "./globals.css";
-import { FaWhatsapp } from 'react-icons/fa';
-
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
-  subsets: ["latin"],
-});
+import { FaWhatsapp } from "react-icons/fa";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,11 +15,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+      <head>
+        {/* Load Montserrat font from Google Fonts */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body
-        className={`${montserrat.variable} antialiased overflow-x-hidden`}
+        style={{
+          fontFamily: "Montserrat, Helvetica, Arial, sans-serif",
+        }}
+        className="antialiased overflow-x-hidden"
       >
         {children}
+
         {/* WhatsApp Floating Icon */}
         <a
           href="https://wa.me/918600181189"
@@ -32,7 +37,7 @@ export default function RootLayout({
           rel="noopener noreferrer"
           aria-label="WhatsApp"
           className="fixed bottom-6 right-6 z-50 bg-white rounded-full shadow-lg p-3 flex items-center justify-center hover:bg-gray-200 transition-colors"
-          style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.15)' }}
+          style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.15)" }}
         >
           <FaWhatsapp size={28} color="#111" />
         </a>

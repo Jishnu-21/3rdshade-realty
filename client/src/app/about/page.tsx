@@ -17,10 +17,34 @@ const AboutPage = () => {
   }, []);
 
   const stats = [
-    { number: '500+', label: 'Properties Sold', icon: <FaHome /> },
-    { number: '1000+', label: 'Happy Clients', icon: <FaUsers /> },
-    { number: '15+', label: 'Years Experience', icon: <FaAward /> },
-    { number: '50+', label: 'Countries Served', icon: <FaGlobe /> },
+    {
+      value: 100,
+      label: 'Transparency & Compliance',
+      suffix: '%',
+      format: (n: number) => `${Math.round(n)}%`,
+      icon: <FaAward className="w-10 h-10 bg-gradient-to-r from-rose-500 to-sky-500 text-transparent bg-clip-text mx-auto" />,
+    },
+    {
+      value: 24,
+      label: 'Client Assistance Available',
+      suffix: '/7',
+      format: (n: number) => `${Math.round(n)}/7`,
+      icon: <FaPhoneAlt className="w-10 h-10 bg-gradient-to-r from-rose-500 to-sky-500 text-transparent bg-clip-text mx-auto" />,
+    },
+    {
+      value: 85,
+      label: 'Client Retention on Repeat Deals',
+      suffix: '%',
+      format: (n: number) => `${Math.round(n)}%`,
+      icon: <FaUsers className="w-10 h-10 bg-gradient-to-r from-rose-500 to-sky-500 text-transparent bg-clip-text mx-auto" />,
+    },
+    {
+      value: 10,
+      label: 'Years experience',
+      suffix: '+',
+      format: (n: number) => `${Math.round(n)}+`,
+      icon: <FaGlobe className="w-10 h-10 bg-gradient-to-r from-rose-500 to-sky-500 text-transparent bg-clip-text mx-auto" />,
+    },
   ];
 
   const values = [
@@ -46,33 +70,7 @@ const AboutPage = () => {
     }
   ];
 
-  const team = [
-    {
-      name: 'Ahmed Al Mansouri',
-      role: 'CEO & Founder',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
-      bio: 'Visionary leader with 20+ years in luxury real estate development.'
-    },
-    {
-      name: 'Sarah Johnson',
-      role: 'Head of Sales',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=400&q=80',
-      bio: 'Expert in international property markets and client relations.'
-    },
-    {
-      name: 'Mohammed Rahman',
-      role: 'Investment Director',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80',
-      bio: 'Specialist in high-value investment properties and market analysis.'
-    },
-    {
-      name: 'Elena Rodriguez',
-      role: 'Design Consultant',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=400&q=80',
-      bio: 'Award-winning interior designer with global luxury portfolio.'
-    }
-  ];
-
+  
   return (
     <div className="bg-black text-white font-montserrat">
       <Header />
@@ -152,10 +150,10 @@ const AboutPage = () => {
                 viewport={{ once: true }}
                 className="text-center group"
               >
-                <div className="text-purple-400 text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="mb-4 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center">
                   {stat.icon}
                 </div>
-                <div className="text-4xl md:text-5xl font-bold text-white mb-2">{stat.number}</div>
+                <div className="text-4xl md:text-5xl font-bold text-white mb-2">{stat.format(stat.value)}</div>
                 <div className="text-gray-400 text-sm md:text-base">{stat.label}</div>
               </motion.div>
             ))}

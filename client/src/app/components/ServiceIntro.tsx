@@ -3,12 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 const paragraphLines = [
-  'Your real estate brand deserves more than visibility, ',
-  'it deserves a story the market remembers. At Third Shade ',
-  'Realty, powered by 3rd Shades creative force, visuals,and',
-  ' marketing excellence to put your properties in the spotlight.',
-  'From new project launches to brand evolution, ',
-  'we scale your presence with precision and purpose.'
+  'Your real estate brand deserves more than just visibility  it deserves a story the market remembers. At Third Shade Realty, we combine creative strategy, compelling visuals, and marketing expertise to put your properties in the spotlight. From new project launches to full-scale brand evolution, we elevate your presence with precision, purpose, and measurable impact.'
 ];
 
 function ColorChangeText({ textLines, onRevealEnd }: { textLines: string[]; onRevealEnd: () => void }) {
@@ -41,9 +36,9 @@ function ColorChangeText({ textLines, onRevealEnd }: { textLines: string[]; onRe
     <div ref={containerRef} className="w-full">
       <div className="flex flex-col items-start gap-8">
         <div
-          className="transition-all duration-500 will-change-transform text-left text-white"
+          className="transition-all duration-500 will-change-transform text-left"
           style={{
-            fontSize: 'clamp(3rem, 3vw, 3rem)',
+            fontSize: 'clamp(3rem, 3vw, 3.4rem)',
             lineHeight: '1.2',
             fontFamily: 'Montserrat, Helvetica, sans-serif',
             fontWeight: 300,
@@ -66,12 +61,12 @@ function ColorChangeText({ textLines, onRevealEnd }: { textLines: string[]; onRe
               {line === '__BUTTON__' ? (
                 <Link
                   href="/about"
-                  className="px-8 py-3 rounded-full border border-white text-white font-bold text-lg hover:bg-white hover:text-black transition-colors duration-200 shadow-lg"
+                  className="px-8 py-3 rounded-full border border-white text-white font-bold text-lg transition-colors duration-200 shadow-lg bg-transparent hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-500 hover:text-white hover:border-transparent"
                 >
                   About us &rarr;
                 </Link>
               ) : (
-                line
+                <span className=" text-white bg-clip-text text-transparent">{line}</span>
               )}
             </div>
           ))}

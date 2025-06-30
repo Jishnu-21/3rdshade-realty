@@ -10,6 +10,7 @@ import React from 'react';
 import Link from 'next/link';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import { useRouter } from 'next/navigation';
 
 // Mock data for all properties
 const allProperties = [
@@ -60,6 +61,21 @@ const allProperties = [
   },
   {
     id: 4,
+    name: 'Sobha Orbis',
+    location: 'Sobha Orbis, Dubai',
+    price: 'Launching Soon',
+    roi: '-',
+    reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727071/sobha-hartland_qo4rxf.mp4',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750856683/orbis_kinmqf.webp', // Add image URL if available
+    beds: 0,
+    baths: 0,
+    sqft: 'N/A',
+    rating: 0,
+    amenities: ['spa', 'gym', 'pool'],
+    description: `Studios, 1 & 2 Bedroom Apartments | Launching Soon\nSobha Orbis is a new launch by Sobha Realty, offering modern apartments in a vibrant community with premium amenities and excellent connectivity.\nMore details coming soon.`,
+  },
+  {
+    id: 11,
     name: 'Deeyar Eleve',
     location: '',
     price: 'Starting from AED 1M',
@@ -163,21 +179,7 @@ const allProperties = [
     amenities: ['spa', 'pool', 'gym'],
     description: `Studio to 3 Bedroom Apartments | Starting from AED 1.2M\nBelgravia Gardens features studio to 3-bedroom apartments with optional office layouts, offering a flexible living experience in a refined residential community. With urban beach access, lagoon views, and a fully-equipped clubhouse, this development is designed for residents seeking lifestyle, leisure, and smart indoor-outdoor connectivity.\nLeisure & Wellness, Urban Beach & Artificial Lagoon, Private Dining & Juice Lounge, Yoga & Pilates Studio, Fitness Studio & Sauna, Children's Pool & Kids' Play Area, Clubhouse Pavilion, Cinema Room, Game Room, Clubhouse Gallery, Clubhouse Majlis.\nPrime Location: Metro: Future station within 15 min, Airport: 20 min to Dubai Intl, Mall: 5 min to Silicon Central, 10 min to Global Village, Nearby: IMG Worlds, Dubai Hills Mall, Downtown (20 min).`,
   },
-  {
-    id: 11,
-    name: 'Sobha Orbis',
-    location: 'Sobha Orbis, Dubai',
-    price: 'Launching Soon',
-    roi: '-',
-    reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727071/sobha-hartland_qo4rxf.mp4',
-    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750856683/orbis_kinmqf.webp', // Add image URL if available
-    beds: 0,
-    baths: 0,
-    sqft: 'N/A',
-    rating: 0,
-    amenities: ['spa', 'gym', 'pool'],
-    description: `Studios, 1 & 2 Bedroom Apartments | Launching Soon\nSobha Orbis is a new launch by Sobha Realty, offering modern apartments in a vibrant community with premium amenities and excellent connectivity.\nMore details coming soon.`,
-  },
+ 
   {
     id: 12,
     name: 'Pierside Marina Residences – Sobha Siniya Island',
@@ -485,6 +487,7 @@ const PropertiesPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const propertiesPerPage = 9;
   const videoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({});
+  const router = useRouter();
 
   useEffect(() => {
     setIsVisible(true);
@@ -551,9 +554,12 @@ const PropertiesPage = () => {
     }
   };
 
-  // Pagination logic
-  const totalPages = Math.ceil(sortedProperties.length / propertiesPerPage);
-  const paginatedProperties = sortedProperties.slice(
+  // Sort so first 4 properties have a non-empty reelVideoUrl
+  const videoProps = sortedProperties.filter(p => p.reelVideoUrl && p.reelVideoUrl.trim() !== '').slice(0, 4);
+  const nonVideoProps = sortedProperties.filter(p => !p.reelVideoUrl || p.reelVideoUrl.trim() === '' || videoProps.includes(p) === false);
+  const sortedForDisplay = [...videoProps, ...nonVideoProps];
+  const totalPages = Math.ceil(sortedForDisplay.length / propertiesPerPage);
+  const paginatedProperties = sortedForDisplay.slice(
     (currentPage - 1) * propertiesPerPage,
     currentPage * propertiesPerPage
   );
@@ -584,16 +590,12 @@ const PropertiesPage = () => {
             <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Luxury Properties
             </h1>
-            <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Discover exceptional investment opportunities in Dubai's most prestigious locations.
+            <p className="text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            Experience world class living and investment potential in Dubai’s most iconic and sought after addresses. Curated for discerning buyers, our portfolio blends architectural excellence with unmatched lifestyle value.
             </p>
           </motion.div>
         </div>
       </section>
-
-    
-
-
 
       {/* Properties Grid */}
       <section className="py-16">
@@ -609,57 +611,86 @@ const PropertiesPage = () => {
                 onMouseEnter={() => handleVideoPlay(property.id)}
                 onMouseLeave={() => handleVideoPause(property.id)}
               >
-                <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-gray-800">
-                  {/* Video/Image Container - Portrait Size */}
-                  <div className="relative h-[450px] overflow-hidden group">
-                    {/* Image always shown by default */}
+                <div
+                  className="min-w-[calc(100vw-32px)] md:min-w-[400px] max-w-md bg-black rounded-2xl shadow-lg snap-start flex-shrink-0 overflow-hidden border border-neutral-800 cursor-pointer relative"
+                  style={{ height: '800px' }}
+                  onClick={e => {
+                    if ((e.target as HTMLElement).closest('button')) return;
+                    const href = property.name === 'Pierside Marina Residences – Sobha Siniya Island'
+                      ? '/property/pierside-marina-residences'
+                      : `/property/${property.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`;
+                    window.location.href = href;
+                  }}
+                >
+                  {/* Video/Image Background */}
+                  <div className="w-full h-full relative">
+                    {property.reelVideoUrl ? (
+                      <video
+                        ref={el => { videoRefs.current[property.id] = el; }}
+                        src={property.reelVideoUrl}
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover absolute inset-0"
+                        preload="auto"
+                        style={{ zIndex: 1 }}
+                      />
+                    ) : (
                     <Image
                       src={property.image}
                       alt={property.name}
-                      width={800}
-                      height={450}
-                      className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-500 ${property.reelVideoUrl ? 'group-hover:opacity-0' : 'opacity-100'}`}
+                        fill
+                        className="w-full h-full object-cover absolute inset-0"
                       style={{ zIndex: 1 }}
                     />
-                    {/* Video fades in on hover if present */}
-                    {property.reelVideoUrl && (
-                    <video
-                      ref={(el) => { videoRefs.current[property.id] = el; }}
-                      src={property.reelVideoUrl}
-                        className="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
-                      muted
-                      loop
-                      playsInline
-                        onMouseEnter={e => e.currentTarget.play()}
-                        onMouseLeave={e => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
-                        style={{ zIndex: 2 }}
-                    />
                     )}
-                    {/* Play Button Overlay (only if video) */}
-                    {property.reelVideoUrl && (
-                      <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                      <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
-                        <FaPlay className="text-black text-xl ml-1" />
+                    {/* Overlay - Shows on hover */}
+                    <div 
+                      className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent transition-all duration-500 ease-in-out opacity-0 group-hover:opacity-100"
+                      style={{ height: '60%', zIndex: 2 }}
+                    >
+                      <div className="p-8 h-full flex flex-col justify-end">
+                        <div className="mb-4">
+                          <div className="text-white text-xl font-bold truncate mb-1">{property.name}</div>
+                          <div className="text-purple-400 font-semibold text-lg whitespace-nowrap">{property.price}</div>
+                        </div>
+                        {property.amenities && property.amenities.length > 0 && (
+                          <div className="text-white text-xs font-bold mb-4 grid grid-cols-1 gap-y-2">
+                            {property.amenities.slice(0, 3).map((amenity, amenityIdx) => (
+                              <div key={amenityIdx} className="flex items-center gap-2">
+                                <span className="inline-block w-2 h-2 rounded-full bg-purple-400" />
+                                <span className="font-bold text-white whitespace-nowrap">{amenity}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        <div className="space-y-2 pt-2">
+                          <button
+                            type="button"
+                            className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg text-sm"
+                            onClick={e => { e.stopPropagation(); alert('Pay Now clicked!'); }}
+                          >
+                            Pay Now
+                          </button>
+                          <div className="grid grid-cols-2 gap-2">
+                            <button
+                              type="button"
+                              className="w-full bg-black text-white font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs"
+                              onClick={e => { e.stopPropagation(); alert('Call Expert clicked!'); }}
+                            >
+                              Call Expert
+                            </button>
+                            <button
+                              type="button"
+                              className="w-full bg-black text-white font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs"
+                              onClick={e => { e.stopPropagation(); alert('Enquire Now clicked!'); }}
+                            >
+                              Enquire Now
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    )}
-                  </div>
-
-                  {/* Property Details */}
-                  <div className="p-6">
-                    <div className="mb-2 text-lg font-bold text-purple-200/90">{property.price}</div>
-                    <div className="flex flex-col items-start mb-3">
-                      <h3 className="text-2xl font-extrabold text-white group-hover:text-purple-400 transition-colors duration-300 truncate w-full" style={{lineHeight: 1.2}} title={property.name}>
-                        {property.name}
-                      </h3>
-                    </div>
-
-                    <Link
-                      href={property.name === 'Pierside Marina Residences – Sobha Siniya Island' ? '/property/pierside-marina-residences' : `/property/${property.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
-                      className="w-full block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold py-3 rounded-xl hover:from-purple-700 hover:to-pink-600 transition-all duration-300 text-center mt-4"
-                    >
-                      View Details
-                    </Link>
                   </div>
                 </div>
               </motion.div>

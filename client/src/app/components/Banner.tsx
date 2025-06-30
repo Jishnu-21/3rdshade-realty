@@ -28,10 +28,10 @@ function useAnimatedNumber(target: number, duration = 1, format?: (n: number) =>
 }
 
 const stats = [
-  { value: 23, label: 'Exclusive Properties', format: (n: number) => Math.round(n).toString() },
-  { value: 50, label: 'Average Property Value', prefix: '$', suffix: 'M+', format: (n: number) => `$${Math.round(n)}M+` },
-  { value: 100, label: 'Client Satisfaction', suffix: '%', format: (n: number) => `${Math.round(n)}%` },
-  { value: 25, label: 'Years Experience', suffix: '+', format: (n: number) => `${Math.round(n)}+` },
+  { value: 100, label: 'Transparency & Compliance', suffix: '%', format: (n: number) => `${Math.round(n)}%` },
+  { value: 24, label: 'Client Assistance Available', suffix: '/7', format: (n: number) => `${Math.round(n)}/7` },
+  { value: 85, label: 'Client Retention on Repeat Deals', suffix: '%', format: (n: number) => `${Math.round(n)}%` },
+  { value: 10, label: 'Years experience', suffix: '+', format: (n: number) => `${Math.round(n)}+` },
 ];
 
 const Banner = () => {

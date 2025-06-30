@@ -16,20 +16,8 @@ const CallToAction = () => {
   return (
     <section className="relative w-full h-[400px] flex items-center justify-center overflow-hidden">
       {/* Background Video */}
-      {!videoError ? (
-        <video
-          src={VIDEO_URL}
-          autoPlay
-          loop
-          muted
-          playsInline
-          onError={handleVideoError}
-          className="absolute inset-0 w-full h-full object-cover "
-        />
-      ) : (
-        <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-900 to-pink-900 z-[-2]" />
-      )}
-      <div className="absolute inset-0 bg-black opacity-60 z-[-1]" />
+      
+      <div className="absolute " />
       <div className="relative z-10 flex flex-col items-center justify-center w-full px-4 text-center">
         <h2 className="text-white text-3xl md:text-4xl lg:text-5xl font-bold mb-4 drop-shadow-lg">
           Ready to Find Your Dream Property?

@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <>
-      <VideoModal />
+      
       <main >
         <Header />
         <div className="relative w-full min-h-screen">
