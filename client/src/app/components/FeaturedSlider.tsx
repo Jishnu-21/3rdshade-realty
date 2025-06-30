@@ -94,13 +94,13 @@ const FeaturedSlider = () => {
       <div className="mb-4 sm:mb-6 md:mb-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 items-start w-full">
           <div className="flex flex-col gap-2">
-            <h2 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-left">Our Best Bet Homes</h2>
+            <h2 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-left">Featured Properties</h2>
             <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl">Experience luxury living through properties defined by aesthetics, access, and assurance.</p>
           </div>
           <div className="hidden sm:flex items-center space-x-4">
-            <button className="bg-black border border-white text-white rounded-full px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base font-semibold hover:bg-white hover:text-black transition">View All</button>
-            <button onClick={() => scroll('left')} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black border border-white text-white flex items-center justify-center text-xl sm:text-2xl hover:bg-white hover:text-black transition">←</button>
-            <button onClick={() => scroll('right')} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black border border-white text-white flex items-center justify-center text-xl sm:text-2xl hover:bg-white hover:text-black transition">→</button>
+            <button  onClick={() => router.push('/properties')} className="bg-black border border-white cursor-pointer text-white rounded-full px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base font-semibold hover:bg-white hover:text-black transition">View All</button>
+            <button onClick={() => scroll('left')} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black border border-white text-white flex items-center justify-center text-xl sm:text-2xl hover:bg-white hover:text-black transition cursor-pointer">←</button>
+            <button onClick={() => scroll('right')} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black border border-white text-white flex items-center justify-center text-xl sm:text-2xl hover:bg-white hover:text-black transition cursor-pointer">→</button>
           </div>
         </div>
       </div>

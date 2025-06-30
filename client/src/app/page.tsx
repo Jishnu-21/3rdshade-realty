@@ -10,6 +10,7 @@ import CallToAction from './components/CallToAction';
 import Footer from './components/Footer';
 import dynamic from 'next/dynamic';
 import FeaturedSlider from './components/FeaturedSlider';
+import WebsiteWithPreloader from './components/VideoModal';
 
 // Dynamically import VideoModal to avoid SSR issues with framer-motion
 const VideoModal = dynamic(() => import('./components/VideoModal'), { ssr: false });
@@ -29,6 +30,7 @@ export default function Home() {
     <>
       
       <main >
+        <WebsiteWithPreloader/>
         <Header />
         <div className="relative w-full min-h-screen">
           <video
