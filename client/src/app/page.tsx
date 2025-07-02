@@ -31,9 +31,12 @@ export default function Home() {
         <div className="absolute inset-0 bg-black opacity-40 z-[-1]"></div>
         <Banner />
       </div>
+      <div className='bg-black'>
       <FeaturedSlider />
       <EliteServices/>
       <CallToAction/>
+      </div>
+      
       <Footer/>
     </>
   );

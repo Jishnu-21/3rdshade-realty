@@ -109,86 +109,99 @@ const FeaturedSlider = () => {
         className="flex flex-nowrap space-x-4 sm:space-x-6 md:space-x-8 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory mb-4 sm:mb-0"
         style={{ scrollBehavior: 'smooth' }}
       >
-        {featuredItems.map((item, idx) => (
-          <div
-            key={idx}
-            className="w-[70vw] sm:w-[50vw] md:w-[30vw] lg:w-[20vw] min-w-[200px] max-w-[360px] bg-black rounded-2xl shadow-lg snap-center flex-shrink-0 overflow-hidden border border-neutral-800 cursor-pointer group relative"
-            style={{ aspectRatio: '9/16' }}
-            onClick={(e) => handleCardClick(item.slug, e)}
-            onMouseEnter={() => {
-              setHoveredIndex(idx);
-              const video = videoRefs.current[idx];
-              if (video) video.play();
-            }}
-            onMouseLeave={() => {
-              setHoveredIndex(null);
-              const video = videoRefs.current[idx];
-              if (video) video.pause();
-            }}
-          >
-            {/* Video Background */}
-            <div className="w-full h-full relative">
-              <video
-                ref={(el: HTMLVideoElement | null) => { videoRefs.current[idx] = el; }}
-                src={item.videoSrc}
-                loop
-                muted
-                playsInline
-                poster={item.poster}
-                className="w-full h-full object-cover"
-                preload="auto"
-              />
-              
-              {/* Content Overlay - Shows on hover */}
-              <div 
-                className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent transition-all duration-500 ease-in-out ${
-                  hoveredIndex === idx ? 'opacity-100' : 'opacity-0'
-                }`}
-                style={{ height: '65%' }}
-              >
-                <div className="p-2 sm:p-3 md:p-4 h-full flex flex-col justify-end">
-                  <div className="mb-2 sm:mb-3 md:mb-4">
-                    <div className="text-white text-sm sm:text-base md:text-lg lg:text-xl font-bold truncate mb-1">{item.title}</div>
-                    <div className="text-purple-400 font-semibold text-xs sm:text-sm md:text-base whitespace-nowrap">{item.price}</div>
-                  </div>
-                  <div className="text-white text-xs sm:text-sm font-bold mb-2 sm:mb-3 md:mb-4 grid grid-cols-1 gap-y-1 sm:gap-y-2">
-                    {item.amenities && item.amenities.slice(0, 3).map((amenity, amenityIdx) => (
-                      <div key={amenityIdx} className="flex items-center gap-1 sm:gap-2">
-                        <span className="inline-block w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-purple-400" />
-                        <span className="font-bold text-white text-xs sm:text-sm whitespace-nowrap">{amenity}</span>
+        {featuredItems.map((item, idx) => {
+          return (
+            <div
+              key={idx}
+              className="w-[70vw] sm:w-[50vw] md:w-[30vw] lg:w-[20vw] min-w-[200px] max-w-[360px] bg-black rounded-2xl shadow-lg snap-center flex-shrink-0 overflow-hidden border border-neutral-800 cursor-pointer group relative"
+              style={{ aspectRatio: '9/16' }}
+              onClick={(e) => handleCardClick(item.slug, e)}
+              onMouseEnter={() => {
+                setHoveredIndex(idx);
+                const video = videoRefs.current[idx];
+                if (video) {
+                  video.currentTime = 0;
+                  video.play();
+                }
+              }}
+              onMouseLeave={() => {
+                setHoveredIndex(null);
+                const video = videoRefs.current[idx];
+                if (video) {
+                  video.pause();
+                  video.currentTime = 1;
+                }
+              }}
+            >
+              {/* Video Background */}
+              <div className="w-full h-full relative">
+                <video
+                  ref={(el: HTMLVideoElement | null) => { videoRefs.current[idx] = el; }}
+                  src={item.videoSrc}
+                  loop
+                  muted
+                  playsInline
+                  poster={item.poster}
+                  className="w-full h-full object-cover"
+                  preload="auto"
+                  onLoadedMetadata={e => {
+                    if (videoRefs.current[idx]) {
+                      videoRefs.current[idx].currentTime = 1;
+                    }
+                  }}
+                />
+                
+                {/* Content Overlay - Shows on hover */}
+                <div 
+                  className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent transition-all duration-500 ease-in-out ${
+                    hoveredIndex === idx ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  style={{ height: '65%' }}
+                >
+                  <div className="p-2 sm:p-3 md:p-4 h-full flex flex-col justify-end">
+                    <div className="mb-2 sm:mb-3 md:mb-4">
+                      <div className="text-white text-sm sm:text-base md:text-lg lg:text-xl font-bold truncate mb-1">{item.title}</div>
+                      <div className="text-purple-400 font-semibold text-xs sm:text-sm md:text-base whitespace-nowrap">{item.price}</div>
+                    </div>
+                    <div className="text-white text-xs sm:text-sm font-bold mb-2 sm:mb-3 md:mb-4 grid grid-cols-1 gap-y-1 sm:gap-y-2">
+                      {item.amenities && item.amenities.slice(0, 3).map((amenity, amenityIdx) => (
+                        <div key={amenityIdx} className="flex items-center gap-1 sm:gap-2">
+                          <span className="inline-block w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-purple-400" />
+                          <span className="font-bold text-white text-xs sm:text-sm whitespace-nowrap">{amenity}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="space-y-1 sm:space-y-2 pt-1 sm:pt-2">
+                      <button
+                        type="button"
+                        className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg text-xs sm:text-sm"
+                        onClick={() => alert('Pay Now clicked!')}
+                      >
+                        Pay Now
+                      </button>
+                      <div className="grid grid-cols-2 gap-1 sm:gap-2">
+                        <button
+                          type="button"
+                          className="w-full bg-black text-white font-semibold py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs sm:text-sm"
+                          onClick={() => alert('Call Expert clicked!')}
+                        >
+                          Call Expert
+                        </button>
+                        <button
+                          type="button"
+                          className="w-full bg-black text-white font-semibold py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs sm:text-sm"
+                          onClick={() => alert('Enquire Now clicked!')}
+                        >
+                          Enquire Now
+                        </button>
                       </div>
-                    ))}
-                  </div>
-                  <div className="space-y-1 sm:space-y-2 pt-1 sm:pt-2">
-                    <button
-                      type="button"
-                      className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg text-xs sm:text-sm"
-                      onClick={() => alert('Pay Now clicked!')}
-                    >
-                      Pay Now
-                    </button>
-                    <div className="grid grid-cols-2 gap-1 sm:gap-2">
-                      <button
-                        type="button"
-                        className="w-full bg-black text-white font-semibold py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs sm:text-sm"
-                        onClick={() => alert('Call Expert clicked!')}
-                      >
-                        Call Expert
-                      </button>
-                      <button
-                        type="button"
-                        className="w-full bg-black text-white font-semibold py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs sm:text-sm"
-                        onClick={() => alert('Enquire Now clicked!')}
-                      >
-                        Enquire Now
-                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
       {/* Mobile navigation controls */}
       <div className="flex sm:hidden justify-center items-center space-x-4 mt-4">
