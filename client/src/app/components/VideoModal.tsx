@@ -1,19 +1,27 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+interface VideoPreloaderProps {
+  videoSrc?: string;
+  onComplete?: () => void;
+  minDisplayTime?: number;
+  onProgress?: (progress: number) => void;
+}
+
 const VideoPreloader = ({
   videoSrc = "https://res.cloudinary.com/dkgjl08a5/video/upload/v1744839021/Dubai_realestate_video_01_tsmqus.webm",
   onComplete = () => {},
-  minDisplayTime = 3000, // Minimum time to show preloader (3 seconds)
-}) => {
+  minDisplayTime = 30000,
+  onProgress,
+}: VideoPreloaderProps) => {
   const [isVisible, setIsVisible] = useState(true);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
   const [canClose, setCanClose] = useState(false);
+  const [progress, setProgress] = useState(0);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const startTimeRef = useRef(Date.now());
 
-  // Handle video loading
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -28,13 +36,11 @@ const VideoPreloader = ({
 
     const handleCanPlayThrough = async () => {
       try {
-        // Try to play with audio first
         video.muted = false;
         video.volume = 1.0;
         await video.play();
         console.log('Playing preloader with audio');
       } catch (error) {
-        // Fallback to muted if autoplay with audio fails
         console.log('Audio autoplay failed, playing muted:', error);
         video.muted = true;
         try {
@@ -56,7 +62,6 @@ const VideoPreloader = ({
     };
   }, []);
 
-  // Check if we can close the preloader
   useEffect(() => {
     const checkCanClose = () => {
       const timeElapsed = Date.now() - startTimeRef.current;
@@ -71,21 +76,19 @@ const VideoPreloader = ({
     return () => clearInterval(interval);
   }, [videoLoaded, videoEnded, minDisplayTime]);
 
-  // Auto-close preloader when conditions are met
   useEffect(() => {
     if (canClose) {
       const timer = setTimeout(() => {
         setIsVisible(false);
         setTimeout(() => {
           onComplete();
-        }, 800); // Wait for exit animation
-      }, 500); // Small delay before closing
+        }, 800);
+      }, 500);
 
       return () => clearTimeout(timer);
     }
   }, [canClose, onComplete]);
 
-  // Prevent body scroll while preloader is visible
   useEffect(() => {
     if (isVisible) {
       document.body.style.overflow = 'hidden';
@@ -98,7 +101,16 @@ const VideoPreloader = ({
     };
   }, [isVisible]);
 
-  // Manual skip functionality
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - startTimeRef.current;
+      const prog = Math.min(elapsed / minDisplayTime, 1);
+      setProgress(prog);
+      if (onProgress) onProgress(prog);
+    }, 50);
+    return () => clearInterval(interval);
+  }, [minDisplayTime, onProgress]);
+
   const handleSkip = () => {
     setIsVisible(false);
     setTimeout(() => {
@@ -116,9 +128,9 @@ const VideoPreloader = ({
     },
     exit: {
       opacity: 0,
-      scale: 0.95,
+      scale: 0.8,
       transition: {
-        duration: 0.8
+        duration: 0.6
       }
     }
   };
@@ -139,21 +151,32 @@ const VideoPreloader = ({
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-[9999] bg-black flex items-center justify-center"
+        className="fixed inset-0 z-[9999] flex items-center justify-center"
         variants={overlayVariants}
         initial="visible"
         animate="visible"
         exit="exit"
       >
+        <div 
+          className="absolute inset-0 bg-black transition-opacity duration-300 ease-out"
+          style={{ opacity: 1 - progress }}
+        />
+        
+        <div className="fixed top-0 left-0 w-full h-2 z-[10000]">
+          <div
+            className="h-full bg-gradient-to-r from-rose-500 to-sky-500 transition-all duration-200"
+            style={{ width: `${progress * 100}%` }}
+          />
+        </div>
+        
         <motion.div
-          className="relative w-full h-full max-w-md max-h-screen flex items-center justify-center"
+          className="relative w-full h-full max-w-md max-h-screen flex items-center justify-center z-[9999]"
           variants={preloaderVariants}
           initial={{ opacity: 0, scale: 0.9 }}
           animate="visible"
           exit="exit"
           transition={{ ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Video Container */}
           <div className="relative w-full aspect-[9/16] max-w-sm max-h-[90vh] rounded-2xl overflow-hidden shadow-2xl bg-black">
             <video
               ref={videoRef}
@@ -163,7 +186,6 @@ const VideoPreloader = ({
               preload="auto"
             />
             
-            {/* Loading overlay while video loads */}
             {!videoLoaded && (
               <div className="absolute inset-0 bg-black flex items-center justify-center">
                 <div className="flex flex-col items-center space-y-4">
@@ -173,7 +195,6 @@ const VideoPreloader = ({
               </div>
             )}
 
-            {/* Skip button */}
             <motion.button
               onClick={handleSkip}
               className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 backdrop-blur-sm"
@@ -185,24 +206,8 @@ const VideoPreloader = ({
             >
               Skip
             </motion.button>
-
-            {/* Progress indicator */}
-            <div className="absolute bottom-4 left-4 right-4">
-              <div className="bg-white/20 rounded-full h-1 overflow-hidden backdrop-blur-sm">
-                <motion.div
-                  className="bg-white h-full"
-                  initial={{ width: "0%" }}
-                  animate={{ width: "100%" }}
-                  transition={{
-                    duration: minDisplayTime / 1000,
-                    ease: "linear"
-                  }}
-                />
-              </div>
-            </div>
           </div>
 
-          {/* Brand/Logo area (optional) */}
           <motion.div
             className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
             initial={{ opacity: 0, y: 20 }}
@@ -220,25 +225,93 @@ const VideoPreloader = ({
   );
 };
 
-// Example usage component showing how to integrate with your main website
 const WebsiteWithPreloader = () => {
   const [showPreloader, setShowPreloader] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [showMiniVideo, setShowMiniVideo] = useState(false);
 
   const handlePreloaderComplete = () => {
     setShowPreloader(false);
+    setShowMiniVideo(true);
+  };
+
+  const handleProgress = (prog: number) => {
+    setProgress(prog);
   };
 
   return (
     <div className="relative">
-      {/* Preloader */}
       {showPreloader && (
         <VideoPreloader
           onComplete={handlePreloaderComplete}
-          minDisplayTime={30000} // 4 seconds minimum
+          minDisplayTime={30000}
+          onProgress={handleProgress}
         />
       )}
 
-  
+      <AnimatePresence>
+        {showMiniVideo && (
+          <motion.div
+            className="fixed z-[9999] overflow-hidden bg-black shadow-2xl border-2 border-white/20 rounded-xl"
+            initial={{
+              top: '50%',
+              left: '50%',
+              x: '-50%',
+              y: '-50%',
+              width: '21rem',
+              height: '37rem',
+              borderRadius: '1rem',
+              opacity: 0,
+            }}
+            animate={{
+              top: 'auto',
+              left: 'auto',
+              bottom: '1.5rem',
+              right: '1.5rem',
+              x: 0,
+              y: 0,
+              width: '21rem',
+              height: '37rem',
+              borderRadius: '1rem',
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+              scale: 0.95,
+              transition: { duration: 0.6 }
+            }}
+            transition={{
+              type: 'spring',
+              stiffness: 60,
+              damping: 18,
+              duration: 2.2,
+              ease: [0.25, 0.46, 0.45, 0.94]
+            }}
+          >
+            <motion.button
+              className="absolute top-2 right-2 w-6 h-6 bg-black/70 hover:bg-black/90 text-white rounded-full flex items-center justify-center text-xs font-bold z-10 transition-all duration-200"
+              onClick={() => setShowMiniVideo(false)}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.5, duration: 0.3 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              ×
+            </motion.button>
+            
+            <video
+              src="https://res.cloudinary.com/dkgjl08a5/video/upload/v1744839021/Dubai_realestate_video_01_tsmqus.webm"
+              className="w-full h-full object-contain bg-black"
+              autoPlay
+              loop
+              muted
+              playsInline
+              controls
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

@@ -26,9 +26,9 @@ const CallToAction = () => {
           Let our experts guide you to the perfect luxury home that exceeds your expectations.
         </p>
         <div className="flex flex-col md:flex-row gap-4 justify-center">
-          <Link href="/contact" passHref legacyBehavior>
+          <Link href="/services" passHref legacyBehavior>
             <a className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 text-center">
-              Get Started
+              View Services
             </a>
           </Link>
           <Link href="/properties" passHref legacyBehavior>

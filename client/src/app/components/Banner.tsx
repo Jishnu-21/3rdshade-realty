@@ -95,13 +95,13 @@ Whether you're buying, selling, or investing  we make your Dubai property journe
 
       {/* Stats Section */}
       <motion.div
-        className="relative z-10 w-full py-12 sm:py-16 md:py-20 px-4 md:px-8"
+        className="relative z-10 w-full py-8 sm:py-10 md:py-12 px-4 md:px-8"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.6 }}
       >
-        <div className="max-w-screen-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center text-white px-0 justify-items-center">
+        <div className="max-w-screen-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-0 text-center text-white px-0 justify-items-center justify-center">
           {stats.map((stat, idx) => {
             const animated = useAnimatedNumber(stat.value, 1.2, stat.format);
             return (
@@ -113,10 +113,10 @@ Whether you're buying, selling, or investing  we make your Dubai property journe
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: 0.2 * idx }}
               >
-                <div className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2 text-white">
+                <div className="text-3xl md:text-4xl lg:text-5xl font-bold mb-1 text-white">
                   {animated}
                 </div>
-                <div className="text-sm md:text-base font-medium opacity-90">
+                <div className="text-xs md:text-sm font-medium opacity-90">
                   {stat.label}
                 </div>
               </motion.div>
