@@ -137,7 +137,7 @@ const Header = ({ onEnquire }: HeaderProps) => {
             </button>
             {!userType && (
               <>
-                <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center SDLK: center text-white font-montserrat" style={{ fontFamily: 'Montserrat, Helvetica, sans-serif' }}>
+                <h2 className="text-xl sm:text-2xl  font-bold mb-4 sm:mb-6 text-center SDLK: center text-black font-montserrat" style={{ fontFamily: 'Montserrat, Helvetica, sans-serif' }}>
                   Are you a Realtor or Buyer?
                 </h2>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full justify-center font-montserrat" style={{ fontFamily: 'Montserrat, Helvetica, sans-serif' }}>
