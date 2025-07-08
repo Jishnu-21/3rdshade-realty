@@ -37,12 +37,21 @@ const VideoPreloader = ({
 
     const handleCanPlayThrough = async () => {
       try {
-        video.muted = false;
-        video.volume = 1.0;
+        // Optimize video for smooth playback
+        video.playbackRate = 1;
+        video.muted = true; // Start muted to avoid autoplay issues
+        video.volume = 0.8;
+        
+        // Ensure video is ready before playing
         await video.play();
-        console.log('Playing preloader with audio');
+        console.log('Playing preloader video');
+        
+        // Try to unmute after successful play
+        setTimeout(() => {
+          video.muted = false;
+        }, 500);
       } catch (error) {
-        console.log('Audio autoplay failed, playing muted:', error);
+        console.log('Video autoplay failed:', error);
         video.muted = true;
         try {
           await video.play();
@@ -52,6 +61,8 @@ const VideoPreloader = ({
       }
     };
 
+    // Preload the video more aggressively
+    video.preload = 'auto';
     video.addEventListener('loadeddata', handleLoadedData);
     video.addEventListener('ended', handleEnded);
     video.addEventListener('canplaythrough', handleCanPlayThrough);
@@ -81,10 +92,11 @@ const VideoPreloader = ({
     if (canClose) {
       const timer = setTimeout(() => {
         setIsVisible(false);
+        // Reduce delay for faster transition
         setTimeout(() => {
           onComplete();
-        }, 800);
-      }, 500);
+        }, 300);
+      }, 200);
 
       return () => clearTimeout(timer);
     }
@@ -112,10 +124,16 @@ const VideoPreloader = ({
   }, [minDisplayTime, onProgress]);
 
   const handleSkip = () => {
+    // Pause video to free up resources
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+    
     setIsVisible(false);
+    // Immediate callback for skip
     setTimeout(() => {
       onComplete();
-    }, 800);
+    }, 100);
   };
 
   const preloaderVariants = {
@@ -123,14 +141,14 @@ const VideoPreloader = ({
       opacity: 1,
       scale: 1,
       transition: {
-        duration: 0.6
+        duration: 0.4
       }
     },
     exit: {
       opacity: 0,
-      scale: 0.8,
+      scale: 0.9,
       transition: {
-        duration: 0.6
+        duration: 0.4
       }
     }
   };
@@ -142,7 +160,7 @@ const VideoPreloader = ({
     },
     exit: {
       opacity: 0,
-      transition: { duration: 0.8 }
+      transition: { duration: 0.4 }
     }
   };
 
@@ -184,6 +202,13 @@ const VideoPreloader = ({
               className="w-full h-full object-cover"
               playsInline
               preload="auto"
+              muted
+              style={{
+                // Optimize video rendering
+                willChange: 'transform',
+                backfaceVisibility: 'hidden',
+                perspective: 1000,
+              }}
             />
             
             {!videoLoaded && (
@@ -200,7 +225,7 @@ const VideoPreloader = ({
               className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 backdrop-blur-sm"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2, duration: 0.5 }}
+              transition={{ delay: 1, duration: 0.5 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -212,7 +237,7 @@ const VideoPreloader = ({
             className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.6 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
           >
             <div className="text-white text-center">
               <h2 className="text-2xl font-bold mb-2">Welcome</h2>
@@ -263,9 +288,9 @@ const HOMEPAGE_ASSETS = [
   "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750944977/wasl2_htj8vz.webp",
   "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750944976/wasl1_qfqnhh.webp",
   "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750944976/wasl3_kchou4.webp",
-  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954172/emaar-south1_utocb5.jpg",
-  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954176/emaar-south2_gevmgc.jpg",
-  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954175/emaar-south4_nlhy6y.jpg",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760822/emaar-creek3_vopplu.jpg",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760833/emaar-creek2_kttzqd.jpg",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760831/damac-villa3_y3zpva.jpg",
   // Preloader video itself
   "https://res.cloudinary.com/dkgjl08a5/video/upload/v1744839021/Dubai_realestate_video_01_tsmqus.webm",
 ];
@@ -273,18 +298,23 @@ const HOMEPAGE_ASSETS = [
 function preloadAsset(url: string): Promise<void> {
   return new Promise((resolve) => {
     if (url.match(/\.(mp4|webm)$/i)) {
-      // Video
+      // Video - optimized preloading
       const video = document.createElement('video');
       video.src = url;
-      video.preload = 'auto';
-      video.oncanplaythrough = () => resolve();
+      video.preload = 'metadata'; // Changed from 'auto' to 'metadata' for faster loading
+      video.muted = true;
+      video.onloadedmetadata = () => resolve();
       video.onerror = () => resolve();
+      // Set a timeout to prevent hanging
+      setTimeout(() => resolve(), 3000);
     } else {
       // Image
       const img = new window.Image();
       img.src = url;
       img.onload = () => resolve();
       img.onerror = () => resolve();
+      // Set a timeout to prevent hanging
+      setTimeout(() => resolve(), 2000);
     }
   });
 }
@@ -295,21 +325,35 @@ const WebsiteWithPreloader = () => {
   const [showMiniVideo, setShowMiniVideo] = useState(false);
   const [assetsLoaded, setAssetsLoaded] = useState(0);
   const [allAssetsLoaded, setAllAssetsLoaded] = useState(false);
-  const minDisplayTime = 30000;
+  const [isSkipped, setIsSkipped] = useState(false);
+  const minDisplayTime = 15000; // Reduced from 30000 to 15000 for faster testing
+
   const totalAssets = HOMEPAGE_ASSETS.length;
 
   // Preload all assets on mount
   useEffect(() => {
     let isMounted = true;
-    Promise.all(
-      HOMEPAGE_ASSETS.map((url) =>
-        preloadAsset(url).then(() => {
-          if (isMounted) setAssetsLoaded((prev) => prev + 1);
-        })
-      )
-    ).then(() => {
+    
+    // Load assets in batches to prevent overwhelming the browser
+    const loadInBatches = async () => {
+      const batchSize = 5;
+      for (let i = 0; i < HOMEPAGE_ASSETS.length; i += batchSize) {
+        const batch = HOMEPAGE_ASSETS.slice(i, i + batchSize);
+        await Promise.all(
+          batch.map((url) =>
+            preloadAsset(url).then(() => {
+              if (isMounted) setAssetsLoaded((prev) => prev + 1);
+            })
+          )
+        );
+        // Small delay between batches to prevent browser freezing
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
       if (isMounted) setAllAssetsLoaded(true);
-    });
+    };
+    
+    loadInBatches();
+    
     return () => {
       isMounted = false;
     };
@@ -326,35 +370,49 @@ const WebsiteWithPreloader = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Final progress is the minimum of time and asset loading
+  // Final progress calculation
   useEffect(() => {
     const assetProgress = assetsLoaded / totalAssets;
-    setProgress(Math.min(timeProgress, assetProgress));
+    setProgress(Math.min(timeProgress * 0.3 + assetProgress * 0.7, 1)); // Weight assets more heavily
   }, [timeProgress, assetsLoaded, totalAssets]);
 
-  // Only allow preloader to close when both are done
-  const canClose = timeProgress >= 1 && allAssetsLoaded;
+  // Only allow preloader to close when both are done OR when skipped
+  const canClose = (timeProgress >= 1 && allAssetsLoaded) || isSkipped;
+
+  const handlePreloaderComplete = () => {
+    setShowPreloader(false);
+    // Show mini video immediately
+    setShowMiniVideo(true);
+  };
+
+  const handleSkip = () => {
+    setIsSkipped(true);
+    handlePreloaderComplete();
+  };
 
   useEffect(() => {
-    if (canClose && showPreloader) {
+    if (canClose && showPreloader && !isSkipped) {
       const timer = setTimeout(() => {
-        setShowPreloader(false);
-        setShowMiniVideo(true);
-      }, 800);
+        handlePreloaderComplete();
+      }, 200);
       return () => clearTimeout(timer);
     }
-  }, [canClose, showPreloader]);
+  }, [canClose, showPreloader, isSkipped]);
 
   return (
-    <div className="relative">
+    <div className="relative min-h-screen bg-gray-900 flex items-center justify-center">
+      {/* Demo content when preloader is not showing */}
+    
+
       {showPreloader && (
         <VideoPreloader
-          onComplete={() => {}}
+          onComplete={handlePreloaderComplete}
           minDisplayTime={minDisplayTime}
           onProgress={() => {}}
-          progress={(assetsLoaded / totalAssets + timeProgress) / 2}
+          progress={progress}
         />
       )}
+
       <AnimatePresence>
         {showMiniVideo && (
           <motion.div
@@ -367,7 +425,7 @@ const WebsiteWithPreloader = () => {
               width: '21rem',
               height: '37rem',
               borderRadius: '1rem',
-              opacity: 0,
+              opacity: 1,
             }}
             animate={{
               top: 'auto',
@@ -384,22 +442,20 @@ const WebsiteWithPreloader = () => {
             exit={{
               opacity: 0,
               scale: 0.95,
-              transition: { duration: 0.6 }
+              transition: { duration: 0.3 }
             }}
             transition={{
               type: 'spring',
-              stiffness: 60,
-              damping: 18,
-              duration: 2.2,
+              stiffness: 80,
+              damping: 20,
+              duration: 1.5,
               ease: [0.25, 0.46, 0.45, 0.94]
             }}
           >
             <motion.button
               className="absolute top-2 right-2 w-6 h-6 bg-black/70 hover:bg-black/90 text-white rounded-full flex items-center justify-center text-xs font-bold z-10 transition-all duration-200"
               onClick={() => setShowMiniVideo(false)}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.5, duration: 0.3 }}
+              initial={{ opacity: 1, scale: 1 }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -407,12 +463,16 @@ const WebsiteWithPreloader = () => {
             </motion.button>
             <video
               src="https://res.cloudinary.com/dkgjl08a5/video/upload/v1744839021/Dubai_realestate_video_01_tsmqus.webm"
-              className="w-full h-full object-contain bg-black"
+              className="w-full h-full object-cover bg-black"
               autoPlay
               loop
               muted
               playsInline
               controls
+              style={{
+                willChange: 'transform',
+                backfaceVisibility: 'hidden',
+              }}
             />
           </motion.div>
         )}

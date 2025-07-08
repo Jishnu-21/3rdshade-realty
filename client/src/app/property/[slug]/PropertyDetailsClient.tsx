@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { FaSwimmer, FaCar, FaConciergeBell, FaDumbbell, FaShieldAlt, FaSpa, FaMapMarkerAlt, FaTrain, FaPlane, FaShoppingBag, FaCheckCircle, FaCalendarAlt, FaPhoneAlt, FaFileDownload, FaTimes, FaClock, FaFilm, FaFire, FaMountain, FaDog, FaTableTennis, FaCouch, FaTint, FaChild, FaHotTub, FaHeartbeat, FaBook, FaMusic, FaBriefcase, FaRoad, FaGamepad, FaStore, FaTheaterMasks, FaHotel, FaSchool, FaTree, FaLandmark, FaWater, FaGolfBall, FaMosque, FaWalking, FaLeaf, FaShip, FaGlassCheers, FaFeather, FaAppleAlt, FaWindowMaximize, FaDoorOpen, FaCogs, FaBed, FaRulerCombined, FaLayerGroup, FaBasketballBall, FaChess, FaUser, FaEnvelope, FaParking } from 'react-icons/fa';
 import Header from '@/app/components/Header';
@@ -797,13 +797,30 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
   const relatedSlugs = propertyData.relatedSlugs || [];
 
   const [mainMedia, setMainMedia] = useState({ type: 'video', src: propertyData.reelVideoUrl });
+  const mainVideoRef = React.useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    if (mainMedia.type === 'video' && mainVideoRef.current) {
+      const video = mainVideoRef.current;
+      video.muted = true;
+      // Try to play the video programmatically
+      const playPromise = video.play();
+      if (playPromise && playPromise.catch) {
+        playPromise.catch(() => {
+          video.muted = true;
+          video.play();
+        });
+      }
+    }
+  }, [mainMedia]);
+
   const [showModal, setShowModal] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '', phone: '', address: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', countryCode: '+91', address: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [formError, setFormError] = useState('');
   const [formSuccess, setFormSuccess] = useState('');
   const [showCallModal, setShowCallModal] = useState(false);
-  const [callForm, setCallForm] = useState({ name: '', date: '', time: '', timezone: '', country: '', email: '', phone: '' });
+  const [callForm, setCallForm] = useState({ name: '', date: '', time: '', timezone: '', country: '', countryCode: '+91', email: '', phone: '' });
   const [showEnquireModal, setShowEnquireModal] = useState(false);
   const [enquireStep, setEnquireStep] = useState(1);
   const [enquireForm, setEnquireForm] = useState({
@@ -875,7 +892,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
     // No need to setSlug, just use slug directly
   }, [slug]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -936,7 +953,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
       setCallFormSuccess('Your call booking was submitted successfully!');
       setTimeout(() => {
         setShowCallModal(false);
-        setCallForm({ name: '', date: '', time: '', timezone: '', country: '', email: '', phone: '' });
+        setCallForm({ name: '', date: '', time: '', timezone: '', country: '', countryCode: '+91', email: '', phone: '' });
         setCallFormSuccess('');
       }, 2000);
     } catch (err) {
@@ -1020,7 +1037,9 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
       {/* Custom Login/Register Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="bg-gradient-to-br from-purple-900/90 to-black/90 rounded-2xl shadow-2xl p-0 w-full max-w-lg relative animate-fadeIn border border-purple-700/40 max-h-[95vh] overflow-y-auto">
+          <div className="bg-gradient-to-br from-purple-900/90 to-black/90 rounded-2xl shadow-2xl p-1 sm:p-3 md:p-5 lg:p-8 w-full 
+            max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl 
+            relative animate-fadeIn border border-purple-700/40 max-h-[95vh] overflow-y-auto">
             <button className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer scale-100 hover:scale-110 z-10" onClick={() => setShowModal(false)}>
               <FaTimes size={20} className="sm:w-[22px] sm:h-[22px]" />
             </button>
@@ -1045,29 +1064,45 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                 </div>
               </div>
             </div>
-            <div className="px-4 sm:px-8 pb-6 sm:pb-8">
+            <div className="px-2 sm:px-4 md:px-8 pb-4 sm:pb-6 md:pb-8">
               {formError && (
-                <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-xs sm:text-sm break-words">{formError}</div>
+                <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-xs sm:text-sm md:text-base break-words">{formError}</div>
               )}
               {formSuccess && (
-                <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-xs sm:text-sm break-words">{formSuccess}</div>
+                <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-xs sm:text-sm md:text-base break-words">{formSuccess}</div>
               )}
               {amountWarning && (
-                <div className="mb-4 p-3 bg-yellow-500/20 border border-yellow-500/50 rounded-lg text-yellow-400 text-xs sm:text-sm break-words">{amountWarning}</div>
+                <div className="mb-4 p-3 bg-yellow-500/20 border border-yellow-500/50 rounded-lg text-yellow-400 text-xs sm:text-sm md:text-base break-words">{amountWarning}</div>
               )}
-              <form onSubmit={handlePayNowSubmit} className="flex flex-col gap-4 sm:gap-5">
+              <form onSubmit={handlePayNowSubmit} className="flex flex-col gap-3 sm:gap-4 md:gap-5">
                 <div className="relative">
-                  <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-base sm:text-lg" />
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Full Name"
-                    value={form.name}
-                    onChange={handleInputChange}
-                    className="pl-10 pr-4 py-2.5 sm:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition text-sm sm:text-base"
-                    required
-                    disabled={isLoading}
-                  />
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <select
+                      name="countryCode"
+                      value={form.countryCode}
+                      onChange={handleInputChange}
+                      className="py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full sm:w-1/3 text-xs sm:text-sm md:text-base"
+                      required
+                      disabled={isLoading}
+                    >
+                      {countryCodeList.map(opt => (
+                        <option key={opt.code} value={opt.code}>{opt.code} ({opt.country})</option>
+                      ))}
+                    </select>
+                    <div className="relative w-full sm:w-2/3">
+                      <FaPhoneAlt className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-base sm:text-lg pointer-events-none" />
+                      <input
+                        type="tel"
+                        name="phone"
+                        placeholder="Phone number"
+                        value={form.phone}
+                        onChange={handleInputChange}
+                        className="py-2 sm:py-2.5 md:py-3 pl-10 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-xs sm:text-sm md:text-base"
+                        required
+                        disabled={isLoading}
+                      />
+                    </div>
+                  </div>
                 </div>
                 <div className="relative">
                   <FaEnvelope className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-base sm:text-lg" />
@@ -1077,20 +1112,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                     placeholder="Email Address"
                     value={form.email}
                     onChange={handleInputChange}
-                    className="pl-10 pr-4 py-2.5 sm:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition text-sm sm:text-base"
-                    required
-                    disabled={isLoading}
-                  />
-                </div>
-                <div className="relative">
-                  <FaPhoneAlt className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-base sm:text-lg" />
-                  <input
-                    type="tel"
-                    name="phone"
-                    placeholder="Phone Number"
-                    value={form.phone}
-                    onChange={handleInputChange}
-                    className="pl-10 pr-4 py-2.5 sm:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition text-sm sm:text-base"
+                    className="pl-10 pr-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition text-xs sm:text-sm md:text-base"
                     required
                     disabled={isLoading}
                   />
@@ -1103,7 +1125,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                     placeholder="Address"
                     value={form.address}
                     onChange={handleInputChange}
-                    className="pl-10 pr-4 py-2.5 sm:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition text-sm sm:text-base"
+                    className="pl-10 pr-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition text-xs sm:text-sm md:text-base"
                     required
                     disabled={isLoading}
                   />
@@ -1133,7 +1155,9 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
       )}
       {showCallModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-          <div className="bg-neutral-900 rounded-xl shadow-2xl p-4 sm:p-8 w-full max-w-md relative animate-fadeIn max-h-[95vh] overflow-y-auto">
+          <div className="bg-neutral-900 rounded-xl shadow-2xl p-2 sm:p-4 md:p-6 lg:p-8 w-full 
+            max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl 
+            relative animate-fadeIn max-h-[95vh] overflow-y-auto">
             <button className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer scale-100 hover:scale-110 z-10" onClick={() => setShowCallModal(false)}>
               <FaTimes size={18} className="sm:w-5 sm:h-5" />
             </button>
@@ -1141,10 +1165,10 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
               <FaPhoneAlt className="text-2xl sm:text-3xl text-purple-400 mb-2" />
               <h2 className="text-xl sm:text-2xl font-bold text-center text-white px-2">Book a Video Call Slot</h2>
             </div>
-            {callFormSuccess && <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-xs sm:text-sm text-center break-words">{callFormSuccess}</div>}
-            {callFormError && <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-xs sm:text-sm text-center break-words">{callFormError}</div>}
-            <form onSubmit={handleCallSubmit} className="flex flex-col gap-3 sm:gap-4">
-              <div>
+            {callFormSuccess && <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-xs sm:text-sm md:text-base text-center break-words">{callFormSuccess}</div>}
+            {callFormError && <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-xs sm:text-sm md:text-base text-center break-words">{callFormError}</div>}
+            <form onSubmit={handleCallSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 md:gap-4">
+              <div className="col-span-1">
                 <label className="text-xs sm:text-sm text-gray-300 block mb-1">Your Name</label>
                 <input
                   type="text"
@@ -1152,70 +1176,11 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                   placeholder="Full Name"
                   value={callForm.name}
                   onChange={handleCallInputChange}
-                  className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-sm sm:text-base"
+                  className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-xs sm:text-sm md:text-base"
                   required
                 />
               </div>
-              <div>
-                <label className="text-xs sm:text-sm text-gray-300 block mb-1">Country</label>
-                <select
-                  name="country"
-                  value={callForm.country}
-                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleCallInputChange(e)}
-                  className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-sm sm:text-base"
-                  required
-                >
-                  <option value="">Select Country</option>
-                  {countryList.map(c => <option key={c} value={c}>{c}</option>)}
-                </select>
-              </div>
-              <div>
-                <label className="text-xs sm:text-sm text-gray-300 block mb-1">Select Date</label>
-                <input
-                  type="date"
-                  name="date"
-                  value={callForm.date}
-                  onChange={handleCallInputChange}
-                  className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer w-full text-sm sm:text-base"
-                  required
-                />
-              </div>
-              <div>
-                <label className="text-xs sm:text-sm text-gray-300 block mb-1">Select Time & Timezone</label>
-                <div className="flex flex-col sm:flex-row gap-2">
-                  <input
-                    type="time"
-                    name="time"
-                    value={callForm.time}
-                    onChange={handleCallInputChange}
-                    className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer w-full sm:w-1/2 text-sm sm:text-base"
-                    required
-                  />
-                  <select
-                    name="timezone"
-                    value={callForm.timezone}
-                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleCallInputChange(e)}
-                    className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full sm:w-1/2 text-sm sm:text-base"
-                    required
-                  >
-                    <option value="">Timezone</option>
-                    {timezoneList.map(tz => <option key={tz} value={tz}>{tz}</option>)}
-                  </select>
-                </div>
-              </div>
-              <div>
-                <label className="text-xs sm:text-sm text-gray-300 block mb-1">Your Phone Number</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone (with country code)"
-                  value={callForm.phone}
-                  onChange={handleCallInputChange}
-                  className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-sm sm:text-base"
-                  required
-                />
-              </div>
-              <div>
+              <div className="col-span-1">
                 <label className="text-xs sm:text-sm text-gray-300 block mb-1">Your Email</label>
                 <input
                   type="email"
@@ -1223,35 +1188,111 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                   placeholder="Email"
                   value={callForm.email}
                   onChange={handleCallInputChange}
-                  className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-sm sm:text-base"
+                  className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-xs sm:text-sm md:text-base"
                   required
                 />
               </div>
-              <button 
-                type="submit" 
-                className={`w-full font-bold py-2.5 sm:py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md text-sm sm:text-base ${
-                  callFormLoading 
-                    ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
-                    : 'bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:scale-105 hover:shadow-lg active:scale-95'
-                }`}
-                disabled={callFormLoading}
-              >
-                {callFormLoading ? (
-                  <div className="flex items-center justify-center gap-2">
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    <span className="text-sm sm:text-base">Submitting...</span>
-                  </div>
-                ) : (
-                  'Book Video Call'
-                )}
-              </button>
+              <div className="col-span-1">
+                <label className="text-xs sm:text-sm text-gray-300 block mb-1">Country</label>
+                <select
+                  name="country"
+                  value={callForm.country}
+                  onChange={handleCallInputChange}
+                  className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-xs sm:text-sm md:text-base"
+                  required
+                >
+                  <option value="">Select Country</option>
+                  {countryList.map(c => <option key={c} value={c}>{c}</option>)}
+                </select>
+              </div>
+              <div className="col-span-1">
+                <label className="text-xs sm:text-sm text-gray-300 block mb-1">Select Date</label>
+                <input
+                  type="date"
+                  name="date"
+                  value={callForm.date}
+                  onChange={handleCallInputChange}
+                  className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer w-full text-xs sm:text-sm md:text-base"
+                  required
+                />
+              </div>
+              <div className="col-span-1">
+                <label className="text-xs sm:text-sm text-gray-300 block mb-1">Your Phone Number</label>
+                <div className="flex gap-2">
+                  <select
+                    name="countryCode"
+                    value={callForm.countryCode}
+                    onChange={handleCallInputChange}
+                    className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-1/3 text-xs sm:text-sm md:text-base"
+                    required
+                  >
+                    {countryCodeList.map(opt => (
+                      <option key={opt.code} value={opt.code}>{opt.code} ({opt.country})</option>
+                    ))}
+                  </select>
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone number"
+                    value={callForm.phone}
+                    onChange={handleCallInputChange}
+                    className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-2/3 text-xs sm:text-sm md:text-base"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="col-span-1">
+                <label className="text-xs sm:text-sm text-gray-300 block mb-1">Select Time & Timezone</label>
+                <div className="flex gap-2">
+                  <input
+                    type="time"
+                    name="time"
+                    value={callForm.time}
+                    onChange={handleCallInputChange}
+                    className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer w-1/2 text-xs sm:text-sm md:text-base"
+                    required
+                  />
+                  <select
+                    name="timezone"
+                    value={callForm.timezone}
+                    onChange={handleCallInputChange}
+                    className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-1/2 text-xs sm:text-sm md:text-base"
+                    required
+                  >
+                    <option value="">Timezone</option>
+                    {timezoneList.map(tz => <option key={tz} value={tz}>{tz}</option>)}
+                  </select>
+                </div>
+              </div>
+              <div className="col-span-1 sm:col-span-2">
+                <button 
+                  type="submit" 
+                  className={`w-full font-bold py-2.5 sm:py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md text-sm sm:text-base ${
+                    callFormLoading 
+                      ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
+                      : 'bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:scale-105 hover:shadow-lg active:scale-95'
+                  }`}
+                  disabled={callFormLoading}
+                >
+                  {callFormLoading ? (
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span className="text-sm sm:text-base">Submitting...</span>
+                    </div>
+                  ) : (
+                    'Book Video Call'
+                  )}
+                </button>
+              </div>
             </form>
           </div>
         </div>
       )}
       {showEnquireModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-gradient-to-br from-purple-900/90 via-black/90 to-pink-900/90 rounded-3xl shadow-2xl p-0 w-full max-w-lg relative animate-fadeIn border border-purple-700/40">
+          <div className="bg-gradient-to-br from-purple-900/90 via-black/90 to-pink-900/90 rounded-3xl shadow-2xl p-1 sm:p-3 md:p-5 lg:p-8 w-full 
+            max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl 
+            relative animate-fadeIn border border-purple-700/40">
             <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full px-6 py-2 shadow-lg text-white font-bold text-lg tracking-wide animate-fadeInUp">Enquire Now</div>
             <button className="absolute top-4 right-4 text-white bg-gradient-to-r from-purple-600 to-pink-500 rounded-full p-2 shadow-lg hover:scale-110 transition-all duration-200" onClick={() => { setShowEnquireModal(false); setEnquireStep(1); }}>
               <FaTimes size={20} />
@@ -1261,7 +1302,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
             </div>
             {enquireFormSuccess && <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-sm text-center shadow">{enquireFormSuccess}</div>}
             {enquireFormError && <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-sm text-center shadow">{enquireFormError}</div>}
-            <form onSubmit={handleEnquireSubmit} className="flex flex-col gap-8 px-4 pb-6">
+            <form onSubmit={handleEnquireSubmit} className="flex flex-col gap-6 px-2 sm:px-4 md:px-6 pb-4 sm:pb-6">
               {/* Stepper */}
               <div className="flex justify-center gap-2 mb-4">
                 {[1, 2].map(step => (
@@ -1360,7 +1401,16 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                 const isImage = /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(mainMedia.src);
                 if (mainMedia.type === 'video' && !isImage) {
                   return (
-                    <video src={mainMedia.src} className="w-full h-full object-contain bg-black" autoPlay loop muted playsInline />
+                    <video
+                      ref={mainVideoRef}
+                      src={mainMedia.src}
+                      className="w-full h-full object-contain bg-black"
+                      autoPlay
+                      loop
+                      muted={true}
+                      playsInline
+                      controls={false}
+                    />
                   );
                 } else {
                   return (
