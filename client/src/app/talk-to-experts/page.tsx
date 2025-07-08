@@ -5,14 +5,17 @@ import Link from "next/link";
 import { FaLinkedin } from "react-icons/fa";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import CallForm from "../components/CallForm";
 
 export default function TalkToExpertsPage() {
+  const [showCallForm, setShowCallForm] = React.useState(false);
+
   return (
     <div className="min-h-screen w-full  bg-gradient-to-br from-purple-900/80 to-pink-900/80 text-white font-montserrat flex flex-col">
       <Header onEnquire={() => {}} />
       <div className="mt-8 sm:mt-12" />
       <main className="flex-1 flex flex-col items-center justify-center px-2 sm:px-4 py-8 sm:py-12 w-full">
-        <div className="w-full max-w-2xl rounded-3xl shadow-2xl p-4 sm:p-8 flex flex-col items-center bg-black/70">
+        <div className="w-full max-w-2xl rounded-3xl shadow-2xl p-6 sm:p-10 flex flex-col items-center bg-gradient-to-br from-purple-900/80 to-pink-900/80">
           <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-4 text-center">Talk to Our Experts</h1>
           <p className="text-lg sm:text-xl text-gray-200 mb-6 text-center">
             Making the right real estate investment can be life-changing. Our experts are here to guide you every step of the way—helping you make informed decisions, avoid costly mistakes, and maximize your returns.
@@ -41,11 +44,22 @@ export default function TalkToExpertsPage() {
               <FaLinkedin className="text-blue-400 text-2xl" />
               <span className="font-semibold text-white">Mr. Ayyaz Shaikh, MD 3rdshade</span>
             </Link>
+            <button
+              className="mt-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:scale-105 hover:shadow-xl active:scale-95 transition-all text-base sm:text-lg"
+              onClick={() => setShowCallForm(true)}
+            >
+              Book Now
+            </button>
             <span className="text-xs text-gray-400 mt-1">(Click to view LinkedIn profile)</span>
           </div>
         </div>
       </main>
       <Footer />
+      <CallForm
+        open={showCallForm}
+        onClose={() => setShowCallForm(false)}
+        propertyName="Mr. Ayyaz Shaikh, MD 3rdshade"
+      />
     </div>
   );
 } 
