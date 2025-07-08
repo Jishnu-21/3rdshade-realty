@@ -9,7 +9,7 @@ const services = [
   {
     title: 'Branding',
     description: 'Build a powerful, memorable brand identity that sets you apart in the real estate market.',
-    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750656188/branding_bkbwui.png',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1751967877/branding_cojlmm.png',
   },
   {
     title: 'SEO',
@@ -19,7 +19,7 @@ const services = [
   {
     title: 'Website Development',
     description: 'Get a stunning, high-performance website tailored for real estate, with seamless user experience.',
-    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750656195/web-dev_qokpcn.png',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1751967883/web-dev_oa4gpo.png',
   },
   {
     title: 'Performance Marketing',
@@ -29,7 +29,7 @@ const services = [
   {
     title: 'UI/UX',
     description: 'Delight your users with intuitive, beautiful interfaces and seamless digital experiences.',
-    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750656189/ui-ux_ccwton.png',
+    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1751967887/ui-ux_bw4ynz.png',
   },
   {
     title: 'Consulting',
