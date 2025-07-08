@@ -400,7 +400,7 @@ const WebsiteWithPreloader = () => {
   }, [canClose, showPreloader, isSkipped]);
 
   return (
-    <div className="relative min-h-screen bg-gray-900 flex items-center justify-center">
+    <div className="relative flex items-center justify-center">
       {/* Demo content when preloader is not showing */}
     
 
