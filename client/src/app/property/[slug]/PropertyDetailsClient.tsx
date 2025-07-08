@@ -3,7 +3,7 @@
 import React from "react";
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { FaSwimmer, FaCar, FaConciergeBell, FaDumbbell, FaShieldAlt, FaSpa, FaMapMarkerAlt, FaTrain, FaPlane, FaShoppingBag, FaCheckCircle, FaCalendarAlt, FaPhoneAlt, FaFileDownload, FaTimes, FaClock, FaFilm, FaFire, FaMountain, FaDog, FaTableTennis, FaCouch, FaTint, FaChild, FaHotTub, FaHeartbeat, FaBook, FaMusic, FaBriefcase, FaRoad, FaGamepad, FaStore, FaTheaterMasks, FaHotel, FaSchool, FaTree, FaLandmark, FaWater, FaGolfBall, FaMosque, FaWalking, FaLeaf, FaShip, FaGlassCheers, FaFeather, FaAppleAlt, FaWindowMaximize, FaDoorOpen, FaCogs, FaBed, FaRulerCombined, FaLayerGroup, FaBasketballBall, FaChess, FaUser, FaEnvelope, FaParking } from 'react-icons/fa';
+import { FaSwimmer, FaCar, FaConciergeBell, FaDumbbell, FaShieldAlt, FaSpa, FaMapMarkerAlt, FaTrain, FaPlane, FaShoppingBag, FaCheckCircle, FaCalendarAlt, FaPhoneAlt, FaFileDownload, FaTimes, FaClock, FaFilm, FaFire, FaMountain, FaDog, FaTableTennis, FaCouch, FaTint, FaChild, FaHotTub, FaHeartbeat, FaBook, FaMusic, FaBriefcase, FaRoad, FaGamepad, FaStore, FaTheaterMasks, FaHotel, FaSchool, FaTree, FaLandmark, FaWater, FaGolfBall, FaMosque, FaWalking, FaLeaf, FaShip, FaGlassCheers, FaFeather, FaAppleAlt, FaWindowMaximize, FaDoorOpen, FaCogs, FaBed, FaRulerCombined, FaLayerGroup, FaBasketballBall, FaChess, FaUser, FaEnvelope, FaParking, FaVolumeMute, FaVolumeUp } from 'react-icons/fa';
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import { notFound } from 'next/navigation';
@@ -798,11 +798,13 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
 
   const [mainMedia, setMainMedia] = useState({ type: 'video', src: propertyData.reelVideoUrl });
   const mainVideoRef = React.useRef<HTMLVideoElement | null>(null);
+  const [videoMuted, setVideoMuted] = useState(true);
+  const [showUnmuteOverlay, setShowUnmuteOverlay] = useState(false);
 
   useEffect(() => {
     if (mainMedia.type === 'video' && mainVideoRef.current) {
       const video = mainVideoRef.current;
-      video.muted = true;
+      video.muted = videoMuted;
       // Try to play the video programmatically
       const playPromise = video.play();
       if (playPromise && playPromise.catch) {
@@ -812,7 +814,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
         });
       }
     }
-  }, [mainMedia]);
+  }, [mainMedia, videoMuted]);
 
   const [showModal, setShowModal] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', phone: '', countryCode: '+91', address: '' });
@@ -1400,16 +1402,37 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
                 const isImage = /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(mainMedia.src);
                 if (mainMedia.type === 'video' && !isImage) {
                   return (
-                    <video
-                      ref={mainVideoRef}
-                      src={mainMedia.src}
-                      className="w-full h-full object-contain bg-black"
-                      autoPlay
-                      loop
-                      muted={true}
-                      playsInline
-                      controls={false}
-                    />
+                    <div
+                      className="relative w-full h-full"
+                      onMouseEnter={() => setShowUnmuteOverlay(true)}
+                      onMouseLeave={() => setShowUnmuteOverlay(false)}
+                    >
+                      <video
+                        ref={mainVideoRef}
+                        src={mainMedia.src}
+                        className="w-full h-full object-contain bg-black cursor-pointer"
+                        autoPlay
+                        loop
+                        muted={videoMuted}
+                        playsInline
+                        controls={false}
+                        onClick={() => setVideoMuted(m => !m)}
+                      />
+                      {videoMuted && showUnmuteOverlay && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/30 z-10 pointer-events-none">
+                          <div className="bg-gradient-to-r from-purple-600 to-pink-500 rounded-full p-4 flex items-center justify-center shadow-lg">
+                            <FaVolumeMute className="text-white text-3xl" />
+                          </div>
+                        </div>
+                      )}
+                      {!videoMuted && showUnmuteOverlay && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/20 z-10 pointer-events-none">
+                          <div className="bg-gradient-to-r from-purple-600 to-pink-500 rounded-full p-4 flex items-center justify-center shadow-lg">
+                            <FaVolumeUp className="text-white text-3xl" />
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   );
                 } else {
                   return (

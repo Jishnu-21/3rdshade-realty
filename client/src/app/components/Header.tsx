@@ -57,10 +57,11 @@ const Header = ({ onEnquire }: HeaderProps) => {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
-            <Link href="/" className="text-white text-base lg:text-xl font-semibold hover:text-purple-400 transition-colors duration-300">Home</Link>
             <Link href="/properties" className="text-white text-base lg:text-xl font-semibold hover:text-purple-400 transition-colors duration-300">Properties</Link>
             <Link href="/services" className="text-white text-base lg:text-xl font-semibold hover:text-purple-400 transition-colors duration-300">Services</Link>
             <Link href="/about" className="text-white text-base lg:text-xl font-semibold hover:text-purple-400 transition-colors duration-300">About</Link>
+            <Link href="/contact" className="text-white text-base lg:text-xl font-semibold hover:text-purple-400 transition-colors duration-300">Contact</Link>
+
           </nav>
 
           {/* Desktop CTA */}
