@@ -242,11 +242,11 @@ const AboutPage = () => {
                 <FaPhoneAlt /> Get in Touch
               </a>
               <a
-                href="mailto:info@3rdshade.in"
+                href="/talk-to-experts"
                 className="border-2 border-white text-white font-bold py-4 px-8 rounded-full hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center gap-2"
                 style={{ display: 'inline-flex' }}
               >
-                <FaEnvelope /> Send Message
+                Talk To Experts
               </a>
             </div>
           </motion.div>
