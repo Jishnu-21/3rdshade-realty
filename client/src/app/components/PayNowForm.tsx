@@ -144,8 +144,20 @@ const PayNowForm: React.FC<PayNowFormProps> = ({ open, onClose, propertyName, on
               />
             </div>
             <div className="relative">
-              <FaPhoneAlt className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-base sm:text-lg" />
-              <div className="flex flex-col sm:flex-row gap-2 pl-7">
+              <FaMapMarkerAlt className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-base sm:text-lg" />
+              <input
+                type="text"
+                name="address"
+                placeholder="Address"
+                value={form.address}
+                onChange={handleInputChange}
+                className="pl-10 pr-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition text-xs sm:text-sm md:text-base"
+                required
+                disabled={isLoading || externalLoading}
+              />
+            </div>
+            <div className="relative">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <select
                   name="countryCode"
                   value={form.countryCode}
@@ -158,30 +170,20 @@ const PayNowForm: React.FC<PayNowFormProps> = ({ open, onClose, propertyName, on
                     <option key={opt.code} value={opt.code}>{opt.code} ({opt.country})</option>
                   ))}
                 </select>
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone number"
-                  value={form.phone}
-                  onChange={handleInputChange}
-                  className="py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full sm:w-2/3 text-xs sm:text-sm md:text-base"
-                  required
-                  disabled={isLoading || externalLoading}
-                />
+                <div className="relative w-full sm:w-2/3">
+                  <FaPhoneAlt className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-base sm:text-lg pointer-events-none" />
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone number"
+                    value={form.phone}
+                    onChange={handleInputChange}
+                    className="py-2 sm:py-2.5 md:py-3 pl-10 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-xs sm:text-sm md:text-base"
+                    required
+                    disabled={isLoading || externalLoading}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="relative">
-              <FaMapMarkerAlt className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-base sm:text-lg" />
-              <input
-                type="text"
-                name="address"
-                placeholder="Address"
-                value={form.address}
-                onChange={handleInputChange}
-                className="pl-10 pr-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition text-xs sm:text-sm md:text-base"
-                required
-                disabled={isLoading || externalLoading}
-              />
             </div>
             <button
               type="submit"
