@@ -180,7 +180,7 @@ export default function ServicesPage() {
 
       {/* Page Content */}
       <div className="relative z-20">
-        <Header />
+      <Header onEnquire={() => {}} />
         <main className="min-h-screen flex flex-col justify-center items-center relative">
           <ServiceHero />
           <div className="w-full max-w-screen-2xl mx-auto px-4 md:px-8">

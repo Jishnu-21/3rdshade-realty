@@ -5,7 +5,7 @@ import Footer from '@/app/components/Footer';
 export default function PrivacyPage() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-purple-900 via-black to-pink-900">
-      <Header />
+      <Header onEnquire={() => {}} />
       <main className="flex-1 max-w-6xl mx-auto px-4 py-16 text-white font-montserrat mt-12 mb-12">
         <h1 className="text-4xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Privacy Policy</h1>
         <p className="text-sm text-gray-400 mb-2">Effective Date: [Insert Date]</p>

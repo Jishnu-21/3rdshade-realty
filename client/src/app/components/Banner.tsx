@@ -49,8 +49,7 @@ const Banner = () => {
       {/* Background Video */}
       <video
         ref={videoRef}
-        src="https://videos.pexels.com/video-files/5838634/5838634-uhd_2560_1440_30fps.mp4"
-        autoPlay
+        src="https://cdn.pixabay.com/video/2020/08/12/46950-450094784_large.mp4"    //    autoPlay
         loop
         muted
         playsInline

@@ -18,7 +18,7 @@ export default function Home() {
       <WebsiteWithPreloader />
       {/* The rest of your site will be revealed by WebsiteWithPreloader */}
       {/* Remove the duplicate main content here if WebsiteWithPreloader already renders it */}
-      <Header />
+      <Header onEnquire={() => {}} />
       <div className="relative w-full min-h-screen">
         <video
           src="https://videos.pexels.com/video-files/5838634/5838634-uhd_2560_1440_30fps.mp4"
