@@ -10,7 +10,7 @@ export default function PrivacyPage() {
       <Header onEnquire={() => {}} />
       <main className="flex-1 max-w-6xl mx-auto px-4 py-16 text-white font-montserrat mt-12 mb-12">
         <h1 className="text-4xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Privacy Policy</h1>
-        <p className="text-sm text-gray-400 mb-2">Effective Date: [Insert Date]</p>
+        <p className="text-sm text-gray-400 mb-2">Effective Date: July 2025</p>
         <p className="mb-4">Welcome to Third Shade Realty. We are a global digital marketing and creative solutions agency serving the real estate industry and its ecosystem. Our services include (but are not limited to) website design and development, social media marketing, branding, content creation, and digital performance advertising. Third Shade Realty and its affiliates (collectively, "Third Shade," "we," "our," or "us") provide access to www.thirdshaderealty.com (the "Website") and related platforms, tools, and services (the "Services").</p>
         <p className="mb-4">By accessing or using our Services, you agree to the terms of this Privacy Policy. If you do not agree, please refrain from using our Website or engaging with our digital platforms.</p>
         <h2 className="text-xl font-semibold mt-8 mb-2 text-purple-300">Why We Collect Your Information</h2>

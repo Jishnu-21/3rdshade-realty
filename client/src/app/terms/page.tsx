@@ -9,7 +9,7 @@ export default function TermsPage() {
       <Header onEnquire={() => {}} />
       <main className="flex-1 max-w-6xl mx-auto px-4 py-16 text-white font-montserrat mt-12 mb-12">
         <h1 className="text-4xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Terms &amp; Conditions</h1>
-        <p className="text-sm text-gray-400 mb-2">Effective Date: [Insert Date]</p>
+        <p className="text-sm text-gray-400 mb-2">Effective Date: July 2025</p>
         <p className="mb-4">Welcome to Third Shade Realty (“Company”, “we”, “us”, or “our”). These Terms &amp; Conditions (“Terms”) govern your access to and use of the website <span className="underline">www.thirdshaderealty.com</span> (the “Website”) and the services we provide (collectively, the “Services”).</p>
         <p className="mb-4">By accessing or using this Website, you agree to comply with and be bound by these Terms. If you do not agree with any part of these Terms, please do not use our Website or Services.</p>
         <h2 className="text-xl font-semibold mt-8 mb-2 text-purple-300">1. Use of the Website</h2>
