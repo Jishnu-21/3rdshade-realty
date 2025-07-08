@@ -93,7 +93,6 @@ const PayNowForm: React.FC<PayNowFormProps> = ({ open, onClose, propertyName, on
           <FaTimes size={20} className="sm:w-[22px] sm:h-[22px]" />
         </button>
         <div className="flex flex-col items-center pt-6 sm:pt-8 pb-2 px-4 sm:px-8">
-          <Image src="/logos/logo.png" alt="3rdshade Logo" width={500} height={40} className="mb-2 sm:w-[120px] sm:h-[20px]" />
           <h2 className="text-2xl sm:text-3xl font-extrabold mb-2 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent px-2">Secure Your Property</h2>
           <p className="text-gray-300 text-center mb-4 text-xs sm:text-sm px-2">Fill in your details to proceed with your interest{propertyName && <span> in <span className="font-bold text-white">{propertyName}</span></span>}.</p>
           <div className="w-full bg-gradient-to-r from-purple-700/60 to-pink-700/60 rounded-xl p-[2px] mb-4 sm:mb-6">

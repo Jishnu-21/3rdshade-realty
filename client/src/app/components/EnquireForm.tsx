@@ -137,7 +137,7 @@ const EnquireForm: React.FC<EnquireFormProps> = ({ open, onClose, propertyName, 
           <FaTimes size={20} />
         </button>
         <div className="flex flex-col items-center mb-4 pt-8">
-          <Image src="/logos/logo.png" alt="3rdshade Logo" width={120} height={40} className="mb-2 drop-shadow-lg" />
+          <Image src="/logos/logo3.png" alt="3rdshade Logo" width={120} height={40} className="mb-2 drop-shadow-lg" />
           {propertyName && <div className="text-white text-center text-base font-semibold mb-2">For: {propertyName}</div>}
         </div>
         {enquireFormSuccess && <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-sm text-center shadow">{enquireFormSuccess}</div>}
