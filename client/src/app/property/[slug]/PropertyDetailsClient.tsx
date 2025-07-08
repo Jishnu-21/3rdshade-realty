@@ -1391,8 +1391,8 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
           </div>
         </div>
       )}
-      <main className="max-w-screen-2xl mx-auto px-6 sm:px-6 lg:px-8 ">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-15 items-stretch min-h-screen">
+<main className="flex-1 max-w-screen-2xl mx-auto px-6 sm:px-6 lg:px-8 w-full flex flex-col pt-8 md:pt-16 lg:pt-24 mt-[64px] md:mt-0">
+<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-15 items-stretch min-h-screen">
           {/* Left Column: Image/Video Gallery */}
           <div className="lg:col-span-1 flex flex-col h-full min-h-screen justify-center">
             <div className="relative w-full h-[60vw] max-h-[635px] min-h-[320px] md:h-[500px] lg:h-[635px] rounded-xl overflow-hidden mb-4 bg-black transition-all duration-300">
@@ -1580,3 +1580,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
     </div>
   );
 } 
+
+
+
+
