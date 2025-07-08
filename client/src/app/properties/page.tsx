@@ -527,16 +527,16 @@ const PropertiesPage = () => {
   const handleVideoPlay = (propertyId: number) => {
     const video = videoRefs.current[propertyId];
     if (video) {
-      video.currentTime = 2; // Set video to start at 2 seconds
-      video.play();
+      video.muted = false; // Unmute on hover
+      video.play(); // Ensure it's playing
     }
   };
 
   const handleVideoPause = (propertyId: number) => {
     const video = videoRefs.current[propertyId];
     if (video) {
-      video.pause();
-      video.currentTime = 0;
+      video.muted = true; // Mute on mouse leave
+      // Do NOT pause or reset currentTime
     }
   };
 
@@ -613,7 +613,7 @@ const PropertiesPage = () => {
       <section className="relative pt-48 pb-40 flex items-center justify-start overflow-hidden">
         {/* Background Image */}
         <Image
-          src="https://res.cloudinary.com/dzmxqwlse/image/upload/v1750745906/dubai-creek_wrypak.jpg"
+          src="https://res.cloudinary.com/dzmxqwlse/image/upload/v1751969568/904507_982668_tevz5r.webp"
           alt="Luxury Property"
           fill
           className="object-cover object-center absolute inset-0 z-0"
@@ -670,6 +670,7 @@ const PropertiesPage = () => {
                         ref={el => { videoRefs.current[property.id] = el; }}
                         src={property.reelVideoUrl}
                         loop
+                        autoPlay
                         muted
                         playsInline
                         className="w-full h-full object-cover absolute inset-0"

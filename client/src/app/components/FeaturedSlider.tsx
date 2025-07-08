@@ -171,6 +171,7 @@ const FeaturedSlider = () => {
                 const video = videoRefs.current[idx];
                 if (video) {
                   video.currentTime = 0;
+                  video.muted = false;
                   video.play();
                 }
               }}
@@ -178,6 +179,7 @@ const FeaturedSlider = () => {
                 setHoveredIndex(null);
                 const video = videoRefs.current[idx];
                 if (video) {
+                  video.muted = true;
                   video.pause();
                   video.currentTime = 1;
                 }
@@ -189,7 +191,7 @@ const FeaturedSlider = () => {
                   ref={(el: HTMLVideoElement | null) => { videoRefs.current[idx] = el; }}
                   src={item.videoSrc}
                   loop
-                  muted
+                  muted={hoveredIndex !== idx}
                   playsInline
                   autoPlay
                   poster={item.poster}
