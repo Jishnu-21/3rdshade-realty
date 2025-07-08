@@ -49,9 +49,8 @@ export default function TermsPage() {
         <h2 className="text-xl font-semibold mt-8 mb-2 text-purple-300">12. Contact</h2>
         <p className="mb-2">If you have any questions or concerns about these Terms &amp; Conditions, you may contact us at:</p>
         <ul className="list-disc ml-6 mb-4 text-gray-300">
-          <li>Email: [Insert Email]</li>
-          <li>Phone: [Insert Contact Number]</li>
-          <li>Business Address: [Insert Address]</li>
+          <li>Email: info@3rdshade.in</li>
+          <li>Phone: +91 8600181189</li>
         </ul>
       </main>
       <Footer />
