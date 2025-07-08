@@ -37,40 +37,41 @@ const VideoPreloader = ({
 
     const handleCanPlayThrough = async () => {
       try {
-        // Optimize video for smooth playback
-        video.playbackRate = 1;
-        video.muted = true; // Start muted to avoid autoplay issues
+        // Start playing immediately when ready
+        video.muted = false;
         video.volume = 0.8;
+        video.playbackRate = 1;
         
-        // Ensure video is ready before playing
         await video.play();
-        console.log('Playing preloader video');
-        
-        // Try to unmute after successful play
-        setTimeout(() => {
-          video.muted = false;
-        }, 500);
+        console.log('Playing preloader video with audio');
       } catch (error) {
-        console.log('Video autoplay failed:', error);
+        console.log('Audio autoplay failed, trying muted:', error);
         video.muted = true;
         try {
           await video.play();
+          console.log('Playing preloader video muted');
         } catch (mutedError) {
-          console.log('Muted autoplay also failed:', mutedError);
+          console.log('Video autoplay completely failed:', mutedError);
         }
       }
     };
 
-    // Preload the video more aggressively
+    // Preload the video and try to start playing
     video.preload = 'auto';
+    video.load(); // Force load
+    
     video.addEventListener('loadeddata', handleLoadedData);
     video.addEventListener('ended', handleEnded);
     video.addEventListener('canplaythrough', handleCanPlayThrough);
+    
+    // Also try to play on loadedmetadata
+    video.addEventListener('loadedmetadata', handleCanPlayThrough);
 
     return () => {
       video.removeEventListener('loadeddata', handleLoadedData);
       video.removeEventListener('ended', handleEnded);
       video.removeEventListener('canplaythrough', handleCanPlayThrough);
+      video.removeEventListener('loadedmetadata', handleCanPlayThrough);
     };
   }, []);
 
@@ -202,7 +203,7 @@ const VideoPreloader = ({
               className="w-full h-full object-cover"
               playsInline
               preload="auto"
-              muted
+              autoPlay
               style={{
                 // Optimize video rendering
                 willChange: 'transform',
@@ -239,10 +240,7 @@ const VideoPreloader = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
           >
-            <div className="text-white text-center">
-              <h2 className="text-2xl font-bold mb-2">Welcome</h2>
-              <p className="text-white/70 text-sm">Loading your experience...</p>
-            </div>
+          
           </motion.div>
         </motion.div>
       </motion.div>
@@ -326,7 +324,7 @@ const WebsiteWithPreloader = () => {
   const [assetsLoaded, setAssetsLoaded] = useState(0);
   const [allAssetsLoaded, setAllAssetsLoaded] = useState(false);
   const [isSkipped, setIsSkipped] = useState(false);
-  const minDisplayTime = 15000; // Reduced from 30000 to 15000 for faster testing
+  const minDisplayTime = 45000; // Increased to 45 seconds
 
   const totalAssets = HOMEPAGE_ASSETS.length;
 
@@ -401,8 +399,8 @@ const WebsiteWithPreloader = () => {
 
   return (
     <div className="relative flex items-center justify-center">
-      {/* Demo content when preloader is not showing */}
-    
+      {/* Minimal loading indicator when preloader is not showing */}
+     
 
       {showPreloader && (
         <VideoPreloader
