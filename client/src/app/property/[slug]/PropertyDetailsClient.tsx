@@ -1554,7 +1554,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
         </div>
 
         {/* Related Properties */}
-        <div className="mt-6 md:mt-4 lg:mt-2">
+        <div className="mt-6 md:mt-4 lg:mt-2 mb-8">
           <h2 className="text-3xl font-bold mb-8">Related Properties</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {relatedSlugs.map((slug: string) => {
