@@ -131,7 +131,9 @@ const EnquireForm: React.FC<EnquireFormProps> = ({ open, onClose, propertyName, 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-gradient-to-br from-purple-900/90 via-black/90 to-pink-900/90 rounded-3xl shadow-2xl p-0 w-full max-w-lg relative animate-fadeIn border border-purple-700/40">
+      <div className="bg-gradient-to-br from-purple-900/90 via-black/90 to-pink-900/90 rounded-3xl shadow-2xl p-1 sm:p-3 md:p-5 lg:p-8 w-full 
+        max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl 
+        relative animate-fadeIn border border-purple-700/40">
         <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full px-6 py-2 shadow-lg text-white font-bold text-lg tracking-wide animate-fadeInUp">Enquire Now</div>
         <button className="absolute top-4 right-4 text-white bg-gradient-to-r from-purple-600 to-pink-500 rounded-full p-2 shadow-lg hover:scale-110 transition-all duration-200" onClick={() => { onClose(); setEnquireStep(1); }}>
           <FaTimes size={20} />
@@ -142,7 +144,7 @@ const EnquireForm: React.FC<EnquireFormProps> = ({ open, onClose, propertyName, 
         </div>
         {enquireFormSuccess && <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-sm text-center shadow">{enquireFormSuccess}</div>}
         {enquireFormError && <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-sm text-center shadow">{enquireFormError}</div>}
-        <form onSubmit={handleEnquireSubmit} className="flex flex-col gap-8 px-4 pb-6">
+        <form onSubmit={handleEnquireSubmit} className="flex flex-col gap-6 px-2 sm:px-4 md:px-6 pb-4 sm:pb-6">
           {/* Stepper */}
           <div className="flex justify-center gap-2 mb-4">
             {[1, 2].map(step => (
@@ -152,15 +154,15 @@ const EnquireForm: React.FC<EnquireFormProps> = ({ open, onClose, propertyName, 
           {/* Step 1: Basic Info */}
           {enquireStep === 1 && (
             <div className="flex flex-col gap-4 animate-fadeIn">
-              <input type="text" name="name" placeholder="Name" value={enquireForm.name} onChange={handleEnquireInputChange} className="px-5 py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm placeholder:text-purple-200/60" required />
-              <input type="email" name="email" placeholder="Email" value={enquireForm.email} onChange={handleEnquireInputChange} className="px-5 py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm placeholder:text-purple-200/60" required />
+              <input type="text" name="name" placeholder="Name" value={enquireForm.name} onChange={handleEnquireInputChange} className="px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm placeholder:text-purple-200/60 text-xs sm:text-sm md:text-base" required />
+              <input type="email" name="email" placeholder="Email" value={enquireForm.email} onChange={handleEnquireInputChange} className="px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm placeholder:text-purple-200/60 text-xs sm:text-sm md:text-base" required />
               <div>
                 <div className="flex flex-col sm:flex-row gap-2">
                   <select
                     name="countryCode"
                     value={enquireForm.countryCode}
                     onChange={handleEnquireInputChange}
-                    className="px-5 py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm w-full sm:w-1/3"
+                    className="px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm w-full sm:w-1/3 text-xs sm:text-sm md:text-base"
                     required
                   >
                     {countryCodeList.map(opt => (
@@ -173,7 +175,7 @@ const EnquireForm: React.FC<EnquireFormProps> = ({ open, onClose, propertyName, 
                     placeholder="Phone number"
                     value={enquireForm.phone}
                     onChange={handleEnquireInputChange}
-                    className="px-5 py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm w-full sm:w-2/3"
+                    className="px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm w-full sm:w-2/3 text-xs sm:text-sm md:text-base"
                     required
                   />
                 </div>
@@ -202,7 +204,7 @@ const EnquireForm: React.FC<EnquireFormProps> = ({ open, onClose, propertyName, 
                 ))}
               </div>
               <label className="text-sm text-purple-200/80 font-semibold">Select the country</label>
-              <select name="country" value={enquireForm.country} onChange={handleEnquireInputChange} className="px-5 py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm">
+              <select name="country" value={enquireForm.country} onChange={handleEnquireInputChange} className="px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm text-xs sm:text-sm md:text-base">
                 <option value="">Select Country</option>
                 {countryList.map(c => <option key={c} value={c}>{c}</option>)}
               </select>
@@ -217,8 +219,8 @@ const EnquireForm: React.FC<EnquireFormProps> = ({ open, onClose, propertyName, 
               </div>
               <label className="text-sm text-purple-200/80 font-semibold">Preferred Date & Time</label>
               <div className="flex gap-2">
-                <input type="date" name="date" value={enquireForm.date} onChange={handleEnquireInputChange} className="px-5 py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm cursor-pointer" required />
-                <input type="time" name="time" value={enquireForm.time} onChange={handleEnquireInputChange} className="px-5 py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm cursor-pointer" required />
+                <input type="date" name="date" value={enquireForm.date} onChange={handleEnquireInputChange} className="px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm cursor-pointer text-xs sm:text-sm md:text-base" required />
+                <input type="time" name="time" value={enquireForm.time} onChange={handleEnquireInputChange} className="px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm cursor-pointer text-xs sm:text-sm md:text-base" required />
               </div>
               <label className="text-sm text-purple-200/80 font-semibold">How soon are you looking to buy?</label>
               <div className="flex flex-wrap gap-2">

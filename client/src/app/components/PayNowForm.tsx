@@ -88,7 +88,9 @@ const PayNowForm: React.FC<PayNowFormProps> = ({ open, onClose, propertyName, on
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-      <div className="bg-gradient-to-br from-purple-900/90 to-black/90 rounded-2xl shadow-2xl p-0 w-full max-w-lg relative animate-fadeIn border border-purple-700/40 max-h-[95vh] overflow-y-auto">
+      <div className="bg-gradient-to-br from-purple-900/90 to-black/90 rounded-2xl shadow-2xl p-1 sm:p-3 md:p-5 lg:p-8 w-full 
+        max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl 
+        relative animate-fadeIn border border-purple-700/40 max-h-[95vh] overflow-y-auto">
         <button className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer scale-100 hover:scale-110 z-10" onClick={() => onClose()}>
           <FaTimes size={20} className="sm:w-[22px] sm:h-[22px]" />
         </button>
@@ -107,14 +109,14 @@ const PayNowForm: React.FC<PayNowFormProps> = ({ open, onClose, propertyName, on
             </div>
           </div>
         </div>
-        <div className="px-4 sm:px-8 pb-6 sm:pb-8">
+        <div className="px-2 sm:px-4 md:px-8 pb-4 sm:pb-6 md:pb-8">
           {formError || errorMessage ? (
             <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-xs sm:text-sm break-words">{formError || errorMessage}</div>
           ) : null}
           {formSuccess || successMessage ? (
             <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-xs sm:text-sm break-words">{formSuccess || successMessage}</div>
           ) : null}
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:gap-5">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:gap-4 md:gap-5">
             <div className="relative">
               <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400 text-base sm:text-lg" />
               <input
@@ -123,7 +125,7 @@ const PayNowForm: React.FC<PayNowFormProps> = ({ open, onClose, propertyName, on
                 placeholder="Full Name"
                 value={form.name}
                 onChange={handleInputChange}
-                className="pl-10 pr-4 py-2.5 sm:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition text-sm sm:text-base"
+                className="pl-10 pr-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition text-xs sm:text-sm md:text-base"
                 required
                 disabled={isLoading || externalLoading}
               />
@@ -136,7 +138,7 @@ const PayNowForm: React.FC<PayNowFormProps> = ({ open, onClose, propertyName, on
                 placeholder="Email Address"
                 value={form.email}
                 onChange={handleInputChange}
-                className="pl-10 pr-4 py-2.5 sm:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition text-sm sm:text-base"
+                className="pl-10 pr-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition text-xs sm:text-sm md:text-base"
                 required
                 disabled={isLoading || externalLoading}
               />
@@ -148,7 +150,7 @@ const PayNowForm: React.FC<PayNowFormProps> = ({ open, onClose, propertyName, on
                   name="countryCode"
                   value={form.countryCode}
                   onChange={handleInputChange}
-                  className="py-2.5 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full sm:w-1/3 text-sm sm:text-base"
+                  className="py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full sm:w-1/3 text-xs sm:text-sm md:text-base"
                   required
                   disabled={isLoading || externalLoading}
                 >
@@ -162,7 +164,7 @@ const PayNowForm: React.FC<PayNowFormProps> = ({ open, onClose, propertyName, on
                   placeholder="Phone number"
                   value={form.phone}
                   onChange={handleInputChange}
-                  className="py-2.5 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full sm:w-2/3 text-sm sm:text-base"
+                  className="py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full sm:w-2/3 text-xs sm:text-sm md:text-base"
                   required
                   disabled={isLoading || externalLoading}
                 />
@@ -176,7 +178,7 @@ const PayNowForm: React.FC<PayNowFormProps> = ({ open, onClose, propertyName, on
                 placeholder="Address"
                 value={form.address}
                 onChange={handleInputChange}
-                className="pl-10 pr-4 py-2.5 sm:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition text-sm sm:text-base"
+                className="pl-10 pr-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-900 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full shadow-sm focus:shadow-purple-900/20 transition text-xs sm:text-sm md:text-base"
                 required
                 disabled={isLoading || externalLoading}
               />

@@ -104,7 +104,9 @@ const CallForm: React.FC<CallFormProps> = ({ open, onClose, propertyName, onSubm
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-      <div className="bg-neutral-900 rounded-xl shadow-2xl p-4 sm:p-8 w-full max-w-md relative animate-fadeIn max-h-[95vh] overflow-y-auto">
+      <div className="bg-neutral-900 rounded-xl shadow-2xl p-2 sm:p-4 md:p-6 lg:p-8 w-full 
+        max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl 
+        relative animate-fadeIn max-h-[95vh] overflow-y-auto">
         <button className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer scale-100 hover:scale-110 z-10" onClick={() => onClose()}>
           <FaTimes size={18} className="sm:w-5 sm:h-5" />
         </button>
@@ -119,8 +121,8 @@ const CallForm: React.FC<CallFormProps> = ({ open, onClose, propertyName, onSubm
         {formError || errorMessage ? (
           <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-xs sm:text-sm text-center break-words">{formError || errorMessage}</div>
         ) : null}
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:gap-4">
-          <div>
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 md:gap-4">
+          <div className="col-span-1">
             <label className="text-xs sm:text-sm text-gray-300 block mb-1">Your Name</label>
             <input
               type="text"
@@ -128,65 +130,54 @@ const CallForm: React.FC<CallFormProps> = ({ open, onClose, propertyName, onSubm
               placeholder="Full Name"
               value={form.name}
               onChange={handleInputChange}
-              className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-sm sm:text-base"
+              className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-xs sm:text-sm md:text-base"
               required
             />
           </div>
-          <div>
+          <div className="col-span-1">
+            <label className="text-xs sm:text-sm text-gray-300 block mb-1">Your Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={form.email}
+              onChange={handleInputChange}
+              className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-xs sm:text-sm md:text-base"
+              required
+            />
+          </div>
+          <div className="col-span-1">
             <label className="text-xs sm:text-sm text-gray-300 block mb-1">Country</label>
             <select
               name="country"
               value={form.country}
               onChange={handleInputChange}
-              className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-sm sm:text-base"
+              className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-xs sm:text-sm md:text-base"
               required
             >
               <option value="">Select Country</option>
               {countryList.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
-          <div>
+          <div className="col-span-1">
             <label className="text-xs sm:text-sm text-gray-300 block mb-1">Select Date</label>
             <input
               type="date"
               name="date"
               value={form.date}
               onChange={handleInputChange}
-              className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer w-full text-sm sm:text-base"
+              className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer w-full text-xs sm:text-sm md:text-base"
               required
             />
           </div>
-          <div>
-            <label className="text-xs sm:text-sm text-gray-300 block mb-1">Select Time & Timezone</label>
-            <div className="flex flex-col sm:flex-row gap-2">
-              <input
-                type="time"
-                name="time"
-                value={form.time}
-                onChange={handleInputChange}
-                className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer w-full sm:w-1/2 text-sm sm:text-base"
-                required
-              />
-              <select
-                name="timezone"
-                value={form.timezone}
-                onChange={handleInputChange}
-                className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full sm:w-1/2 text-sm sm:text-base"
-                required
-              >
-                <option value="">Timezone</option>
-                {timezoneList.map(tz => <option key={tz} value={tz}>{tz}</option>)}
-              </select>
-            </div>
-          </div>
-          <div>
+          <div className="col-span-1">
             <label className="text-xs sm:text-sm text-gray-300 block mb-1">Your Phone Number</label>
-            <div className="flex flex-col sm:flex-row gap-2">
+            <div className="flex gap-2">
               <select
                 name="countryCode"
                 value={form.countryCode}
                 onChange={handleInputChange}
-                className="px-3 py-2.5 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full sm:w-1/3 text-sm sm:text-base"
+                className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-1/3 text-xs sm:text-sm md:text-base"
                 required
               >
                 {countryCodeList.map(opt => (
@@ -199,41 +190,54 @@ const CallForm: React.FC<CallFormProps> = ({ open, onClose, propertyName, onSubm
                 placeholder="Phone number"
                 value={form.phone}
                 onChange={handleInputChange}
-                className="px-3 py-2.5 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full sm:w-2/3 text-sm sm:text-base"
+                className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-2/3 text-xs sm:text-sm md:text-base"
                 required
               />
             </div>
           </div>
-          <div>
-            <label className="text-xs sm:text-sm text-gray-300 block mb-1">Your Email</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={form.email}
-              onChange={handleInputChange}
-              className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-full text-sm sm:text-base"
-              required
-            />
+          <div className="col-span-1">
+            <label className="text-xs sm:text-sm text-gray-300 block mb-1">Select Time & Timezone</label>
+            <div className="flex gap-2">
+              <input
+                type="time"
+                name="time"
+                value={form.time}
+                onChange={handleInputChange}
+                className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer w-1/2 text-xs sm:text-sm md:text-base"
+                required
+              />
+              <select
+                name="timezone"
+                value={form.timezone}
+                onChange={handleInputChange}
+                className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 w-1/2 text-xs sm:text-sm md:text-base"
+                required
+              >
+                <option value="">Timezone</option>
+                {timezoneList.map(tz => <option key={tz} value={tz}>{tz}</option>)}
+              </select>
+            </div>
           </div>
-          <button 
-            type="submit" 
-            className={`w-full font-bold py-2.5 sm:py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md text-sm sm:text-base ${
-              isLoading || externalLoading
-                ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
-                : 'bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:scale-105 hover:shadow-lg active:scale-95'
-            }`}
-            disabled={isLoading || externalLoading}
-          >
-            {(isLoading || externalLoading) ? (
-              <div className="flex items-center justify-center gap-2">
-                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                <span className="text-sm sm:text-base">Submitting...</span>
-              </div>
-            ) : (
-              'Book Video Call'
-            )}
-          </button>
+          <div className="col-span-1 sm:col-span-2">
+            <button 
+              type="submit" 
+              className={`w-full font-bold py-2.5 sm:py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md text-sm sm:text-base ${
+                isLoading || externalLoading
+                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
+                  : 'bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:scale-105 hover:shadow-lg active:scale-95'
+              }`}
+              disabled={isLoading || externalLoading}
+            >
+              {(isLoading || externalLoading) ? (
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <span className="text-sm sm:text-base">Submitting...</span>
+                </div>
+              ) : (
+                'Book Video Call'
+              )}
+            </button>
+          </div>
         </form>
       </div>
     </div>
