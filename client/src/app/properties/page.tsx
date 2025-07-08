@@ -129,9 +129,7 @@ const allProperties = [
       "Children's Pool & Kids' Play Area",
       'BBQ Stations',
     ],
-    description: `1–3 Bedroom Apartments | Starting from AED 1.5M\nPositioned at the crossroads of old and new Dubai, this community blends city connectivity with modern comfort. Enjoy
-
- park views, premium fitness zones, and family-friendly spaces -  all in one address.\nClick to discover the amenities and location advantage.`,
+    description: `1–3 Bedroom Apartments | Starting from AED 1.5M\nPositioned at the crossroads of old and new Dubai, this community blends city connectivity with modern comfort. Enjoy park views, premium fitness zones, and family-friendly spaces -  all in one address.\nClick to discover the amenities and location advantage.`,
   },
   {
     id: 6,
@@ -226,7 +224,7 @@ const allProperties = [
       'Urban Beach & Artificial Lagoon',
       'Private Dining & Juice Lounge',
     ],
-    description: `Studio to 3 Bedroom Apartments | Starting from AED 1.2M\nBelgravia Gardens features studio to 3-bedroom apartments with optional office layouts, offering a flexible living experience in a refined residential community. With urban beach access, lagoon views, and a fully-equipped clubhouse, this development is designed for residents seeking lifestyle, leisure, and smart indoor-outdoor connectivity.\nLeisure & Wellness, Urban Beach & Artificial Lagoon, Private Dining & Juice Lounge, Yoga & Pilates Studio, Fitness Studio & Sauna, Children's Pool & Kids' Play Area, Clubhouse Pavilion, Cinema Room, Game Room, Clubhouse Gallery, Clubhouse Majlis.\nPrime Location: Metro: Future station within 15 min, Airport: 20 min to Dubai Intl, Mall: 5 min to Silicon Central, 10 min to Global Village, Nearby: IMG Worlds, Dubai Hills Mall, Downtown (20 min).`,
+    description: `Studio to 3 Bedroom Apartments | Starting from AED 1.2M\nBelgravia Gardens features studio to 3-bedroom apartments with optional office layouts, offering a flexible living experience in a refined residential community. With urban beach access, lagoon views, and a fully-equipped clubhouse, this development is designed for residents seeking lifestyle, leisure, and smart indoor-outdoor connectivity.\nLeisure & Wellness, Urban Beach & Artificial Lagoon, Private Dining & Juice Lounge, Yoga & Pilates Studio, Fitness Studio & Sauna, Children's Pool & Kids' Play Area, Clubhouse Pavilion, Cinema Room, Game Room, Clubhouse Gallery, Clubhouse Majlis.\nPrime Location: Metro: Future station within 15 min, Airport: 20 min to Dubai Intl, Mall: 5Counting min to Silicon Central, 10 min to Global Village, Nearby: IMG Worlds, Dubai Hills Mall, Downtown (20 min).`,
   },
   {
     id: 12,
@@ -264,7 +262,7 @@ const allProperties = [
       'Infinity Pool with Jacuzzi & Aquatic Gym',
       'Japanese Garden & Open-Air Cinema',
     ],
-    description: `Studio to 2 Bedroom Convertible Apartments | Starting from $200,000\nTimez by Danube offers studio to 2-bedroom convertible apartments in the heart of Dubai Silicon Oasis. With smart layouts that adapt as you grow—like studios that transform into 1BHKs—this project blends flexibility with upscale living. From private pools in select homes to 40+ curated amenities, it's an ideal choice for end-users and investors seeking affordable luxury with high ROI potential.\n\nPremium Amenities: Convertible Studio & 1BHK Units, Infinity Pool with Jacuzzi & Aquatic Gym, Japanese Garden & Open-Air Cinema, Paddle Court, Cricket Pitch & Mini Golf, Kids' Oasis, Splash Pad & Trampoline Zone, Indoor Party Lounge & BBQ Area, Outdoor Gym, Zumba Ring & Yoga Deck.\n\nPrime Location: Dubai Silicon Oasis, UAE. Metro: Proposed Station – 3 min. Airport: Dubai Intl – 14 km (≈14 min drive). Mall: Silicon Central Mall – 2 min. Nearby Landmark: Global Village – 7 min.`,
+    description: `Studio to 2 Bedroom Convertible Apartments | Starting from $200,000\nTimez by Danube offers studio to 2-bedroom convertible apartments in the heart of Dubai Silicon Oasis.—with smart layouts that adapt as you grow—like studios that transform into 1BHKs—this project blends flexibility with upscale living. From private pools in select homes to 40+ curated amenities, it's an ideal choice for end-users and investors seeking affordable luxury with high ROI potential.\n\nPremium Amenities: Convertible Studio & 1BHK Units, Infinity Pool with Jacuzzi & Aquatic Gym, Japanese Garden & Open-Air Cinema, Paddle Court, Cricket Pitch & Mini Golf, Kids' Oasis, Splash Pad & Trampoline Zone, Indoor Party Lounge & BBQ Area, Outdoor Gym, Zumba Ring & Yoga Deck.\n\nPrime Location: Dubai Silicon Oasis, UAE. Metro: Proposed Station – 3 min. Airport: Dubai Intl – 14 km (≈14 min drive). Mall: Silicon Central Mall – 2 min. Nearby Landmark: Global Village – 7 min.`,
   },
   {
     id: 14,
@@ -529,6 +527,7 @@ const PropertiesPage = () => {
   const handleVideoPlay = (propertyId: number) => {
     const video = videoRefs.current[propertyId];
     if (video) {
+      video.currentTime = 2; // Set video to start at 2 seconds
       video.play();
     }
   };
@@ -774,4 +773,4 @@ const PropertiesPage = () => {
   );
 };
 
-export default PropertiesPage; 
+export default PropertiesPage;

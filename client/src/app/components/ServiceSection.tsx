@@ -73,7 +73,7 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
 
   // Modal state
   const [showModal, setShowModal] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '', phone: '', services: [] as string[], message: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', services: [] as string[], message: '', countryCode: '+91' });
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
 
@@ -97,7 +97,9 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
   };
 
   // Handle form input
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value, type } = e.target;
     if (type === 'checkbox' && e.target instanceof HTMLInputElement) {
       const checked = e.target.checked;
@@ -131,7 +133,7 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
       });
       if (res.ok) {
         setResult('Thank you! Your enquiry has been sent.');
-        setForm({ name: '', email: '', phone: '', services: [], message: '' });
+        setForm({ name: '', email: '', phone: '', services: [], message: '', countryCode: '+91' });
       } else {
         setResult('Sorry, there was an error sending your enquiry.');
       }
@@ -246,19 +248,19 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
         overlayClassName="fixed inset-0 bg-black/70 z-[9998]"
         ariaHideApp={false}
       >
-        <div className="bg-neutral-900 rounded-xl shadow-2xl p-8 w-full max-w-md relative animate-fadeIn font-montserrat">
-          <button className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer scale-100 hover:scale-110 font-montserrat" onClick={() => setShowModal(false)}>
+        <div className="bg-neutral-900 rounded-xl shadow-2xl p-2 sm:p-4 md:p-6 lg:p-8 xl:p-6 2xl:p-8 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-md 2xl:max-w-lg relative animate-fadeIn font-montserrat max-h-screen overflow-visible">
+          <button className="absolute top-2 right-2 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer scale-100 hover:scale-110 font-montserrat text-base sm:text-lg md:text-xl" onClick={() => setShowModal(false)}>
             ×
           </button>
-          <h2 className="text-2xl font-bold mb-6 text-center text-white font-montserrat">Service Enquiry</h2>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <h2 className="text-base sm:text-lg md:text-xl font-bold mb-2 sm:mb-3 text-center text-white font-montserrat">Service Enquiry</h2>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-2 sm:gap-3 md:gap-4">
             <input
               type="text"
               name="name"
               placeholder="Name"
               value={form.name}
               onChange={handleInputChange}
-              className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 font-montserrat"
+              className="px-2 py-1 sm:px-3 sm:py-2 rounded bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 font-montserrat text-xs sm:text-sm md:text-base"
               required
             />
             <input
@@ -267,48 +269,82 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
               placeholder="Email"
               value={form.email}
               onChange={handleInputChange}
-              className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 font-montserrat"
+              className="px-2 py-1 sm:px-3 sm:py-2 rounded bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 font-montserrat text-xs sm:text-sm md:text-base"
               required
             />
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone Number"
-              value={form.phone}
-              onChange={handleInputChange}
-              className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 font-montserrat"
-              required
-            />
+            <div className="flex flex-row gap-1">
+              <select
+                name="countryCode"
+                value={form.countryCode || '+91'}
+                onChange={handleInputChange}
+                className="px-1 py-1 sm:px-2 sm:py-2 rounded bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 font-montserrat text-xs sm:text-sm md:text-base w-16"
+                required
+              >
+                <option value="+91">+91</option>
+                <option value="+1">+1</option>
+                <option value="+44">+44</option>
+                <option value="+971">+971</option>
+                <option value="+61">+61</option>
+                <option value="+65">+65</option>
+                <option value="+49">+49</option>
+                <option value="+33">+33</option>
+                <option value="+81">+81</option>
+                <option value="+27">+27</option>
+                <option value="+966">+966</option>
+                <option value="+974">+974</option>
+                <option value="+965">+965</option>
+                <option value="+968">+968</option>
+                <option value="+973">+973</option>
+                <option value="+7">+7</option>
+                <option value="+39">+39</option>
+                <option value="+34">+34</option>
+                <option value="+31">+31</option>
+                <option value="+41">+41</option>
+                <option value="+90">+90</option>
+                <option value="+55">+55</option>
+                <option value="+86">+86</option>
+                <option value="+other">Other</option>
+              </select>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Phone"
+                value={form.phone}
+                onChange={handleInputChange}
+                className="px-2 py-1 sm:px-3 sm:py-2 rounded bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 font-montserrat text-xs sm:text-sm md:text-base flex-1"
+                required
+              />
+            </div>
             <div>
-              <label className="block text-white mb-2 font-montserrat">Select Service(s):</label>
-              <div className="flex flex-wrap gap-2">
+              <label className="block text-white mb-1 font-montserrat text-xs sm:text-sm md:text-base">Select Service(s):</label>
+              <select
+                name="services"
+                multiple
+                value={form.services}
+                onChange={e => {
+                  const selected = Array.from(e.target.selectedOptions, option => option.value);
+                  setForm(f => ({ ...f, services: selected }));
+                }}
+                className="w-full px-2 py-1 sm:px-3 sm:py-2 rounded bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 font-montserrat text-xs sm:text-sm md:text-base min-h-[40px]"
+                required
+              >
                 {services.map(s => (
-                  <label key={s.title} className="flex items-center gap-2 bg-neutral-800 px-3 py-2 rounded-lg cursor-pointer text-white font-montserrat">
-                    <input
-                      type="checkbox"
-                      name="services"
-                      value={s.title}
-                      checked={form.services.includes(s.title)}
-                      onChange={handleInputChange}
-                      className="accent-purple-500 w-5 h-5"
-                    />
-                    {s.title}
-                  </label>
+                  <option key={s.title} value={s.title}>{s.title}</option>
                 ))}
-              </div>
+              </select>
             </div>
             <textarea
               name="message"
               placeholder="Message"
               value={form.message}
               onChange={handleInputChange}
-              className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 min-h-[100px] font-montserrat"
+              className="px-2 py-1 sm:px-3 sm:py-2 rounded bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 min-h-[60px] sm:min-h-[80px] md:min-h-[100px] font-montserrat text-xs sm:text-sm md:text-base"
               required
             />
-            <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg font-montserrat" disabled={loading}>
+            <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold py-2 sm:py-2.5 md:py-3 rounded-xl mt-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg font-montserrat text-sm sm:text-base md:text-lg" disabled={loading}>
               {loading ? 'Sending...' : 'Send Enquiry'}
             </button>
-            {result && <div className="text-center text-sm mt-2 text-white font-montserrat">{result}</div>}
+            {result && <div className="text-center text-xs sm:text-sm md:text-base mt-2 text-white font-montserrat">{result}</div>}
           </form>
         </div>
       </Modal>

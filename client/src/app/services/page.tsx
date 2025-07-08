@@ -25,11 +25,13 @@ export default function ServicesPage() {
     name: string;
     organization: string;
     email: string;
+    phone: string;
     services: string[];
   }>({
     name: '',
     organization: '',
     email: '',
+    phone: '',
     services: [],
   });
   const [loading, setLoading] = useState(false);
@@ -73,7 +75,7 @@ export default function ServicesPage() {
       setLoading(false);
       if (res.ok) {
         setMessage("Inquiry sent! We'll get back to you soon.");
-        setForm({ name: '', organization: '', email: '', services: [] });
+        setForm({ name: '', organization: '', email: '', phone: '', services: [] });
       } else {
         setMessage('Failed to send. Please try again.');
       }
@@ -203,122 +205,136 @@ export default function ServicesPage() {
 
         {/* Modal Form */}
         {showModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-            <div className="bg-black/90 backdrop-blur-md rounded-xl p-8 w-full max-w-md shadow-2xl relative border border-gray-800/50">
-              <button
-                className="absolute top-2 right-3 text-white text-2xl hover:text-purple-400 transition-colors"
-                onClick={() => { setShowModal(false); setMessage(''); }}
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-2 sm:p-4">
+    <div className="bg-black/90 backdrop-blur-md rounded-lg p-3 sm:p-5 md:p-6 w-full max-w-xs sm:max-w-sm md:max-w-md shadow-2xl relative border border-gray-800/50">
+      <button
+        className="absolute top-2 right-2 text-white text-lg md:text-xl hover:text-purple-400 transition-colors"
+        onClick={() => { setShowModal(false); setMessage(''); }}
+      >
+        &times;
+      </button>
+      <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-3 text-white text-center">Service Inquiry</h2>
+      <form className="flex flex-col gap-2 sm:gap-3" onSubmit={handleSubmit}>
+        <input
+          className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 focus:border-purple-500 focus:outline-none text-sm"
+          placeholder="Your Name"
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          required
+        />
+        <input
+          className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 focus:border-purple-500 focus:outline-none text-sm"
+          placeholder="Organization"
+          name="organization"
+          value={form.organization}
+          onChange={handleChange}
+          required
+        />
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+          <input
+            className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 focus:border-purple-500 focus:outline-none text-sm flex-1"
+            placeholder="Email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            type="email"
+            required
+          />
+          <input
+            className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 focus:border-purple-500 focus:outline-none text-sm flex-1"
+            placeholder="Phone"
+            name="phone"
+            value={form.phone}
+            onChange={handleChange}
+            type="tel"
+            required
+          />
+        </div>
+        <div>
+          <div className="text-white font-medium mb-1 text-sm">Select Services</div>
+          <div className="flex flex-wrap gap-1 sm:gap-2">
+            {SERVICE_LIST.map(service => (
+              <label
+                key={service}
+                className="flex items-center gap-1 border border-gray-700 bg-neutral-900/80 rounded px-2 py-1 text-white cursor-pointer hover:border-purple-500 transition-colors text-xs sm:text-sm"
               >
-                &times;
-              </button>
-              <h2 className="text-xl font-bold mb-4 text-white">Service Inquiry</h2>
-              <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                 <input
-                  className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 backdrop-blur-sm focus:border-purple-500 focus:outline-none transition-colors"
-                  placeholder="Your Name"
-                  name="name"
-                  value={form.name}
+                  type="checkbox"
+                  name="services"
+                  value={service}
+                  checked={form.services.includes(service)}
                   onChange={handleChange}
-                  required
+                  className="accent-purple-500"
                 />
-                <input
-                  className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 backdrop-blur-sm focus:border-purple-500 focus:outline-none transition-colors"
-                  placeholder="Organization"
-                  name="organization"
-                  value={form.organization}
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 backdrop-blur-sm focus:border-purple-500 focus:outline-none transition-colors"
-                  placeholder="Email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  type="email"
-                  required
-                />
-                <div>
-                  <div className="text-white font-semibold mb-2">Select Services</div>
-                  <div className="flex flex-wrap gap-2">
-                    {SERVICE_LIST.map(service => (
-                      <label key={service} className="flex items-center gap-2 bg-neutral-900/80 border border-gray-700 rounded px-3 py-1 text-white cursor-pointer hover:border-purple-500 transition-colors backdrop-blur-sm">
-                        <input
-                          type="checkbox"
-                          name="services"
-                          value={service}
-                          checked={form.services.includes(service)}
-                          onChange={handleChange}
-                          className="accent-purple-500"
-                        />
-                        <span>{service}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-                <button
-                  type="submit"
-                  className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-2 rounded mt-2 hover:from-purple-700 hover:to-pink-600 transition-all transform hover:scale-105"
-                  disabled={loading}
-                >
-                  {loading ? 'Sending...' : 'Submit'}
-                </button>
-                {message && <div className="mt-2 text-center text-white">{message}</div>}
-              </form>
-            </div>
+                <span>{service}</span>
+              </label>
+            ))}
           </div>
-        )}
+        </div>
+        <button
+          type="submit"
+          className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold py-2 rounded mt-2 hover:from-purple-700 hover:to-pink-600 transition-all transform hover:scale-105 text-sm"
+          disabled={loading}
+        >
+          {loading ? 'Sending...' : 'Submit'}
+        </button>
+        {message && <div className="mt-2 text-center text-white text-sm">{message}</div>}
+      </form>
+    </div>
+  </div>
+)}
 
-        {/* Call Booking Modal */}
-        {showCallModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-            <div className="bg-black/70 backdrop-blur-md rounded-xl p-8 w-full max-w-md shadow-2xl relative border border-purple-800/50">
-              <button
-                className="absolute top-2 right-3 text-white text-2xl hover:text-purple-400 transition-colors"
-                onClick={() => { setShowCallModal(false); setCallMessage(''); }}
-              >
-                &times;
-              </button>
-              <h2 className="text-xl font-bold mb-4 text-white">Book a Call Slot</h2>
-              <form className="flex flex-col gap-4" onSubmit={handleCallSubmit}>
-                <div className="text-white font-semibold">Service: <span className="text-pink-400">{callForm.service}</span></div>
-                <input
-                  className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 backdrop-blur-sm focus:border-purple-500 focus:outline-none transition-colors"
-                  type="date"
-                  name="date"
-                  value={callForm.date}
-                  onChange={handleCallChange}
-                  required
-                />
-                <input
-                  className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 backdrop-blur-sm focus:border-purple-500 focus:outline-none transition-colors"
-                  type="time"
-                  name="time"
-                  value={callForm.time}
-                  onChange={handleCallChange}
-                  required
-                />
-                <input
-                  className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 backdrop-blur-sm focus:border-purple-500 focus:outline-none transition-colors"
-                  placeholder="Your Email"
-                  name="email"
-                  value={callForm.email}
-                  onChange={handleCallChange}
-                  type="email"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-2 rounded mt-2 hover:from-purple-700 hover:to-pink-600 transition-all transform hover:scale-105"
-                  disabled={callLoading}
-                >
-                  {callLoading ? 'Booking...' : 'Book Slot'}
-                </button>
-                {callMessage && <div className="mt-2 text-center text-white">{callMessage}</div>}
-              </form>
-            </div>
-          </div>
-        )}
+{showCallModal && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-2 sm:p-4">
+    <div className="bg-black/80 backdrop-blur-md rounded-lg p-3 sm:p-5 md:p-6 w-full max-w-xs sm:max-w-sm md:max-w-md shadow-2xl relative border border-purple-800/50">
+      <button
+        className="absolute top-2 right-2 text-white text-lg md:text-xl hover:text-purple-400 transition-colors"
+        onClick={() => { setShowCallModal(false); setCallMessage(''); }}
+      >
+        &times;
+      </button>
+      <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-3 text-white text-center">Book a Call Slot</h2>
+      <form className="flex flex-col gap-2 sm:gap-3" onSubmit={handleCallSubmit}>
+        <div className="text-white font-medium text-sm">Service: <span className="text-pink-400">{callForm.service}</span></div>
+        <input
+          className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 focus:border-purple-500 focus:outline-none text-sm"
+          type="date"
+          name="date"
+          value={callForm.date}
+          onChange={handleCallChange}
+          required
+        />
+        <input
+          className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 focus:border-purple-500 focus:outline-none text-sm"
+          type="time"
+          name="time"
+          value={callForm.time}
+          onChange={handleCallChange}
+          required
+        />
+        <input
+          className="border border-gray-700 bg-neutral-900/80 text-white rounded p-2 focus:border-purple-500 focus:outline-none text-sm"
+          placeholder="Your Email"
+          name="email"
+          value={callForm.email}
+          onChange={handleCallChange}
+          type="email"
+          required
+        />
+        <button
+          type="submit"
+          className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold py-2 rounded mt-2 hover:from-purple-700 hover:to-pink-600 transition-all transform hover:scale-105 text-sm"
+          disabled={callLoading}
+        >
+          {callLoading ? 'Booking...' : 'Book Slot'}
+        </button>
+        {callMessage && <div className="mt-2 text-center text-white text-sm">{callMessage}</div>}
+      </form>
+    </div>
+  </div>
+)}
+
       </div>
 
       <style jsx>{`
