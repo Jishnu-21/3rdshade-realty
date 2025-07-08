@@ -518,7 +518,7 @@ const allProperties = [
       description: `Ellington Cove offers studio to 4-bedroom residences along the pristine shores of Dubai Islands. With private beach access and a calm coastal aesthetic, the development merges contemporary architecture with nature-inspired design. From waterfall pools to a beach clubhouse, every space reflects a laid-back rhythm of beachfront living, perfect for those seeking serenity and connection.`,
       price: '300,000',
       roi: '-',
-      reelVideoUrl: '/images/properties/cove2.jpg', // Placeholder video
+      reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1751969088/elington-cove_utlkoz.webm', // Placeholder video
       images: [
         '/images/properties/cove1.jpg',
         '/images/properties/cove3.jpg',

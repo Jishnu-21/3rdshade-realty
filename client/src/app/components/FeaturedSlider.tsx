@@ -67,6 +67,18 @@ const featuredItems = [
       'Community Gym & Studios',
     ],
   },
+  {
+    videoSrc: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1751969088/elington-cove_utlkoz.webm',
+    poster: '/images/properties/cove2.jpg',
+    title: 'Ellington Cove',
+    slug: 'ellington-cove',
+    price: 'Starting from $300,000',
+    amenities: [
+      'Private Beach with Water Sports',
+      'Beachfront Clubhouse ',
+      'Yoga & Fitness Studio',
+    ],
+  },
 ];
 
 const FeaturedSlider = () => {

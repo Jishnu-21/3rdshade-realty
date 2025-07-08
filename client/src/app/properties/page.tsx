@@ -308,7 +308,7 @@ const allProperties = [
     location: 'Dubai Islands, Dubai',
     price: 'Starting from $300,000',
     roi: '-',
-    reelVideoUrl: '',
+    reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1751969088/elington-cove_utlkoz.webm',
     image: '/images/properties/cove2.jpg',
     beds: 0,
     baths: 0,
