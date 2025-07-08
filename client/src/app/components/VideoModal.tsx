@@ -6,6 +6,7 @@ interface VideoPreloaderProps {
   onComplete?: () => void;
   minDisplayTime?: number;
   onProgress?: (progress: number) => void;
+  progress?: number;
 }
 
 const VideoPreloader = ({
@@ -13,12 +14,12 @@ const VideoPreloader = ({
   onComplete = () => {},
   minDisplayTime = 30000,
   onProgress,
+  progress = 0,
 }: VideoPreloaderProps) => {
   const [isVisible, setIsVisible] = useState(true);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
   const [canClose, setCanClose] = useState(false);
-  const [progress, setProgress] = useState(0);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const startTimeRef = useRef(Date.now());
 
@@ -105,7 +106,6 @@ const VideoPreloader = ({
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTimeRef.current;
       const prog = Math.min(elapsed / minDisplayTime, 1);
-      setProgress(prog);
       if (onProgress) onProgress(prog);
     }, 50);
     return () => clearInterval(interval);
@@ -161,7 +161,7 @@ const VideoPreloader = ({
           className="absolute inset-0 bg-black transition-opacity duration-300 ease-out"
           style={{ opacity: 1 - progress }}
         />
-        
+        {/* Progress bar overlay */}
         <div className="fixed top-0 left-0 w-full h-2 z-[10000]">
           <div
             className="h-full bg-gradient-to-r from-rose-500 to-sky-500 transition-all duration-200"
@@ -225,30 +225,136 @@ const VideoPreloader = ({
   );
 };
 
+const HOMEPAGE_ASSETS = [
+  // Banner video
+  "https://videos.pexels.com/video-files/5838634/5838634-uhd_2560_1440_30fps.mp4",
+  // CallToAction video
+  "https://videos.pexels.com/video-files/3611031/3611031-hd_1920_1080_24fps.mp4",
+  // FeaturedSlider videos/posters
+  "https://res.cloudinary.com/dzmxqwlse/video/upload/v1749729573/emaar-creek_lk2lce.webm",
+  "https://cdn.pixabay.com/photo/2017/01/20/00/30/dubai-1990138_1280.jpg",
+  "https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727749/sobha-solis2_c6nt2j.mp4",
+  "https://cdn.pixabay.com/photo/2016/11/29/09/32/architecture-1868667_1280.jpg",
+  "https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727087/azizi-venice_gsscns.mp4",
+  "https://cdn.pixabay.com/photo/2015/01/28/23/35/dubai-615430_1280.jpg",
+  "https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727167/sobha-solis_y9ojjs.mp4",
+  // FeaturedProperties images/videos
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760831/damac-villa3_y3zpva.jpg",
+  "https://res.cloudinary.com/dzmxqwlse/video/upload/v1749729573/emaar-creek_lk2lce.webm",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750958543/sobhasolis_hqajtt.webp",
+  "https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727749/sobha-solis2_c6nt2j.mp4",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750745150/azizi_fvgglb.webp",
+  "https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727087/azizi-venice_gsscns.mp4",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750938518/sobha2_a5ajh9.webp",
+  "https://res.cloudinary.com/dzmxqwlse/video/upload/v1749727071/sobha-hartland_qo4rxf.mp4",
+  // PropertyDetailsClient images (allProperties)
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760822/emaar-creek3_vopplu.jpg",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760833/emaar-creek2_kttzqd.jpg",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760831/damac-villa3_y3zpva.jpg",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750958272/Exterior-scaled_omygee.jpg",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750958268/Pool-scaled_ngcwan.jpg",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750958268/Eleve_02Living-Dining_006-min-scaled_b60opc.jpg",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750958703/sobhasolis3_zxecuh.webp",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750958543/sobhasolis_hqajtt.webp",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750958703/sobhasolis2_g7kbxt.webp",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750938711/azizi3_hyudc7.webp",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750938712/azizi4_d3cmug.jpg",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750938711/azizi1_wtf7m6.webp",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750944977/wasl2_htj8vz.webp",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750944976/wasl1_qfqnhh.webp",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750944976/wasl3_kchou4.webp",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954172/emaar-south1_utocb5.jpg",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954176/emaar-south2_gevmgc.jpg",
+  "https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954175/emaar-south4_nlhy6y.jpg",
+  // Preloader video itself
+  "https://res.cloudinary.com/dkgjl08a5/video/upload/v1744839021/Dubai_realestate_video_01_tsmqus.webm",
+];
+
+function preloadAsset(url: string): Promise<void> {
+  return new Promise((resolve) => {
+    if (url.match(/\.(mp4|webm)$/i)) {
+      // Video
+      const video = document.createElement('video');
+      video.src = url;
+      video.preload = 'auto';
+      video.oncanplaythrough = () => resolve();
+      video.onerror = () => resolve();
+    } else {
+      // Image
+      const img = new window.Image();
+      img.src = url;
+      img.onload = () => resolve();
+      img.onerror = () => resolve();
+    }
+  });
+}
+
 const WebsiteWithPreloader = () => {
   const [showPreloader, setShowPreloader] = useState(true);
   const [progress, setProgress] = useState(0);
   const [showMiniVideo, setShowMiniVideo] = useState(false);
+  const [assetsLoaded, setAssetsLoaded] = useState(0);
+  const [allAssetsLoaded, setAllAssetsLoaded] = useState(false);
+  const minDisplayTime = 30000;
+  const totalAssets = HOMEPAGE_ASSETS.length;
 
-  const handlePreloaderComplete = () => {
-    setShowPreloader(false);
-    setShowMiniVideo(true);
-  };
+  // Preload all assets on mount
+  useEffect(() => {
+    let isMounted = true;
+    Promise.all(
+      HOMEPAGE_ASSETS.map((url) =>
+        preloadAsset(url).then(() => {
+          if (isMounted) setAssetsLoaded((prev) => prev + 1);
+        })
+      )
+    ).then(() => {
+      if (isMounted) setAllAssetsLoaded(true);
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
-  const handleProgress = (prog: number) => {
-    setProgress(prog);
-  };
+  // Progress: combine time and asset loading
+  const [timeProgress, setTimeProgress] = useState(0);
+  useEffect(() => {
+    const start = Date.now();
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - start;
+      setTimeProgress(Math.min(elapsed / minDisplayTime, 1));
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Final progress is the minimum of time and asset loading
+  useEffect(() => {
+    const assetProgress = assetsLoaded / totalAssets;
+    setProgress(Math.min(timeProgress, assetProgress));
+  }, [timeProgress, assetsLoaded, totalAssets]);
+
+  // Only allow preloader to close when both are done
+  const canClose = timeProgress >= 1 && allAssetsLoaded;
+
+  useEffect(() => {
+    if (canClose && showPreloader) {
+      const timer = setTimeout(() => {
+        setShowPreloader(false);
+        setShowMiniVideo(true);
+      }, 800);
+      return () => clearTimeout(timer);
+    }
+  }, [canClose, showPreloader]);
 
   return (
     <div className="relative">
       {showPreloader && (
         <VideoPreloader
-          onComplete={handlePreloaderComplete}
-          minDisplayTime={30000}
-          onProgress={handleProgress}
+          onComplete={() => {}}
+          minDisplayTime={minDisplayTime}
+          onProgress={() => {}}
+          progress={(assetsLoaded / totalAssets + timeProgress) / 2}
         />
       )}
-
       <AnimatePresence>
         {showMiniVideo && (
           <motion.div
@@ -299,7 +405,6 @@ const WebsiteWithPreloader = () => {
             >
               ×
             </motion.button>
-            
             <video
               src="https://res.cloudinary.com/dkgjl08a5/video/upload/v1744839021/Dubai_realestate_video_01_tsmqus.webm"
               className="w-full h-full object-contain bg-black"

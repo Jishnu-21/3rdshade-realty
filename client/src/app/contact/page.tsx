@@ -7,7 +7,7 @@ import Footer from '../components/Footer';
 export default function ContactPage() {
   return (
     <div className="relative min-h-screen bg-black flex flex-col font-montserrat">
-      <Header />
+      <Header onEnquire={() => {}} />
       {/* Glowing Gradient: wide, soft, well-spread lighting effect */}
       <motion.div 
         className="pointer-events-none absolute right-0 top-4 w-full h-80 z-0 flex justify-end"
@@ -68,8 +68,7 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
           >
-            <div className="uppercase text-xs text-neutral-400 mb-2 tracking-widest">Our address</div>
-            <div className="font-bold text-white">THIRD SHADE MEDIA SERVICES<br />PARK PLAZA, LOHEGAON<br />1st FLOOR, ROOM No.01<br />PUNE, MAHARASTRA, INDIA<br />411047</div>
+
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}

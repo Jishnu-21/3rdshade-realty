@@ -11,6 +11,9 @@ import Link from 'next/link';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { useRouter } from 'next/navigation';
+import EnquireForm from '../components/EnquireForm';
+import PayNowForm from '../components/PayNowForm';
+import CallForm from '../components/CallForm';
 
 // Mock data for all properties
 const allProperties = [
@@ -489,6 +492,23 @@ const PropertiesPage = () => {
   const videoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({});
   const router = useRouter();
 
+  // Modal states for each form
+  const [showEnquireModal, setShowEnquireModal] = useState(false);
+  const [showPayNowModal, setShowPayNowModal] = useState(false);
+  const [showCallModal, setShowCallModal] = useState(false);
+  const [activeProperty, setActiveProperty] = useState<string | null>(null);
+
+  // Submission handlers (simulate async, can be replaced with real API calls)
+  const handleEnquireSubmit = async (form: any) => {
+    return new Promise<void>(resolve => setTimeout(resolve, 1200));
+  };
+  const handlePayNowSubmit = async (form: any) => {
+    return new Promise<void>(resolve => setTimeout(resolve, 1200));
+  };
+  const handleCallSubmit = async (form: any) => {
+    return new Promise<void>(resolve => setTimeout(resolve, 1200));
+  };
+
   useEffect(() => {
     setIsVisible(true);
   }, []);
@@ -566,7 +586,26 @@ const PropertiesPage = () => {
 
   return (
     <div className="bg-black text-white font-montserrat">
-      <Header />
+      <Header onEnquire={() => {}} />
+      {/* Modals */}
+      <EnquireForm
+        open={showEnquireModal}
+        onClose={() => { setShowEnquireModal(false); setActiveProperty(null); }}
+        propertyName={activeProperty || undefined}
+        onSubmit={handleEnquireSubmit}
+      />
+      <PayNowForm
+        open={showPayNowModal}
+        onClose={() => { setShowPayNowModal(false); setActiveProperty(null); }}
+        propertyName={activeProperty || undefined}
+        onSubmit={handlePayNowSubmit}
+      />
+      <CallForm
+        open={showCallModal}
+        onClose={() => { setShowCallModal(false); setActiveProperty(null); }}
+        propertyName={activeProperty || undefined}
+        onSubmit={handleCallSubmit}
+      />
       
       {/* Hero Section */}
       <section className="relative pt-48 pb-40 flex items-center justify-start overflow-hidden">
@@ -668,7 +707,7 @@ const PropertiesPage = () => {
                           <button
                             type="button"
                             className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg text-sm"
-                            onClick={e => { e.stopPropagation(); alert('Pay Now clicked!'); }}
+                            onClick={e => { e.stopPropagation(); setShowPayNowModal(true); setActiveProperty(property.name); }}
                           >
                             Pay Now
                           </button>
@@ -676,14 +715,14 @@ const PropertiesPage = () => {
                             <button
                               type="button"
                               className="w-full bg-black text-white font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs"
-                              onClick={e => { e.stopPropagation(); alert('Call Expert clicked!'); }}
+                              onClick={e => { e.stopPropagation(); setShowCallModal(true); setActiveProperty(property.name); }}
                             >
                               Call Expert
                             </button>
                             <button
                               type="button"
                               className="w-full bg-black text-white font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs"
-                              onClick={e => { e.stopPropagation(); alert('Enquire Now clicked!'); }}
+                              onClick={e => { e.stopPropagation(); setShowEnquireModal(true); setActiveProperty(property.name); }}
                             >
                               Enquire Now
                             </button>

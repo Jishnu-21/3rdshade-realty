@@ -95,28 +95,28 @@ Whether you're buying, selling, or investing  we make your Dubai property journe
 
       {/* Stats Section */}
       <motion.div
-        className="relative z-10 w-full py-8 sm:py-10 md:py-12 px-4 md:px-8"
+        className="relative z-10 w-full py-6 sm:py-8 md:py-10 lg:py-12 xl:py-14 2xl:py-16 px-2 sm:px-4 md:px-8"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.6 }}
       >
-        <div className="max-w-screen-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-0 text-center text-white px-0 justify-items-center justify-center">
+        <div className="max-w-screen-2xl mx-auto grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-0 text-center text-white px-0 justify-items-center justify-center w-full">
           {stats.map((stat, idx) => {
             const animated = useAnimatedNumber(stat.value, 1.2, stat.format);
             return (
               <motion.div
                 key={stat.label}
-                className="flex flex-col items-center justify-center"
+                className="flex flex-col items-center justify-center w-full px-2 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: 0.2 * idx }}
               >
-                <div className="text-3xl md:text-4xl lg:text-5xl font-bold mb-1 text-white">
+                <div className="text-2xl xs:text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold mb-1 text-white">
                   {animated}
                 </div>
-                <div className="text-xs md:text-sm font-medium opacity-90">
+                <div className="text-xs xs:text-sm sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-medium opacity-90">
                   {stat.label}
                 </div>
               </motion.div>

@@ -2,13 +2,18 @@
 
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import { FaTimes } from 'react-icons/fa';
+import EnquireForm from './EnquireForm';
+import PayNowForm from './PayNowForm';
+import CallForm from './CallForm';
 
 const featuredItems = [
   {
     videoSrc: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749729573/emaar-creek_lk2lce.webm',
     poster: 'https://cdn.pixabay.com/photo/2017/01/20/00/30/dubai-1990138_1280.jpg',
     title: 'Emaar Creek',
-    slug: 'emaar-creek',
+    slug: 'emaar-creek-harbour',
     price: 'Starting from AED 1.5M',
     amenities: [
       '700,000 sq.m. of Parks & Green Spaces',
@@ -69,6 +74,22 @@ const FeaturedSlider = () => {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  // Modal states for each form
+  const [showEnquireModal, setShowEnquireModal] = useState(false);
+  const [showPayNowModal, setShowPayNowModal] = useState(false);
+  const [showCallModal, setShowCallModal] = useState(false);
+  const [activeProperty, setActiveProperty] = useState<string | null>(null);
+
+  // Submission handlers (simulate async, can be replaced with real API calls)
+  const handleEnquireSubmit = async (form: any) => {
+    return new Promise<void>(resolve => setTimeout(resolve, 1200));
+  };
+  const handlePayNowSubmit = async (form: any) => {
+    return new Promise<void>(resolve => setTimeout(resolve, 1200));
+  };
+  const handleCallSubmit = async (form: any) => {
+    return new Promise<void>(resolve => setTimeout(resolve, 1200));
+  };
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -91,6 +112,27 @@ const FeaturedSlider = () => {
 
   return (
     <section className="bg-black py-6 sm:py-6 md:py-16 max-w-screen-2xl mx-auto px-4 md:px-8 overflow-x-hidden">
+      {/* Enquire Modal */}
+      <EnquireForm
+        open={showEnquireModal}
+        onClose={() => { setShowEnquireModal(false); setActiveProperty(null); }}
+        propertyName={activeProperty || undefined}
+        onSubmit={handleEnquireSubmit}
+      />
+      {/* Pay Now Modal */}
+      <PayNowForm
+        open={showPayNowModal}
+        onClose={() => { setShowPayNowModal(false); setActiveProperty(null); }}
+        propertyName={activeProperty || undefined}
+        onSubmit={handlePayNowSubmit}
+      />
+      {/* Call Expert Modal */}
+      <CallForm
+        open={showCallModal}
+        onClose={() => { setShowCallModal(false); setActiveProperty(null); }}
+        propertyName={activeProperty || undefined}
+        onSubmit={handleCallSubmit}
+      />
       <div className="mb-4 sm:mb-6 md:mb-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 items-start w-full">
           <div className="flex flex-col gap-2">
@@ -150,7 +192,6 @@ const FeaturedSlider = () => {
                     }
                   }}
                 />
-                
                 {/* Content Overlay - Shows on hover */}
                 <div 
                   className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent transition-all duration-500 ease-in-out ${
@@ -175,7 +216,7 @@ const FeaturedSlider = () => {
                       <button
                         type="button"
                         className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg text-xs sm:text-sm"
-                        onClick={() => alert('Pay Now clicked!')}
+                        onClick={e => { e.stopPropagation(); setShowPayNowModal(true); setActiveProperty(item.title); }}
                       >
                         Pay Now
                       </button>
@@ -183,14 +224,14 @@ const FeaturedSlider = () => {
                         <button
                           type="button"
                           className="w-full bg-black text-white font-semibold py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs sm:text-sm"
-                          onClick={() => alert('Call Expert clicked!')}
+                          onClick={e => { e.stopPropagation(); setShowCallModal(true); setActiveProperty(item.title); }}
                         >
                           Call Expert
                         </button>
                         <button
                           type="button"
                           className="w-full bg-black text-white font-semibold py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs sm:text-sm"
-                          onClick={() => alert('Enquire Now clicked!')}
+                          onClick={e => { e.stopPropagation(); setShowEnquireModal(true); setActiveProperty(item.title); }}
                         >
                           Enquire Now
                         </button>

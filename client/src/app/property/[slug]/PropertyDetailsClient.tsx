@@ -43,7 +43,7 @@ const allProperties = [
           { icon: <FaShoppingBag />, name: 'Dubai Festival City Mall – ~3 km / 7 min drive' },
         ],
       },
-      goldenVisa: true,
+      goldenVisa: false,
       relatedSlugs: ['deeyar-eleve', 'sobha-solis', 'azizi-venice', 'wasl-1-residences'],
     },
     {
@@ -75,7 +75,7 @@ const allProperties = [
           { icon: <FaShoppingBag />, name: 'DXB - 40 min drive DWC - 20 min drive' },
         ],
       },
-      goldenVisa: true,
+      goldenVisa: false,
       relatedSlugs: ['emaar-creek-harbour', 'sobha-solis', 'azizi-venice', 'wasl-1-residences'],
     },
     {
@@ -106,9 +106,10 @@ const allProperties = [
           { icon: <FaPlane />, name: 'Airport: Dubai International – 41 km (≈45 min drive)' },
           { icon: <FaShoppingBag />, name: 'Mall: First Avenue Mall – 4.6 km (≈10 min)' },
           { icon: <FaCar />, name: 'Nearby Landmark: Dubai Autodrome – <1 min drive' },
+          
         ],
       },
-      goldenVisa: true,
+      goldenVisa: false,
       relatedSlugs: ['emaar-creek-harbour', 'deeyar-eleve', 'azizi-venice', 'wasl-1-residences'],
     },
     {
@@ -128,6 +129,10 @@ const allProperties = [
         { icon: <FaSwimmer />, name: 'Crystal Lagoon & Swimmable Beaches' },
         { icon: <FaTheaterMasks />, name: 'Opera House (1,500 seats)' },
         { icon: <FaHotel />, name: 'Five-Star Family & Lifestyle Hotels' },
+        { icon: <FaSchool />, name: 'Schools & Clinics' },
+        { icon: <FaMosque />, name: 'Mosque & Nursery' },
+        { icon: <FaTree />, name: 'Park & Green Spaces' },
+        { icon: <FaCouch />, name: 'Lounge & Relaxation Areas' },
       ],
       location: {
         address: 'Azizi Venice, Dubai South',
@@ -139,7 +144,7 @@ const allProperties = [
           { icon: <FaMapMarkerAlt />, name: '20 MINS Dubai Marina' },
         ],
       },
-      goldenVisa: true,
+      goldenVisa: false,
       relatedSlugs: ['emaar-creek-harbour', 'deeyar-eleve', 'sobha-solis', 'wasl-1-residences'],
     },
     {
@@ -358,9 +363,6 @@ const allProperties = [
         { icon: <FaGamepad />, name: 'Billiards & Indoor Games' },
         { icon: <FaChild />, name: "Kid's & Toddler Play Areas" },
         { icon: <FaDumbbell />, name: 'Community Gym & Studios' },
-        { icon: <FaCogs />, name: 'MPH Sports Hall' },
-        { icon: <FaSpa />, name: 'Yoga & Meditation Zones' },
-        { icon: <FaLeaf />, name: 'Zen Garden & Hammock Lawn' },
         
       ],
       location: {
@@ -840,6 +842,34 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
   ];
   const [callFormLoading, setCallFormLoading] = useState(false);
   const [enquireFormLoading, setEnquireFormLoading] = useState(false);
+  const countryCodeList = [
+    { code: '+91', country: 'India' },
+    { code: '+1', country: 'United States' },
+    { code: '+44', country: 'United Kingdom' },
+    { code: '+971', country: 'UAE' },
+    { code: '+61', country: 'Australia' },
+    { code: '+65', country: 'Singapore' },
+    { code: '+49', country: 'Germany' },
+    { code: '+33', country: 'France' },
+    { code: '+81', country: 'Japan' },
+    { code: '+27', country: 'South Africa' },
+    { code: '+966', country: 'Saudi Arabia' },
+    { code: '+974', country: 'Qatar' },
+    { code: '+965', country: 'Kuwait' },
+    { code: '+968', country: 'Oman' },
+    { code: '+973', country: 'Bahrain' },
+    { code: '+7', country: 'Russia' },
+    { code: '+39', country: 'Italy' },
+    { code: '+34', country: 'Spain' },
+    { code: '+31', country: 'Netherlands' },
+    { code: '+41', country: 'Switzerland' },
+    { code: '+90', country: 'Turkey' },
+    { code: '+55', country: 'Brazil' },
+    { code: '+86', country: 'China' },
+    { code: '+61', country: 'Australia' },
+    { code: '+1', country: 'Canada' },
+    { code: '+other', country: 'Other' },
+  ];
 
   useEffect(() => {
     // No need to setSlug, just use slug directly
@@ -1220,33 +1250,34 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
         </div>
       )}
       {showEnquireModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-          <div className="bg-neutral-900 rounded-xl shadow-2xl p-8 w-full max-w-lg relative animate-fadeIn">
-            <button className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer scale-100 hover:scale-110" onClick={() => { setShowEnquireModal(false); setEnquireStep(1); }}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm animate-fadeIn">
+          <div className="bg-gradient-to-br from-purple-900/90 via-black/90 to-pink-900/90 rounded-3xl shadow-2xl p-0 w-full max-w-lg relative animate-fadeIn border border-purple-700/40">
+            <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full px-6 py-2 shadow-lg text-white font-bold text-lg tracking-wide animate-fadeInUp">Enquire Now</div>
+            <button className="absolute top-4 right-4 text-white bg-gradient-to-r from-purple-600 to-pink-500 rounded-full p-2 shadow-lg hover:scale-110 transition-all duration-200" onClick={() => { setShowEnquireModal(false); setEnquireStep(1); }}>
               <FaTimes size={20} />
             </button>
-            <div className="flex flex-col items-center mb-4">
-              <Image src="/logos/logo.png" alt="3rdshade Logo" width={120} height={40} className="mb-2" />
+            <div className="flex flex-col items-center mb-4 pt-8">
+              <Image src="/logos/logo.png" alt="3rdshade Logo" width={120} height={40} className="mb-2 drop-shadow-lg" />
             </div>
-            {enquireFormSuccess && <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-sm text-center">{enquireFormSuccess}</div>}
-            {enquireFormError && <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-sm text-center">{enquireFormError}</div>}
-            <form onSubmit={handleEnquireSubmit} className="flex flex-col gap-6">
+            {enquireFormSuccess && <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-sm text-center shadow">{enquireFormSuccess}</div>}
+            {enquireFormError && <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-sm text-center shadow">{enquireFormError}</div>}
+            <form onSubmit={handleEnquireSubmit} className="flex flex-col gap-8 px-4 pb-6">
               {/* Stepper */}
               <div className="flex justify-center gap-2 mb-4">
                 {[1, 2].map(step => (
-                  <div key={step} className={`w-8 h-2 rounded-full transition-all duration-300 ${enquireStep === step ? 'bg-gradient-to-r from-purple-600 to-pink-500' : 'bg-neutral-700'}`}></div>
+                  <div key={step} className={`w-8 h-2 rounded-full transition-all duration-300 shadow ${enquireStep === step ? 'bg-gradient-to-r from-purple-600 to-pink-500' : 'bg-neutral-800/80'}`}></div>
                 ))}
               </div>
               {/* Step 1: Basic Info */}
               {enquireStep === 1 && (
                 <div className="flex flex-col gap-4 animate-fadeIn">
-                  <input type="text" name="name" placeholder="Name" value={enquireForm.name} onChange={handleEnquireInputChange} className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500" required />
-                  <input type="email" name="email" placeholder="Email" value={enquireForm.email} onChange={handleEnquireInputChange} className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500" required />
-                  <input type="tel" name="phone" placeholder="Phone (with country code)" value={enquireForm.phone} onChange={handleEnquireInputChange} className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500" required />
-                  <label className="text-sm text-gray-300">Preferred contact method</label>
+                  <input type="text" name="name" placeholder="Name" value={enquireForm.name} onChange={handleEnquireInputChange} className="px-5 py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm placeholder:text-purple-200/60" required />
+                  <input type="email" name="email" placeholder="Email" value={enquireForm.email} onChange={handleEnquireInputChange} className="px-5 py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm placeholder:text-purple-200/60" required />
+                  <input type="tel" name="phone" placeholder="Phone (with country code)" value={enquireForm.phone} onChange={handleEnquireInputChange} className="px-5 py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm placeholder:text-purple-200/60" required />
+                  <label className="text-sm text-purple-200/80 font-semibold mt-2">Preferred contact method</label>
                   <div className="flex gap-3">
                     {['WhatsApp', 'Email', 'Phone'].map(method => (
-                      <label key={method} className={`px-4 py-2 rounded-full cursor-pointer font-semibold transition-all duration-200 ${enquireForm.contactMethod === method ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700'}`}>
+                      <label key={method} className={`px-4 py-2 rounded-full cursor-pointer font-semibold transition-all duration-200 shadow-sm ${enquireForm.contactMethod === method ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' : 'bg-neutral-900/80 text-purple-200/80 hover:bg-neutral-800/80'}`}>
                         <input type="radio" name="contactMethod" value={method} checked={enquireForm.contactMethod === method} onChange={handleEnquireInputChange} className="hidden" />
                         {method}
                       </label>
@@ -1257,38 +1288,38 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
               {/* Step 2: Property Visit Preferences */}
               {enquireStep === 2 && (
                 <div className="flex flex-col gap-4 animate-fadeIn">
-                  <label className="text-sm text-gray-300">Are you currently in India?</label>
+                  <label className="text-sm text-purple-200/80 font-semibold">Are you currently in India?</label>
                   <div className="flex gap-3">
                     {['Yes', 'No'].map(val => (
-                      <label key={val} className={`px-4 py-2 rounded-full cursor-pointer font-semibold transition-all duration-200 ${enquireForm.inIndia === val ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700'}`}>
+                      <label key={val} className={`px-4 py-2 rounded-full cursor-pointer font-semibold transition-all duration-200 shadow-sm ${enquireForm.inIndia === val ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' : 'bg-neutral-900/80 text-purple-200/80 hover:bg-neutral-800/80'}`}>
                         <input type="radio" name="inIndia" value={val} checked={enquireForm.inIndia === val} onChange={handleEnquireInputChange} className="hidden" />
                         {val}
                       </label>
                     ))}
                   </div>
-                  <label className="text-sm text-gray-300">Select the country</label>
-                  <select name="country" value={enquireForm.country} onChange={handleEnquireInputChange} className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500">
+                  <label className="text-sm text-purple-200/80 font-semibold">Select the country</label>
+                  <select name="country" value={enquireForm.country} onChange={handleEnquireInputChange} className="px-5 py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm">
                     <option value="">Select Country</option>
                     {countryList.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
-                  <label className="text-sm text-gray-300">Type of visit</label>
+                  <label className="text-sm text-purple-200/80 font-semibold">Type of visit</label>
                   <div className="flex gap-3">
                     {['Virtual', 'Physical'].map(type => (
-                      <label key={type} className={`px-4 py-2 rounded-full cursor-pointer font-semibold transition-all duration-200 ${enquireForm.visitType === type ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700'}`}>
+                      <label key={type} className={`px-4 py-2 rounded-full cursor-pointer font-semibold transition-all duration-200 shadow-sm ${enquireForm.visitType === type ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' : 'bg-neutral-900/80 text-purple-200/80 hover:bg-neutral-800/80'}`}>
                         <input type="radio" name="visitType" value={type} checked={enquireForm.visitType === type} onChange={handleEnquireInputChange} className="hidden" />
                         {type}
                       </label>
                     ))}
                   </div>
-                  <label className="text-sm text-gray-300">Preferred Date & Time</label>
+                  <label className="text-sm text-purple-200/80 font-semibold">Preferred Date & Time</label>
                   <div className="flex gap-2">
-                    <input type="date" name="date" value={enquireForm.date} onChange={handleEnquireInputChange} className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer" required />
-                    <input type="time" name="time" value={enquireForm.time} onChange={handleEnquireInputChange} className="px-4 py-3 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:border-purple-500 cursor-pointer" required />
+                    <input type="date" name="date" value={enquireForm.date} onChange={handleEnquireInputChange} className="px-5 py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm cursor-pointer" required />
+                    <input type="time" name="time" value={enquireForm.time} onChange={handleEnquireInputChange} className="px-5 py-3 rounded-xl bg-neutral-900/80 text-white border border-purple-700/40 focus:outline-none focus:border-pink-500 shadow-sm cursor-pointer" required />
                   </div>
-                  <label className="text-sm text-gray-300">How soon are you looking to buy?</label>
+                  <label className="text-sm text-purple-200/80 font-semibold">How soon are you looking to buy?</label>
                   <div className="flex flex-wrap gap-2">
                     {['Immediately', '1–3 Months', '3–6 Months', 'Just Exploring'].map(opt => (
-                      <label key={opt} className={`px-4 py-2 rounded-full cursor-pointer font-semibold transition-all duration-200 ${enquireForm.buyTimeline === opt ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700'}`}>
+                      <label key={opt} className={`px-4 py-2 rounded-full cursor-pointer font-semibold transition-all duration-200 shadow-sm ${enquireForm.buyTimeline === opt ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white' : 'bg-neutral-900/80 text-purple-200/80 hover:bg-neutral-800/80'}`}>
                         <input type="radio" name="buyTimeline" value={opt} checked={enquireForm.buyTimeline === opt} onChange={handleEnquireInputChange} className="hidden" />
                         {opt}
                       </label>
@@ -1299,7 +1330,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
               {/* Step Navigation */}
               <div className="flex justify-between mt-2">
                 {enquireStep > 1 ? (
-                  <button type="button" onClick={handleEnquireBack} className="px-6 py-2 rounded-full bg-neutral-800 text-gray-300 font-semibold transition-all duration-200 cursor-pointer hover:bg-neutral-700 hover:scale-105">Back</button>
+                  <button type="button" onClick={handleEnquireBack} className="px-6 py-2 rounded-full bg-neutral-900/80 text-purple-200/80 font-semibold transition-all duration-200 cursor-pointer hover:bg-neutral-800/80 hover:scale-105 shadow">Back</button>
                 ) : <div />}
                 {enquireStep < 2 ? (
                   <button type="button" onClick={handleEnquireNext} className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold transition-all duration-200 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg">Next</button>
