@@ -16,11 +16,9 @@ const featuredItems = [
     slug: 'emaar-creek-harbour',
     price: 'Starting from AED 1.5M',
     amenities: [
-      '700,000 sq.m. of Parks & Green Spaces',
-      'Over 250,000 sq.m. of Retail & Dining',
-      'Cultural Hub with Museums & Exhibitions',
+    
       'Cycling Tracks',
-      'Entertainment Arenas for Concerts & Theatre',
+      'Entertainment Arenas',
       'Waterfront Promenades',
     ],
   },
@@ -46,11 +44,9 @@ const featuredItems = [
     slug: 'azizi-venice',
     price: 'Launching Soon',
     amenities: [
-      'Climate-Controlled Retail Boulevard',
-      'Crystal Lagoon & Swimmable Beaches',
+      'Community Gym & Studios',
+      'Crystal Lagoon',
       'Opera House (1,500 seats)',
-      'Five-Star Family & Lifestyle Hotels',
-      'Five-Star Family & Lifestyle Hotels',
     ],
   },
   {
@@ -64,7 +60,7 @@ const featuredItems = [
       'Badminton & Squash Courts',
       'Billiards & Indoor Games',
       "Kid's & Toddler Play Areas",
-      'Community Gym & Studios',
+     
     ],
   },
   {
