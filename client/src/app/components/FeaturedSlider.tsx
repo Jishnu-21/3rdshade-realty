@@ -183,6 +183,7 @@ const FeaturedSlider = () => {
                   loop
                   muted
                   playsInline
+                  autoPlay
                   poster={item.poster}
                   className="w-full h-full object-cover"
                   preload="auto"
