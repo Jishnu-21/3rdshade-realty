@@ -1391,7 +1391,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
           </div>
         </div>
       )}
-<main className="flex-1 max-w-screen-2xl mx-auto px-6 sm:px-6 lg:px-8 w-full flex flex-col pt-8 md:pt-16 lg:pt-24 mt-[64px] md:mt-0">
+<main className="flex-1 max-w-screen-2xl mx-auto px-6 sm:px-6 lg:px-8 w-full flex flex-col pt-8 md:pt-16 lg:pt-12 mt-[64px] md:mt-0">
 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-15 items-stretch min-h-screen">
           {/* Left Column: Image/Video Gallery */}
           <div className="lg:col-span-1 flex flex-col h-full min-h-screen justify-center">
