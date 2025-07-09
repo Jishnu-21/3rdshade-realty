@@ -167,7 +167,7 @@ const AboutPage = () => {
             >
               <div className="relative h-[500px] rounded-2xl overflow-hidden">
                 <Image 
-                  src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" 
+                  src="https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954758/Ocean_House_by_Ellington_-_penthouse_bedroom_vhe1g5.jpg" 
                   alt="Luxury Development" 
                   layout="fill" 
                   className="object-cover"
