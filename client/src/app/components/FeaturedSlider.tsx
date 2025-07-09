@@ -226,7 +226,7 @@ const FeaturedSlider = () => {
                     <div className="space-y-1 sm:space-y-2 pt-1 sm:pt-2">
                       <button
                         type="button"
-                        className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg text-xs sm:text-sm"
+                        className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all duration-300 cursor-pointer shadow-md hover:scale-105 hover:shadow-lg text-xs sm:text-sm hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600"
                         onClick={e => { e.stopPropagation(); setShowPayNowModal(true); setActiveProperty(item.title); }}
                       >
                         Pay Now
@@ -234,14 +234,14 @@ const FeaturedSlider = () => {
                       <div className="grid grid-cols-2 gap-1 sm:gap-2">
                         <button
                           type="button"
-                          className="w-full bg-black text-white font-semibold py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs sm:text-sm"
+                          className="w-full bg-black text-white font-semibold py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all duration-300 cursor-pointer hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-500 hover:text-white hover:scale-105 hover:shadow-lg text-xs sm:text-sm"
                           onClick={e => { e.stopPropagation(); setShowCallModal(true); setActiveProperty(item.title); }}
                         >
                           Call Expert
                         </button>
                         <button
                           type="button"
-                          className="w-full bg-black text-white font-semibold py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all duration-300 cursor-pointer hover:bg-neutral-900 hover:scale-105 hover:shadow-lg text-xs sm:text-sm"
+                          className="w-full bg-black text-white font-semibold py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all duration-300 cursor-pointer hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-500 hover:text-white hover:scale-105 hover:shadow-lg text-xs sm:text-sm"
                           onClick={e => { e.stopPropagation(); setShowEnquireModal(true); setActiveProperty(item.title); }}
                         >
                           Enquire Now

@@ -150,7 +150,7 @@ export default function ServicesPage() {
           video.play().catch(console.error);
         }}
       >
-        <source src="https://res.cloudinary.com/dzmxqwlse/video/upload/v1751966475/bg-service3d_xxpg9p_nabk29.mp4" type="video/mp4" />
+        <source src="https://res.cloudinary.com/dzmxqwlse/video/upload/v1752042814/bg-service3d_xxpg9p_1_txsviz.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
