@@ -132,17 +132,18 @@ export default function ServicesPage() {
         loop
         muted
         playsInline
-        preload="metadata"
+        preload="auto"
+        poster="/path/to/lightweight-poster.jpg" // <-- Add a small poster image in public/
+        disablePictureInPicture
         className="fixed top-0 left-0 w-full h-full object-cover z-0"
         style={{ 
           minHeight: '100vh', 
           minWidth: '100vw',
           filter: 'brightness(0.8) contrast(1.1)',
           opacity: 1,
-          willChange: 'transform',
           backfaceVisibility: 'hidden',
           perspective: '1000px',
-          transform: 'translate3d(0, 0, 0)'
+          // Remove willChange unless you animate transform/opacity
         }}
         onLoadedData={(e) => {
           const video = e.target as HTMLVideoElement;
@@ -150,7 +151,7 @@ export default function ServicesPage() {
           video.play().catch(console.error);
         }}
       >
-        <source src="https://res.cloudinary.com/dzmxqwlse/video/upload/v1752042814/bg-service3d_xxpg9p_1_txsviz.mp4" type="video/mp4" />
+        <source src="https://upcdn.io/223k2J2/raw/bg-service3d_xxpg9p.webm" type="video/webm" />
         Your browser does not support the video tag.
       </video>
 
