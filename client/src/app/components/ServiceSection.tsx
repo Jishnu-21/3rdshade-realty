@@ -152,7 +152,7 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
       <div className="w-full max-w-screen-4xl ">
         <div className="flex items-center mb-2">
           <motion.h2
-            className="text-4xl md:text-7xl font-normal text-center mx-auto flex gap-1 bg-gradient-to-r from-rose-500 to-sky-500 bg-clip-text text-transparent"
+            className="text-4xl md:text-7xl font-normal text-center mx-auto flex gap-1 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
             variants={titleParent}
             initial="hidden"
             whileInView="visible"
@@ -352,9 +352,9 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
       <AnimatePresence>
         {pointer && hoveredIdx !== null && (
           <motion.div
-            className="fixed z-[9999] pointer-events-none"
+            className="fixed  pointer-events-none"
             style={{ left: pointer.x - 80, top: pointer.y - 80 }}
-            initial={{ opacity: 0, scale: 0.7 }}
+            initial={{ opacity: 1, scale: 0.7 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.7 }}
             transition={{ duration: 0.2 }}

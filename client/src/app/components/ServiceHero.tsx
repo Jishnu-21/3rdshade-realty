@@ -50,7 +50,7 @@ export default function ServiceHero() {
               variants={lineVariants}
             >
               <h1
-                className={'bg-gradient-to-r from-rose-500 to-sky-500 bg-clip-text text-transparent break-words text-left w-full'}
+                className={'bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent break-words text-left w-full'}
                 style={{
                   fontSize: 'clamp(2.5rem, 8vw + 1rem, 9.5rem)',
                   lineHeight: 'clamp(0.85, 0.9, 1.1)',
