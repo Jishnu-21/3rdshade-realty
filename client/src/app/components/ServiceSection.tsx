@@ -9,22 +9,22 @@ const services = [
   {
     title: 'Branding',
     description: 'Build a powerful, memorable brand identity that sets you apart in the real estate market.',
-    image: 'https://res.cloudinary.com/dkgjl08a5/image/upload/v1752067413/15_cmsvde.png',
+    image: 'https://upcdn.io/223k2J2/raw/15.webp',
   },
   {
     title: 'SEO',
     description: 'Optimize your online presence to rank higher in search results and attract more qualified leads.',
-    image: 'https://res.cloudinary.com/dkgjl08a5/image/upload/v1752067409/21_rsyxki.png',
+    image: 'https://upcdn.io/223k2J2/raw/21.webp',
   },
   {
     title: 'Website Development',
     description: 'Get a stunning, high-performance website tailored for real estate, with seamless user experience.',
-    image: 'https://res.cloudinary.com/dkgjl08a5/image/upload/v1752067412/16_xrciqv.png',
+    image: 'https://upcdn.io/223k2J2/raw/16.webp',
   },
   {
     title: 'Performance Marketing',
     description: 'Drive measurable results with targeted digital campaigns and data-driven marketing strategies.',
-    image: 'https://res.cloudinary.com/dkgjl08a5/image/upload/v1752067413/22_p1x1ge.png',
+    image: 'https://upcdn.io/223k2J2/raw/22.webp',
   },
   {
     title: 'UI/UX',
@@ -34,7 +34,7 @@ const services = [
   {
     title: 'Consulting',
     description: 'Expert advice and strategic guidance to help you grow and scale your real estate business.',
-    image: 'https://res.cloudinary.com/dkgjl08a5/image/upload/v1752067618/20_ygjha7.png',
+    image: 'https://upcdn.io/223k2J2/raw/20.webp',
   },
   {
     title: 'Ecommerce Listing',
@@ -44,7 +44,7 @@ const services = [
   {
     title: 'Social Media',
     description: 'Engage your audience and build your brand with creative, effective social media strategies.',
-    image: 'https://res.cloudinary.com/dkgjl08a5/image/upload/v1752067409/18_krynuw.png',
+    image: 'https://upcdn.io/223k2J2/raw/18.webp',
   },
 ];
 
