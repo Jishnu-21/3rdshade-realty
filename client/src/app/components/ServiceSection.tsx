@@ -220,7 +220,7 @@ export default function ServiceSection({ onEnquire, onCallNow }: { onEnquire: ()
                         <span key={i} className="relative block">
                           {word}
                           <span
-                            className="absolute left-0 -bottom-0.5 h-0.5 w-full origin-left scale-x-0 group-hover:scale-x-100 bg-white transition-transform duration-300"
+                            className="absolute left-0 -bottom-0.5 h-0.5 w-full origin-left scale-x-0 group-hover:scale-x-100 b  bg-gradient-to-r from-purple-400 to-pink-400transition-transform duration-300"
                             aria-hidden="true"
                           />
                         </span>

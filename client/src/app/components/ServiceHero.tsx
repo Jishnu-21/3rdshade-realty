@@ -56,7 +56,7 @@ export default function ServiceHero() {
                   lineHeight: 'clamp(0.85, 0.9, 1.1)',
                   letterSpacing: 'clamp(-0.06em, -0.04em, -0.02em)',
                   fontFamily: 'Montserrat, Helvetica, sans-serif',
-                  fontWeight: 500,
+                  fontWeight: 600,
                   textShadow: '0 2px 24px rgba(0,0,0,0.15)',
                   wordBreak: 'break-word',
                   padding: 'clamp(0.05em, 0.08em, 0.10em) 0',
