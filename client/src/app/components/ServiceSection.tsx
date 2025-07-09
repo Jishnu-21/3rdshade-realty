@@ -9,42 +9,42 @@ const services = [
   {
     title: 'Branding',
     description: 'Build a powerful, memorable brand identity that sets you apart in the real estate market.',
-    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1751967877/branding_cojlmm.png',
+    image: 'https://res.cloudinary.com/dkgjl08a5/image/upload/v1752067413/15_cmsvde.png',
   },
   {
     title: 'SEO',
     description: 'Optimize your online presence to rank higher in search results and attract more qualified leads.',
-    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750498823/seo_q1e3dk.png',
+    image: 'https://res.cloudinary.com/dkgjl08a5/image/upload/v1752067409/21_rsyxki.png',
   },
   {
     title: 'Website Development',
     description: 'Get a stunning, high-performance website tailored for real estate, with seamless user experience.',
-    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1751967883/web-dev_oa4gpo.png',
+    image: 'https://res.cloudinary.com/dkgjl08a5/image/upload/v1752067412/16_xrciqv.png',
   },
   {
     title: 'Performance Marketing',
     description: 'Drive measurable results with targeted digital campaigns and data-driven marketing strategies.',
-    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750656187/performance_kksaww.png',
+    image: 'https://res.cloudinary.com/dkgjl08a5/image/upload/v1752067413/22_p1x1ge.png',
   },
   {
     title: 'UI/UX',
     description: 'Delight your users with intuitive, beautiful interfaces and seamless digital experiences.',
-    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1751967887/ui-ux_bw4ynz.png',
+    image: 'https://res.cloudinary.com/dkgjl08a5/image/upload/v1752067410/17_qqtqzq.png',
   },
   {
     title: 'Consulting',
     description: 'Expert advice and strategic guidance to help you grow and scale your real estate business.',
-    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750656187/consulting_hglv1k.png',
+    image: 'https://res.cloudinary.com/dkgjl08a5/image/upload/v1752067618/20_ygjha7.png',
   },
   {
     title: 'Ecommerce Listing',
     description: 'Expand your reach with professional ecommerce listing services for your properties.',
-    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750656192/ecom_hb3oui.png',
+    image: 'https://res.cloudinary.com/dkgjl08a5/image/upload/v1752067409/19_nmioss.png',
   },
   {
     title: 'Social Media',
     description: 'Engage your audience and build your brand with creative, effective social media strategies.',
-    image: 'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750656185/social-media_izbxum.png',
+    image: 'https://res.cloudinary.com/dkgjl08a5/image/upload/v1752067409/18_krynuw.png',
   },
 ];
 
