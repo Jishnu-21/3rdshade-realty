@@ -43,14 +43,15 @@ const Header = ({ onEnquire }: HeaderProps) => {
       >
         <div className="max-w-screen-2xl mx-auto px-4 md:px-8 flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center">
-            <Link href="/" className="flex items-center">
+          <div className="flex items-center w-[110px] sm:w-[150px]">
+            <Link href="/" className="flex items-center w-full">
               <Image
                 src="/logos/logo3.png"
                 alt="3RD SHADE Logo"
-                width={185}
+                width={150}
                 height={18}
                 priority
+                className="w-full h-auto"
               />
             </Link>
           </div>
@@ -101,9 +102,9 @@ const Header = ({ onEnquire }: HeaderProps) => {
             <Image
               src="/logos/logo.png"
               alt="3RD SHADE Logo"
-              width={140}
-              height={24}
-              className="w-[120px] sm:w-[140px] h-auto mx-auto"
+              width={90}
+              height={20}
+              className="w-[90px] sm:w-[140px] h-auto mx-auto"
               priority
             />
           </Link>
