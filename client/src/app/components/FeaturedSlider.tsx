@@ -148,9 +148,9 @@ const FeaturedSlider = () => {
             <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl">Experience luxury living through properties defined by aesthetics, access, and assurance.</p>
           </div>
           <div className="hidden sm:flex items-center space-x-4">
-            <button  onClick={() => router.push('/properties')} className="bg-black border border-white cursor-pointer text-white rounded-full px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base font-semibold hover:bg-white hover:text-black transition">View All</button>
-            <button onClick={() => scroll('left')} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black border border-white text-white flex items-center justify-center text-xl sm:text-2xl hover:bg-white hover:text-black transition cursor-pointer">←</button>
-            <button onClick={() => scroll('right')} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black border border-white text-white flex items-center justify-center text-xl sm:text-2xl hover:bg-white hover:text-black transition cursor-pointer">→</button>
+            <button  onClick={() => router.push('/properties')} className="bg-black border border-white cursor-pointer text-white rounded-full px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base font-semibold transition hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-500 hover:text-white hover:border-transparent">View All</button>
+            <button onClick={() => scroll('left')} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black border border-white text-white flex items-center justify-center text-xl sm:text-2xl transition cursor-pointer hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-500 hover:text-white hover:border-transparent">←</button>
+            <button onClick={() => scroll('right')} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black border border-white text-white flex items-center justify-center text-xl sm:text-2xl transition cursor-pointer hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-500 hover:text-white hover:border-transparent">→</button>
           </div>
         </div>
       </div>
@@ -257,9 +257,9 @@ const FeaturedSlider = () => {
       </div>
       {/* Mobile navigation controls */}
       <div className="flex sm:hidden justify-center items-center space-x-4 mt-4">
-        <button className="bg-black border border-white text-white rounded-full px-4 py-1.5 text-sm font-semibold hover:bg-white hover:text-black transition">View All</button>
-        <button onClick={() => scroll('left')} className="w-10 h-10 rounded-full bg-black border border-white text-white flex items-center justify-center text-xl hover:bg-white hover:text-black transition">←</button>
-        <button onClick={() => scroll('right')} className="w-10 h-10 rounded-full bg-black border border-white text-white flex items-center justify-center text-xl hover:bg-white hover:text-black transition">→</button>
+        <button className="bg-black border border-white text-white rounded-full px-4 py-1.5 text-sm font-semibold transition hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-500 hover:text-white hover:border-transparent">View All</button>
+        <button onClick={() => scroll('left')} className="w-10 h-10 rounded-full bg-black border border-white text-white flex items-center justify-center text-xl transition hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-500 hover:text-white hover:border-transparent">←</button>
+        <button onClick={() => scroll('right')} className="w-10 h-10 rounded-full bg-black border border-white text-white flex items-center justify-center text-xl transition hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-500 hover:text-white hover:border-transparent">→</button>
       </div>
       <style jsx global>{`
         .scrollbar-hide::-webkit-scrollbar {
