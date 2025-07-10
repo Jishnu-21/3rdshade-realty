@@ -1034,8 +1034,8 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
   return (
     <div className="bg-black text-white font-montserrat">
       <Header onEnquire={() => setShowEnquireModal(true)} />
-      {/* Add gap below header */}
-      <div className="mt-0 md:pt-8" />
+      {/* Tighter gap below header for mobile, keep md:pt-8 for desktop */}
+      <div className="mt-0 md:pt-4" />
       {/* Custom Login/Register Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
@@ -1393,10 +1393,10 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
           </div>
         </div>
       )}
-<main className="flex-1 max-w-screen-2xl mx-auto px-6 sm:px-6 lg:px-8 w-full flex flex-col pt-8 md:pt-16 lg:pt-12 mt-[64px] md:mt-0">
-<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-15 items-stretch min-h-screen">
+<main className="flex-1 max-w-screen-2xl mx-auto px-6 sm:px-6 lg:px-8 w-full flex flex-col pt-2 md:pt-8 lg:pt-12 mt-2 md:mt-0">
+<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 md:mb-12 items-stretch md:min-h-screen">
           {/* Left Column: Image/Video Gallery */}
-          <div className="lg:col-span-1 flex flex-col h-full min-h-screen justify-center">
+          <div className="lg:col-span-1 flex flex-col h-full pt-10 md:pt-0 justify-center">
             <div className="relative w-full h-[60vw] max-h-[635px] min-h-[320px] md:h-[500px] lg:h-[635px] rounded-xl overflow-hidden mb-4 bg-black transition-all duration-300">
               {(() => {
                 const isImage = /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(mainMedia.src);
@@ -1577,7 +1577,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
         </div>
 
         {/* Related Properties */}
-        <div className="mt-6 md:mt-4 lg:mt-2 mb-8">
+        <div className="mt-2 md:mt-4 lg:mt-2 mb-8">
           <h2 className="text-3xl font-bold mb-8">Related Properties</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {relatedSlugs.map((slug: string) => {

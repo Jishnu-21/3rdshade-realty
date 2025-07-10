@@ -458,7 +458,7 @@ const WebsiteWithPreloader = () => {
               ×
             </motion.button>
             <video
-              src="https://res.cloudinary.com/dkgjl08a5/video/upload/v1744839021/Dubai_realestate_video_01_tsmqus.webm"
+              src="https://upcdn.io/223k2J2/raw/Dubai_realestate_video_01_tsmqus.mp4"
               className="w-full h-full object-cover bg-black"
               autoPlay
               loop
