@@ -414,28 +414,26 @@ const WebsiteWithPreloader = () => {
       <AnimatePresence>
         {showMiniVideo && (
           <motion.div
-            className="fixed z-[9999] overflow-hidden bg-black shadow-2xl border-2 border-white/20 rounded-xl"
+            className="fixed z-[9999] overflow-hidden bg-black shadow-2xl border-2 border-white/20 rounded-xl
+              w-[90px] h-[160px] sm:w-[180px] sm:h-[320px] md:w-[21rem] md:h-[37rem]"
+            style={{ borderRadius: '1rem' }}
             initial={{
               top: '50%',
               left: '50%',
               x: '-50%',
               y: '-50%',
-              width: '21rem',
-              height: '37rem',
-              borderRadius: '1rem',
-              opacity: 1,
+              opacity: 0,
+              scale: 0.95,
             }}
             animate={{
               top: 'auto',
               left: 'auto',
-              bottom: '1.5rem',
-              right: '1.5rem',
+              bottom: '1rem',
+              right: '1rem',
               x: 0,
               y: 0,
-              width: '21rem',
-              height: '37rem',
-              borderRadius: '1rem',
               opacity: 1,
+              scale: 1,
             }}
             exit={{
               opacity: 0,
@@ -451,7 +449,7 @@ const WebsiteWithPreloader = () => {
             }}
           >
             <motion.button
-              className="absolute top-2 right-2 w-6 h-6 bg-black/70 hover:bg-black/90 text-white rounded-full flex items-center justify-center text-xs font-bold z-10 transition-all duration-200"
+              className="absolute top-1 right-1 w-5 h-5 sm:top-2 sm:right-2 sm:w-6 sm:h-6 bg-black/70 hover:bg-black/90 text-white rounded-full flex items-center justify-center text-xs font-bold z-10 transition-all duration-200"
               onClick={() => setShowMiniVideo(false)}
               initial={{ opacity: 1, scale: 1 }}
               whileHover={{ scale: 1.1 }}
