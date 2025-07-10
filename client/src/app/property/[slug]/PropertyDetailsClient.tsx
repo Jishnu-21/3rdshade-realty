@@ -22,9 +22,9 @@ const allProperties = [
       roi: '12-15%',
       reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1749729573/emaar-creek_lk2lce.webm',
       images: [
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760822/emaar-creek3_vopplu.jpg',
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760833/emaar-creek2_kttzqd.jpg',
-        'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750760831/damac-villa3_y3zpva.jpg',
+        'https://upcdn.io/223k2J2/raw/images/emaar-creek1.webp',
+        'https://upcdn.io/223k2J2/raw/images/emaar-creek3.webp',
+        'https://upcdn.io/223k2J2/raw/images/emaar-creek2.webp',
       ],
       amenities: [
         { icon: <FaSwimmer />, name: '700,000 sq.m. of Parks & Green Spaces' },
@@ -451,11 +451,11 @@ const allProperties = [
       description: `Belgrove Residences offers 1 to 3-bedroom apartments that blend architectural precision with the serenity of nature. Set in MBR City and overlooking the Ras Al Khor Wildlife Sanctuary, the project creates a peaceful escape within a vibrant urban core. Designed with sacred geometry and natural balance.`,
       price: '350,000',
       roi: '-',
-      reelVideoUrl: '/images/properties/belgrove4.jpg', // Placeholder video
+      reelVideoUrl: 'https://upcdn.io/223k2J2/raw/images/belgrove4.webp', // Placeholder video
       images: [
-        '/images/properties/belgrove1.jpg',
-        '/images/properties/belgrove2.jpg',
-        '/images/properties/belgrove3.jpg',
+        'https://upcdn.io/223k2J2/raw/images/belgrove1.webp',
+        'https://upcdn.io/223k2J2/raw/images/belgrove2.webp',
+        'https://upcdn.io/223k2J2/raw/images/belgrove3.webp',
       ],
       amenities: [
         { icon: <FaSwimmer />, name: 'Infinity Pool with Flamingo Views' },
@@ -485,11 +485,11 @@ const allProperties = [
       description: `Claydon House offers 1 to 4-bedroom waterfront apartments thoughtfully designed for refined living in the heart of MBR City. Surrounded by nature and connected to urban life, the residences combine spacious layouts, premium finishes, and panoramic views of Ras Al Khor and Downtown Dubai.`,
       price: '450,000',
       roi: '-',
-      reelVideoUrl: '/images/properties/claydon1.jpg', // Placeholder video
+      reelVideoUrl: 'https://upcdn.io/223k2J2/raw/images/claydon1.webp', // Placeholder video
       images: [
-        '/images/properties/claydon2.jpg',
-        '/images/properties/claydon4.jpg',
-        '/images/properties/claydon3.jpg',
+        'https://upcdn.io/223k2J2/raw/images/claydon2.webp',
+        'https://upcdn.io/223k2J2/raw/images/claydon4.webp',
+        'https://upcdn.io/223k2J2/raw/images/claydon3.webp',
       ],
       amenities: [
         { icon: <FaSwimmer />, name: 'Rooftop Infinity Pool with City Views' },
@@ -520,9 +520,9 @@ const allProperties = [
       roi: '-',
       reelVideoUrl: 'https://res.cloudinary.com/dzmxqwlse/video/upload/v1751969088/elington-cove_utlkoz.webm', // Placeholder video
       images: [
-        '/images/properties/cove1.jpg',
-        '/images/properties/cove3.jpg',
-        '/images/properties/cove4.jpg',
+        'https://upcdn.io/223k2J2/raw/images/cove2.webp',
+        'https://upcdn.io/223k2J2/raw/images/cove3.webp',
+        'https://upcdn.io/223k2J2/raw/images/cove4.webp',
       ],
       amenities: [
         { icon: <FaWater />, name: 'Private Beach with Water Sports Pavilion' },
@@ -551,11 +551,11 @@ const allProperties = [
       description: `Mercer House presents studio to 4-bedroom residences, including penthouses, in one of JLT's most dynamic addresses. Designed for modern urban living, the twin towers combine skyline views, wellness spaces, and high-end leisure with city convenience. From family pools to a rooftop beach club`,
       price: '350,000',
       roi: '-',
-      reelVideoUrl: '/images/properties/mercer1.jpg', // Placeholder video
+      reelVideoUrl: 'https://upcdn.io/223k2J2/raw/images/mercer1.webp', // Placeholder video
       images: [
-        '/images/properties/mercer2.jpg',
-        '/images/properties/mercer3.jpg',
-        '/images/properties/mercer4.jpg',
+        'https://upcdn.io/223k2J2/raw/images/mercer2.webp',
+        'https://upcdn.io/223k2J2/raw/images/mercer3.webp',
+        'https://upcdn.io/223k2J2/raw/images/mercer4.webp',
       ],
       amenities: [
         { icon: <FaWater />, name: 'Urban Beach Club with Skyline Views' },
@@ -618,10 +618,10 @@ const allProperties = [
       description: `Positioned along the Dubai Canal with direct views of Burj Khalifa, One River Point presents luxury living in the heart of Business Bay. The project redefines modern elegance with a sculptural façade, curated amenities, and seamless urban connectivity. Designed for refined lifestyles, this tower is both a landmark and a sanctuary for city dwellers.`,
       price: '460,000',
       roi: '-',
-      reelVideoUrl: '/images/properties/orp1.jpg',// Placeholder video
+      reelVideoUrl: 'https://upcdn.io/223k2J2/raw/images/orp1.webp',// Placeholder video
       images: [
-        '/images/properties/orp2.jpg',
-        '/images/properties/orp3.jpg',
+        'https://upcdn.io/223k2J2/raw/images/orp2.webp',
+        'https://upcdn.io/223k2J2/raw/images/orp3.webp',
         'https://res.cloudinary.com/dzmxqwlse/image/upload/v1750954755/One_River_Point_Aerial_View_rzeu25.jpg',
       ],
       amenities: [
@@ -1396,7 +1396,7 @@ export default function PropertyDetailsClient({ slug }: PropertyDetailsClientPro
 <main className="flex-1 max-w-screen-2xl mx-auto px-6 sm:px-6 lg:px-8 w-full flex flex-col pt-2 md:pt-8 lg:pt-12 mt-2 md:mt-0">
 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 md:mb-12 items-stretch md:min-h-screen">
           {/* Left Column: Image/Video Gallery */}
-          <div className="lg:col-span-1 flex flex-col h-full pt-10 md:pt-0 justify-center">
+          <div className="lg:col-span-1 flex flex-col h-full pt-16 md:pt-0 justify-center">
             <div className="relative w-full h-[60vw] max-h-[635px] min-h-[320px] md:h-[500px] lg:h-[635px] rounded-xl overflow-hidden mb-4 bg-black transition-all duration-300">
               {(() => {
                 const isImage = /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(mainMedia.src);
