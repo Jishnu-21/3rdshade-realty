@@ -12,6 +12,7 @@ interface PropertyDetailsClientProps {
   slug: string;
 }
 
+
 // Array of all properties with a unique slug for each
 const allProperties = [
     {
